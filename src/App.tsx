@@ -253,6 +253,7 @@ export default function App() {
                 ['summaries', 'Summaries'],
                 ['level-up', 'Level Up'],
                 ['template', 'Template'],
+                ['resources', 'Resources'],
               ].map(([id, label]) => (
                 <button
                   key={id}
@@ -810,7 +811,7 @@ export default function App() {
 
 
         {/* ── RESOURCES ── */}
-        <section className="bg-white rounded-2xl shadow-sm border border-stone-200/60 p-8 md:p-10">
+        <section id="resources" className="bg-white rounded-2xl shadow-sm border border-stone-200/60 p-8 md:p-10 scroll-mt-24">
           <h2 className="text-xl font-bold text-stone-900 mb-2">Official Resources</h2>
           <p className="text-sm text-stone-500 mb-6">Bookmark these — they're the best places to go deeper when you're ready.</p>
           <div className="grid md:grid-cols-2 gap-4">
