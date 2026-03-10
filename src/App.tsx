@@ -769,6 +769,63 @@ export default function App() {
           </div>
         </section>
 
+
+        {/* ── RESOURCES ── */}
+        <section className="bg-white rounded-2xl shadow-sm border border-stone-200/60 p-8 md:p-10">
+          <h2 className="text-xl font-bold text-stone-900 mb-2">Official Resources</h2>
+          <p className="text-sm text-stone-500 mb-6">Bookmark these — they're the best places to go deeper when you're ready.</p>
+          <div className="grid md:grid-cols-3 gap-4">
+            <a
+              href="https://code.claude.com/docs/en/overview"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block bg-stone-50 hover:bg-teal-50 rounded-xl p-5 border border-stone-200/60 hover:border-teal-200 transition-colors"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-5 h-5 text-teal-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                </svg>
+                <p className="font-semibold text-stone-800 text-sm group-hover:text-teal-brand transition-colors">Documentation</p>
+              </div>
+              <p className="text-xs text-stone-500">
+                The official Claude Code docs. Everything from installation to advanced features, written clearly with examples.
+              </p>
+            </a>
+            <a
+              href="https://code.claude.com/docs/en/quickstart"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block bg-stone-50 hover:bg-teal-50 rounded-xl p-5 border border-stone-200/60 hover:border-teal-200 transition-colors"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-5 h-5 text-teal-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                </svg>
+                <p className="font-semibold text-stone-800 text-sm group-hover:text-teal-brand transition-colors">Quickstart Guide</p>
+              </div>
+              <p className="text-xs text-stone-500">
+                Get up and running in minutes. Step-by-step installation and your first conversation with Claude Code.
+              </p>
+            </a>
+            <a
+              href="https://anthropic.skilljar.com/claude-code-in-action"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block bg-stone-50 hover:bg-teal-50 rounded-xl p-5 border border-stone-200/60 hover:border-teal-200 transition-colors"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-5 h-5 text-teal-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                </svg>
+                <p className="font-semibold text-stone-800 text-sm group-hover:text-teal-brand transition-colors">Free Video Course</p>
+              </div>
+              <p className="text-xs text-stone-500">
+                Anthropic's official "Claude Code in Action" course. Watch real workflows, see what's possible, learn by example.
+              </p>
+            </a>
+          </div>
+        </section>
+
       </main>
 
 
