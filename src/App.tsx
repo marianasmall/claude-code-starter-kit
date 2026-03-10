@@ -903,6 +903,78 @@ export default function App() {
                 </p>
               </div>
 
+              {/* CLAUDE.md Hierarchy */}
+              <div className="bg-white rounded-xl p-6 border border-stone-200/60">
+                <h3 className="font-bold text-stone-900 mb-2">CLAUDE.md Hierarchy: Project-Specific Instructions</h3>
+                <p className="text-sm text-stone-600 mb-4">
+                  Your global CLAUDE.md at <code className="px-1 py-0.5 bg-stone-100 rounded text-xs font-mono">~/.claude/CLAUDE.md</code> loads
+                  in every conversation. But Claude Code also loads any CLAUDE.md it finds in your current working
+                  directory. This means you can create <strong>project-specific instruction files</strong> that layer
+                  on top of your global one.
+                </p>
+
+                <div className="bg-stone-50 rounded-lg p-5 border border-stone-200/60 mb-4">
+                  <p className="font-medium text-stone-700 text-sm mb-3">How the hierarchy works:</p>
+                  <div className="space-y-3">
+                    {/* Global level */}
+                    <div className="flex items-start gap-3">
+                      <div className="bg-violet-100 text-violet-700 text-xs font-mono font-semibold px-2.5 py-1 rounded shrink-0">
+                        ~/.claude/CLAUDE.md
+                      </div>
+                      <div>
+                        <p className="text-xs text-stone-700 font-medium">Global — loads in every session</p>
+                        <p className="text-xs text-stone-500">Who you are, communication style, permissions, constitution</p>
+                      </div>
+                    </div>
+                    {/* Arrow */}
+                    <div className="flex justify-center">
+                      <svg className="w-4 h-4 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+                      </svg>
+                    </div>
+                    {/* Project level */}
+                    <div className="grid md:grid-cols-3 gap-2">
+                      {[
+                        {
+                          path: 'Projects/Consulting/',
+                          label: 'Consulting',
+                          items: ['Client conventions', 'Deliverable standards', 'Pricing model'],
+                        },
+                        {
+                          path: 'Projects/JobSearch/',
+                          label: 'Job Search',
+                          items: ['Target roles & companies', 'Resume strategy', 'Interview frameworks'],
+                        },
+                        {
+                          path: 'Projects/Course/',
+                          label: 'Course Dev',
+                          items: ['Curriculum outline', 'Target audience', 'Platform decisions'],
+                        },
+                      ].map((proj) => (
+                        <div key={proj.label} className="bg-white rounded-lg p-3 border border-violet-200/60">
+                          <p className="font-mono text-xs text-violet-600 mb-1">~/{proj.path}CLAUDE.md</p>
+                          <p className="font-semibold text-stone-800 text-xs mb-1.5">{proj.label}</p>
+                          {proj.items.map((item) => (
+                            <p key={item} className="text-xs text-stone-500 leading-snug">{item}</p>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-sm text-stone-600 mb-3">
+                  <strong>The power:</strong> When you start Claude Code from your consulting folder, it automatically
+                  knows your client conventions and deliverable standards — without you explaining every time. Start from
+                  your job search folder, and it knows your target roles and resume strategy. No duplicate instructions,
+                  no wasted context.
+                </p>
+                <p className="text-xs text-stone-400 italic">
+                  To set this up: create project folders, add a CLAUDE.md to each one with project-specific context,
+                  and start Claude Code from that folder. Ask Claude to help you draft the project CLAUDE.md files.
+                </p>
+              </div>
+
             </div>
           </div>
         </section>
