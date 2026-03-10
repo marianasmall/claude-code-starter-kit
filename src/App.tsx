@@ -373,6 +373,45 @@ export default function App() {
               ))}
             </div>
 
+            {/* How Anthropic uses it */}
+            <div className="bg-stone-50 rounded-xl p-6 border border-stone-200/60 mt-2">
+              <h3 className="font-semibold text-stone-800 mb-2">It's not just for developers.</h3>
+              <p className="text-sm text-stone-600 mb-4">
+                Anthropic — the company that builds Claude — uses Claude Code across their entire organization.
+                Here are the teams that use it for non-engineering work:
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  {
+                    team: 'Growth Marketing',
+                    uses: ['Automated ad creative generation', 'Advanced prompt engineering with memory systems'],
+                  },
+                  {
+                    team: 'Sales',
+                    uses: ['Sales forecasting via MCP', 'End-to-end demo prep'],
+                  },
+                  {
+                    team: 'Product Design',
+                    uses: ['Rapid interactive prototyping', 'Complex copy changes and legal compliance'],
+                  },
+                  {
+                    team: 'Finance',
+                    uses: ['P&L modeling with sensitivity analysis', 'Cost modeling with assumptions'],
+                  },
+                ].map((dept) => (
+                  <div key={dept.team} className="bg-white rounded-lg p-3.5 border border-stone-200">
+                    <p className="font-semibold text-stone-800 text-xs mb-2">{dept.team}</p>
+                    {dept.uses.map((use) => (
+                      <p key={use} className="text-xs text-stone-500 mb-1 leading-snug">{use}</p>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-stone-400 mt-3 italic">
+                Source: "Claude Code in an Hour" — Anthropic webinar on how they use Claude Code internally
+              </p>
+            </div>
+
             <h3 className="font-semibold text-stone-800 pt-2">Out of the box, it's good. With setup, it's transformative.</h3>
             <p>
               Claude Code works the moment you install it — no configuration required. But out of the box,
@@ -837,6 +876,22 @@ export default function App() {
               </div>
               <p className="text-xs text-stone-500">
                 On-demand webinar from Anthropic. A hands-on walkthrough of Claude Code — great for seeing it in action before diving in yourself.
+              </p>
+            </a>
+            <a
+              href="https://claude.com/blog/category/claude-code"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block bg-stone-50 hover:bg-teal-50 rounded-xl p-5 border border-stone-200/60 hover:border-teal-200 transition-colors"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-5 h-5 text-teal-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                </svg>
+                <p className="font-semibold text-stone-800 text-sm group-hover:text-teal-brand transition-colors">Claude Code Blog</p>
+              </div>
+              <p className="text-xs text-stone-500">
+                Latest updates, new features, and tips straight from Anthropic. Follow along as Claude Code evolves.
               </p>
             </a>
           </div>
