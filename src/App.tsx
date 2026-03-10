@@ -251,7 +251,7 @@ export default function App() {
                 ['setup', 'Setup'],
                 ['insights', 'Insights'],
                 ['summaries', 'Summaries'],
-                ['level-up', 'Level Up'],
+                ['advanced', 'Advanced'],
                 ['template', 'Template'],
                 ['resources', 'Resources'],
               ].map(([id, label]) => (
@@ -686,55 +686,226 @@ export default function App() {
         </SectionCard>
 
 
-        {/* SECTION: Level Up */}
-        <SectionCard id="level-up" icon={<IconArrowUp />} title="When You're Ready: Level Up" tier="Power User" tierColor="purple">
-          <p>
-            Once you're comfortable with the basics, here's what takes Claude Code from great to transformative.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-4 mt-2">
-            <div className="bg-violet-50/50 rounded-xl p-5 border border-violet-200/40">
-              <h3 className="font-semibold text-stone-800 mb-2">Memory Architecture</h3>
-              <p className="text-sm">
-                Beyond session summaries, you can set up a <code className="px-1 py-0.5 bg-white rounded text-xs font-mono">MEMORY.md</code> file
-                where Claude stores patterns it notices about your work — your preferences, recurring solutions,
-                tools that work well together. It's like building institutional knowledge.
-              </p>
+        {/* SECTION: Advanced */}
+        <section id="advanced" className="scroll-mt-24">
+          <div className="bg-gradient-to-br from-violet-50/80 to-stone-50 rounded-2xl border border-violet-200/40 p-8 md:p-10">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2.5 bg-violet-100 text-violet-600 rounded-xl">
+                <IconArrowUp />
+              </div>
+              <h2 className="text-2xl font-bold text-stone-900">Advanced: When You're Ready</h2>
+              <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-violet-100 text-violet-700">Power User</span>
             </div>
+            <p className="text-stone-600 mb-8">
+              None of this is required — the basics above will get you further than most users ever go.
+              But when you're comfortable and want more, these are the features that turn Claude Code
+              into something genuinely transformative. Come back to this section when you're ready.
+            </p>
 
-            <div className="bg-violet-50/50 rounded-xl p-5 border border-violet-200/40">
-              <h3 className="font-semibold text-stone-800 mb-2">Custom Skills & Commands</h3>
-              <p className="text-sm">
-                Create reusable workflows that Claude can run with a single command. A marketing audit,
-                a content calendar builder, a competitive analysis — whatever you do repeatedly,
-                you can teach Claude to do it your way.
-              </p>
-            </div>
+            <div className="space-y-6">
 
-            <div className="bg-violet-50/50 rounded-xl p-5 border border-violet-200/40">
-              <h3 className="font-semibold text-stone-800 mb-2">Agent Teams</h3>
-              <p className="text-sm">
-                Spawn multiple Claude agents that work in parallel. One researches competitors while another
-                drafts content while a third builds a Notion dashboard. It's like having a team that works
-                simultaneously on different parts of a project.
-              </p>
-            </div>
+              {/* Hooks */}
+              <div className="bg-white rounded-xl p-6 border border-stone-200/60">
+                <h3 className="font-bold text-stone-900 mb-2">Hooks: Automations That Run at Key Moments</h3>
+                <p className="text-sm text-stone-600 mb-4">
+                  Hooks are small scripts that trigger automatically when specific things happen in Claude Code —
+                  when a session starts, when a file is about to be edited, when Claude finishes working, or when
+                  it needs your permission. Think of them as "if this happens, also do that" rules.
+                </p>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {[
+                    {
+                      name: 'Backup before edit',
+                      desc: 'Automatically saves a copy of any file before Claude touches it. Your undo button.',
+                      when: 'Day 1',
+                    },
+                    {
+                      name: 'Safety net',
+                      desc: 'Blocks genuinely dangerous commands (deleting critical folders, force-pushing code). A hard stop even if Claude makes a mistake.',
+                      when: 'Day 1',
+                    },
+                    {
+                      name: 'Notify when done',
+                      desc: 'Plays a sound or sends a notification when Claude finishes a task. Walk away, come back when it\'s ready.',
+                      when: 'Week 1',
+                    },
+                    {
+                      name: 'Context monitor',
+                      desc: 'Alerts you when a conversation is getting long and might lose context. Prompts you to save progress before it\'s too late.',
+                      when: 'Month 1',
+                    },
+                    {
+                      name: 'Phone notifications',
+                      desc: 'Push notifications to your phone when Claude needs your input — so you don\'t have to watch the screen.',
+                      when: 'Month 1',
+                    },
+                    {
+                      name: 'Session start context',
+                      desc: 'Automatically loads your current project state at the start of every session. No more "where were we?"',
+                      when: 'Month 1',
+                    },
+                  ].map((hook) => (
+                    <div key={hook.name} className="bg-stone-50 rounded-lg p-3.5 border border-stone-200/60">
+                      <div className="flex items-center justify-between mb-1">
+                        <p className="font-semibold text-stone-800 text-sm">{hook.name}</p>
+                        <span className="text-xs text-stone-400">{hook.when}</span>
+                      </div>
+                      <p className="text-xs text-stone-500 leading-relaxed">{hook.desc}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-stone-400 mt-3 italic">
+                  To set any of these up, just ask Claude Code: "Help me create a [hook name] hook."
+                </p>
+              </div>
 
-            <div className="bg-violet-50/50 rounded-xl p-5 border border-violet-200/40">
-              <h3 className="font-semibold text-stone-800 mb-2">Advanced Hooks</h3>
-              <p className="text-sm">
-                Context monitoring (alerts you when a session is running long), phone notifications
-                (Pushover alerts when Claude needs your input), relay systems for cross-session handoffs,
-                and more. The automation layer gets as sophisticated as you want it.
-              </p>
+              {/* Custom Skills & Commands */}
+              <div className="bg-white rounded-xl p-6 border border-stone-200/60">
+                <h3 className="font-bold text-stone-900 mb-2">Custom Skills & Slash Commands</h3>
+                <p className="text-sm text-stone-600 mb-4">
+                  Skills are reusable workflows you teach Claude. Instead of explaining how to do something
+                  every time, you write the instructions once and Claude follows them whenever you ask.
+                  Slash commands (like <code className="px-1 py-0.5 bg-stone-100 rounded text-xs font-mono">/audit</code> or
+                  <code className="px-1 py-0.5 bg-stone-100 rounded text-xs font-mono">/content-calendar</code>) are shortcuts
+                  to trigger skills instantly.
+                </p>
+                <div className="bg-stone-50 rounded-lg p-4 border border-stone-200/60">
+                  <p className="font-medium text-stone-700 text-sm mb-2">Examples of skills you could build:</p>
+                  <div className="grid md:grid-cols-2 gap-2 text-xs text-stone-600">
+                    <div className="flex gap-2 items-start">
+                      <div className="w-1 h-1 rounded-full bg-violet-400 mt-1.5 shrink-0" />
+                      <span><strong>Marketing audit</strong> — Analyze any company's public presence across 26 dimensions</span>
+                    </div>
+                    <div className="flex gap-2 items-start">
+                      <div className="w-1 h-1 rounded-full bg-violet-400 mt-1.5 shrink-0" />
+                      <span><strong>Content calendar</strong> — Generate a month of content ideas with platform-specific formatting</span>
+                    </div>
+                    <div className="flex gap-2 items-start">
+                      <div className="w-1 h-1 rounded-full bg-violet-400 mt-1.5 shrink-0" />
+                      <span><strong>Client onboarding</strong> — Run your full intake process: pull transcripts, research, build hub</span>
+                    </div>
+                    <div className="flex gap-2 items-start">
+                      <div className="w-1 h-1 rounded-full bg-violet-400 mt-1.5 shrink-0" />
+                      <span><strong>Competitive analysis</strong> — Research competitors and produce a structured comparison report</span>
+                    </div>
+                    <div className="flex gap-2 items-start">
+                      <div className="w-1 h-1 rounded-full bg-violet-400 mt-1.5 shrink-0" />
+                      <span><strong>YouTube strategy</strong> — Audit a channel, research competitors, generate content pipeline</span>
+                    </div>
+                    <div className="flex gap-2 items-start">
+                      <div className="w-1 h-1 rounded-full bg-violet-400 mt-1.5 shrink-0" />
+                      <span><strong>Proposal builder</strong> — Generate client proposals from discovery notes with pricing options</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs text-stone-400 mt-3 italic">
+                  You describe what the skill should do in plain language. Claude builds the skill file for you.
+                </p>
+              </div>
+
+              {/* MCP Integrations */}
+              <div className="bg-white rounded-xl p-6 border border-stone-200/60">
+                <h3 className="font-bold text-stone-900 mb-2">MCP Integrations: Connecting Your Entire Tool Stack</h3>
+                <p className="text-sm text-stone-600 mb-4">
+                  MCP (Model Context Protocol) is how Claude Code connects to external tools. Some come built-in
+                  (Notion, Gmail, Slack), but there's a growing ecosystem of integrations you can add.
+                  Each one gives Claude direct access to another tool — no copy-pasting between windows.
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  {[
+                    { tool: 'Notion', desc: 'Databases, pages, wikis' },
+                    { tool: 'Gmail', desc: 'Read and draft emails' },
+                    { tool: 'Slack', desc: 'Read channels and threads' },
+                    { tool: 'Google Calendar', desc: 'Events and scheduling' },
+                    { tool: 'Figma', desc: 'Design-to-code workflows' },
+                    { tool: 'GitHub', desc: 'Repos, issues, PRs' },
+                    { tool: 'Fireflies', desc: 'Meeting transcripts' },
+                    { tool: 'Perplexity', desc: 'Deep research with citations' },
+                  ].map((mcp) => (
+                    <div key={mcp.tool} className="bg-stone-50 rounded-lg p-3 border border-stone-200/60 text-center">
+                      <p className="font-semibold text-stone-800 text-xs">{mcp.tool}</p>
+                      <p className="text-xs text-stone-400 mt-0.5">{mcp.desc}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-stone-400 mt-3 italic">
+                  New MCP servers are being published regularly. Ask Claude Code: "What MCP integrations are available?"
+                </p>
+              </div>
+
+              {/* Agent Teams */}
+              <div className="bg-white rounded-xl p-6 border border-stone-200/60">
+                <h3 className="font-bold text-stone-900 mb-2">Agent Teams: Multiple Claudes Working in Parallel</h3>
+                <p className="text-sm text-stone-600 mb-4">
+                  This is the feature that blows people's minds. You can spawn multiple Claude agents that
+                  work simultaneously on different parts of a project — each with their own focus, coordinating
+                  through a shared task list.
+                </p>
+                <div className="bg-stone-50 rounded-lg p-4 border border-stone-200/60">
+                  <p className="font-medium text-stone-700 text-sm mb-3">Example: Client onboarding in parallel</p>
+                  <div className="space-y-2">
+                    {[
+                      { agent: 'Research Agent', task: 'Deep-dives into the client\'s market, competitors, and positioning' },
+                      { agent: 'Content Agent', task: 'Audits their website, social media, and existing content' },
+                      { agent: 'Data Agent', task: 'Analyzes their email metrics, traffic data, and conversion rates' },
+                      { agent: 'Hub Agent', task: 'Builds the Notion hub, organizing findings as they come in' },
+                    ].map((a) => (
+                      <div key={a.agent} className="flex gap-3 items-start">
+                        <span className="bg-violet-100 text-violet-700 text-xs font-semibold px-2 py-0.5 rounded shrink-0 mt-0.5">
+                          {a.agent}
+                        </span>
+                        <p className="text-xs text-stone-600">{a.task}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-stone-500 mt-3">
+                    All four work simultaneously. What might take a full day sequentially finishes in an hour.
+                  </p>
+                </div>
+              </div>
+
+              {/* Memory Architecture */}
+              <div className="bg-white rounded-xl p-6 border border-stone-200/60">
+                <h3 className="font-bold text-stone-900 mb-2">Memory Architecture: Building Institutional Knowledge</h3>
+                <p className="text-sm text-stone-600 mb-4">
+                  The starter setup gives you session summaries for continuity. The full memory architecture
+                  is a three-layer system where Claude actually learns and improves over time:
+                </p>
+                <div className="grid md:grid-cols-3 gap-3">
+                  <div className="bg-stone-50 rounded-lg p-4 border border-stone-200/60">
+                    <p className="font-semibold text-stone-800 text-sm mb-1">CLAUDE.md</p>
+                    <p className="text-xs text-violet-600 font-medium mb-2">Identity Layer</p>
+                    <p className="text-xs text-stone-500">
+                      Who you are, how you work, what you expect. You control this file.
+                      It changes slowly and deliberately.
+                    </p>
+                  </div>
+                  <div className="bg-stone-50 rounded-lg p-4 border border-stone-200/60">
+                    <p className="font-semibold text-stone-800 text-sm mb-1">MEMORY.md</p>
+                    <p className="text-xs text-violet-600 font-medium mb-2">Learning Layer</p>
+                    <p className="text-xs text-stone-500">
+                      Patterns Claude notices about your work — preferences, tools that pair well,
+                      recurring problems and solutions. Claude writes this and updates it over time.
+                    </p>
+                  </div>
+                  <div className="bg-stone-50 rounded-lg p-4 border border-stone-200/60">
+                    <p className="font-semibold text-stone-800 text-sm mb-1">Session Summaries</p>
+                    <p className="text-xs text-violet-600 font-medium mb-2">Operations Layer</p>
+                    <p className="text-xs text-stone-500">
+                      What happened, what's pending, what decisions were made.
+                      The running history that keeps every session connected.
+                    </p>
+                  </div>
+                </div>
+                <p className="text-sm text-stone-600 mt-4">
+                  Together, these three layers mean Claude gets meaningfully better the longer you work with it.
+                  It's not just memory — it's accumulated expertise about <em>your</em> work.
+                </p>
+              </div>
+
             </div>
           </div>
-
-          <p className="text-sm text-stone-500 mt-4 italic">
-            You don't need any of this on day one. The CLAUDE.md and basic setup above will get you
-            further than most people ever get. Come back to this section when you're ready.
-          </p>
-        </SectionCard>
+        </section>
 
 
         {/* ── THE TEMPLATE ── */}
