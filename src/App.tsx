@@ -774,7 +774,7 @@ export default function App() {
         <section className="bg-white rounded-2xl shadow-sm border border-stone-200/60 p-8 md:p-10">
           <h2 className="text-xl font-bold text-stone-900 mb-2">Official Resources</h2>
           <p className="text-sm text-stone-500 mb-6">Bookmark these — they're the best places to go deeper when you're ready.</p>
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             <a
               href="https://code.claude.com/docs/en/overview"
               target="_blank"
@@ -821,6 +821,22 @@ export default function App() {
               </div>
               <p className="text-xs text-stone-500">
                 Anthropic's official "Claude Code in Action" course. Watch real workflows, see what's possible, learn by example.
+              </p>
+            </a>
+            <a
+              href="https://anthropic.ondemand.goldcast.io/on-demand/09d55ee8-3223-481e-88df-357b3e7868c4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block bg-stone-50 hover:bg-teal-50 rounded-xl p-5 border border-stone-200/60 hover:border-teal-200 transition-colors"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-5 h-5 text-teal-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+                </svg>
+                <p className="font-semibold text-stone-800 text-sm group-hover:text-teal-brand transition-colors">Webinar: Claude Code in an Hour</p>
+              </div>
+              <p className="text-xs text-stone-500">
+                On-demand webinar from Anthropic. A hands-on walkthrough of Claude Code — great for seeing it in action before diving in yourself.
               </p>
             </a>
           </div>
