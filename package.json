@@ -1,13 +1,32 @@
 {
   "name": "claude-starter-kit",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Interactive onboarding guide to Claude Code, written for marketing executives and senior operators starting with a CLI tool for the first time.",
+  "homepage": "https://claude-code-starter-kit.netlify.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marianasmall/site-claude-starter-kit.git"
   },
-  "keywords": [],
-  "author": "",
+  "bugs": {
+    "url": "https://github.com/marianasmall/site-claude-starter-kit/issues"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "claude-code",
+    "anthropic",
+    "claude",
+    "starter-kit",
+    "onboarding",
+    "marketing",
+    "ai-tools",
+    "non-coder",
+    "tutorial"
+  ],
+  "author": "Mariana Small <marianabsmall@gmail.com> (https://resonantgrowth.com)",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
