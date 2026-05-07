@@ -11,7 +11,7 @@ Here's a guest pass to get you started:
 **https://claude.ai/referral/wYS1mXeEWg**
 
 That'll get you up and running with Claude (you need at least Claude Pro to use Claude Code).
-Already have a Claude account? Skip this and follow the official install:  https://code.claude.com/docs/en/setup
+Already have a Claude account? Skip this and follow the official install: https://code.claude.com/docs/en/setup
 
 ---
 
@@ -88,7 +88,7 @@ If you'd rather do it yourself manually, see **Manual Setup** at the bottom of t
 
 ## Step 4: Customize your CLAUDE.md
 
-After Claude copies the template, you need to open `~/.claude/CLAUDE.md` and edit it.
+Once `~/.claude/CLAUDE.md` is in place (whether Claude copied it fresh in Step 3 or you merged from your existing one), open it and edit it.
 
 > ⚠️ **Heads up:** `~/.claude/` is a **hidden folder** on macOS. Finder won't show it by default. Use one of these instead:
 >
@@ -135,13 +135,13 @@ If something looks wrong, ask Claude:
 
 - *"My hook scripts aren't executable. Can you fix them?"* (Claude will run the chmod for you — the file paths use plugin variables it knows but you don't.)
 - *"My statusline isn't showing. Help me debug."*
-- *"This slash command isn't appearing. What's wrong?"* (Sometimes you need `/quit` and relaunch Claude Code to pick up new commands.)
+- *"This slash command isn't appearing. What's wrong?"* (Sometimes you need to type `/quit` to exit Claude Code, then type `claude` again in Terminal to start a fresh session — that picks up new commands.)
 
 > ## 🎉 You're done with the basics
 >
 > If `/maintain quick` came back clean, **you're set up.** Steps 7+ below are optional integrations — only do them if you want the specific features they add.
 >
-> **Try this right now to feel the kit working:** type `/note testing the kit` at Claude Code's prompt. A timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md`. That's a hook + a slash command + a file the kit created, all working together. Welcome aboard.
+> **Try this right now to feel the kit working:** type `/note testing the kit` at Claude Code's prompt. A timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md` (that's a hidden folder — to view it, use the same TextEdit `Cmd+Shift+G` trick from Step 4, or just ask Claude *"show me what's in today's notes file"*). That's a hook + a slash command + a file the kit created, all working together. Welcome aboard.
 
 ## Step 7 (optional): Integrations
 
@@ -171,7 +171,7 @@ If something looks wrong, ask Claude:
    NOTION_RELAY_TOKEN=your_integration_token
    ```
 5. Edit `examples/debt-sync.sh.opt-in` — set `DATABASE_ID` to your database ID
-6. Copy it to `hooks/scripts/debt-sync.sh` and add a wire in `hooks/hooks.json` (PostToolUse on Edit|Write)
+6. Copy it to `hooks/scripts/debt-sync.sh` and register it in `hooks/hooks.json` (add an entry under PostToolUse with matcher `Edit|Write`)
 
 (This is the most involved integration — see `examples/debt-sync.sh.opt-in` for full instructions. Most users skip it and the kit works fine.)
 

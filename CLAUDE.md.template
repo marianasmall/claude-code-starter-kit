@@ -81,6 +81,21 @@ Examples:
 - Working files: `~/Projects/<name>/`
 - Claude config: `~/.claude/`
 
+### File naming convention (optional but recommended)
+
+Pick one and uncomment / customize:
+
+<!-- Topic-first: clusters by topic when sorted alphabetically -->
+<!-- File naming: `[Topic]_[Subtopic]_[Description]_YYYY-MM-DD.ext` — e.g., `Acme_Strategy_Discovery_2026-05-06.md` -->
+
+<!-- Date-first: clusters by recency -->
+<!-- File naming: `YYYY-MM-DD_[Topic]_[Description].ext` -->
+
+<!-- kebab-case: URL-friendly, all lowercase -->
+<!-- File naming: `topic-subtopic-description-YYYY-MM-DD.ext` -->
+
+See [`docs/project-conventions.md`](docs/project-conventions.md) for tradeoffs.
+
 ## Memory Architecture (provided by starter kit)
 
 This setup uses a three-space memory pattern:

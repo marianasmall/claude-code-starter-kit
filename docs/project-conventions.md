@@ -153,6 +153,74 @@ A typical project lifecycle with these files:
 - Update CONTEXT-SUMMARY.md to reflect "Done" or "Paused: see PLANNING.md for resume notes."
 - Don't delete PLANNING.md — you'll thank yourself later.
 
+## Naming conventions
+
+A second layer of project organization: how you name files inside a project. The kit doesn't enforce a convention (no hook checks filenames — that gets noisy fast), but **picking one and sticking with it** matters more than which one you pick.
+
+### Why naming matters
+
+- **Findability:** you can `grep` or search by a consistent token
+- **Sortability:** alphabetical sort produces useful clusters (by topic, or by date)
+- **Scannability:** the filename tells you content at a glance, before you open it
+- **AI-readability:** Claude can find and reference files faster when they follow a predictable shape
+
+### Three common patterns
+
+Pick whichever fits your work:
+
+#### 1. Topic-first (good for knowledge work, consulting, research)
+
+```
+[Topic]_[Subtopic]_[Description]_YYYY-MM-DD.ext
+```
+
+Example: `Acme_Strategy_Discovery-Synthesis_2026-05-06.md`
+
+- ✅ Alphabetical sort clusters files by topic
+- ✅ Date at the end is informative without disrupting the topic grouping
+- ❌ Pure date-sort requires a separate sort
+
+#### 2. Date-first (good for journals, daily logs, time-series notes)
+
+```
+YYYY-MM-DD_[Topic]_[Description].ext
+```
+
+Example: `2026-05-06_Acme_Discovery-Synthesis.md`
+
+- ✅ Newest at the bottom (or top, depending on sort), easy chronological scan
+- ❌ Topic clustering breaks — same client's files spread across the directory
+
+#### 3. kebab-case lowercase (good for code, web content, anything URL-adjacent)
+
+```
+topic-subtopic-description-YYYY-MM-DD.ext
+```
+
+Example: `acme-discovery-synthesis-2026-05-06.md`
+
+- ✅ URL-safe, no spaces, no caps to worry about
+- ✅ Reads cleanly in URLs and command-line listings
+- ❌ Slightly less readable for humans (words run together visually)
+
+### Recommended starting point
+
+If you're not sure, **start with topic-first** (`Topic_Subtopic_Description_YYYY-MM-DD.ext`). It's the most flexible across the kinds of work this kit is designed for (consulting, research, knowledge work).
+
+### Documenting your choice
+
+Add a one-liner to your CLAUDE.md so Claude follows the same convention when creating files for you:
+
+> **File naming:** Use topic-first format `[Topic]_[Subtopic]_[Description]_YYYY-MM-DD.ext`. Apply this to anything I save under `~/Projects/` or `~/Documents/`.
+
+Now Claude knows the convention and uses it consistently. Without that line, Claude will name files however seems natural at the time — usually fine for one-off files but inconsistent over time.
+
+### What about existing files?
+
+If you're adopting a convention partway through a project, **don't rename everything at once.** Apply it going forward. Bulk-rename old files only if findability is genuinely broken. Inconsistency in old files is much less expensive than the time it takes to rename them.
+
+---
+
 ## When NOT to use these
 
 - **Throwaway scratch directories** — One-off explorations don't need this overhead.
