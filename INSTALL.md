@@ -237,7 +237,14 @@ You'll see files like `CLAUDE.md.20260506_143022.bak`. Restore by copying back:
 cp ~/.claude/_backups/CLAUDE.md.20260506_143022.bak ~/.claude/CLAUDE.md
 ```
 
-> **Caveat:** the backup hook only fires when Claude uses the **Edit/Write tools**, not when it runs `cp` via Bash. If Claude used Bash to copy the template, there's no auto-backup. This is the only real risk, and it's why we recommend renaming existing files to `.backup` *before* installing if you want belt-and-suspenders safety.
+> **Caveat:** the backup hook only fires when Claude uses the **Edit/Write tools**, not when it runs `cp` via Bash. If Claude used Bash to copy the template, there's no auto-backup. This is the only real risk, and it's why we recommend appending `.backup` to your existing filenames *before* installing if you want belt-and-suspenders safety. For example, in your terminal:
+>
+> ```
+> mv ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.backup
+> mv ~/.claude/settings.json ~/.claude/settings.json.backup
+> ```
+>
+> If anything goes sideways during install, restore by renaming back: `mv ~/.claude/CLAUDE.md.backup ~/.claude/CLAUDE.md`.
 
 ## What to do next
 
