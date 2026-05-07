@@ -1,0 +1,135 @@
+{
+  "_comment": "Template for ~/.claude/settings.json. Copy this file to ~/.claude/settings.json and edit. Items marked [CUSTOMIZE] need your input.",
+
+  "cleanupPeriodDays": 120,
+
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "ENABLE_PROMPT_CACHING_1H": "1",
+    "CLAUDE_CODE_FORK_SUBAGENT": "1",
+    "ENABLE_TOOL_SEARCH": "auto"
+  },
+
+  "permissions": {
+    "_comment": "Sensible-default allowlist. The /permissions-audit command can review and prune these later.",
+    "allow": [
+      "// === Shell read-only ===",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(diff:*)",
+      "Bash(stat:*)",
+      "Bash(which:*)",
+      "Bash(env)",
+      "Bash(date)",
+      "Bash(echo:*)",
+
+      "// === Shell mutating (review for your comfort) ===",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(chmod:*)",
+      "Bash(rm:*)",
+
+      "// === Git ===",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+
+      "// === Dev tools ===",
+      "Bash(python3:*)",
+      "Bash(pip3 install:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(brew:*)",
+
+      "// === Web access ===",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:claude.com)",
+
+      "// === Skills (let Claude use any installed skill) ===",
+      "Skill(*)",
+
+      "// === File operations on Claude config ===",
+      "Edit(/Users/[CUSTOMIZE]/.claude/**)",
+      "Write(/Users/[CUSTOMIZE]/.claude/**)"
+    ]
+  },
+
+  "_hooks_note": "Hooks come from the claude-code-starter-kit plugin via hooks/hooks.json. You don't need to wire them here.",
+
+  "statusLine": {
+    "_comment": "Optional — install the bundled statusline first: cp $CLAUDE_PLUGIN_ROOT/examples/statusline.sh ~/.claude/statusline.sh && chmod +x ~/.claude/statusline.sh",
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "refreshInterval": 30
+  },
+
+  "enabledPlugins": {
+    "claude-code-starter-kit@local": true,
+    "explanatory-output-style@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+
+  "spinnerVerbs": {
+    "_comment": "Adds personality to Claude Code's loading spinner. Edit, add, remove freely.",
+    "mode": "append",
+    "verbs": [
+      "Strategizing",
+      "Synthesizing",
+      "Auditing",
+      "Reading the room",
+      "Triangulating",
+      "Solving the right thing",
+      "Not starting with 'Great question!'",
+      "Avoiding the word 'delve'",
+      "Reading between your lines",
+      "Pondering what to skip",
+      "Earning my keep",
+      "Caffeinating",
+      "Vibing",
+      "Holding the context",
+      "Pretending this is simple",
+      "Building the scaffold",
+      "Not hallucinating (probably)",
+      "Asking what's underneath",
+      "Choosing the right abstraction",
+      "Finding the so-what",
+      "Decoding the brief",
+      "Skipping the bullet points this time",
+      "Choosing not to summarize what I just said",
+      "Inferring what you actually meant",
+      "Filling in the gaps you left",
+      "Hyperfocusing (do not disturb)",
+      "Following the tangent anyway",
+      "Returning from the tangent",
+      "Making it make sense retroactively",
+      "Untangling the logic",
+      "Not pretending this is done",
+      "Making sure it lands",
+      "Not the first draft",
+      "Trusting the process (reluctantly)",
+      "Resisting the tempting wrong answer",
+      "Checking my work like it matters",
+      "This is actually interesting",
+      "Quietly updating MEMORY.md",
+      "Active context injected",
+      "Safety-net.sh is watching",
+      "Backup hook just fired",
+      "Reading CLAUDE.md (again)",
+      "Compacting gracefully",
+      "Hoping this survives the context window",
+      "Two searches, time to persist"
+    ]
+  },
+
+  "autoUpdatesChannel": "latest"
+}

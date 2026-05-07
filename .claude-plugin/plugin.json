@@ -1,0 +1,21 @@
+{
+  "name": "claude-code-starter-kit",
+  "version": "0.1.0",
+  "description": "An opinionated Claude Code starter kit — hooks, slash commands, agents, and a CLAUDE.md framework — for serious knowledge workers who want a calm, structured, partnership-style setup out of the box.",
+  "author": {
+    "name": "Mariana Small",
+    "url": "https://github.com/marianasmall"
+  },
+  "homepage": "https://github.com/marianasmall/claude-code-starter-kit",
+  "repository": "https://github.com/marianasmall/claude-code-starter-kit",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "hooks",
+    "slash-commands",
+    "agents",
+    "starter-kit",
+    "productivity",
+    "knowledge-work"
+  ]
+}

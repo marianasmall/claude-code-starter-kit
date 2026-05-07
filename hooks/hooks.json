@@ -1,0 +1,137 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "Bash",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/safety-net.sh",
+          "timeout": 5,
+          "statusMessage": "Safety check..."
+        }
+      ]
+    },
+    {
+      "matcher": "Edit|Write",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/self-guard.sh",
+          "timeout": 5,
+          "statusMessage": "Self-guard check..."
+        },
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/backup-before-edit.sh",
+          "timeout": 10,
+          "statusMessage": "Backing up file..."
+        }
+      ]
+    }
+  ],
+  "UserPromptSubmit": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/user-prompt-context.sh",
+          "timeout": 5
+        },
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/idle-summary.sh",
+          "timeout": 5
+        },
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/scope-creep-detector.sh",
+          "timeout": 5
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/context-monitor.sh",
+          "timeout": 5,
+          "statusMessage": "Checking context usage..."
+        },
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/retry-nudge.sh",
+          "timeout": 5,
+          "statusMessage": "Retry check..."
+        },
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/persistence-rule.sh",
+          "timeout": 5
+        }
+      ]
+    },
+    {
+      "matcher": "Edit|Write",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/writing-humanizer.sh",
+          "timeout": 5
+        }
+      ]
+    }
+  ],
+  "PreCompact": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pre-compact.sh",
+          "timeout": 5,
+          "statusMessage": "Saving context before compression..."
+        }
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/notify-done.sh",
+          "timeout": 5
+        },
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/stop-check.sh",
+          "timeout": 5
+        }
+      ]
+    }
+  ],
+  "SessionEnd": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/session-end.sh",
+          "timeout": 10,
+          "statusMessage": "Logging session..."
+        }
+      ]
+    }
+  ],
+  "PermissionRequest": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/permission-ding.sh",
+          "timeout": 5
+        }
+      ]
+    }
+  ]
+}

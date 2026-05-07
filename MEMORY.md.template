@@ -1,0 +1,48 @@
+# Auto Memory
+
+This file is Claude's tactical memory — auto-written observations, patterns, and feedback that accumulate across sessions. Claude maintains it; you read it; both of you reference it.
+
+## How this differs from CLAUDE.md
+
+| | CLAUDE.md | MEMORY.md (this file) |
+|---|---|---|
+| **Who writes it** | You (curated) | Claude (auto-observations) |
+| **Pace of change** | Slow, intentional | Fast, organic |
+| **Content** | Strategic instructions | Tactical observations |
+| **Length goal** | Under 500 lines | Index of topic files |
+| **First load** | Every session | First 200 lines auto-loaded |
+
+## Topic Files (read on demand)
+
+Memory is organized as small topic files in this directory. This index has one line per topic. Read individual files when their topic comes up.
+
+[Add lines as memory accumulates. Format: `- topic_name.md — one-line hook`]
+
+Example entries (delete these once you have real ones):
+
+- `feedback_communication_style.md` — How user prefers updates phrased; tone calibration.
+- `pattern_session_end_routine.md` — User's habit of running /reflect → /session-end at close.
+- `project_active_work.md` — What's currently in flight; updated at session end.
+- `tool_quirks.md` — Known issues with tools/MCP servers; workarounds.
+
+## Tags
+
+When writing memory entries, use these tags for pattern detection:
+
+- `[PATTERN]` — Recurring behavior or preference (positive or negative)
+- `[DRIFT]` — Moment Claude drifted from partnership principles
+- `[FRICTION]` — Something that slowed work or caused unnecessary effort
+- `[TOOL-GAP]` — Missing tool or capability that would have helped
+- `[DEAD-END]` — Approach that failed (also log to ~/.claude/dead-ends.md)
+- `[CONTEXT-GAP]` — Missing information that caused problems
+- `[WIN]` — Something that worked exceptionally well
+
+## Maintenance
+
+Twice a month or so:
+- Review topic files. Delete what's no longer true.
+- Promote stable patterns from MEMORY.md → CLAUDE.md (curated rules)
+- Demote outdated CLAUDE.md rules → MEMORY.md (with sunset date)
+- Keep this index under ~50 lines. If it's longer, consolidate adjacent topics.
+
+> WARNING: Files larger than ~200 lines or 30KB get partially loaded. Keep index entries to one line and move detail into topic files.

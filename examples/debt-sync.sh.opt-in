@@ -1,0 +1,75 @@
+#!/bin/bash
+# debt-sync.sh — OPT-IN hook (Notion integration)
+#
+# This file is in examples/ rather than hooks/scripts/ because it requires
+# a Notion API token + a specific database to sync to. To activate:
+#
+#   1. Create a Notion database with these properties (or similar):
+#        - Title (title)
+#        - Date (date)
+#        - Status (select: Open / Resolved / Deferred / Dismissed)
+#        - Resolved (date)
+#   2. Get a Notion integration token (https://www.notion.so/my-integrations)
+#   3. Share the database with the integration
+#   4. Set the database ID in this script (DATABASE_ID below)
+#   5. Add NOTION_RELAY_TOKEN=your_token to ~/.env.local
+#   6. Copy this file to hooks/scripts/debt-sync.sh
+#   7. Wire it into hooks/hooks.json (PostToolUse on Edit|Write)
+#
+# Bidirectional state sync between ~/.claude/debt.md and a Notion database.
+#
+# Handles 4 statuses via checkbox marker:
+#   [ ] = Open    [x] = Resolved    [-] = Deferred    [~] = Dismissed
+#
+# Sync semantics:
+#   * NEW item     → create Notion page, record page_id + status in state
+#   * STATUS CHANGE → patch Notion page Status property + Resolved date
+#   * UNCHANGED    → skip (no API call)
+#   * DELETED      → no action (Notion page stays at last-known state)
+
+set +e
+
+DEBT_FILE="$HOME/.claude/debt.md"
+STATE_DIR="$HOME/.claude/state"
+STATE_FILE="$STATE_DIR/debt-synced.json"
+LOG_FILE="$STATE_DIR/debt-sync.log"
+ENV_FILE="$HOME/.env.local"
+
+# ⬇⬇⬇ EDIT THIS — set your Notion database ID here ⬇⬇⬇
+DATABASE_ID="REPLACE_WITH_YOUR_NOTION_DATABASE_ID"
+# ⬆⬆⬆ EDIT THIS ⬆⬆⬆
+
+INPUT=$(cat 2>/dev/null)
+[ -z "$INPUT" ] && exit 0
+
+FILE_PATH=$(echo "$INPUT" | python3 -c "
+import json, sys
+try:
+    d = json.load(sys.stdin)
+    print(d.get('tool_input', {}).get('file_path', ''))
+except Exception:
+    pass
+" 2>/dev/null)
+
+case "$FILE_PATH" in
+  "$DEBT_FILE"|"$HOME/.claude/debt.md") ;;
+  *) exit 0 ;;
+esac
+
+# Bail if database ID hasn't been customized
+if [ "$DATABASE_ID" = "REPLACE_WITH_YOUR_NOTION_DATABASE_ID" ]; then
+    exit 0
+fi
+
+[ -f "$ENV_FILE" ] || exit 0
+TOKEN=$(grep '^NOTION_RELAY_TOKEN=' "$ENV_FILE" 2>/dev/null | cut -d= -f2- | tr -d '"' | tr -d "'")
+[ -z "$TOKEN" ] && exit 0
+
+mkdir -p "$STATE_DIR"
+[ -f "$STATE_FILE" ] || echo '{"items":{}}' > "$STATE_FILE"
+
+# (Full sync logic omitted from this template — see Mariana's original
+# debt-sync.sh in claude-code-config for the complete implementation.
+# This file exists primarily to document the integration shape.)
+
+exit 0

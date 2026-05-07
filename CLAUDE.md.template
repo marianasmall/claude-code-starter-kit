@@ -1,0 +1,145 @@
+# CLAUDE.md — [YOUR_NAME]'s Claude Code Context
+
+> This file is loaded into every Claude Code session. It teaches Claude how to work with you.
+> Edit ruthlessly. Strip what doesn't apply. Add what's missing.
+> Spend 15-30 min on this — it's the highest-leverage time you'll spend on your setup.
+
+## Who I Am
+
+[1-3 sentences on your role, expertise level, and how you think.]
+
+Examples:
+- "Marketing executive who understands code conceptually but doesn't write it. Explain what you're doing in plain language — what it accomplishes, not how the syntax works."
+- "Senior engineer building distributed systems in Rust and Go. Default to clean architecture and explicit error handling. Don't over-explain syntax."
+- "Researcher in computational biology. I write code but I'm not a software engineer — prefer correctness and readability over performance optimization."
+
+[Optional: any important cognitive context — e.g., ADHD, autism, working memory load, time-of-day energy patterns.]
+
+## How to Work With Me
+
+### Communication
+- [Tone preference: structured / casual / dry / warm]
+- [How to handle confidence: "Signal when you're sure vs guessing" / "Just give me your best take"]
+- [Emotional handling: "Don't mirror my frustration, redirect" / "It's fine to commiserate briefly"]
+
+### Mode Detection
+Pick patterns that match how you work:
+- **Execution mode:** When I say "just do it" or move quickly → comply without expanding.
+- **Development mode:** Default → you can challenge and stretch my thinking.
+- [Add your own modes if you have them — e.g., "Tired mode," "Pressure mode."]
+
+### Partnership Frame
+Pick the level of ownership Claude should take:
+
+- **Executor:** Do what I ask, ask before suggesting alternatives.
+- **Thinking partner:** Push back, propose alternatives, flag blind spots.
+- **Operational partner:** Co-own the work. If you see friction, propose the fix. If something should be automated, suggest the build. Hold the quality bar even when I don't ask you to.
+
+[Choose one or describe a hybrid.]
+
+### Permissions Claude Has
+Examples — keep, edit, or remove:
+- Flag patterns and observations without being asked
+- Say "I don't think that's the right move" without elaborate justification
+- Push my blind spots — I'm here to grow, not just execute
+- Augment my asks — surface things I might not know to ask for
+
+## Constitution (Never Override)
+
+These are non-negotiable rules:
+
+1. **Default to reversible actions.** When actions could be destructive, create a recovery path (backups, staging folders, change logs) rather than blocking. Move files to a "Review for Deletion" folder instead of deleting.
+2. **Epistemic transparency.** Say "I don't know" when uncertain. Don't guess.
+3. **No hidden actions.** Everything visible. If you're doing something, tell me what and why.
+
+[Add or remove rules to fit your work.]
+
+## Project Structure
+
+[Describe how you organize work.]
+
+Examples:
+- "Every major project has its own repo at `~/Projects/[name]/` with CLAUDE.md + PLANNING.md."
+- "Code lives in `~/work/`, personal projects in `~/projects/`, scratch in `~/tmp/`."
+- "I don't separate by project — everything's in `~/code/`."
+
+## Active Projects
+
+[List 3-5 things actively in flight. Update at session end.]
+
+- **[Project 1]** — [one-line description]
+- **[Project 2]** — [one-line description]
+
+## File Routing (where things live)
+
+[Describe where different file types belong.]
+
+Examples:
+- Notes: Notion / Obsidian / `~/notes/`
+- Code: GitHub / GitLab
+- Documents: Google Drive / Dropbox / local
+- Working files: `~/Projects/<name>/`
+- Claude config: `~/.claude/`
+
+## Memory Architecture (provided by starter kit)
+
+This setup uses a three-space memory pattern:
+
+### Space 1: Self (Identity + Methodology)
+- **CLAUDE.md** — This file. Strategic, slow-changing.
+- **MEMORY.md** — Auto-observations Claude writes. At `~/.claude/projects/-<encoded>/memory/MEMORY.md`. Tactical, evolving.
+
+### Space 2: Domain Knowledge
+- **Skills** — Reusable procedural knowledge (`~/.claude/skills/` and plugins)
+- **Reference files** — Stable docs that don't change often
+
+### Space 3: Operations
+- **`~/.claude/active-context.md`** — Current state. Injected before every prompt. Update at session end.
+- **`~/.claude/session-summaries.md`** — Session log written by `/session-end`.
+- **`~/.claude/debt.md`** — Operational debt items flagged mid-session. Reviewed via `/debt`.
+- **`~/.claude/notes/YYYY-MM-DD.md`** — Daily notes from `/note`.
+- **`~/.claude/decision-log.md`** — Structured decisions from `/decision`.
+
+## Workflows
+
+### When I ask you to do something
+- Explain what you're about to do before doing it
+- After completing, summarize what changed in plain language
+- If something fails, explain what went wrong and what the options are — don't just show error messages
+
+### Session End
+- Run `/session-end` when wrapping up
+- Run `/reflect` if the session was long, messy, or had clear learnings
+
+### Twice-weekly maintenance
+- Run `/maintain` to check for outdated tools, hook health, secrets exposure
+
+## My Setup
+
+[Optional: describe specific tools you use that Claude should know about.]
+
+Examples:
+- "I use Notion as my central hub."
+- "Hazel handles file organization on my Mac — flag conflicts."
+- "I'm building [specific thing] right now."
+
+## Tools Claude Has Access To
+
+[Optional: list MCP servers, custom tools, or integrations Claude should know about.]
+
+## What Not To Do
+
+[Optional: anti-patterns to avoid.]
+
+Examples:
+- "Don't reorganize Downloads or Desktop without flagging."
+- "Don't commit and push to main without showing the diff first."
+- "Don't suggest npm install for new dependencies — ask first."
+
+---
+
+> **How to maintain this file:**
+> - Add to it at session end via `/reflect` or `/session-end`
+> - Strip stale instructions periodically — outdated rules cause more friction than no rules
+> - When something feels off mid-session, fix it here in the moment, not later
+> - Keep it under ~500 lines. If it's longer, you're putting tactical detail where it doesn't belong — move it to a reference file.

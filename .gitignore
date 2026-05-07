@@ -1,0 +1,19 @@
+# Claude Code state and runtime files
+**/state/
+**/_backups/
+*.local
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
