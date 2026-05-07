@@ -181,25 +181,63 @@ If something looks wrong, ask Claude:
 
 If you already have hooks in `~/.claude/settings.json`, they'll continue to fire alongside the plugin's hooks. Run `/maintain` to detect any duplicate behavior.
 
-### "Can I disable individual hooks?"
-
-Yes. Edit `$CLAUDE_PLUGIN_ROOT/hooks/hooks.json` and remove the entry. Or set environment variables:
-- `IDLE_SUMMARY_DISABLE=1` — disable idle-summary hook
-- `SCOPE_CREEP_ENABLED=0` — keep scope-creep off (it's off by default anyway)
-
 ### "How do I update the plugin?"
 
 ```
 /plugin update claude-code-starter-kit
 ```
 
-### "How do I uninstall?"
+---
+
+## Don't like something? Here's how to back out
+
+None of this is one-way. Three levels of revert, light to heavy:
+
+### Level 1 (lightest): Disable a single hook
+
+If one specific hook is annoying you (the writing-humanizer keeps nudging when you don't want it, the idle-summary fires too often), disable just that one.
+
+**Easiest way:** ask Claude — *"Disable the writing-humanizer hook from the starter kit."* Claude will edit the plugin's `hooks/hooks.json` to remove that entry. The other hooks keep working.
+
+**Some hooks have built-in env-var disables:**
+- `IDLE_SUMMARY_DISABLE=1` — turns off idle-summary for the current session
+- `SCOPE_CREEP_ENABLED=0` — keeps scope-creep off (it's off by default anyway)
+
+Add these to your shell environment (`~/.zshrc` or similar) to make them permanent.
+
+### Level 2 (medium): Disable the whole plugin
+
+Keep it installed but stop everything from firing:
+
+```
+/plugin disable claude-code-starter-kit
+```
+
+All hooks stop firing. All slash commands disappear from `/help`. Your personal CLAUDE.md, settings.json, notes, and decision-log are untouched. Re-enable any time with `/plugin enable claude-code-starter-kit`.
+
+### Level 3 (heaviest): Uninstall entirely
 
 ```
 /plugin uninstall claude-code-starter-kit
 ```
 
-Removes the plugin and its hook wiring. Your CLAUDE.md, settings.json, and any files you wrote (notes, decision-log, debt.md) stay — they're outside the plugin.
+Removes the plugin and all its files. Your personal config files (CLAUDE.md, settings.json, statusline.sh) and any files you wrote (`~/.claude/notes/*`, `~/.claude/decision-log.md`, `~/.claude/debt.md`) all stay — they're outside the plugin.
+
+### Restoring an overwritten CLAUDE.md or settings.json
+
+If during install Claude overwrote a file you wanted to keep, the kit's `backup-before-edit` hook auto-created a timestamped backup. Find it:
+
+```
+ls ~/.claude/_backups/
+```
+
+You'll see files like `CLAUDE.md.20260506_143022.bak`. Restore by copying back:
+
+```
+cp ~/.claude/_backups/CLAUDE.md.20260506_143022.bak ~/.claude/CLAUDE.md
+```
+
+> **Caveat:** the backup hook only fires when Claude uses the **Edit/Write tools**, not when it runs `cp` via Bash. If Claude used Bash to copy the template, there's no auto-backup. This is the only real risk, and it's why we recommend renaming existing files to `.backup` *before* installing if you want belt-and-suspenders safety.
 
 ## What to do next
 

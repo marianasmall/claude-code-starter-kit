@@ -37,6 +37,8 @@ The only two files to think about are `CLAUDE.md` and `settings.json` (your pers
 
 **If you're starting fresh,** you'll be ahead of the game. The kit is months of "I wish I'd done this earlier" learning packaged for one install + 15 minutes of customization.
 
+**Don't like something?** None of this is one-way. You can disable individual hooks, disable the whole plugin (`/plugin disable claude-code-starter-kit`), uninstall it entirely (`/plugin uninstall claude-code-starter-kit`), or restore overwritten files from the timestamped backups the kit auto-creates. Full revert paths in [INSTALL.md](INSTALL.md#dont-like-something-heres-how-to-back-out).
+
 ---
 
 ## How this is different from Claude Code out of the box
