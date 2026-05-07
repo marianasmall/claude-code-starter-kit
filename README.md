@@ -15,7 +15,7 @@ claude-code-starter-kit/
 ├── hooks/
 │   ├── hooks.json                # Wires the hooks into Claude Code events
 │   └── scripts/                  # 16 hook scripts
-├── commands/                     # 11 slash commands
+├── commands/                     # 12 slash commands
 ├── agents/                       # 5 specialized agents
 ├── skills/                       # 4 generally-useful skills
 ├── examples/
