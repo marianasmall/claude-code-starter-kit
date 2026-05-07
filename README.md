@@ -255,12 +255,16 @@ claude-code-starter-kit/
 
 ## Credits
 
-Built and depersonalized from a real working Claude Code setup. Inspired by:
+Built by **[Mariana Small](https://github.com/marianasmall)** — the original setup, the depersonalization, the voice, and the structural decisions are hers. This kit is what her daily-driver Claude Code looks like, made shareable.
+
+Inspired by:
 
 - The Anthropic team's own hook examples and plugin patterns
 - The `superpowers` plugin's discipline-first approach
 - Boris Cherny's self-improving Claude Code patterns
 - The broader Claude Code community's hook/skill experiments
+
+Co-built with Claude (Opus 4.7) over the course of one long, productive evening.
 
 ## License
 
