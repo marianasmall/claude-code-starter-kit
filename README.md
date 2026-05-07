@@ -21,7 +21,8 @@ claude-code-starter-kit/
 ├── examples/
 │   ├── statusline.sh             # Custom status line with context bar
 │   ├── debt-sync.sh.opt-in       # Optional Notion integration
-│   └── pushover-setup.md         # Phone notification setup
+│   ├── pushover-setup.md         # Phone notification setup
+│   └── sample-project/           # Worked example: filled-in project files
 └── docs/
     ├── ARCHITECTURE.md           # The philosophy
     ├── project-conventions.md    # README/PLANNING/CONTEXT-SUMMARY templates + workflow
