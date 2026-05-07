@@ -24,6 +24,7 @@ claude-code-starter-kit/
 │   └── pushover-setup.md         # Phone notification setup
 └── docs/
     ├── ARCHITECTURE.md           # The philosophy
+    ├── project-conventions.md    # README/PLANNING/CONTEXT-SUMMARY templates + workflow
     ├── output-styles-primer.md   # Native CC feature: output styles
     ├── plan-mode-primer.md       # Native CC feature: plan mode
     └── worktrees-primer.md       # Parallel work via worktrees
@@ -52,7 +53,7 @@ claude-code-starter-kit/
 | `notify-done` | macOS notification on turn completion |
 | `stop-check` | Bulletproof stop hook |
 
-### Slash Commands (11)
+### Slash Commands (12)
 
 | Command | What it does |
 |---|---|
@@ -67,6 +68,7 @@ claude-code-starter-kit/
 | `/permissions-audit` | Review and prune settings.json permissions |
 | `/checkpoint <label>` | Save mid-session state snapshot |
 | `/extract-skill <name>` | Scaffold a new skill from an emerging pattern |
+| `/scaffold-project [name]` | Drop the recommended project files (README, PLANNING, CONTEXT-SUMMARY) into the current directory |
 
 ### Agents (5)
 
