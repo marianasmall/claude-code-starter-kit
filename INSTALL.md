@@ -4,6 +4,17 @@ Step-by-step setup for `claude-code-starter-kit`. Plain language. Light-technica
 
 ## Prerequisites
 
+### Don't have Claude Code yet?
+
+Here's a guest pass to get you started:
+
+**https://claude.ai/referral/wYS1mXeEWg**
+
+That'll get you up and running with Claude (you need at least Claude Pro to use Claude Code).
+Already have a Claude account? Skip this and follow the official install: https://claude.com/code
+
+---
+
 You need:
 - **Claude Code** installed and working (`claude --version` should print something)
 - A **macOS, Linux, or WSL** environment (Windows native is partially supported but the macOS notification hooks won't fire)
