@@ -29,6 +29,16 @@ All curated, depersonalized from a daily-driver setup, installable in under five
 
 ---
 
+## Already using Claude Code? Or starting fresh?
+
+**If you've been using Claude Code for a while** and want to refine your setup, this won't override what you have. The hooks, commands, agents, and skills all install alongside your existing setup — they live in their own plugin namespace.
+
+The only two files to think about are `CLAUDE.md` and `settings.json` (your personal config files). If you already have them, **rename them to `.backup` first**, or during install tell Claude: *"I already have these — show me the templates so I can decide what to merge."*
+
+**If you're starting fresh,** you'll be ahead of the game. The kit is months of "I wish I'd done this earlier" learning packaged for one install + 15 minutes of customization.
+
+---
+
 ## How this is different from Claude Code out of the box
 
 Out of the box, Claude Code is powerful but generic. To get this same setup yourself, you'd need to:

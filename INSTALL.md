@@ -62,13 +62,27 @@ This wires the hooks, commands, agents, and skills into Claude Code. They become
 
 ## Step 3: Let Claude set you up (the easy way)
 
-The friendliest path: just ask Claude to do the file setup for you. Type this at Claude Code's prompt:
+The friendliest path: just ask Claude to do the file setup for you. Pick the prompt that matches your situation:
+
+### If you're starting fresh (no existing CLAUDE.md or settings.json)
+
+Type this at Claude Code's prompt:
 
 > Set me up with the starter kit defaults. Copy the CLAUDE.md template, settings.json template, and statusline to my ~/.claude/ directory. Make the statusline executable. Tell me what you did.
 
-Claude already knows where the plugin's files live (it has the `$CLAUDE_PLUGIN_ROOT` variable available). It'll copy the templates, set permissions, and report back.
+### If you already have a CLAUDE.md or settings.json (existing setup)
 
-**Why this is easier than typing commands manually:** the file paths use environment variables that only exist *inside* Claude Code — if you tried to run them in a regular terminal, they'd fail silently.
+Type this instead — it tells Claude **not** to overwrite anything:
+
+> I already have a CLAUDE.md and/or settings.json. Show me what's in the starter kit templates so I can decide what to merge. Don't overwrite my existing files. For the statusline, copy it only if I don't have one.
+
+Claude will read the template files and surface what's worth merging (e.g., new spinner verbs, new permissions, the `enabledPlugins` block) without touching your existing customization.
+
+### Why this works
+
+Claude already knows where the plugin's files live (it has the `$CLAUDE_PLUGIN_ROOT` variable available). It'll handle the templates, set permissions, and report back. The file paths use environment variables that only exist *inside* Claude Code — if you tried to run them in a regular terminal, they'd fail silently.
+
+> **Extra safety:** Even if Claude does try to overwrite a file via the Edit or Write tools, the kit's `backup-before-edit` hook automatically creates a timestamped `.bak` copy first. So you can recover if anything unexpected happens.
 
 If you'd rather do it yourself manually, see **Manual Setup** at the bottom of this file.
 
