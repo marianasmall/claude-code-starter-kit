@@ -116,7 +116,7 @@ Reusable frameworks Claude loads when relevant:
 - **idea-to-scope** — Turn vague ideas into structured scope docs
 - **kaizen** — Continuous improvement framework
 
-### 12 Slash Commands
+### 13 Slash Commands
 
 Type at Claude Code's prompt:
 
@@ -134,6 +134,7 @@ Type at Claude Code's prompt:
 | `/permissions-audit` | Review and prune settings.json permissions |
 | `/extract-skill <name>` | Scaffold a new skill from a pattern |
 | `/scaffold-project [name]` | Drop project files (README, PLANNING, CONTEXT-SUMMARY) into the current directory |
+| `/consistency-check [path]` | Pre-ship audit for doc bundles — catches count drift, broken anchors, ambiguous pronouns, audience assumptions, jargon |
 
 ### 5 Agents
 
@@ -235,7 +236,7 @@ claude-code-starter-kit/
 ├── hooks/
 │   ├── hooks.json                # Wires hooks into Claude Code events
 │   └── scripts/                  # 16 hook scripts
-├── commands/                     # 12 slash commands
+├── commands/                     # 13 slash commands
 ├── agents/                       # 5 specialized agents
 ├── skills/                       # 4 generally-useful skills
 ├── examples/
