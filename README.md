@@ -4,6 +4,8 @@ A starter setup for Claude Code, ready to install — so you don't have to spend
 
 > Built and depersonalized from a real working setup so anyone can start with what took months to figure out.
 
+> 🚀 **Just want to install?** → [Skip to Installation](#installation)
+
 ---
 
 ## Philosophy
@@ -68,6 +70,22 @@ Installing this gets you a Claude Code that's:
 - **Invested in your success** — A CLAUDE.md framework captures who you are and how you work. After 15 minutes of customization, Claude works *with* your specific shape — not against it.
 
 > The metaphor: Claude Code out of the box is a brilliant intern on day one — capable, but unfamiliar with how you work. This kit is the intern with three months of context already loaded.
+
+---
+
+## Reading order
+
+The repo's other files are alphabetical, which doesn't help you know where to start. Here's the recommended sequence:
+
+1. **[INSTALL.md](INSTALL.md)** — if you're about to install. Step-by-step setup.
+2. **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — the philosophy + the "three-space memory" model (why CLAUDE.md, MEMORY.md, and project files all play different roles).
+3. **[docs/project-conventions.md](docs/project-conventions.md)** — the four-file project pattern (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md) + naming conventions.
+4. **[examples/sample-project/](examples/sample-project/)** — a worked example showing what those four files look like fully filled in for an imaginary project. Read this if conventions feel abstract.
+5. **The native CC primers** (read on demand when relevant):
+   - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — explanatory / concise / technical / conversational
+   - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
+   - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
+6. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
 
 ---
 
@@ -204,22 +222,6 @@ claude-code-starter-kit/
     ├── plan-mode-primer.md       # Native CC feature: plan mode
     └── worktrees-primer.md       # Parallel work via worktrees
 ```
-
----
-
-## Reading order — where to look after this README
-
-The repo's other files are alphabetical, which doesn't help you know where to start. Here's the recommended sequence:
-
-1. **[INSTALL.md](INSTALL.md)** — if you're about to install. Step-by-step setup.
-2. **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — the philosophy + the "three-space memory" model (why CLAUDE.md, MEMORY.md, and project files all play different roles).
-3. **[docs/project-conventions.md](docs/project-conventions.md)** — the four-file project pattern (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md) + naming conventions.
-4. **[examples/sample-project/](examples/sample-project/)** — a worked example showing what those four files look like fully filled in for an imaginary project. Read this if conventions feel abstract.
-5. **The native CC primers** (read on demand when relevant):
-   - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — explanatory / concise / technical / conversational
-   - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
-   - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
-6. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
 
 ---
 
