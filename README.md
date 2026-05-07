@@ -1,6 +1,6 @@
 # claude-code-starter-kit
 
-An opinionated Claude Code starter kit — hooks, slash commands, agents, and a CLAUDE.md framework — for serious knowledge workers who want a calm, structured, partnership-style setup out of the box.
+A working Claude Code setup, ready to install — hooks, slash commands, agents, and a CLAUDE.md framework for serious knowledge workers.
 
 This is what a real working Claude Code setup looks like. Not "hello world." Not a demo. The actual hooks, commands, and patterns from a daily-driver setup, depersonalized so anyone can start with them.
 
