@@ -11,7 +11,7 @@ Here's a guest pass to get you started:
 **https://claude.ai/referral/wYS1mXeEWg**
 
 That'll get you up and running with Claude (you need at least Claude Pro to use Claude Code).
-Already have a Claude account? Skip this and follow the official install: https://claude.com/code
+Already have a Claude account? Skip this and follow the official install:  https://code.claude.com/docs/en/setup
 
 ---
 

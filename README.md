@@ -73,7 +73,7 @@ Installing this gets you a Claude Code that's:
 
 ## Quick glossary
 
-If you're new to Claude Code, these terms come up a lot:
+If you're new to Claude Code, these terms come up a lot. The kit's quick definitions below; for the full docs, see [Going deeper](#going-deeper) at the end of this file.
 
 | Term | What it is |
 |---|---|
@@ -208,6 +208,34 @@ claude-code-starter-kit/
     ├── plan-mode-primer.md       # Native CC feature: plan mode
     └── worktrees-primer.md       # Parallel work via worktrees
 ```
+
+---
+
+## Going deeper
+
+Want to understand how Claude Code actually works under the hood? The official docs are well-written and worth a read:
+
+**Claude Code documentation:**
+- [Overview](https://code.claude.com/docs/en/overview) — start here
+- [Hooks guide](https://code.claude.com/docs/en/hooks-guide) — what they are, how to write them
+- [Slash commands](https://code.claude.com/docs/en/commands) — full reference
+- [Skills](https://code.claude.com/docs/en/skills) — auto-activating knowledge
+- [Sub-agents](https://code.claude.com/docs/en/sub-agents) — specialists Claude can spawn
+- [Plugins](https://code.claude.com/docs/en/plugins) — how this kit packages itself
+- [Memory & CLAUDE.md](https://code.claude.com/docs/en/memory) — the file at the heart of customization
+- [Output styles](https://code.claude.com/docs/en/output-styles) — explanatory, concise, technical, conversational
+- [Plan mode](https://code.claude.com/docs/en/interactive-mode) — when to plan before executing
+- [MCP servers](https://code.claude.com/docs/en/mcp) — connecting external tools
+
+**Broader Claude ecosystem:**
+- [Anthropic platform docs](https://platform.claude.com/docs/en/home) — for the underlying Claude API and general capabilities
+
+**Local primers in this kit:**
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — the philosophy + three-space memory model
+- [`docs/project-conventions.md`](docs/project-conventions.md) — README/PLANNING/CONTEXT-SUMMARY pattern
+- [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — when to use each style
+- [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
+- [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
 
 ---
 
