@@ -25,15 +25,34 @@ Optional (only if you want their features):
 - **Notion** workspace + API key (for `/debt` and session sync)
 - **`gitleaks`** (for the secrets scan in `/maintain`)
 
-## Step 1: Install the plugin
+> **Where to type things:** The instructions below use commands in two places:
+> - **In your terminal** (regular shell — Terminal app on Mac, etc.) — for things like opening Claude Code or editing files
+> - **At Claude Code's prompt** (after you launch it) — for slash commands like `/plugin install`
+>
+> Where it matters, I'll call out which one. The friendliest path is to **let Claude do the file copies for you** — see Step 3.
 
-In Claude Code:
+## Step 1: Open Claude Code
+
+If Claude Code isn't already running:
+
+1. **Open Terminal**
+   - **macOS:** Press `Cmd + Space`, type "Terminal", press Enter
+   - **Linux:** Press `Ctrl + Alt + T`, or find Terminal in your apps menu
+   - **Windows (WSL):** Open your WSL distro from the Start menu
+2. **Type `claude` and press Enter**
+3. You should see Claude Code's prompt — that's where slash commands go
+
+If `claude` says "command not found," Claude Code isn't installed yet. Scroll back up to Prerequisites.
+
+## Step 2: Install the plugin
+
+**At Claude Code's prompt** (not the regular terminal), type:
 
 ```
 /plugin install marianasmall/claude-code-starter-kit
 ```
 
-Or, if installing from a local clone:
+Or, if you cloned the repo locally:
 
 ```
 /plugin install /path/to/claude-code-starter-kit
@@ -41,59 +60,29 @@ Or, if installing from a local clone:
 
 This wires the hooks, commands, agents, and skills into Claude Code. They become available immediately.
 
-## Step 2: Customize CLAUDE.md
+## Step 3: Let Claude set you up (the easy way)
 
-The plugin ships a template. Copy it to your real CLAUDE.md location:
+The friendliest path: just ask Claude to do the file setup for you. Type this at Claude Code's prompt:
 
-```
-cp $CLAUDE_PLUGIN_ROOT/CLAUDE.md.template ~/.claude/CLAUDE.md
-```
+> Set me up with the starter kit defaults. Copy the CLAUDE.md template, settings.json template, and statusline to my ~/.claude/ directory. Make the statusline executable. Tell me what you did.
 
-(In Claude Code, `$CLAUDE_PLUGIN_ROOT` resolves to the installed plugin's path.)
+Claude already knows where the plugin's files live (it has the `$CLAUDE_PLUGIN_ROOT` variable available). It'll copy the templates, set permissions, and report back.
 
-Open `~/.claude/CLAUDE.md` and replace the `[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]` placeholders. **Spend 15-30 minutes on this.** It's the highest-leverage time you'll spend on your setup.
+**Why this is easier than typing commands manually:** the file paths use environment variables that only exist *inside* Claude Code — if you tried to run them in a regular terminal, they'd fail silently.
+
+If you'd rather do it yourself manually, see **Manual Setup** at the bottom of this file.
+
+## Step 4: Customize your CLAUDE.md
+
+After Claude copies the template, open `~/.claude/CLAUDE.md` in any text editor (VS Code, TextEdit, vim — whatever you have).
+
+Replace the `[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]` placeholders with your actual context. **Spend 15-30 minutes on this.** It's the highest-leverage time you'll spend on your setup.
 
 You don't need to fill every section. Strip what doesn't apply.
 
-## Step 3: Set up settings.json (optional but recommended)
-
-If you don't already have `~/.claude/settings.json`, copy the template:
-
-```
-cp $CLAUDE_PLUGIN_ROOT/settings.json.template ~/.claude/settings.json
-```
-
-If you already have one, **don't overwrite it** — instead, look at the template and merge useful sections:
-- `enabledPlugins` — make sure `claude-code-starter-kit@local` and `explanatory-output-style` are enabled
-- `spinnerVerbs` — totally optional but adds personality
-- Permissions you might want to add to your existing allowlist
-
-Replace `[CUSTOMIZE]` placeholders (mostly your username in path patterns).
-
-## Step 4: Install the statusline (optional, recommended)
-
-The statusline shows context window remaining, cost, duration, and rate limits at the bottom of your terminal. The `context-monitor` hook reads from a file the statusline writes — without the statusline, that hook degrades to a no-op.
-
-```
-cp $CLAUDE_PLUGIN_ROOT/examples/statusline.sh ~/.claude/statusline.sh
-chmod +x ~/.claude/statusline.sh
-```
-
-Then add to `~/.claude/settings.json` (top level — outside any other block):
-
-```json
-"statusLine": {
-  "type": "command",
-  "command": "~/.claude/statusline.sh",
-  "refreshInterval": 30
-}
-```
-
-Restart Claude Code and you'll see the bar at the bottom of your terminal.
-
 ## Step 5: Walk through `/getting-started`
 
-In Claude Code, run:
+**At Claude Code's prompt:**
 
 ```
 /getting-started
@@ -178,3 +167,58 @@ Once you've customized CLAUDE.md and verified everything works:
 4. Edit ruthlessly — this kit is a starting point, not a religion
 
 Welcome aboard.
+
+---
+
+## Manual Setup (for those who'd rather do it themselves)
+
+If you'd rather copy the templates by hand instead of asking Claude (Step 3 above), here's the manual path. **All commands here run in your regular terminal** (not at Claude Code's prompt).
+
+### Find the plugin path
+
+After installing the plugin, ask Claude:
+
+> Where is this plugin installed? Print the absolute path.
+
+Claude will respond with something like `/Users/yourname/.claude/plugins/cache/<id>/claude-code-starter-kit/`. Copy that path — you'll use it as `<PLUGIN_PATH>` below.
+
+### Copy the CLAUDE.md template
+
+```
+cp <PLUGIN_PATH>/CLAUDE.md.template ~/.claude/CLAUDE.md
+```
+
+### Copy the settings.json template (optional)
+
+If you don't already have `~/.claude/settings.json`:
+
+```
+cp <PLUGIN_PATH>/settings.json.template ~/.claude/settings.json
+```
+
+If you already have one, **don't overwrite it** — open both files in a text editor and merge the useful sections (`enabledPlugins`, `spinnerVerbs`, any permissions you want). Replace `[CUSTOMIZE]` placeholders (mostly your username in path patterns).
+
+### Install the statusline (optional, recommended)
+
+The statusline shows context window remaining, cost, duration, and rate limits at the bottom of your terminal.
+
+```
+cp <PLUGIN_PATH>/examples/statusline.sh ~/.claude/statusline.sh
+chmod +x ~/.claude/statusline.sh
+```
+
+Then add to `~/.claude/settings.json` (top level — outside any other block):
+
+```json
+"statusLine": {
+  "type": "command",
+  "command": "~/.claude/statusline.sh",
+  "refreshInterval": 30
+}
+```
+
+Restart Claude Code (`/quit`, then re-launch) and you'll see the bar at the bottom of your terminal.
+
+### Why the easy path is easier
+
+Inside Claude Code, the variable `$CLAUDE_PLUGIN_ROOT` resolves to the plugin path automatically. Outside Claude Code (in your regular terminal), it doesn't — which is why the manual path requires you to find the plugin path first. If you skip that, the `cp` commands will silently fail.
