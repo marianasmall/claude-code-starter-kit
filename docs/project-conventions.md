@@ -2,9 +2,9 @@
 
 How to structure project repos so Claude Code can pick them up cold and resume your work fast.
 
-## The four files
+## The five files
 
-A well-set-up project repo has up to four files at its root. Each serves a different purpose:
+A well-set-up project repo has up to five files at its root. Each serves a different purpose:
 
 | File | Audience | Pace | When to start one |
 |---|---|---|---|
@@ -12,8 +12,43 @@ A well-set-up project repo has up to four files at its root. Each serves a diffe
 | `PLANNING.md` | You + future you | Accumulates | Once the project is past sketch-stage (day 2+) |
 | `CONTEXT-SUMMARY.md` | Claude (auto-injected) | Overwritten each session | After your first multi-day gap |
 | `CLAUDE.md` (project-local) | Claude | Slow-changing | When this project has quirks the global CLAUDE.md doesn't capture |
+| `handoff.md` | You (copy-paste source) | Replaced each `/session-end` | Once you start working in this project across multiple sessions |
 
-You don't need all four right away. Start with README.md, add PLANNING.md when the project gets serious, add CONTEXT-SUMMARY.md when you start losing the thread between sessions, add a project-local CLAUDE.md only if there's something genuinely project-specific Claude needs to know.
+You don't need all five right away. Start with README.md, add PLANNING.md when the project gets serious, add CONTEXT-SUMMARY.md when you start losing the thread between sessions, add a project-local CLAUDE.md only if there's something genuinely project-specific Claude needs to know. `handoff.md` gets created automatically the first time you run `/session-end` in the project — see the ritual below.
+
+## The handoff ritual (how to continue work in a new thread)
+
+Long sessions hit context limits. New threads start fresh. The handoff system bridges them so you don't have to re-explain context every time.
+
+**At session close:**
+
+1. Run `/session-end` — Step 3.5 auto-generates `<project>/handoff.md` with:
+   - What state your work is in
+   - Which files to read first
+   - The next action to take
+   - Last session log path/URL
+
+2. The file gets REPLACED every session. Only the latest matters. (Historical handoffs live in your session summaries — searchable, durable.)
+
+**To continue work in a new thread:**
+
+1. Open `<project>/handoff.md`
+2. Find the `---` separator near the top
+3. Copy everything BELOW the `---` line (that's the literal first message for a new Claude Code thread)
+4. Paste into your new thread. Done.
+
+Claude reads the pasted message, sees what to read first, and picks up cleanly without you re-explaining.
+
+**Mid-session shortcut:**
+
+Don't want to fully end a session but want to refresh the handoff (e.g., after a meaningful checkpoint)? Run `/handoff` — it updates only `<project>/handoff.md` without the rest of the session-end ritual (no logging, no commits).
+
+**If you can't find the handoff later:**
+
+Three discovery paths so it's never lost:
+- The session summary you wrote includes the handoff path
+- `~/.claude/active-context.md` references the most recent project worked on
+- Just ask Claude — it can read active-context and find the latest handoff for you
 
 ## Why this works
 
