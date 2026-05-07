@@ -30,9 +30,9 @@ Tell the user (the human reading this):
 
 ### 1. CLAUDE.md is the most important file
 
-Located at `~/.claude/CLAUDE.md`. It's loaded into every Claude Code session. The starter kit shipped with a template — find it at `$CLAUDE_PLUGIN_ROOT/CLAUDE.md.template`.
+Located at `~/.claude/CLAUDE.md`. It's loaded into every Claude Code session. The starter kit shipped with a template you can use as your starting point.
 
-**Action item:** Copy the template to `~/.claude/CLAUDE.md` and customize it. Replace the `[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]` placeholders. Spend 15 minutes on this — it's the highest-leverage time you'll spend on your setup.
+**Action item:** Offer to copy the template to `~/.claude/CLAUDE.md` for the user (you have the plugin path; they don't). Then tell them to open it and replace the `[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]` placeholders. Tell them to spend 15 minutes on this — it's the highest-leverage time they'll spend on their setup.
 
 ### 2. Hooks run automatically
 
@@ -88,15 +88,17 @@ Generic frameworks Claude loads on demand:
 
 ## Setup checklist
 
-Walk the user through this:
+Walk the user through this. **For each item, offer to do it for them** — most users don't want to type `cp` commands. The plugin variables (`$CLAUDE_PLUGIN_ROOT`) only resolve when Claude runs commands, not when the user runs them in a regular terminal.
 
-- [ ] Customize `~/.claude/CLAUDE.md` from the template
-- [ ] Optionally install the statusline (`cp $CLAUDE_PLUGIN_ROOT/examples/statusline.sh ~/.claude/statusline.sh && chmod +x ~/.claude/statusline.sh`)
-- [ ] Add `statusLine` block to `~/.claude/settings.json` (template at `$CLAUDE_PLUGIN_ROOT/settings.json.template`)
+- [ ] Copy CLAUDE.md template to `~/.claude/CLAUDE.md` (offer to do it for them, then they edit)
+- [ ] Customize `~/.claude/CLAUDE.md` placeholders (`[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]`)
+- [ ] Optionally install the statusline (offer to copy `examples/statusline.sh` to `~/.claude/statusline.sh` and chmod it executable)
+- [ ] Optionally add `statusLine` block to `~/.claude/settings.json`
 - [ ] Optional: enable `explanatory-output-style` plugin for `★ Insight` boxes
 - [ ] Optional: configure Pushover for phone notifications (see `examples/pushover-setup.md`)
 - [ ] Optional: configure Notion sync for `/debt` and `/session-end` (see `examples/debt-sync.sh.opt-in`)
 - [ ] Run `/maintain quick` to verify everything's wired correctly
+- [ ] **First success moment:** ask the user to type `/note testing the kit` — a timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md`. That's a hook + a slash command + a file, all working together.
 
 ## What to do if something feels wrong
 

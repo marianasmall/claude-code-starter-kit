@@ -74,11 +74,28 @@ If you'd rather do it yourself manually, see **Manual Setup** at the bottom of t
 
 ## Step 4: Customize your CLAUDE.md
 
-After Claude copies the template, open `~/.claude/CLAUDE.md` in any text editor (VS Code, TextEdit, vim — whatever you have).
+After Claude copies the template, you need to open `~/.claude/CLAUDE.md` and edit it.
 
-Replace the `[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]` placeholders with your actual context. **Spend 15-30 minutes on this.** It's the highest-leverage time you'll spend on your setup.
+> ⚠️ **Heads up:** `~/.claude/` is a **hidden folder** on macOS. Finder won't show it by default. Use one of these instead:
+>
+> - **In TextEdit:** Open TextEdit → `File → Open` → press `Cmd+Shift+G` → paste `~/.claude/CLAUDE.md` → press Enter
+> - **In VS Code:** Run `code ~/.claude/CLAUDE.md` in your terminal
+> - **In vim:** Run `vim ~/.claude/CLAUDE.md` in your terminal
+> - **Easiest of all:** Just ask Claude — *"Open my CLAUDE.md so I can edit it."* Claude can show you the contents and even make edits if you tell it what to change.
 
-You don't need to fill every section. Strip what doesn't apply.
+Inside the file, you'll find placeholders in brackets like `[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]`. Replace them with your real context.
+
+**Examples of good fill-ins:**
+
+| Placeholder | Example |
+|---|---|
+| `[YOUR_NAME]` | Your first name |
+| `[YOUR_ROLE]` | "Marketing executive who understands code conceptually but doesn't write it" or "Senior backend engineer at a fintech startup" |
+| `[YOUR_PROJECTS]` | "Building a fractional CMO consulting practice + a course on AI literacy" |
+
+**Spend 15-30 minutes on this.** It's the highest-leverage time you'll spend on your setup.
+
+You don't need to fill every section. Strip what doesn't apply. The template is a prompt, not a constraint.
 
 ## Step 5: Walk through `/getting-started`
 
@@ -92,20 +109,31 @@ This walks you through the architecture, what each hook does, and the customizat
 
 ## Step 6: Verify everything's working
 
+**At Claude Code's prompt:**
+
 ```
 /maintain quick
 ```
 
 This runs a quick health check. It'll flag any wiring issues.
 
-If something looks wrong:
-- Hook scripts not executable? Run `chmod +x $CLAUDE_PLUGIN_ROOT/hooks/scripts/*.sh`
-- Statusline not showing? Make sure `~/.claude/settings.json` has the `statusLine` block
-- A command doesn't appear? Restart Claude Code (`/quit` then re-launch)
+If something looks wrong, ask Claude:
 
-## Step 7: Optional integrations
+- *"My hook scripts aren't executable. Can you fix them?"* (Claude will run the chmod for you — the file paths use plugin variables it knows but you don't.)
+- *"My statusline isn't showing. Help me debug."*
+- *"This slash command isn't appearing. What's wrong?"* (Sometimes you need `/quit` and relaunch Claude Code to pick up new commands.)
+
+> ## 🎉 You're done with the basics
+>
+> If `/maintain quick` came back clean, **you're set up.** Steps 7+ below are optional integrations — only do them if you want the specific features they add.
+>
+> **Try this right now to feel the kit working:** type `/note testing the kit` at Claude Code's prompt. A timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md`. That's a hook + a slash command + a file the kit created, all working together. Welcome aboard.
+
+## Step 7 (optional): Integrations
 
 ### Pushover (phone notifications)
+
+> **Why bother:** Get a notification on your phone when Claude needs your approval to do something — useful when you've stepped away from your laptop. Also pings you when context is running low so you know to wrap up. ~$5 one-time, no subscription.
 
 1. Sign up at https://pushover.net
 2. Create an app, get your User Key + API Token
@@ -114,9 +142,11 @@ If something looks wrong:
    PUSHOVER_USER_KEY=your_user_key
    PUSHOVER_API_TOKEN=your_api_token
    ```
-4. The `permission-ding` and `context-monitor` hooks will start sending notifications.
+4. The `permission-ding` and `context-monitor` hooks will start sending notifications automatically.
 
 ### Notion (debt sync, session logs)
+
+> **Why bother:** Sync your operational debt items and session summaries to Notion automatically. Useful if Notion is already your daily hub for notes/projects. Skip this if you'd rather keep everything local in markdown files (the kit works fully without it).
 
 1. Create a Notion integration at https://www.notion.so/my-integrations
 2. Create a database for operational debt with these properties:
@@ -129,7 +159,7 @@ If something looks wrong:
 5. Edit `examples/debt-sync.sh.opt-in` — set `DATABASE_ID` to your database ID
 6. Copy it to `hooks/scripts/debt-sync.sh` and add a wire in `hooks/hooks.json` (PostToolUse on Edit|Write)
 
-(This is more involved — see `examples/debt-sync.sh.opt-in` for full instructions.)
+(This is the most involved integration — see `examples/debt-sync.sh.opt-in` for full instructions. Most users skip it and the kit works fine.)
 
 ## Common questions
 
