@@ -1,24 +1,61 @@
 # claude-code-starter-kit
 
-A working Claude Code setup, ready to install — with the safety, structure, and shortcuts that make Claude Code feel less like a tool and more like a partner.
+A starter setup for Claude Code, ready to install — so you don't have to spend months figuring out what to build yourself.
 
 > Built and depersonalized from a daily-driver setup so anyone can start with what took months to figure out.
 
 ---
 
-## What you'll actually feel after installing this kit
+## Philosophy
 
-**Mid-flow capture, no surface-switching.** Type `/note kept thinking about that pricing structure` and a timestamped line lands in today's notes file. No Notion. No Apple Notes. No tab-switch.
+This is a *partnership* setup, not a *power-user* setup. The hooks aren't trying to make Claude faster — they're trying to make Claude **correct** and **safe**. The CLAUDE.md template isn't trying to be exhaustive — it's trying to give Claude enough context to be a thoughtful partner.
 
-**Welcome back, automatically.** Step away for 20 minutes. When you return and type your next message, Claude prepends a "where we left off" summary so you don't have to re-explain.
+If you find yourself fighting the kit, change it. None of this is sacred.
 
-**Safety nets that hold.** Claude tries to run `rm -rf` on the wrong directory. The hook blocks it *before* the command runs. You see what was attempted and why it was stopped.
+---
 
-**Sessions that compound.** Type `/session-end` to wrap up. Claude writes a summary, updates a context file, and queues you up for next time. Three months later, type `/recall pricing decision` and find what you decided and why.
+## What this is
 
-**Status at a glance.** A bar at the bottom of your terminal shows context window remaining, cost, time elapsed, and rate-limit usage. You always know how much room you have.
+This plugin structures Claude Code so you start with:
 
-**Calm by design.** Validation errors get a "try retrying with different parameters" nudge instead of escalating to you. Long writes get a humanizer pass before delivery. Decisions can be logged with reasoning, alternatives, and predicted outcomes.
+- **A memory system** that survives across sessions
+- **Visual polish** — a context bar at the bottom of your terminal, structured insights when Claude is teaching, distinct sounds for "done" vs "waiting"
+- **Safety hooks** that block destructive commands before they run
+- **A library of slash commands** for common rituals (logging sessions, capturing notes, reviewing decisions)
+- **Specialists Claude can call on** for complex work (deep research, devil's-advocate review)
+- **A CLAUDE.md framework** that teaches Claude how *you* work
+
+All curated, depersonalized from a daily-driver setup, installable in under five minutes.
+
+---
+
+## How this is different from Claude Code out of the box
+
+Out of the box, Claude Code is powerful but generic. To get this same setup yourself, you'd need to:
+
+- Learn Anthropic's hook system, plugin structure, slash command syntax, and output styles
+- Find and adopt skills scattered across various repos
+- Build hook scripts for safety, backups, context monitoring, retry coaching
+- Write a CLAUDE.md that actually captures how you work (most people stop after a paragraph)
+- Figure out project-level conventions (PLANNING.md, CONTEXT-SUMMARY.md) that let Claude resume cold
+
+That's months of "I wish I'd done this earlier" learning, scattered across blog posts and trial-and-error.
+
+This plugin shortcuts that. Install it, customize one file, you're set up.
+
+---
+
+## What you get
+
+Installing this gets you a Claude Code that's:
+
+- **Safe** — Destructive commands get blocked before they run. Files get backed up before edits. Risky scripts require explicit dry-run gates.
+- **Proactive** — Claude retries validation errors before escalating to you. Warns when context is running low. Reminds you to persist findings before they evaporate.
+- **Memorable** — Remembers where you left off across sessions. Tracks decisions, notes, and operational debt. Surfaces past context when you ask *"didn't we decide X already?"*
+- **Polished** — Custom statusline at the bottom of your terminal showing context, cost, and time. `★ Insight ─` boxes when Claude is teaching. Notifications when you've stepped away.
+- **Invested in your success** — A CLAUDE.md framework captures who you are and how you work. After 15 minutes of customization, Claude works *with* your specific shape — not against it.
+
+> The metaphor: Claude Code out of the box is a brilliant intern on day one — capable, but unfamiliar with how you work. This kit is the intern with three months of context already loaded.
 
 ---
 
@@ -103,12 +140,6 @@ Background automation. The most-relatable:
 Full instructions, including how to customize CLAUDE.md and set up the optional integrations: **[INSTALL.md](INSTALL.md)**.
 
 ---
-
-## Philosophy
-
-This is a *partnership* setup, not a *power-user* setup. The hooks aren't trying to make Claude faster — they're trying to make Claude **correct** and **safe**. The CLAUDE.md template isn't trying to be exhaustive — it's trying to give Claude enough context to be a thoughtful partner.
-
-If you find yourself fighting the kit, change it. None of this is sacred.
 
 > Read [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the longer version of the philosophy, including the "three-space memory" model and why hooks default to advisory rather than enforcing.
 
