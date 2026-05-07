@@ -66,6 +66,42 @@ Write `~/.claude/active-context.md` with:
 
 This is the warm-start file that gets injected at the beginning of the next session by `user-prompt-context.sh`. Keep it short (under 30 lines) — only what's needed to resume.
 
+## Step 3.5: Generate Handoff Prompt
+
+Write a copy-paste-ready handoff message to `<project>/handoff.md` — the project folder where the work lives. **REPLACES contents** every session — only the latest matters. (Historical handoffs live in your session summaries; this file is just the copy-paste shortcut.)
+
+**Detect "primary project":**
+- If cwd is in a project repo (has `CLAUDE.md`, `handoff.md`, or `~/Projects/<name>/` pattern) → write to `<project>/handoff.md`
+- If session touched MULTIPLE projects → ask the user which is primary; default to most-recently-modified
+- If no project context (system-level only) → skip; `active-context.md` already serves as continuation state
+
+**Template:**
+
+```markdown
+# Handoff — YYYY-MM-DD HH:MM
+
+> Copy-paste prompt for a new Claude Code thread. Paste everything below the line.
+
+---
+
+Continuing [topic / project] from prior session.
+
+**Status:** [latest deliverable + state]
+
+**Read first:**
+1. `~/.claude/active-context.md` — cross-session rolling state
+2. [project-specific file paths most relevant to pickup]
+3. [secondary file if needed]
+
+**Last session log:** [path or URL — depends on where Step 2 saved it]
+
+**Next action when you pick up:** [the one thing to do first]
+```
+
+**The user's ritual:** at session close after this command runs, open `<project>/handoff.md`, copy contents below the `---` line, paste into a new Claude Code thread to continue.
+
+**On-demand version:** the `/handoff` command runs ONLY this step (no session summary, no commits) — useful for mid-session context switches.
+
 ## Step 4: Update CLAUDE.md (only if substantial)
 
 Review what happened this session. If there are new learnings, corrections, patterns, or behavioral changes that should persist, propose updates to CLAUDE.md.
@@ -90,9 +126,12 @@ Step 0 (Transcript recovery):  ✅/⏭️ skipped/❌ failed
 Step 1 (Summary):              ✅
 Step 2 (Persist):              ✅
 Step 3 (Active context):       ✅
+Step 3.5 (Handoff prompt):     ✅  → <project>/handoff.md
 Step 4 (CLAUDE.md):            ✅/⏭️
 Step 5 (Commits):              ✅/⏭️
 ━━━━━━━━━━━━━━━━━━━
+
+**Tell the user:** "Handoff prompt saved to `<project>/handoff.md` — open it, copy below the `---` line, paste into a new Claude Code thread."
 ```
 
 Confirm with the user that everything looks right.

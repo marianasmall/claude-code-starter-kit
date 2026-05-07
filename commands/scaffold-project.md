@@ -25,6 +25,7 @@ Read the current directory. For each of these files, check if it already exists:
 - `PLANNING.md`
 - `CONTEXT-SUMMARY.md`
 - `CLAUDE.md`
+- `handoff.md` (auto-updated by `/session-end` Step 3.5 — copy-paste pickup prompt for next thread)
 
 If any exist, ask: "Found existing `<file>`. Skip / Overwrite / Append-section?"
 - **Skip** — leave it untouched, don't create
