@@ -92,7 +92,7 @@ Once `~/.claude/CLAUDE.md` is in place (whether Claude copied it fresh in Step 3
 
 > ⚠️ **Heads up:** `~/.claude/` is a **hidden folder** on macOS. Finder won't show it by default. Use one of these instead:
 >
-> - **In TextEdit:** Open TextEdit → `File → Open` → press `Cmd+Shift+G` → paste `~/.claude/CLAUDE.md` → press Enter
+> - **In TextEdit:** Open TextEdit → `File → Open` → press `Cmd+Shift+G` → paste `~/.claude/CLAUDE.md` → press Enter. (TextEdit may open the file in Rich Text mode — if it looks fancy with formatting toolbars, press `Cmd+Shift+T` to switch to Plain Text before editing. Markdown should stay plain text.)
 > - **In VS Code:** Run `code ~/.claude/CLAUDE.md` in your terminal
 > - **In vim:** Run `vim ~/.claude/CLAUDE.md` in your terminal
 > - **Easiest of all:** Just ask Claude — *"Open my CLAUDE.md so I can edit it."* Claude can show you the contents and even make edits if you tell it what to change.

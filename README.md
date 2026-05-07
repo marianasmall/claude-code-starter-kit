@@ -48,7 +48,7 @@ Out of the box, Claude Code is powerful but generic. To get this same setup your
 - Learn Anthropic's hook system, plugin structure, slash command syntax, and output styles
 - Find and adopt skills scattered across various repos
 - Build hook scripts for safety, backups, context monitoring, retry coaching
-- Write a CLAUDE.md that actually captures how you work (most people stop after a paragraph)
+- Write a CLAUDE.md that actually captures how you work (this is the step most people underestimate — strong CLAUDE.md files are rare in the wild)
 - Figure out project-level conventions (PLANNING.md, CONTEXT-SUMMARY.md) that let Claude resume cold
 
 That's months of "I wish I'd done this earlier" learning, scattered across blog posts and trial-and-error.
