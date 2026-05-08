@@ -196,6 +196,51 @@ This kit deliberately doesn't include:
 
 ---
 
+## Recommended plugins to add
+
+The kit is intentionally lean. Once you have it installed, here's what most users grab next, organized by what they do.
+
+**Foundational** (most people benefit):
+- `superpowers@claude-plugins-official` — brainstorming, systematic debugging, plan-writing skills. This kit's discipline-first philosophy is influenced by it; install for the full skill set.
+- `context7@claude-plugins-official` — fetches current library/framework docs on demand.
+- `github@claude-plugins-official` — manage repos, PRs, issues conversationally. **Setup note:** needs `GITHUB_PERSONAL_ACCESS_TOKEN` in your `~/.claude/settings.json` env block. The `gh` CLI's token works — run `gh auth token` to get the value.
+
+**Knowledge workers** (pick by role):
+- `productivity@knowledge-work-plugins` — Notion / Asana / Linear / Monday / ClickUp connectors for tasks, calendars, personal context.
+- `data@knowledge-work-plugins` — SQL queries, dashboards, statistical analysis.
+- `marketing@knowledge-work-plugins` — Figma / Notion / Ahrefs / SimilarWeb integrations for marketers.
+- `cowork-plugin-management@knowledge-work-plugins` — for customizing or building your own plugins (like this one).
+
+**Skill bundle:**
+- `example-skills@anthropic-agent-skills` — Anthropic's example skills, including `theme-factory` (design themes), `brand-guidelines`, `algorithmic-art`, `canvas-design`, and document skills (`docx` / `pdf` / `pptx` / `xlsx`). First add the marketplace: `claude plugin marketplace add anthropics/skills`.
+
+**Communication channels** (pick whichever you prefer for chatting with Claude outside the terminal):
+- `slack@claude-plugins-official`, `telegram@claude-plugins-official`, or `imessage@claude-plugins-official`.
+
+**Specialists** (install only if relevant to your work):
+- `figma@claude-plugins-official` — design work
+- `playwright@claude-plugins-official` — browser automation and web testing
+- `hookify@claude-plugins-official` — building custom hooks
+- `Notion@notion-plugin-marketplace` — deeper Notion integration than the productivity plugin alone
+
+**Honest caveats — skip these unless your stack matches:**
+- `enterprise-search@knowledge-work-plugins` — designed for Microsoft 365. Skip on Google Workspace; the Gmail / Calendar connector slots ship empty.
+- `legal@knowledge-work-plugins` and `finance@knowledge-work-plugins` — same MS365 dependency.
+
+**Install commands:**
+```bash
+# From your terminal
+claude plugin install <name>@<marketplace>
+
+# Or from inside Claude Code
+/plugin install <name>
+
+# Browse what's available
+claude plugin marketplace list
+```
+
+---
+
 ## Going deeper
 
 Want to understand how Claude Code actually works under the hood? The official docs are well-written and worth a read:
