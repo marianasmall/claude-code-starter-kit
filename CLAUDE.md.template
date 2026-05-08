@@ -44,6 +44,15 @@ Examples — keep, edit, or remove:
 - Push my blind spots — I'm here to grow, not just execute
 - Augment my asks — surface things I might not know to ask for
 
+### Verification discipline
+Five rules to avoid quietly drifting away from truth:
+
+- **Verify before propagating a claim to 3+ files.** Memory and recollections degrade — they reflect what was true when written, not now. When a claim will land in 3+ places, verify against the primary source first. Cite the source inline.
+- **Verify cross-surface "saved/pushed" claims.** When any tool, hook, or MCP reports success, check that the artifact actually arrived at the destination before relying on it. Trust nothing on faith.
+- **Verify the source before asserting.** Before factual claims about a specific file, skill, or config, read the source. Don't substitute memory. Mark confidence honestly: "I just verified..." vs "I recall..." vs "the description claims..."
+- **Cold-read before shipping user-facing docs.** Before any user-facing doc ships, do a cold-read pass with the lens "what would a fresh reader miss or misread?" Scan for audience mismatch, pronoun ambiguity, cross-section drift.
+- **Dry-run destructive logic before committing.** Before any script with destructive or mirror logic auto-commits, dry-run it. Inspect `git diff --stat` before automation triggers.
+
 ## Constitution (Never Override)
 
 These are non-negotiable rules:
@@ -151,6 +160,24 @@ Examples:
 - "Don't reorganize Downloads or Desktop without flagging."
 - "Don't commit and push to main without showing the diff first."
 - "Don't suggest npm install for new dependencies — ask first."
+
+## Optional patterns (adapt to your setup)
+
+The patterns below are powerful when you've set up the underlying systems. They don't ship in the kit because they require infrastructure you'd build yourself. Pick the ones that fit your workflow — or skip the section entirely.
+
+**Meta-rule first:** When you have a system for *where things go*, tell Claude about it explicitly. The more Claude knows about your filing system — your Notion structure, your Drive folder taxonomy, your project repo conventions — the more it can put things away properly without asking. Be generous with location-routing instructions.
+
+**Suggested patterns:**
+
+- **Project planning files.** If every major project has a `PLANNING.md` (or `handoff.md`) at the repo root, tell Claude to read it on re-entry and update it at session end. Compounds across multi-session work — you don't re-explain context every time.
+
+- **Brand tokens.** If you maintain a brand-identity file (palette, typography, voice rules), tell Claude to load it before producing any branded artifact. Prevents palette and typography invention drift.
+
+- **Inter-AI messaging.** If Claude.ai and Claude Code (or other AIs) talk via a relay channel — a Notion database, shared file, or similar — tell Claude to check the inbox at session start.
+
+- **Multi-surface delegation.** If you use multiple AI surfaces (Claude.ai for strategy, Perplexity for research, Claude Code for implementation, etc.), tell Claude which work routes where. Otherwise it'll try to handle everything itself when delegation would be faster.
+
+- **Augmentation prompts.** If you regularly ask things like "what didn't I think of?" or "how would this be better?" — tell Claude to address one or two of those proactively in research and analysis output, not just when explicitly asked.
 
 ---
 
