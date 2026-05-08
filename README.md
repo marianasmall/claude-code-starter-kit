@@ -35,7 +35,7 @@ All curated, depersonalized from a real working setup, installable in under five
 
 Installing this gets you a Claude Code that's:
 
-- **Safe** — Destructive commands get blocked before they run. Files get backed up before edits. Risky scripts require explicit dry-run gates.
+- **Safe** — Destructive commands get blocked before they run. Files get backed up before edits. Risky scripts require explicit dry-run gates. Critical claims get verified against primary sources before propagating across files.
 - **Proactive** — Claude retries validation errors before escalating to you. Warns when context is running low. Reminds you to persist findings before they evaporate.
 - **Memorable** — Remembers where you left off across sessions. Tracks decisions, notes, and operational debt. Surfaces past context when you ask *"didn't we decide X already?"*
 - **Continuable** — When a thread fills up, `/session-end` auto-generates a `handoff.md` in your project folder. Copy it into a new thread to pick up exactly where you left off — no re-explaining required. (See [project conventions](docs/project-conventions.md#the-handoff-ritual-how-to-continue-work-in-a-new-thread) for the full ritual.)
