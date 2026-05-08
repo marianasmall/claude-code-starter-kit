@@ -24,6 +24,7 @@ Optional (only if you want their features):
 - **Pushover** account (for phone notifications)
 - **Notion** workspace + API key (for `/debt` and session sync)
 - **`gitleaks`** (for the secrets scan in `/maintain`)
+- **`pipx`** (for the Python tool checks in `/maintain` — install via `brew install pipx`. Modern Python enforces PEP 668, which blocks system-wide pip installs.)
 
 > **Where to type things:** The instructions below use commands in two places:
 > - **In your terminal** (regular shell — Terminal app on Mac, etc.) — for things like opening Claude Code or editing files

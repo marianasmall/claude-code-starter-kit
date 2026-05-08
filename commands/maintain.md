@@ -25,11 +25,14 @@ brew outdated
 ```
 Show the outdated list. If user approves, run `brew upgrade`. After upgrading, run `brew cleanup` to reclaim disk space.
 
-### 1b. Python (pip)
+### 1b. Python (pipx)
 ```
-pip list --outdated
+pipx list --short
+pipx upgrade-all --include-injected
 ```
-Show outdated packages. Only upgrade packages the user actively uses (don't blindly upgrade everything — pip dependency conflicts are real).
+List installed pipx packages and upgrade them.
+
+**Note:** Modern Python (3.11+) enforces PEP 668 (externally-managed-environment), which blocks `pip list --outdated` and `pip install` against system Python. If you have Python 3.14 (latest stable as of 2026), this is strictly enforced. The migration path is pipx for user CLI tools — install it via brew (`brew install pipx`) if it's not already there. Library packages (lxml, python-docx, etc.) are dependencies of other tools and don't need direct upgrade — they refresh when their parent tool refreshes.
 
 ### 1c. Node.js / npm globals
 ```
