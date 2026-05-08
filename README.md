@@ -185,6 +185,24 @@ The kit is a starting point, not a religion. After a week of use, you'll know wh
 
 ---
 
+## Pro tips (native Claude Code features worth knowing)
+
+These aren't part of the kit — they ship with Claude Code itself — but they're easy to miss and they change how the tool feels day-to-day.
+
+**1. Name your sessions.** Claude Code auto-names each session based on your first prompt, but you can override it. Launch with `claude -n "session-name"`, or use `/branch <name>` and `/rename <name>` mid-session. Names show in the terminal tab, the prompt box, and the `/resume` picker — useful when you have multiple sessions running at once.
+
+**2. Plan mode (Shift+Tab cycles modes).** Hit `Shift+Tab` to cycle between auto-accept, plan-first, and manual-confirm modes. Plan mode forces Claude to outline its approach before touching anything — invaluable for risky changes (refactors, deletions, multi-file edits) where you want to review the plan before approving execution.
+
+**3. `@<filename>` to reference files.** Inside a prompt, type `@` and start typing a filename — Claude Code autocompletes from your project. Beats copy-pasting code into the prompt, and Claude reads the file directly so you don't burn context on quoted blocks.
+
+**4. `Esc` to interrupt.** When Claude is heading down the wrong path, hit `Esc` to interrupt the current tool call. You can then redirect with a corrective prompt instead of waiting for a multi-step task to finish before pivoting.
+
+**5. `/recap` to re-orient.** Returning to a session you started yesterday? `/recap` summarizes what's happened so far, what was decided, and where you left off. Cheaper than re-reading the whole transcript.
+
+Other power features worth exploring once these feel natural: `/usage` (context, cost, rate limits at a glance), `/effort` (raise reasoning depth for hard tasks — Pro/Max only), `Ctrl+R` (search past prompts across sessions), `--worktree` (parallel work on the same repo with no merge headaches).
+
+---
+
 ## What's NOT in here
 
 This kit deliberately doesn't include:
