@@ -4,6 +4,7 @@
 *.local
 .env
 .env.local
+handoff.md
 
 # OS
 .DS_Store
