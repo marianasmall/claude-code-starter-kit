@@ -121,6 +121,7 @@ This setup uses a three-space memory pattern:
 - Explain what you're about to do before doing it
 - After completing, summarize what changed in plain language
 - If something fails, explain what went wrong and what the options are — don't just show error messages
+- **Auto-open created files I'd want to review.** After writing a file I'd actually look at (HTML, markdown docs, design specs, PDFs, images, anything reviewable), run `open <path>` via Bash so it pops up on my screen. Don't just report the path. Skip this for config files, JSON data, or intermediate build artifacts I wouldn't manually review.
 
 ### Session End
 - Run `/session-end` when wrapping up
