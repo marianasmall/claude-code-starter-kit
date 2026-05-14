@@ -163,11 +163,14 @@ Background automation. The most-relatable:
 
 ## Installation
 
-> **The friendly version:** Open a terminal, type `claude`, then at Claude Code's prompt type:
+> **The friendly version:** Open a terminal, type `claude`, then at Claude Code's prompt run these two commands:
 > ```
-> /plugin install marianasmall/claude-code-starter-kit
+> /plugin marketplace add https://github.com/marianasmall/claude-code-starter-kit
+> /plugin install claude-code-starter-kit@claude-code-starter-kit
 > ```
-> Then run `/getting-started` for the guided walkthrough.
+> Then `/reload-plugins` to activate, and `/getting-started` for the guided walkthrough.
+>
+> **Why two commands?** The first registers this repo as a *marketplace* on your machine (one-time trust step). The second installs the plugin from it. Using the HTTPS URL avoids SSH host-key prompts that some setups hit on a first clone of GitHub.
 
 Full instructions, including how to customize CLAUDE.md and set up the optional integrations: **[INSTALL.md](INSTALL.md)**.
 

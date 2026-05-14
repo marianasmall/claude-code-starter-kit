@@ -47,19 +47,29 @@ If `claude` says "command not found," Claude Code isn't installed yet. Scroll ba
 
 ## Step 2: Install the plugin
 
-**At Claude Code's prompt** (not the regular terminal), type:
+**At Claude Code's prompt** (not the regular terminal), run these two commands:
 
 ```
-/plugin install marianasmall/claude-code-starter-kit
+/plugin marketplace add https://github.com/marianasmall/claude-code-starter-kit
+/plugin install claude-code-starter-kit@claude-code-starter-kit
 ```
 
-Or, if you cloned the repo locally:
+Then activate:
 
 ```
-/plugin install /path/to/claude-code-starter-kit
+/reload-plugins
 ```
 
-This wires the hooks, commands, agents, and skills into Claude Code. They become available immediately.
+**What's happening:** the first command registers this repo as a *marketplace* on your machine (one-time per machine — Claude Code keeps a local registry of trusted plugin sources). The second installs the plugin from that registered source. The third reloads the active session so the new hooks, commands, agents, and skills become available without restarting.
+
+> **Why the HTTPS URL?** The shortform `marianasmall/claude-code-starter-kit` makes Claude Code clone via SSH (`git@github.com`), which fails on machines that have never SSH'd to GitHub before (you'll see a "Host key verification failed" error). HTTPS works without any SSH setup for public repos.
+
+**Alternative — local install:** If you cloned the repo locally and want to install from your filesystem:
+
+```
+/plugin marketplace add /path/to/claude-code-starter-kit
+/plugin install claude-code-starter-kit@claude-code-starter-kit
+```
 
 ## Step 3: Let Claude set you up (the easy way)
 
