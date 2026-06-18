@@ -1,0 +1,15 @@
+{
+  "name": "claude-code-starter-kit",
+  "owner": {
+    "name": "Mariana Small",
+    "url": "https://github.com/marianasmall"
+  },
+  "description": "A working Claude Code setup, ready to install — hooks, slash commands, agents, and a CLAUDE.md framework for serious knowledge workers.",
+  "plugins": [
+    {
+      "name": "claude-code-starter-kit",
+      "source": "./",
+      "description": "A working Claude Code setup, ready to install — hooks, slash commands, agents, and a CLAUDE.md framework for serious knowledge workers."
+    }
+  ]
+}
