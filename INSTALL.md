@@ -6,12 +6,9 @@ Step-by-step setup for `claude-code-starter-kit`. Plain language. Light-technica
 
 ### Don't have Claude Code yet?
 
-Here's a guest pass to get you started:
+Follow the official setup guide to get Claude Code installed: **https://code.claude.com/docs/en/setup**
 
-**https://claude.ai/referral/wYS1mXeEWg**
-
-That'll get you up and running with Claude (you need at least Claude Pro to use Claude Code).
-Already have a Claude account? Skip this and follow the official install: https://code.claude.com/docs/en/setup
+Claude Code requires a Claude paid plan (Pro or Max) or Anthropic API billing.
 
 ---
 
@@ -22,9 +19,9 @@ You need:
 
 Optional (only if you want their features):
 - **Pushover** account (for phone notifications)
-- **Notion** workspace + API key (for `/debt` and session sync)
-- **`gitleaks`** (for the secrets scan in `/maintain`)
-- **`pipx`** (for the Python tool checks in `/maintain` — install via `brew install pipx`. Modern Python enforces PEP 668, which blocks system-wide pip installs.)
+- **Notion** workspace + API key (for `/kit:debt` and session sync)
+- **`gitleaks`** (for the secrets scan in `/kit:maintain`)
+- **`pipx`** (for the Python tool checks in `/kit:maintain` — install via `brew install pipx`. Modern Python enforces PEP 668, which blocks system-wide pip installs.)
 
 > **Where to type things:** The instructions below use commands in two places:
 > - **In your terminal** (regular shell — Terminal app on Mac, etc.) — for things like opening Claude Code or editing files
@@ -51,7 +48,7 @@ If `claude` says "command not found," Claude Code isn't installed yet. Scroll ba
 
 ```
 /plugin marketplace add https://github.com/marianasmall/claude-code-starter-kit
-/plugin install claude-code-starter-kit@claude-code-starter-kit
+/plugin install kit@claude-code-starter-kit
 ```
 
 Then activate:
@@ -62,13 +59,13 @@ Then activate:
 
 **What's happening:** the first command registers this repo as a *marketplace* on your machine (one-time per machine — Claude Code keeps a local registry of trusted plugin sources). The second installs the plugin from that registered source. The third reloads the active session so the new hooks, commands, agents, and skills become available without restarting.
 
-> **Why the HTTPS URL?** The shortform `marianasmall/claude-code-starter-kit` makes Claude Code clone via SSH (`git@github.com`), which fails on machines that have never SSH'd to GitHub before (you'll see a "Host key verification failed" error). HTTPS works without any SSH setup for public repos.
+> **Why the HTTPS URL?** The `owner/repo` shortform works on most machines, but on some setups it resolves to an SSH clone (`git@github.com`), which fails if you've never SSH'd to GitHub before (you'll see a "Host key verification failed" error). The HTTPS URL sidesteps SSH entirely, so it's the safer default for a first install.
 
 **Alternative — local install:** If you cloned the repo locally and want to install from your filesystem:
 
 ```
 /plugin marketplace add /path/to/claude-code-starter-kit
-/plugin install claude-code-starter-kit@claude-code-starter-kit
+/plugin install kit@claude-code-starter-kit
 ```
 
 ## Step 3: Let Claude set you up (the easy way)
@@ -122,12 +119,12 @@ Inside the file, you'll find placeholders in brackets like `[YOUR_NAME]`, `[YOUR
 
 You don't need to fill every section. Strip what doesn't apply. The template is a prompt, not a constraint.
 
-## Step 5: Walk through `/getting-started`
+## Step 5: Walk through `/kit:getting-started`
 
 **At Claude Code's prompt:**
 
 ```
-/getting-started
+/kit:getting-started
 ```
 
 This walks you through the architecture, what each hook does, and the customization options.
@@ -137,7 +134,7 @@ This walks you through the architecture, what each hook does, and the customizat
 **At Claude Code's prompt:**
 
 ```
-/maintain quick
+/kit:maintain quick
 ```
 
 This runs a quick health check. It'll flag any wiring issues.
@@ -150,9 +147,9 @@ If something looks wrong, ask Claude:
 
 > ## 🎉 You're done with the basics
 >
-> If `/maintain quick` came back clean, **you're set up.** Steps 7+ below are optional integrations — only do them if you want the specific features they add.
+> If `/kit:maintain quick` came back clean, **you're set up.** Steps 7+ below are optional integrations — only do them if you want the specific features they add.
 >
-> **Try this right now to feel the kit working:** type `/note testing the kit` at Claude Code's prompt. A timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md` (that's a hidden folder — to view it, use the same TextEdit `Cmd+Shift+G` trick from Step 4, or just ask Claude *"show me what's in today's notes file"*). That's a hook + a slash command + a file the kit created, all working together. Welcome aboard.
+> **Try this right now to feel the kit working:** type `/kit:note testing the kit` at Claude Code's prompt. A timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md` (that's a hidden folder — to view it, use the same TextEdit `Cmd+Shift+G` trick from Step 4, or just ask Claude *"show me what's in today's notes file"*). That's a hook + a slash command + a file the kit created, all working together. Welcome aboard.
 
 ## Step 7 (optional): Integrations
 
@@ -190,12 +187,12 @@ If something looks wrong, ask Claude:
 
 ### "Will this conflict with my existing setup?"
 
-If you already have hooks in `~/.claude/settings.json`, they'll continue to fire alongside the plugin's hooks. Run `/maintain` to detect any duplicate behavior.
+If you already have hooks in `~/.claude/settings.json`, they'll continue to fire alongside the plugin's hooks. Run `/kit:maintain` to detect any duplicate behavior.
 
 ### "How do I update the plugin?"
 
 ```
-/plugin update claude-code-starter-kit
+/plugin update kit
 ```
 
 ---
@@ -221,15 +218,15 @@ Add these to your shell environment (`~/.zshrc` or similar) to make them permane
 Keep it installed but stop everything from firing:
 
 ```
-/plugin disable claude-code-starter-kit
+/plugin disable kit
 ```
 
-All hooks stop firing. All slash commands disappear from `/help`. Your personal CLAUDE.md, settings.json, notes, and decision-log are untouched. Re-enable any time with `/plugin enable claude-code-starter-kit`.
+All hooks stop firing. All slash commands disappear from `/help`. Your personal CLAUDE.md, settings.json, notes, and decision-log are untouched. Re-enable any time with `/plugin enable kit`.
 
 ### Level 3 (heaviest): Uninstall entirely
 
 ```
-/plugin uninstall claude-code-starter-kit
+/plugin uninstall kit
 ```
 
 Removes the plugin and all its files. Your personal config files (CLAUDE.md, settings.json, statusline.sh) and any files you wrote (`~/.claude/notes/*`, `~/.claude/decision-log.md`, `~/.claude/debt.md`) all stay — they're outside the plugin.
@@ -262,8 +259,8 @@ cp ~/.claude/_backups/CLAUDE.md.20260506_143022.bak ~/.claude/CLAUDE.md
 Once you've customized CLAUDE.md and verified everything works:
 
 1. Use Claude Code for a real task and see how the hooks feel
-2. After a session, run `/reflect` and `/session-end` to start building habits
-3. After a week, run `/permissions-audit` to clean up any permissions that accumulated
+2. After a session, run `/kit:reflect` and `/kit:session-end` to start building habits
+3. After a week, run `/kit:permissions-audit` to clean up any permissions that accumulated
 4. Edit ruthlessly — this kit is a starting point, not a religion
 
 Welcome aboard.

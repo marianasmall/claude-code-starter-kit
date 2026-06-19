@@ -38,7 +38,7 @@ Installing this gets you a Claude Code that's:
 - **Safe** — Destructive commands get blocked before they run. Files get backed up before edits. Risky scripts require explicit dry-run gates. Critical claims get verified against primary sources before propagating across files.
 - **Proactive** — Claude retries validation errors before escalating to you. Warns when context is running low. Reminds you to persist findings before they evaporate.
 - **Memorable** — Remembers where you left off across sessions. Tracks decisions, notes, and operational debt. Surfaces past context when you ask *"didn't we decide X already?"*
-- **Continuable** — When a thread fills up, `/session-end` auto-generates a `handoff.md` in your project folder. Copy it into a new thread to pick up exactly where you left off — no re-explaining required. (See [project conventions](docs/project-conventions.md#the-handoff-ritual-how-to-continue-work-in-a-new-thread) for the full ritual.)
+- **Continuable** — When a thread fills up, `/kit:session-end` auto-generates a `handoff.md` in your project folder. Copy it into a new thread to pick up exactly where you left off — no re-explaining required. (See [project conventions](docs/project-conventions.md#the-handoff-ritual-how-to-continue-work-in-a-new-thread) for the full ritual.)
 - **Polished** — Custom statusline at the bottom of your terminal showing context, cost, and time. `★ Insight ─` boxes when Claude is teaching. Notifications when you've stepped away.
 - **Invested in your success** — A CLAUDE.md framework captures who you are and how you work. After 15 minutes of customization, Claude works *with* your specific shape — not against it.
 
@@ -70,7 +70,7 @@ The only two files to think about are `CLAUDE.md` and `settings.json` (your pers
 
 **If you're starting fresh,** you'll be ahead of the game. The kit is months of "I wish I'd done this earlier" learning packaged for one install + 15 minutes of customization.
 
-**Don't like something?** None of this is one-way. You can disable individual hooks, disable the whole plugin (`/plugin disable claude-code-starter-kit`), uninstall it entirely (`/plugin uninstall claude-code-starter-kit`), or restore overwritten files from the timestamped backups the kit auto-creates. Full revert paths in [INSTALL.md](INSTALL.md#dont-like-something-heres-how-to-back-out).
+**Don't like something?** None of this is one-way. You can disable individual hooks, disable the whole plugin (`/plugin disable kit`), uninstall it entirely (`/plugin uninstall kit`), or restore overwritten files from the timestamped backups the kit auto-creates. Full revert paths in [INSTALL.md](INSTALL.md#dont-like-something-heres-how-to-back-out).
 
 ---
 
@@ -97,7 +97,7 @@ If you're new to Claude Code, these terms come up a lot. The kit's quick definit
 | Term | What it is |
 |---|---|
 | **Hook** | A small script that runs automatically on Claude Code events (before a tool runs, after a session ends). Background safety + automation. |
-| **Slash command** | A shortcut you type at Claude Code's prompt, like `/note` or `/session-end`. Triggers pre-written instructions. |
+| **Slash command** | A shortcut you type at Claude Code's prompt, like `/kit:note` or `/kit:session-end`. Triggers pre-written instructions. |
 | **Agent** | A specialist Claude can spawn for a complex task — deep research, strategic review. You don't usually invoke them directly. |
 | **Skill** | A piece of reusable knowledge Claude loads on demand when relevant. Like a framework or methodology. |
 | **CLAUDE.md** | A file loaded into every Claude Code session. Your personal instructions to Claude. The most important file in your setup. |
@@ -117,25 +117,26 @@ Reusable frameworks Claude loads when relevant:
 - **idea-to-scope** — Turn vague ideas into structured scope docs
 - **kaizen** — Continuous improvement framework
 
-### 13 Slash Commands
+### 14 Slash Commands
 
-Type at Claude Code's prompt:
+Type at Claude Code's prompt. (Installed plugin commands are namespaced under the plugin name, so they all start with `/kit:`.)
 
 | Command | What it does |
 |---|---|
-| `/getting-started` | Guided first-run walkthrough |
-| `/session-end` | Log session, update active-context for next time |
-| `/reflect [quick\|deep]` | End-of-session retrospective |
-| `/note <text>` | Quick timestamped capture to today's notes |
-| `/decision <title>` | Structured decision log with outcome tracking |
-| `/checkpoint <label>` | Save mid-session state snapshot |
-| `/recall <topic>` | Search across past sessions |
-| `/debt` | Review operational debt items |
-| `/maintain [full\|quick]` | Periodic system health check |
-| `/permissions-audit` | Review and prune settings.json permissions |
-| `/extract-skill <name>` | Scaffold a new skill from a pattern |
-| `/scaffold-project [name]` | Drop project files (README, PLANNING, CONTEXT-SUMMARY) into the current directory |
-| `/consistency-check [path]` | Pre-ship audit for doc bundles — catches count drift, broken anchors, ambiguous pronouns, audience assumptions, jargon |
+| `/kit:getting-started` | Guided first-run walkthrough |
+| `/kit:session-end` | Log session, update active-context for next time |
+| `/kit:reflect [quick\|deep]` | End-of-session retrospective |
+| `/kit:note <text>` | Quick timestamped capture to today's notes |
+| `/kit:decision <title>` | Structured decision log with outcome tracking |
+| `/kit:checkpoint <label>` | Save mid-session state snapshot |
+| `/kit:recall <topic>` | Search across past sessions |
+| `/kit:debt` | Review operational debt items |
+| `/kit:maintain [full\|quick]` | Periodic system health check |
+| `/kit:permissions-audit` | Review and prune settings.json permissions |
+| `/kit:extract-skill <name>` | Scaffold a new skill from a pattern |
+| `/kit:scaffold-project [name]` | Drop project files (README, PLANNING, CONTEXT-SUMMARY) into the current directory |
+| `/kit:consistency-check [path]` | Pre-ship audit for doc bundles — catches count drift, broken anchors, ambiguous pronouns, audience assumptions, jargon |
+| `/kit:handoff` | Refresh `<project>/handoff.md` without the full session-end ritual (mid-session context switch) |
 
 ### 5 Agents
 
@@ -166,11 +167,13 @@ Background automation. The most-relatable:
 > **The friendly version:** Open a terminal, type `claude`, then at Claude Code's prompt run these two commands:
 > ```
 > /plugin marketplace add https://github.com/marianasmall/claude-code-starter-kit
-> /plugin install claude-code-starter-kit@claude-code-starter-kit
+> /plugin install kit@claude-code-starter-kit
 > ```
-> Then `/reload-plugins` to activate, and `/getting-started` for the guided walkthrough.
+> Then `/reload-plugins` to activate, and `/kit:getting-started` for the guided walkthrough.
 >
-> **Why two commands?** The first registers this repo as a *marketplace* on your machine (one-time trust step). The second installs the plugin from it. Using the HTTPS URL avoids SSH host-key prompts that some setups hit on a first clone of GitHub.
+> **Heads-up on command names:** the kit's own commands are namespaced under the plugin name, so you type `/kit:getting-started`, `/kit:session-end`, `/kit:note`, etc. — not the bare names. (That's standard for any installed plugin; the `/kit:` prefix is just this plugin's namespace.)
+>
+> **Why two commands?** The first registers this repo as a *marketplace* on your machine (one-time trust step). The second installs the plugin from it (`kit` is the plugin name; `claude-code-starter-kit` is the marketplace name). Using the HTTPS URL avoids SSH host-key prompts that some setups hit on a first clone of GitHub.
 
 Full instructions, including how to customize CLAUDE.md and set up the optional integrations: **[INSTALL.md](INSTALL.md)**.
 
@@ -254,7 +257,7 @@ The kit is intentionally lean. Once you have it installed, here's what most user
 claude plugin install <name>@<marketplace>
 
 # Or from inside Claude Code
-/plugin install <name>
+/plugin install <name>@<marketplace>
 
 # Browse what's available
 claude plugin marketplace list
@@ -303,7 +306,7 @@ claude-code-starter-kit/
 ├── hooks/
 │   ├── hooks.json                # Wires hooks into Claude Code events
 │   └── scripts/                  # 16 hook scripts
-├── commands/                     # 13 slash commands
+├── commands/                     # 14 slash commands
 ├── agents/                       # 5 specialized agents
 ├── skills/                       # 4 generally-useful skills
 ├── examples/

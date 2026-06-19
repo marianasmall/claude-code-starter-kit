@@ -52,18 +52,20 @@ You don't run these. They run themselves. Read `hooks/scripts/*.sh` if you want 
 
 ### 3. Slash commands are your shortcuts
 
-Type these in Claude Code:
+Type these in Claude Code. (Installed plugin commands are namespaced, so they all start with `/kit:`.)
 
-- `/session-end` — Log the session, update active-context for next time
-- `/reflect` — End-of-session retrospective (quick or deep)
-- `/debt` — Review operational debt items
-- `/recall <topic>` — Search across past sessions for something
-- `/maintain` — Periodic system health check
-- `/note <text>` — Quick timestamped capture to today's notes
-- `/decision <title>` — Log a structured decision with reasoning
-- `/permissions-audit` — Review and prune settings.json permissions
-- `/checkpoint` — Save mid-session state snapshot
-- `/extract-skill` — Scaffold a new skill from an emerging pattern
+- `/kit:session-end` — Log the session, update active-context for next time
+- `/kit:reflect` — End-of-session retrospective (quick or deep)
+- `/kit:debt` — Review operational debt items
+- `/kit:recall <topic>` — Search across past sessions for something
+- `/kit:maintain` — Periodic system health check
+- `/kit:note <text>` — Quick timestamped capture to today's notes
+- `/kit:decision <title>` — Log a structured decision with reasoning
+- `/kit:permissions-audit` — Review and prune settings.json permissions
+- `/kit:checkpoint` — Save mid-session state snapshot
+- `/kit:extract-skill` — Scaffold a new skill from an emerging pattern
+
+> This is a curated subset. The full list of all 14 commands lives in the README.
 
 ### 4. Agents are specialists
 
@@ -96,9 +98,9 @@ Walk the user through this. **For each item, offer to do it for them** — most 
 - [ ] Optionally add `statusLine` block to `~/.claude/settings.json`
 - [ ] Optional: enable `explanatory-output-style` plugin for `★ Insight` boxes
 - [ ] Optional: configure Pushover for phone notifications (see `examples/pushover-setup.md`)
-- [ ] Optional: configure Notion sync for `/debt` and `/session-end` (see `examples/debt-sync.sh.opt-in`)
-- [ ] Run `/maintain quick` to verify everything's wired correctly
-- [ ] **First success moment:** ask the user to type `/note testing the kit` — a timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md`. That's a hook + a slash command + a file, all working together.
+- [ ] Optional: configure Notion sync for `/kit:debt` and `/kit:session-end` (see `examples/debt-sync.sh.opt-in`)
+- [ ] Run `/kit:maintain quick` to verify everything's wired correctly
+- [ ] **First success moment:** ask the user to type `/kit:note testing the kit` — a timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md`. That's a hook + a slash command + a file, all working together.
 
 ## What to do if something feels wrong
 

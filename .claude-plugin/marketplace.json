@@ -7,7 +7,7 @@
   "description": "A working Claude Code setup, ready to install — hooks, slash commands, agents, and a CLAUDE.md framework for serious knowledge workers.",
   "plugins": [
     {
-      "name": "claude-code-starter-kit",
+      "name": "kit",
       "source": "./",
       "description": "A working Claude Code setup, ready to install — hooks, slash commands, agents, and a CLAUDE.md framework for serious knowledge workers."
     }
