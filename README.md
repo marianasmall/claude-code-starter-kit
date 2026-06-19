@@ -235,8 +235,9 @@ The kit is intentionally lean. Once you have it installed, here's what most user
 - `marketing@knowledge-work-plugins` — Figma / Notion / Ahrefs / SimilarWeb integrations for marketers.
 - `cowork-plugin-management@knowledge-work-plugins` — for customizing or building your own plugins (like this one).
 
-**Skill bundle:**
-- `example-skills@anthropic-agent-skills` — Anthropic's example skills, including `theme-factory` (design themes), `brand-guidelines`, `algorithmic-art`, `canvas-design`, and document skills (`docx` / `pdf` / `pptx` / `xlsx`). First add the marketplace: `claude plugin marketplace add anthropics/skills`.
+**Skill bundle:** (add the marketplace once — `claude plugin marketplace add anthropics/skills` — then install either plugin)
+- `example-skills@anthropic-agent-skills` — Anthropic's example skills: `theme-factory` (design themes), `brand-guidelines`, `algorithmic-art`, `canvas-design`, and more.
+- `document-skills@anthropic-agent-skills` — document creation/editing skills: `docx`, `pdf`, `pptx`, `xlsx`.
 
 **Communication channels** (pick whichever you prefer for chatting with Claude outside the terminal):
 - `slack@claude-plugins-official`, `telegram@claude-plugins-official`, or `imessage@claude-plugins-official`.
