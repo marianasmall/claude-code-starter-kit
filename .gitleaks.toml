@@ -1,0 +1,16 @@
+title = "claude-code-starter-kit — suppress gitignored-path noise"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Local-only paths from .gitignore — never committed to repo"
+# Patterns match both absolute (--no-git) and relative (git-history) paths. No leading anchor.
+paths = [
+    '''/\.env$''',
+    '''/\.env\.''',
+    '''\.local$''',
+    '''/state/''',
+    '''/_backups/''',
+    '''/handoff\.md$''',
+]
