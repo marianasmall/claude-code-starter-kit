@@ -86,6 +86,7 @@ The repo's other files are alphabetical, which doesn't help you know where to st
    - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — explanatory / concise / technical / conversational
    - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
    - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
+   - [`docs/1password-environments-primer.md`](docs/1password-environments-primer.md) — get your API keys out of plaintext files (if you use 1Password)
 6. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
 
 ---
