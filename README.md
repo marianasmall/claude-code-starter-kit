@@ -220,7 +220,7 @@ These aren't part of the kit — they ship with Claude Code itself — but they'
 
 **5. `/recap` to re-orient.** Returning to a session you started yesterday? `/recap` summarizes what's happened so far, what was decided, and where you left off. Cheaper than re-reading the whole transcript.
 
-Other power features worth exploring once these feel natural: `/usage` (context, cost, rate limits at a glance), `/effort` (raise reasoning depth for hard tasks — Pro/Max only), `Ctrl+R` (search past prompts across sessions), `--worktree` (parallel work on the same repo with no merge headaches).
+Other power features worth exploring once these feel natural: `/color blue` (persistent prompt-bar accent per session — pairs with named tabs for telling parallel sessions apart; needs v2.1.205+), `/usage` (context, cost, rate limits at a glance), `/effort` (raise reasoning depth for hard tasks — Pro/Max only), `Ctrl+R` (search past prompts across sessions), `--worktree` (parallel work on the same repo with no merge headaches).
 
 ---
 
