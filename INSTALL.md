@@ -297,7 +297,7 @@ If you already have one, **don't overwrite it** — open both files in a text ed
 
 ### Install the statusline (optional, recommended)
 
-The statusline shows context window remaining, cost, duration, and rate limits at the bottom of your terminal.
+The statusline shows context window remaining, cost, duration, and rate limits at the bottom of your terminal — and names your terminal tab after the conversation (Claude Code's auto-generated session title, or whatever you set with `/rename`), so parallel sessions stay tellable-apart.
 
 ```
 cp <PLUGIN_PATH>/examples/statusline.sh ~/.claude/statusline.sh

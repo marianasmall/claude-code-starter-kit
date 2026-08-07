@@ -78,6 +78,10 @@ All of the above scales down. Day one, you need exactly two habits:
 
 Everything else (ledgers, archives, wrap rituals, parallel-session dedup) earns its place when the pain shows up. It will. Add the surface *with* its ritual, and your sessions stop being strangers.
 
+## Name tags: telling sessions apart at a glance
+
+All the coordination above assumes you can tell which terminal window is which session — and by the fifth tab, you can't. Claude Code already names every session (it auto-generates a title from your first prompt; override it anytime with `/rename`), and it hands that name to your statusline script on every refresh. The kit's bundled statusline (`examples/statusline.sh`) does two things with it: shows the name at the front of the status bar, and writes it into the terminal tab title. Your tab bar becomes a list of conversations instead of a row of identical windows. One file, no new habits — the names were always there; this just puts them where your eyes are.
+
 ## Why this matters beyond one person
 
 Nothing above is actually about Claude. It's information architecture: agreed places, honest state, read-rituals, explicit handoffs. Which means it scales from one person's laptop to a team's shared repos without changing shape — a colleague's session reads the same handoff yours does. The AI was always capable of collaborating; the architecture is what turns capability into a team. Structure first, intelligence second.
