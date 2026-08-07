@@ -14,7 +14,9 @@ Claude Code requires a Claude paid plan (Pro or Max) or Anthropic API billing.
 
 You need:
 - **Claude Code** installed and working (`claude --version` should print something)
-- A **macOS, Linux, or WSL** environment (Windows native is partially supported but the macOS notification hooks won't fire)
+- A **macOS, Linux, or WSL** environment. Note: the sound/notification hooks (done-chime, permission ding, compaction alert) use macOS `osascript` — on Linux/WSL and Windows all safety and coaching hooks work identically, but you get no audible/desktop alerts unless you wire your own `notify-send` equivalent.
+
+**Heads-up on backups:** the pre-edit backup hook drops a timestamped copy into a `_backups/` folder *next to any file Claude edits* — in every project, not just `~/.claude/`. That's the safety net working as designed, but add `_backups/` to your global gitignore (`git config --global core.excludesFile`) so it never lands in a commit.
 - **`jq`** and **Python 3** in your `$PATH` (most systems have these — `jq --version` and `python3 --version` to check)
 
 Optional (only if you want their features):

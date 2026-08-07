@@ -53,9 +53,9 @@ For each applicable surface, make the update directly (don't just note it):
 | **MEMORY.md** | Tactical observations, patterns noticed, preferences learned | Write directly with appropriate tag |
 | **CLAUDE.md** | Strategic instruction changes, new workflows, permission updates | Propose to user, apply if approved |
 | **Dead Ends** (`~/.claude/dead-ends.md`) | Approaches that failed and why | Append entry |
-| **Session Summary** | Handled by `/session-end` — just flag what to include | Note for next step |
+| **Session Summary** | Handled by `/kit:session-end` — just flag what to include | Note for next step |
 
-After routing, tell the user: "Reflection complete. Run `/session-end` to log the session."
+After routing, tell the user: "Reflection complete. Run `/kit:session-end` to log the session."
 
 ---
 
@@ -115,7 +115,7 @@ If a fresh Claude Code session started tomorrow with only CLAUDE.md and MEMORY.m
 ### Forward Motion (same as Quick, but more thorough)
 Run the same routing table from Quick Reflect, but with the additional items from sections 7-13 included.
 
-After routing, tell the user: "Deep reflection complete. Run `/session-end` to log the session."
+After routing, tell the user: "Deep reflection complete. Run `/kit:session-end` to log the session."
 
 ---
 

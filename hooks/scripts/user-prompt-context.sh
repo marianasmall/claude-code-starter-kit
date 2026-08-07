@@ -14,6 +14,13 @@
 # Reset permission notification marker — user is back and responding
 rm -f /tmp/claude-permission-notified 2>/dev/null
 
+# jq builds every JSON payload this hook emits. Without it there is nothing
+# safe to hand back, so skip the injection rather than risk malformed output.
+if ! command -v jq >/dev/null 2>&1; then
+  echo '{"ok": true}'
+  exit 0
+fi
+
 CONTEXT_FILE="$HOME/.claude/active-context.md"
 RELAY_FILE="$HOME/.claude/relay-inbox.md"
 
@@ -74,7 +81,13 @@ $(head -50 "$CONTEXT_SUMMARY")"
   elif [ -f "$PLANNING" ]; then
     # Staleness: PLANNING.md mtime vs latest git commit time
     STALENESS=""
-    PLANNING_MTIME=$(stat -f %m "$PLANNING" 2>/dev/null)
+    # stat -c is GNU/Linux, stat -f is BSD/macOS. GNU first on purpose: BSD stat
+    # rejects -c outright, whereas GNU's -f queries the *filesystem* and can
+    # return "?" with exit 0, which would slip past a fallback test.
+    PLANNING_MTIME=$(stat -c %Y "$PLANNING" 2>/dev/null || stat -f %m "$PLANNING" 2>/dev/null)
+    case "$PLANNING_MTIME" in
+      ''|*[!0-9]*) PLANNING_MTIME="" ;;
+    esac
     GIT_MTIME=$(cd "$REPO_ROOT" && git log -1 --format=%ct 2>/dev/null)
     if [ -n "$GIT_MTIME" ] && [ -n "$PLANNING_MTIME" ] && [ "$GIT_MTIME" -gt "$PLANNING_MTIME" ]; then
       DAYS_DIFF=$(( (GIT_MTIME - PLANNING_MTIME) / 86400 ))

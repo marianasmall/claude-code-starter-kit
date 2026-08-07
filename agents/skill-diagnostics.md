@@ -28,9 +28,7 @@ tools: Read, Glob, Grep, Bash
 model: sonnet
 color: yellow
 category: Development / Diagnostics
-pipeline_position: Utility
 purpose: Diagnose and validate skills for triggering, structure, and conflicts
-provenance: Custom
 status: Active
 trigger: Manual — point at a skill path or describe a skill issue
 ---

@@ -74,10 +74,14 @@
   },
 
   "enabledPlugins": {
-    "claude-code-starter-kit@local": true,
-    "explanatory-output-style@claude-plugins-official": true,
+    "_comment": "kit@claude-code-starter-kit appears here automatically after /plugin install",
+    "kit@claude-code-starter-kit": true,
     "superpowers@claude-plugins-official": true
   },
+
+  "outputStyle": "Explanatory",
+
+  "notionSessionDb": "REPLACE_WITH_YOUR_NOTION_DATABASE_ID_or_delete_this_line",
 
   "spinnerVerbs": {
     "_comment": "Adds personality to Claude Code's loading spinner. Edit, add, remove freely.",

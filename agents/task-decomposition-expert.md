@@ -4,9 +4,7 @@ description: Complex goal breakdown specialist. Use PROACTIVELY for multi-step p
 tools: Read, Write, TaskCreate, TaskUpdate, TaskList
 model: sonnet
 category: Workflow Automation
-pipeline_position: Standalone
 purpose: Break complex goals into structured executable workflows
-provenance: Custom
 status: Active
 trigger: For multi-step projects needing dependency mapping
 ---

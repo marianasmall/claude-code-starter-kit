@@ -40,7 +40,7 @@ If nothing is found across all layers, say so honestly. Don't guess.
 
 ## Examples
 
-- `/recall when did we set up the hook system` → finds the setup session and configuration details
-- `/recall what did we decide about [topic]` → finds the discussion and decision
-- `/recall [project] timeline` → finds when/what was decided about that project
-- `/recall errors with [tool]` → finds prior failures and what fixed them
+- `/kit:recall when did we set up the hook system` → finds the setup session and configuration details
+- `/kit:recall what did we decide about [topic]` → finds the discussion and decision
+- `/kit:recall [project] timeline` → finds when/what was decided about that project
+- `/kit:recall errors with [tool]` → finds prior failures and what fixed them

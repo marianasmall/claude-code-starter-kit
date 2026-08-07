@@ -72,8 +72,8 @@ If the user says "resume from checkpoint <slug>" or "resume <slug>":
 
 ## Cleanup
 
-Suggest: checkpoints older than 30 days can be archived or deleted. The `/maintain` command's cleanup section can handle this if added to the cleanup list.
+Suggest: checkpoints older than 30 days can be archived or deleted. The `/kit:maintain` command's cleanup section can handle this if added to the cleanup list.
 
 ## Why this exists
 
-Sometimes you want to bookmark "I was here" without ending the session. Different from `/session-end` (full close-out) and from active-context.md (single most-recent state). Checkpoints accumulate; you can have many. Useful for exploration where you might genuinely want to come back to a previous fork point.
+Sometimes you want to bookmark "I was here" without ending the session. Different from `/kit:session-end` (full close-out) and from active-context.md (single most-recent state). Checkpoints accumulate; you can have many. Useful for exploration where you might genuinely want to come back to a previous fork point.

@@ -37,6 +37,7 @@ Scan all `.md` files in scope. For each, extract:
 - **Heading slugs** — `## Section Name` → `section-name` (GitHub anchor convention: lowercase, alphanumeric + hyphens, special chars dropped)
 - **Numeric counts** — phrases like "16 hooks", "12 slash commands", "5 agents" (numbers followed by repeated nouns across files)
 - **Section references** — phrases like "see X above" / "see X below" / "see [Y]"
+- **Command references** — any `/word` slash-command mention
 
 ### 3. Run the checks
 
@@ -103,6 +104,12 @@ For phrases like "see X above" / "see X below", verify X is actually above/below
 #### H. Stale references 🟢
 
 For mentioned features/files/commands, verify they still exist in the actual codebase or referenced repo. Flag references to things that have been removed or renamed.
+
+#### I. Command namespace check 🟢
+
+For every `/word` reference in scope, verify it's either a kit command with the `/kit:` prefix or a native Claude Code command.
+
+**Common cause:** A command was written before the kit was packaged as a plugin, when commands weren't yet namespaced.
 
 ### 4. Present findings
 

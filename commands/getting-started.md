@@ -94,11 +94,13 @@ Walk the user through this. **For each item, offer to do it for them** — most 
 
 - [ ] Copy CLAUDE.md template to `~/.claude/CLAUDE.md` (offer to do it for them, then they edit)
 - [ ] Customize `~/.claude/CLAUDE.md` placeholders (`[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]`)
+- [ ] Copy `MEMORY.md.template` to `~/.claude/MEMORY.md` (used by `/kit:reflect` for tactical pattern-tracking)
 - [ ] Optionally install the statusline (offer to copy `examples/statusline.sh` to `~/.claude/statusline.sh` and chmod it executable)
 - [ ] Optionally add `statusLine` block to `~/.claude/settings.json`
-- [ ] Optional: enable `explanatory-output-style` plugin for `★ Insight` boxes
+- [ ] Optional: set `"outputStyle": "Explanatory"` in `~/.claude/settings.json` for `★ Insight` boxes (built-in style — see `docs/output-styles-primer.md`)
 - [ ] Optional: configure Pushover for phone notifications (see `examples/pushover-setup.md`)
-- [ ] Optional: configure Notion sync for `/kit:debt` and `/kit:session-end` (see `examples/debt-sync.sh.opt-in`)
+- [ ] Optional: sync `/kit:debt` items to Notion — `examples/debt-sync.sh.opt-in` is the integration shape to implement your own sync
+- [ ] Optional: log `/kit:session-end` summaries to a Notion database — set the `notionSessionDb` key in `~/.claude/settings.json`
 - [ ] Run `/kit:maintain quick` to verify everything's wired correctly
 - [ ] **First success moment:** ask the user to type `/kit:note testing the kit` — a timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md`. That's a hook + a slash command + a file, all working together.
 

@@ -4,16 +4,15 @@
 # Uses "Submarine" (deeper tone than the "Glass" completion sound) so the
 # user can distinguish "Claude finished" from "Claude is stuck waiting."
 #
-# Optional: also sends Pushover notification with tool description and a
-# tappable link to the remote session (if Pushover is configured).
-# Falls back silently to just the Mac sound if Pushover isn't set up.
+# Optional: also sends a Pushover notification naming the tool that's waiting
+# (if Pushover is configured). Falls back silently to just the Mac sound if
+# Pushover isn't set up.
 
 PERM_MARKER="/tmp/claude-permission-notified"
 
 INPUT=$(cat)
 
 TOOL_NAME=$(echo "$INPUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('tool_name','unknown'))" 2>/dev/null || echo "unknown")
-SESSION_ID=$(echo "$INPUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('session_id',''))" 2>/dev/null || echo "")
 
 # Build a human-readable description of what's being asked
 TOOL_DESC="$TOOL_NAME"
@@ -31,11 +30,6 @@ case "$TOOL_NAME" in
         ;;
 esac
 
-RC_URL=""
-if [ -n "$SESSION_ID" ]; then
-    RC_URL="https://claude.ai/code/session_${SESSION_ID}"
-fi
-
 # Log the permission request
 LOG_FILE="$HOME/.claude/permission-log.md"
 echo "- $(date '+%Y-%m-%d %H:%M') | $TOOL_DESC" >> "$LOG_FILE"
@@ -52,8 +46,6 @@ if [ ! -f "$PERM_MARKER" ]; then
         "Claude Code — Approval Needed" \
         "$TOOL_DESC" \
         1 \
-        "$RC_URL" \
-        "Approve in Browser" \
         2>/dev/null
 fi
 

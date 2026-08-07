@@ -1,41 +1,26 @@
 # Output Styles Primer
 
-Claude Code ships with several "output styles" you can switch between. Most users never know they exist.
+Claude Code ships with built-in "output styles" you can switch between. Most users never know they exist.
 
 ## What they are
 
-Output styles change Claude's *response shape* without changing its underlying behavior. Different styles emphasize different things — terseness, depth, education, specific formatting.
+Output styles change *how* Claude responds — role, tone, and output format — by modifying the system prompt. They don't change what Claude knows or which tools it can use.
 
-## The styles
+## The built-in styles
 
-### `default`
-Standard Claude output. Adapts to context. Use this most of the time.
+### `Default`
+Standard Claude Code output, tuned for efficient software engineering work. Use this most of the time.
 
-### `concise`
-Short answers. Code blocks without prose. Good for:
-- Quick lookups
-- When you just want the command
-- Pair programming where you already understand the context
+### `Proactive`
+Claude acts first and asks less — it makes reasonable assumptions instead of pausing for routine decisions. Good when you trust it with routine calls. (You still see permission prompts before tools run.)
 
-### `technical`
-Adds technical depth. More implementation detail. More acknowledgment of trade-offs. Good for:
-- Architecture discussions
-- Performance work
-- Security reviews
-
-### `conversational`
-Less formal. More natural rhythm. Good for:
-- Brainstorming
-- Working through ambiguity
-- When you're tired and don't want a structured wall of text
-
-### `explanatory` (provided by `explanatory-output-style` plugin)
-Adds `★ Insight ─` boxes around educational asides. Good for:
+### `Explanatory`
+Adds `★ Insight ─` boxes with educational asides while working. Good for:
 - Learning a new codebase or framework
 - Onboarding to a project
 - Anytime you want Claude to teach as it works
 
-This style is **enabled by default** in this starter kit's `settings.json.template`. You'll see boxes like:
+This style is **enabled by default** in this starter kit's `settings.json.template` (via the `outputStyle` setting). You'll see boxes like:
 
 ```
 ★ Insight ─────────────────────────────────────
@@ -43,33 +28,29 @@ This style is **enabled by default** in this starter kit's `settings.json.templa
 ─────────────────────────────────────────────────
 ```
 
-If you don't want them, disable `explanatory-output-style` in your settings.
+If you don't want them, remove the `outputStyle` line from your settings or switch back to Default.
+
+### `Learning`
+Collaborative learn-by-doing mode: Claude shares insights *and* leaves small, strategic pieces of code for you to implement, marked `TODO(human)`. Good when you want to build the skill, not just ship the task.
 
 ## How to switch
 
-```
-/output-style <name>
-```
-
-Or set a default in `~/.claude/settings.json`:
+Run `/config` and pick a style under **Output style**. Or set it directly in `~/.claude/settings.json`:
 
 ```json
 {
-  "outputStyle": "concise"
+  "outputStyle": "Explanatory"
 }
 ```
 
-## Recommendations
+Style changes take effect after `/clear` or a new session.
 
-- **Default → `default` or `explanatory`** depending on whether you're learning or executing.
-- **Switch to `concise` for known workflows** (e.g., committing, simple file edits).
-- **Switch to `technical` for architecture and infra work**.
-- **Switch to `conversational` when you're depleted** — it's gentler.
+> **Note:** older guides mention an `/output-style` command — it was removed in v2.1.91. Everything lives in `/config` now.
 
-You can switch mid-session. Claude won't lose context.
+## Custom styles
+
+You can create your own: a markdown file in `~/.claude/output-styles/` with a `name`, a `description`, and your instructions. Add `keep-coding-instructions: true` to the frontmatter if you want Claude to keep its normal engineering behavior underneath your custom voice. See the [official docs](https://code.claude.com/docs/en/output-styles).
 
 ## Don't go overboard
 
-Output styles are a *response shape*, not a *personality*. Don't try to layer multiple styles or edit the prompts behind them aggressively — it usually causes drift. The styles are tuned by Anthropic for consistency.
-
-If you find yourself wanting a custom style, the answer is usually a *new skill* or a *clearer CLAUDE.md instruction*, not a custom output style.
+Output styles are a *response shape*, not a *memory*. For project conventions or standing instructions, the answer is usually a *skill* or a *clearer CLAUDE.md instruction*, not a custom output style.

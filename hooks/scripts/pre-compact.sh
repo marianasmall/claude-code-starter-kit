@@ -20,4 +20,5 @@ echo "- $TIMESTAMP — Context compaction triggered" >> "$LOG_FILE"
 # Notify so the user knows context is being trimmed (macOS only; silent on other OS)
 osascript -e 'display notification "Context is being compressed — long conversation detected" with title "Claude Code" sound name "Purr"' 2>/dev/null
 
+echo '{"ok": true}'
 exit 0

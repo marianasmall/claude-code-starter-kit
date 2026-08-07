@@ -8,6 +8,7 @@ FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
 # Skip backups for ephemeral/temp paths (reduces noise, saves disk)
 case "$FILE_PATH" in
   /tmp/*|/private/tmp/*|*/tool-results/*|*/.claude/projects/*/tool-results/*)
+    echo '{"ok": true}'
     exit 0
     ;;
 esac
@@ -24,4 +25,5 @@ if [ -n "$FILE_PATH" ] && [ -f "$FILE_PATH" ]; then
 fi
 
 # Always allow the edit to proceed
+echo '{"ok": true}'
 exit 0

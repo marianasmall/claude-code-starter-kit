@@ -100,7 +100,7 @@ Continuing [topic / project] from prior session.
 
 **The user's ritual:** at session close after this command runs, open `<project>/handoff.md`, copy contents below the `---` line, paste into a new Claude Code thread to continue.
 
-**On-demand version:** the `/handoff` command runs ONLY this step (no session summary, no commits) — useful for mid-session context switches.
+**On-demand version:** the `/kit:handoff` command runs ONLY this step (no session summary, no commits) — useful for mid-session context switches.
 
 ## Step 4: Update CLAUDE.md (only if substantial)
 

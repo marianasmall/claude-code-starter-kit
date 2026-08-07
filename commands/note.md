@@ -28,10 +28,10 @@ Show today's notes (read the daily file). If the file is empty or missing, say "
 
 ## Examples
 
-- `/note remembered to email the client` → adds `- 14:23 — remembered to email the client`
-- `/note that bug repro is in commit a3f4b21` → adds with timestamp
-- `/note` → shows today's notes
+- `/kit:note remembered to email the client` → adds `- 14:23 — remembered to email the client`
+- `/kit:note that bug repro is in commit a3f4b21` → adds with timestamp
+- `/kit:note` → shows today's notes
 
 ## Why this exists
 
-Quick capture without surface-switching. Mid-flow when something pops into your head, you don't want to open Notion or break your context. The daily file is reviewable at end of day or rolled into `/reflect`.
+Quick capture without surface-switching. Mid-flow when something pops into your head, you don't want to open Notion or break your context. The daily file is reviewable at end of day or rolled into `/kit:reflect`.

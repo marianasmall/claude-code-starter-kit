@@ -77,9 +77,9 @@ To list active worktrees:
 git worktree list
 ```
 
-## Worktrees + the `superpowers` plugin
+## Worktrees + agents
 
-The `superpowers` plugin (in this kit's recommended `enabledPlugins`) has agents that can launch in their own worktree:
+Claude Code's Agent tool can natively launch a sub-agent in its own worktree:
 
 ```
 Agent({

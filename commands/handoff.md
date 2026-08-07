@@ -5,7 +5,7 @@ description: Generate a copy-paste-ready handoff prompt to <project>/handoff.md 
 
 # /handoff — Generate per-project handoff prompt only
 
-On-demand version of the handoff step from `/session-end`. Skips the session summary, active-context update, commits, and other session-end work. Just refreshes the project's handoff prompt.
+On-demand version of the handoff step from `/kit:session-end`. Skips the session summary, active-context update, commits, and other session-end work. Just refreshes the project's handoff prompt.
 
 ## When to use
 
@@ -15,7 +15,7 @@ On-demand version of the handoff step from `/session-end`. Skips the session sum
 
 ## When NOT to use
 
-- End of a real session — use `/session-end` (which includes handoff generation + summary + commits)
+- End of a real session — use `/kit:session-end` (which includes handoff generation + summary + commits)
 - You haven't done substantive work yet — handoff would be the same as last time
 - You're not in a project directory — system-level work doesn't need a handoff
 
@@ -26,7 +26,7 @@ On-demand version of the handoff step from `/session-end`. Skips the session sum
 Check the current working directory:
 - If in a project repo (`CLAUDE.md`, `handoff.md`, or `~/Projects/<name>/`) → write to `<project>/handoff.md`
 - Multi-project session → ask which is primary; default to most-recently-modified
-- No project → tell the user: "No project context detected. System-level work uses `active-context.md` for continuation. Run `/session-end` if you want to log the session."
+- No project → tell the user: "No project context detected. System-level work uses `active-context.md` for continuation. Run `/kit:session-end` if you want to log the session."
 
 ### Step 2: Generate handoff content
 
@@ -46,7 +46,7 @@ Continuing [topic / project] from prior session.
 2. [project-specific file paths most relevant to pickup]
 3. [secondary file if needed]
 
-**Last session log:** [path or URL if known, else "not yet logged — run /session-end to log"]
+**Last session log:** [path or URL if known, else "not yet logged — run /kit:session-end to log"]
 
 **Next action when you pick up:** [the one thing to do first]
 ```
@@ -63,9 +63,9 @@ Target: `<project>/handoff.md` — REPLACES contents (not appends). Co-located w
 
 Handoff is tied to work; work lives in projects. Putting handoff in the project folder means it's findable, scoped correctly, and replaced cleanly each session. No global handoff file needed — `active-context.md` already serves the cross-session "where am I" function for Claude.
 
-## Difference from /session-end
+## Difference from /kit:session-end
 
-| Aspect | `/handoff` | `/session-end` |
+| Aspect | `/kit:handoff` | `/kit:session-end` |
 |---|---|---|
 | Generates handoff prompt | ✅ | ✅ (Step 3.5) |
 | Logs session summary | ❌ | ✅ |
@@ -73,4 +73,4 @@ Handoff is tied to work; work lives in projects. Putting handoff in the project 
 | Commits/pushes | ❌ | ✅ |
 | Time required | ~30 sec | ~3 min |
 
-Use `/handoff` for fast context-switches, `/session-end` for actually closing the session.
+Use `/kit:handoff` for fast context-switches, `/kit:session-end` for actually closing the session.

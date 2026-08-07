@@ -3,11 +3,7 @@ name: idea-to-scope
 description: Transform vague ideas into structured scope documents through guided questioning. Use when someone says "I want to build...", "Can you help me with a project...", "I have an idea for...", or presents an unclear request that needs definition before execution. Warm but persistent — extracts what's actually needed before diving into implementation.
 metadata:
   version: "1.0.0"
-  provenance: custom
   status: active
-  surfaces: code, ai
-  shareability: course
-  tier: "2"
 ---
 
 # Idea to Scope

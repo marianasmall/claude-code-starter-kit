@@ -68,8 +68,10 @@ TOKEN=$(grep '^NOTION_RELAY_TOKEN=' "$ENV_FILE" 2>/dev/null | cut -d= -f2- | tr 
 mkdir -p "$STATE_DIR"
 [ -f "$STATE_FILE" ] || echo '{"items":{}}' > "$STATE_FILE"
 
-# (Full sync logic omitted from this template — see Mariana's original
-# debt-sync.sh in claude-code-config for the complete implementation.
-# This file exists primarily to document the integration shape.)
+# This file is a TEMPLATE, not a working sync: it documents the integration
+# shape (hook wiring, env loading, state file, dedup key) up to this point,
+# and stops before the Notion API calls. To make it real, ask Claude Code:
+# "implement the Notion sync in this script — create a page per new debt
+# item and PATCH status changes, using the state file above for dedup."
 
 exit 0

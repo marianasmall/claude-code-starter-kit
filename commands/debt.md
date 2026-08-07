@@ -102,4 +102,4 @@ Effort heuristic (coarse on purpose — don't estimate precisely):
 - `~30m` = focused slice (rewrite a section, research + execute a decision)
 - `~2h` = real block (new hook, non-trivial build, anything with multiple subtasks)
 
-Do not ask the user to pick severity or effort — make your best call and note both. They can override via `/debt`.
+Do not ask the user to pick severity or effort — make your best call and note both. They can override via `/kit:debt`.

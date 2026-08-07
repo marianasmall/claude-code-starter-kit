@@ -77,4 +77,5 @@ fi
 # macOS notification as a gentle nudge if session ended without /session-end
 osascript -e 'display notification "Session logged. Did you run /session-end?" with title "Claude Code" sound name "Purr"' 2>/dev/null
 
+echo '{"ok": true}'
 exit 0

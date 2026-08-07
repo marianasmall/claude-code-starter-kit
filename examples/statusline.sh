@@ -32,8 +32,14 @@ MODEL=$(echo "$input" | jq -r 'if .model | type == "object" then .model.display_
 REMAINING=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty' | cut -d. -f1)
 if [ -z "$REMAINING" ]; then
     USED_PCT=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
-    REMAINING=$((100 - USED_PCT))
+    REMAINING=$((100 - ${USED_PCT:-0}))
 fi
+# Everything downstream treats REMAINING as an integer (comparisons, bar width,
+# screenshot estimate). A payload without context data would otherwise throw
+# shell errors into the status line, so pin it to a safe default.
+case "$REMAINING" in
+    ''|*[!0-9]*) REMAINING=100 ;;
+esac
 COST=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
 DURATION_MS=$(echo "$input" | jq -r '.cost.total_duration_ms // 0')
 

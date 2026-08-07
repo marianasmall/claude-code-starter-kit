@@ -4,9 +4,7 @@ description: Communication specialist providing email refinement, tone calibrati
 tools: Read, Glob, Grep
 model: opus
 category: Content Creation
-pipeline_position: Standalone
 purpose: Email refinement, tone calibration, and difficult conversation preparation
-provenance: Custom
 status: Active
 trigger: Manual — when drafting important communications
 ---
@@ -225,11 +223,3 @@ This agent:
 - Technical code review
 - Legal or compliance review
 - Content that needs domain expertise you have
-
-## See Also
-
-- `professional-effective-communication` skill - Frameworks and templates
-- `feedback-mastery` skill - SBI model and difficult conversations
-- `tech-talks-craft` skill - Presentation structure guidance
-- `/compose-email` command - Generate emails from scratch
-- `/feedback-composer` command - Structure feedback using SBI

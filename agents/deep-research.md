@@ -29,11 +29,9 @@ description: >-
 tools: Read, Write, Edit, Glob, Grep, WebSearch, WebFetch, Task
 model: opus
 category: Strategic / Decision Support
-pipeline_position: Stage 1
 purpose: Structured research with source evaluation for consulting and strategy
-provenance: Custom
 status: Active
-trigger: Auto-invoked in consulting pipeline or manual via Task tool
+trigger: Manual — invoke via the Task tool for research-heavy questions
 ---
 
 # Deep Research Agent
@@ -378,7 +376,7 @@ This agent:
 - Marketing methodology and best practices research
 - Strategic exploration ("what are the options for X?")
 - Fact-checking and claim verification
-- Research feeding downstream agents (proposal-architect, strategy-reviewer)
+- Research feeding downstream review (see `strategic-reviewer` agent)
 - Any question requiring evidence-based, confidence-calibrated findings
 
 **Not a good fit:**
@@ -391,8 +389,5 @@ This agent:
 
 ## See Also
 
-- `research-orchestrator` agent — Legacy orchestrator; deep-research replaces its core functionality
-- `report-generator` agent — For formatting finalized research into polished reports
+- `strategic-reviewer` agent — Stress-tests the findings this agent produces
 - `task-decomposition-expert` agent — For breaking complex projects into task lists (non-research)
-- `/client-intake` command — Thin wrapper that invokes deep-research for client discovery contexts
-- `/prospect` command — Thin wrapper that invokes deep-research for prospect evaluation

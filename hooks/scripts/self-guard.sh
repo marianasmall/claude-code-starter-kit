@@ -6,15 +6,29 @@
 # logic looks correct, runs clean end-to-end, and silently deletes legitimate
 # files — only caught after the fact by inspecting `git show --stat HEAD`.
 #
-# Behavior: BLOCKS (permissionDecision: deny) when a script destined for
-# ~/.claude/hooks/*.sh or similar contains destructive patterns but no
-# DRY_RUN safeguard. Remediation is clear: add the gate, retry.
+# Scope: only Claude Code infrastructure — .claude/hooks/, .claude/scripts/,
+# and this kit's own hooks/scripts/. Shell scripts belonging to your other
+# projects are not policed; they are allowed through untouched.
+#
+# Behavior: BLOCKS (permissionDecision: deny) when a script in that scope
+# contains destructive patterns but no DRY_RUN safeguard. Remediation is
+# clear: add the gate, retry.
 #
 # Strips bash comments and quoted strings before pattern-matching to avoid
 # false positives on checker scripts like safety-net.sh (which mentions
 # "rm -rf" and "git reset --hard" inside regex patterns).
 
 INPUT=$(cat)
+
+# python3 does every bit of parsing below. Without it this guard can't inspect
+# anything. This hook fires on EVERY Edit/Write, so failing closed here would
+# brick all file editing on a python3-less machine — instead we fail open but
+# LOUDLY, so the user knows the guard is off. (safety-net.sh, which only gates
+# Bash, is the one that fails closed.)
+if ! command -v python3 >/dev/null 2>&1; then
+    echo '{"ok": true, "systemMessage": "⚠️ kit self-guard inactive: python3 not found — destructive-script protection is OFF until python3 is installed"}'
+    exit 0
+fi
 
 TOOL_NAME=$(echo "$INPUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('tool_name',''))" 2>/dev/null)
 
@@ -31,12 +45,22 @@ if [ -z "$FILE_PATH" ]; then
     exit 0
 fi
 
-# Only check shell scripts in hook/script locations
+# Only check shell scripts that are Claude Code infrastructure — the hooks and
+# scripts a Claude install actually executes. Scripts belonging to unrelated
+# projects on disk are none of this hook's business, so they fall through to
+# allow. (Nested paths like .claude/hooks/scripts/ match the first pattern —
+# `*` in a case glob spans slashes.)
 case "$FILE_PATH" in
     */.claude/hooks/*.sh) ;;
-    */scripts/*.sh) ;;
-    */bin/*.sh) ;;
-    *.zsh|*.bash) ;;
+    */.claude/scripts/*.sh) ;;
+    */hooks/scripts/*.sh)
+        # This kit's own hook scripts, wherever the repo is checked out. Guard
+        # against catching an unrelated project that also uses hooks/scripts/.
+        case "$FILE_PATH" in
+            */.claude/*|*/claude-code-starter-kit/*) ;;
+            *) echo '{"ok": true}'; exit 0 ;;
+        esac
+        ;;
     *) echo '{"ok": true}'; exit 0 ;;
 esac
 

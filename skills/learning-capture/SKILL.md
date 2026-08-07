@@ -3,16 +3,12 @@ name: learning-capture
 description: "Use when you want to capture, review, or export learning moments from conversations. Triggers on 'pin this', 'capture that', 'learning moment', 'remember this insight', or 'export learnings'."
 metadata:
   version: "1.0.0"
-  provenance: custom
   status: active
-  surfaces: code
-  shareability: public-lite
-  tier: "2"
 ---
 
 # Learning Capture
 
-Extracts and structures learning moments from conversations. Adapted from mark's Blue Fish pattern.
+Extracts and structures learning moments from conversations.
 
 ## Core Philosophy
 

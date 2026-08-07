@@ -14,6 +14,14 @@
 
 INPUT=$(cat)
 
+# python3 parses every field this hook inspects. Without it the checks below
+# see nothing and would wave all commands through, so block loudly instead —
+# the deliberate exception to the fail-open rule the other hooks follow.
+if ! command -v python3 >/dev/null 2>&1; then
+    echo '{"error": "python3 required for kit safety hooks — install python3 or disable these hooks in hooks.json"}'
+    exit 0
+fi
+
 # Extract the tool name and command from hook input
 TOOL_NAME=$(echo "$INPUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('tool_name',''))" 2>/dev/null)
 

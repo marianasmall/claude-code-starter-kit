@@ -45,7 +45,7 @@ Confirm with: `Decision logged. Review trigger: <trigger>.`
 
 ## Outcome update mode
 
-If the user runs `/decision review` or `/decision outcome`, list the most recent 5 decisions where Outcome is `_(pending)_` and walk them through filling in actual outcomes.
+If the user runs `/kit:decision review` or `/kit:decision outcome`, list the most recent 5 decisions where Outcome is `_(pending)_` and walk them through filling in actual outcomes.
 
 For each:
 - **Actual outcome?** (what really happened)

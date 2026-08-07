@@ -83,7 +83,7 @@ The repo's other files are alphabetical, which doesn't help you know where to st
 3. **[docs/project-conventions.md](docs/project-conventions.md)** — the four-file project pattern (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md) + naming conventions.
 4. **[examples/sample-project/](examples/sample-project/)** — a worked example showing what those four files look like fully filled in for an imaginary project. Read this if conventions feel abstract.
 5. **The native CC primers** (read on demand when relevant):
-   - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — explanatory / concise / technical / conversational
+   - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — Default / Proactive / Explanatory / Learning
    - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
    - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
    - [`docs/1password-environments-primer.md`](docs/1password-environments-primer.md) — get your API keys out of plaintext files (if you use 1Password)
@@ -149,7 +149,7 @@ Specialists Claude can spawn for complex tasks:
 - **communication-excellence-coach** — Email refinement, difficult conversations
 - **skill-diagnostics** — Debug skill triggering issues
 
-### 16 Hooks (most run silently)
+### 16 hook scripts — 15 wired events + 1 shared helper (most run silently)
 
 Background automation. The most-relatable:
 
@@ -279,7 +279,7 @@ Want to understand how Claude Code actually works under the hood? The official d
 - [Sub-agents](https://code.claude.com/docs/en/sub-agents) — specialists Claude can spawn
 - [Plugins](https://code.claude.com/docs/en/plugins) — how this kit packages itself
 - [Memory & CLAUDE.md](https://code.claude.com/docs/en/memory) — the file at the heart of customization
-- [Output styles](https://code.claude.com/docs/en/output-styles) — explanatory, concise, technical, conversational
+- [Output styles](https://code.claude.com/docs/en/output-styles) — Default, Proactive, Explanatory, Learning + custom styles
 - [Plan mode](https://code.claude.com/docs/en/interactive-mode) — when to plan before executing
 - [MCP servers](https://code.claude.com/docs/en/mcp) — connecting external tools
 
@@ -307,7 +307,7 @@ claude-code-starter-kit/
 ├── settings.json.template        # Sensible-default settings.json
 ├── hooks/
 │   ├── hooks.json                # Wires hooks into Claude Code events
-│   └── scripts/                  # 16 hook scripts
+│   └── scripts/                  # 16 hook scripts (15 wired + pushover.sh helper)
 ├── commands/                     # 14 slash commands
 ├── agents/                       # 5 specialized agents
 ├── skills/                       # 4 generally-useful skills

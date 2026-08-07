@@ -5,11 +5,7 @@ description: |
   text to make it sound more natural and human-written.
 metadata:
   version: "2.1.1"
-  provenance: custom
   status: active
-  surfaces: code, ai
-  shareability: public-lite
-  tier: "2"
 ---
 
 # Humanizer: Remove AI Writing Patterns

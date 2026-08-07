@@ -15,7 +15,7 @@ You just solved a problem in a way that:
 - You'd want to apply again in a similar context
 - Has clear-enough triggers that Claude could activate it autonomously next time
 
-If it doesn't pass that bar, use `/note` instead.
+If it doesn't pass that bar, use `/kit:note` instead.
 
 ## What to do
 
@@ -95,7 +95,7 @@ Optionally suggest invoking the `plugin-dev:skill-reviewer` agent to validate th
 
 ## Why this exists
 
-Patterns are most legible right after they emerge. If you wait until end-of-session, the texture is lost. This makes capture as fast as `/note` so good patterns don't escape.
+Patterns are most legible right after they emerge. If you wait until end-of-session, the texture is lost. This makes capture as fast as `/kit:note` so good patterns don't escape.
 
 The four-test gate before extracting (per skill-extraction discipline):
 1. **Repeatable** — Will this come up again?
@@ -103,4 +103,4 @@ The four-test gate before extracting (per skill-extraction discipline):
 3. **Triggerable** — Are the activation conditions clear?
 4. **Worth the friction** — Does loading the skill cost less than re-deriving?
 
-If you can't honestly say yes to all four, this isn't a skill — it's a note. Use `/note` instead.
+If you can't honestly say yes to all four, this isn't a skill — it's a note. Use `/kit:note` instead.

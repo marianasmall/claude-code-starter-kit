@@ -50,7 +50,7 @@ Hooks in this kit follow these principles:
 
 ### 1. Default to safe, fail to silent
 
-Every hook returns `{"ok": true}` on any error condition. No hook should block work because *the hook itself* is broken. Better to lose a feature than break a session.
+Every hook exits 0 (allow) on any error condition, and most also echo `{"ok": true}` explicitly. No hook should block work because *the hook itself* is broken. Better to lose a feature than break a session. (One deliberate exception: the safety hooks refuse to run blind — if `python3` is missing they say so instead of silently switching protection off.)
 
 ### 2. Bounded blast radius
 
@@ -127,4 +127,4 @@ This kit is at **v0.1.0** — early. Expect:
 - Commands to absorb good patterns from the community
 - Templates to get cleaner as feedback accumulates
 
-If something breaks after an update, the previous version is always available via `/plugin install <repo>@<version>`.
+If something breaks after an update, you can roll back by checking out an earlier tag of this repo and installing from that copy. (Note: in `/plugin install kit@claude-code-starter-kit`, the `@` names the *marketplace*, not a version — there is no version-pinning install syntax.)

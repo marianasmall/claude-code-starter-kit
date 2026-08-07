@@ -28,11 +28,9 @@ description: >-
 tools: Read, Glob, Grep
 model: opus
 category: Strategic / Decision Support
-pipeline_position: Stage 2
 purpose: Stress-test plans, research, proposals for gaps and blind spots
-provenance: Custom
 status: Active
-trigger: Auto-invoked after deep-research or manual for any deliverable review
+trigger: Manual — invoke for any deliverable review
 ---
 
 # Strategic Reviewer Agent
@@ -196,14 +194,9 @@ This agent:
 
 ## Pipeline Position
 
-This agent sits **between** research and output:
-- **deep-research** → produces findings → **strategic-reviewer** → validates findings → **proposal-architect** → builds deliverable
-- Can also be invoked standalone on any document or decision
+This agent reviews the output of `deep-research` (or any other document) before it's finalized. It doesn't chain automatically — invoke it explicitly.
 
 ## See Also
 
 - `deep-research` agent — Produces the research this agent reviews
 - `communication-excellence-coach` agent — Reviews tone, clarity, and communication quality
-- `report-generator` agent — Formats reviewed research into final reports
-- `proposal-architect` agent — Builds proposals from reviewed research (planned)
-- `/pipeline-review` command — Audits the full agent ecosystem

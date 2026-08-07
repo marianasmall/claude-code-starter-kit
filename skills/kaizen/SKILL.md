@@ -1,13 +1,9 @@
 ---
 name: kaizen
-description: Use when Code implementation and refactoring, architecturing or designing systems, process and workflow improvements, error handling and validation. Provide tehniquest to avoid over-engineering and apply iterative improvements.
+description: Use when doing code implementation and refactoring, architecting or designing systems, or improving processes, workflows, and error handling. Provides techniques to avoid over-engineering and apply iterative improvements.
 metadata:
   version: "1.0.0"
-  provenance: third-party
   status: active
-  surfaces: code
-  shareability: public-lite
-  tier: "3"
 ---
 
 # Kaizen: Continuous Improvement
@@ -683,17 +679,7 @@ Complex solution for unmeasured problem
 - Prefer duplication over wrong abstraction
 - Refactor when pattern clear
 
-## Integration with Commands
-
-The Kaizen skill guides how you work. The commands provide structured analysis:
-
-- **`/why`**: Root cause analysis (5 Whys)
-- **`/cause-and-effect`**: Multi-factor analysis (Fishbone)
-- **`/plan-do-check-act`**: Iterative improvement cycles
-- **`/analyse-problem`**: Comprehensive documentation (A3)
-- **`/analyse`**: Smart method selection (Gemba/VSM/Muda)
-
-Use commands for structured problem-solving. Apply skill for day-to-day development.
+Use this skill's guidance during day-to-day implementation and review — it doesn't require any companion commands.
 
 ## Red Flags
 
