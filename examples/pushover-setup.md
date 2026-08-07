@@ -16,7 +16,6 @@ If Pushover is configured, the kit will send notifications for:
 
 - **Permission requests** (`permission-ding.sh`) — Claude is waiting for your approval to run a tool
 - **Context low warnings** (`context-monitor.sh`) — Session is approaching context limit, time to save
-- **Maintenance reminders** (if you set up a cron job from `examples/maintain-launchd.plist`)
 
 All notifications are debounced (default 3 minutes) so you don't get spammed during active work.
 

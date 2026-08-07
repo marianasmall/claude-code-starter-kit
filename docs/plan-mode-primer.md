@@ -39,10 +39,11 @@ Plan mode adds friction. Friction is good when stakes are high and bad when stak
 
 Several ways:
 
-**1. Explicitly via slash command** (if your Claude Code version supports it):
+**1. Explicitly via slash command:**
 ```
 /plan
 ```
+(Or press **Shift+Tab** to cycle permission modes until the plan-mode indicator shows.)
 
 **2. By telling Claude:**
 > "Use plan mode for this — I want to see the plan before you start."

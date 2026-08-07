@@ -9,8 +9,8 @@ argument-hint: "[full|quick]"
 Run a structured maintenance sweep of the development environment. This keeps tools current, catches drift, and prevents silent failures from accumulating between sessions. Recommended cadence: twice weekly.
 
 **Mode selection:**
-- If `$ARGUMENTS` is empty or "full": run all checks below
-- If `$ARGUMENTS` is "quick": run only Sections 1-3 (package updates, no audits)
+- If `$ARGUMENTS` is empty or "full": run all sections below
+- If `$ARGUMENTS` is "quick": run only Sections 2-3 (Claude Code + hook/script health checks — no package upgrades, no audits, nothing modified). Safe as a first-run wiring check.
 
 ---
 
@@ -28,9 +28,8 @@ Show the outdated list. If user approves, run `brew upgrade`. After upgrading, r
 ### 1b. Python (pipx)
 ```
 pipx list --short
-pipx upgrade-all --include-injected
 ```
-List installed pipx packages and upgrade them.
+List installed pipx packages. If the user approves, run `pipx upgrade-all --include-injected`. Never upgrade without showing the list and asking first.
 
 **Note:** Modern Python (3.11+) enforces PEP 668 (externally-managed-environment), which blocks `pip list --outdated` and `pip install` against system Python. If you have Python 3.14 (latest stable as of 2026), this is strictly enforced. The migration path is pipx for user CLI tools — install it via brew (`brew install pipx`) if it's not already there. Library packages (lxml, python-docx, etc.) are dependencies of other tools and don't need direct upgrade — they refresh when their parent tool refreshes.
 
@@ -146,9 +145,9 @@ Check `git log -1 --format=%cr` for last commit date. Flag repos with no commits
 ## Section 6: Cleanup (skip in quick mode)
 
 ### 6a. Stale backup files
-The `backup-before-edit` hook creates timestamped copies before every edit:
+The `backup-before-edit` hook creates timestamped copies before every edit. Ask the user where their projects live if you don't know (common: `~/Projects`, `~/code`, `~/dev`), then:
 ```
-find ~/Projects -path "*/_backups/*" -mtime +14 -type f
+find <projects-dir> -path "*/_backups/*" -mtime +14 -type f
 find ~/.claude -path "*/_backups/*" -mtime +14 -type f
 ```
 Show count and total size of backups older than 14 days. Offer to delete with approval.

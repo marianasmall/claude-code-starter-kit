@@ -80,12 +80,13 @@ The repo's other files are alphabetical, which doesn't help you know where to st
 
 1. **[INSTALL.md](INSTALL.md)** — if you're about to install. Step-by-step setup.
 2. **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — the philosophy + the "three-space memory" model (why CLAUDE.md, MEMORY.md, and project files all play different roles).
-3. **[docs/project-conventions.md](docs/project-conventions.md)** — the four-file project pattern (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md) + naming conventions.
-4. **[examples/sample-project/](examples/sample-project/)** — a worked example showing what those four files look like fully filled in for an imaginary project. Read this if conventions feel abstract.
+3. **[docs/project-conventions.md](docs/project-conventions.md)** — the five-file project pattern (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md, handoff.md) + naming conventions.
+4. **[examples/sample-project/](examples/sample-project/)** — a worked example showing four of those files fully filled in for an imaginary project (handoff.md is generated at runtime). Read this if conventions feel abstract.
 5. **The native CC primers** (read on demand when relevant):
    - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — Default / Proactive / Explanatory / Learning
    - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
    - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
+   - [`docs/multi-session-coordination-primer.md`](docs/multi-session-coordination-primer.md) — running several sessions as colleagues: shared surfaces, handoffs, wrap rituals
    - [`docs/1password-environments-primer.md`](docs/1password-environments-primer.md) — get your API keys out of plaintext files (if you use 1Password)
 6. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
 
@@ -159,11 +160,24 @@ Background automation. The most-relatable:
 - **context-monitor** — Warns when context is getting low (with phone notification, optional)
 - **retry-nudge** — Coaches Claude to retry validation errors before escalating
 
-…plus 11 more covering session logging, scope-creep detection, writing-humanizer passes, project-state injection, and more. Full list in [`hooks/scripts/`](hooks/scripts/).
+…plus 10 more wired events covering session logging, scope-creep detection, writing-humanizer passes, project-state injection, and more — 15 wired hooks total, plus a shared notification helper (`pushover.sh`). Full list in [`hooks/scripts/`](hooks/scripts/).
+
+---
+
+## What's NOT in here — and what the kit touches
+
+This kit deliberately doesn't include:
+
+- **Specific MCP integrations** (Notion, Slack, etc.) — Anthropic ships those as separate plugins. Install what you need.
+- **Enforced project conventions** — The kit *suggests* conventions for project file structure (README/PLANNING/CONTEXT-SUMMARY) and naming (see [`docs/project-conventions.md`](docs/project-conventions.md)) and ships templates for them, but nothing is enforced. Use what fits, ignore what doesn't.
+
+**And so you know exactly what you're installing:** the hooks run locally on every prompt and tool call. They write only to your Claude home folder (`~/.claude/notes/`, `debt.md`, `decision-log.md`) and to timestamped `_backups/` folders next to files Claude edits. Nothing phones home — the only network call anywhere in the kit is the optional Pushover phone notification, and only if you add your own credentials. Everything you bring is yours.
 
 ---
 
 ## Installation
+
+**Prerequisites:** Claude Code on a Pro/Max plan or API billing, plus `jq` and Python 3 on your `$PATH` (`jq --version` / `python3 --version` to check — most systems have both).
 
 > **The friendly version:** Open a terminal, type `claude`, then at Claude Code's prompt run these two commands:
 > ```
@@ -207,17 +221,6 @@ These aren't part of the kit — they ship with Claude Code itself — but they'
 **5. `/recap` to re-orient.** Returning to a session you started yesterday? `/recap` summarizes what's happened so far, what was decided, and where you left off. Cheaper than re-reading the whole transcript.
 
 Other power features worth exploring once these feel natural: `/usage` (context, cost, rate limits at a glance), `/effort` (raise reasoning depth for hard tasks — Pro/Max only), `Ctrl+R` (search past prompts across sessions), `--worktree` (parallel work on the same repo with no merge headaches).
-
----
-
-## What's NOT in here
-
-This kit deliberately doesn't include:
-
-- **Consulting workflows** — Different professions need different patterns. Build your own.
-- **Specific MCP integrations** (Notion, Slack, etc.) — Anthropic ships those as separate plugins. Install what you need.
-- **Personal data or credentials** — Everything you bring is yours.
-- **Enforced project conventions** — The kit *suggests* conventions for project file structure (README/PLANNING/CONTEXT-SUMMARY) and naming (see [`docs/project-conventions.md`](docs/project-conventions.md)) and ships templates for them, but nothing is enforced. Use what fits, ignore what doesn't.
 
 ---
 
@@ -321,6 +324,8 @@ claude-code-starter-kit/
     ├── project-conventions.md    # README/PLANNING/CONTEXT-SUMMARY templates + workflow
     ├── output-styles-primer.md   # Native CC feature: output styles
     ├── plan-mode-primer.md       # Native CC feature: plan mode
+    ├── multi-session-coordination-primer.md  # Running parallel sessions as colleagues
+    ├── 1password-environments-primer.md      # Secrets out of plaintext files
     └── worktrees-primer.md       # Parallel work via worktrees
 ```
 

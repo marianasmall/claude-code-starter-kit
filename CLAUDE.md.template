@@ -119,10 +119,10 @@ This setup uses a three-space memory pattern:
 
 ### Space 3: Operations
 - **`~/.claude/active-context.md`** — Current state. Injected before every prompt. Update at session end.
-- **`~/.claude/session-summaries.md`** — Session log written by `/session-end`.
-- **`~/.claude/debt.md`** — Operational debt items flagged mid-session. Reviewed via `/debt`.
-- **`~/.claude/notes/YYYY-MM-DD.md`** — Daily notes from `/note`.
-- **`~/.claude/decision-log.md`** — Structured decisions from `/decision`.
+- **`~/.claude/session-summaries.md`** — Session log written by `/kit:session-end`.
+- **`~/.claude/debt.md`** — Operational debt items flagged mid-session. Reviewed via `/kit:debt`.
+- **`~/.claude/notes/YYYY-MM-DD.md`** — Daily notes from `/kit:note`.
+- **`~/.claude/decision-log.md`** — Structured decisions from `/kit:decision`.
 
 ## Workflows
 
@@ -133,11 +133,11 @@ This setup uses a three-space memory pattern:
 - **Auto-open created files I'd want to review.** After writing a file I'd actually look at (HTML, markdown docs, design specs, PDFs, images, anything reviewable), run `open <path>` via Bash so it pops up on my screen. Don't just report the path. Skip this for config files, JSON data, or intermediate build artifacts I wouldn't manually review.
 
 ### Session End
-- Run `/session-end` when wrapping up
-- Run `/reflect` if the session was long, messy, or had clear learnings
+- Run `/kit:session-end` when wrapping up
+- Run `/kit:reflect` if the session was long, messy, or had clear learnings
 
 ### Twice-weekly maintenance
-- Run `/maintain` to check for outdated tools, hook health, secrets exposure
+- Run `/kit:maintain` to check for outdated tools, hook health, secrets exposure
 
 ## My Setup
 
@@ -182,7 +182,7 @@ The patterns below are powerful when you've set up the underlying systems. They 
 ---
 
 > **How to maintain this file:**
-> - Add to it at session end via `/reflect` or `/session-end`
+> - Add to it at session end via `/kit:reflect` or `/kit:session-end`
 > - Strip stale instructions periodically — outdated rules cause more friction than no rules
 > - When something feels off mid-session, fix it here in the moment, not later
 > - Keep it under ~500 lines. If it's longer, you're putting tactical detail where it doesn't belong — move it to a reference file.

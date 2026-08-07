@@ -12,9 +12,9 @@ A well-set-up project repo has up to five files at its root. Each serves a diffe
 | `PLANNING.md` | You + future you | Accumulates | Once the project is past sketch-stage (day 2+) |
 | `CONTEXT-SUMMARY.md` | Claude (auto-injected) | Overwritten each session | After your first multi-day gap |
 | `CLAUDE.md` (project-local) | Claude | Slow-changing | When this project has quirks the global CLAUDE.md doesn't capture |
-| `handoff.md` | You (copy-paste source) | Replaced each `/session-end` | Once you start working in this project across multiple sessions |
+| `handoff.md` | You (copy-paste source) | Replaced each `/kit:session-end` | Once you start working in this project across multiple sessions |
 
-You don't need all five right away. Start with README.md, add PLANNING.md when the project gets serious, add CONTEXT-SUMMARY.md when you start losing the thread between sessions, add a project-local CLAUDE.md only if there's something genuinely project-specific Claude needs to know. `handoff.md` gets created automatically the first time you run `/session-end` in the project — see the ritual below.
+You don't need all five right away. Start with README.md, add PLANNING.md when the project gets serious, add CONTEXT-SUMMARY.md when you start losing the thread between sessions, add a project-local CLAUDE.md only if there's something genuinely project-specific Claude needs to know. `handoff.md` gets created automatically the first time you run `/kit:session-end` in the project — see the ritual below.
 
 ## The handoff ritual (how to continue work in a new thread)
 
@@ -22,7 +22,7 @@ Long sessions hit context limits. New threads start fresh. The handoff system br
 
 **At session close:**
 
-1. Run `/session-end` — Step 3.5 auto-generates `<project>/handoff.md` with:
+1. Run `/kit:session-end` — Step 3.5 auto-generates `<project>/handoff.md` with:
    - What state your work is in
    - Which files to read first
    - The next action to take
@@ -41,7 +41,7 @@ Claude reads the pasted message, sees what to read first, and picks up cleanly w
 
 **Mid-session shortcut:**
 
-Don't want to fully end a session but want to refresh the handoff (e.g., after a meaningful checkpoint)? Run `/handoff` — it updates only `<project>/handoff.md` without the rest of the session-end ritual (no logging, no commits).
+Don't want to fully end a session but want to refresh the handoff (e.g., after a meaningful checkpoint)? Run `/kit:handoff` — it updates only `<project>/handoff.md` without the rest of the session-end ritual (no logging, no commits).
 
 **If you can't find the handoff later:**
 
@@ -61,7 +61,7 @@ You don't paste context. The hook does it for you.
 
 ## Templates
 
-Copy-paste any of these into your project root and edit. Or run `/scaffold-project` to drop them all in at once.
+Copy-paste any of these into your project root and edit. Or run `/kit:scaffold-project` to drop them all in at once.
 
 ### README.md
 
@@ -174,7 +174,7 @@ A typical project lifecycle with these files:
 
 ### Day 2-7 — Active build
 - Add `PLANNING.md`. Update it at end of each working session — current state, decisions made, what's next.
-- Run `/session-end` from the kit to nudge yourself.
+- Run `/kit:session-end` from the kit to nudge yourself.
 
 ### After first multi-day gap
 - Add `CONTEXT-SUMMARY.md`. Update it at the start of each new session — fresh dashboard.
@@ -264,4 +264,4 @@ If you're adopting a convention partway through a project, **don't rename everyt
 
 ## Worked example
 
-See `examples/sample-project/` for a fully-filled-in version of all four files for an imaginary blog-post pipeline project. It demonstrates what these files actually look like when used in real working conditions — not the empty templates above, but the real texture of mid-project notes.
+See `examples/sample-project/` for fully-filled-in versions of four of the five files for an imaginary blog-post pipeline project — `handoff.md` isn't included because it's generated at runtime by `/kit:session-end` rather than committed. It demonstrates what these files actually look like when used in real working conditions — not the empty templates above, but the real texture of mid-project notes.

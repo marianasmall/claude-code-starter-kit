@@ -21,7 +21,7 @@ Memory is organized as small topic files in this directory. This index has one l
 Example entries (delete these once you have real ones):
 
 - `feedback_communication_style.md` — How user prefers updates phrased; tone calibration.
-- `pattern_session_end_routine.md` — User's habit of running /reflect → /session-end at close.
+- `pattern_session_end_routine.md` — User's habit of running /kit:reflect → /kit:session-end at close.
 - `project_active_work.md` — What's currently in flight; updated at session end.
 - `tool_quirks.md` — Known issues with tools/MCP servers; workarounds.
 

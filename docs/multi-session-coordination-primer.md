@@ -46,11 +46,11 @@ Three design rules that make them work:
 
 ## The three rituals
 
-Surfaces without rituals become graveyards: write-only files nobody reads. (Our project *started* because a weekly report had been auto-filed to an unread folder for three months. Then, mid-build, we found the automation's own log had been silently broken for eleven weeks. Same disease everywhere: a surface with no read-ritual is a place information goes to die.)
+Surfaces without rituals become graveyards: write-only files nobody reads. (A real example: a weekly report auto-filed to an unread folder for three months — and the automation's own log silently broken for eleven weeks before anyone looked. Same disease everywhere: a surface with no read-ritual is a place information goes to die.)
 
 **1. Refresh on state change, not on schedule.** When something meaningful shifts (a phase completes, a blocker lands, a decision gets made), update the handoff *then*, mid-session. If the session dies five minutes later, the paperwork already reflects reality. End-of-session wrap-up is the backstop, not the plan.
 
-**2. Wrap every session.** A closing ritual that updates the surfaces and logs the archive entry. Ours checks for same-day entries first so parallel sessions don't file duplicate reports — steal that detail; you'll need it the first day you run two sessions at once.
+**2. Wrap every session.** A closing ritual that updates the surfaces and logs the archive entry. A detail worth adding to yours: check for same-day entries first so parallel sessions don't file duplicate reports — you'll want it the first day you run two sessions at once. (The kit's `/kit:session-end` doesn't do this out of the box — ask Claude to add the check.)
 
 **3. Dispatch instead of re-explaining.** When work should continue in a fresh session, have the *current* session write the successor's first message: what's done, what to read (paths, in order), the first action to take, and the traps. Human's job shrinks to copy-paste. The written dispatch beats a verbal summary every time, because the session that writes it still has the details you'd forget.
 

@@ -139,7 +139,7 @@ This walks you through the architecture, what each hook does, and the customizat
 /kit:maintain quick
 ```
 
-This runs a quick health check. It'll flag any wiring issues.
+This runs a health-checks-only sweep (Claude Code version, hook wiring, script permissions — it upgrades nothing and modifies nothing). It'll flag any wiring issues.
 
 If something looks wrong, ask Claude:
 
