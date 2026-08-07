@@ -165,6 +165,35 @@ A **project-scoped override** for `~/.claude/CLAUDE.md`. Used only when this pro
 
 You probably don't need a project-local CLAUDE.md for most projects. Add it only when you find yourself repeatedly correcting Claude on the same project-specific quirk.
 
+### handoff.md
+
+The fifth file. Normally you never write this by hand — `/kit:session-end` (or `/kit:handoff` mid-session) generates and replaces it. The template below is the shape those commands produce, here so you can seed one manually on day one or adapt the format:
+
+```markdown
+# Handoff — [Project Name]
+
+> Where work left off. REPLACED each session — history lives in your session log.
+> To resume: copy everything below the `---` into a new Claude Code thread.
+
+Last worked: [date] · Session log: [path or URL]
+
+---
+
+Continuing work on [Project Name] in [directory].
+
+**State:** [What's done, what's mid-flight.]
+
+**Read first, in order:**
+1. [file — why]
+2. [file — why]
+
+**Next action:** [the single concrete first step]
+
+**Traps:** [anything that will waste time if not known — gotchas, dead ends already tried, decisions already made]
+```
+
+The section order is deliberate: state before reading list, reading list before action — a fresh session needs orientation before instructions. The **Traps** line earns its keep the first time a new thread avoids re-trying something that already failed.
+
 ## Workflow
 
 A typical project lifecycle with these files:

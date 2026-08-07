@@ -54,6 +54,7 @@ Scaffolded <project-name>:
   ✓ PLANNING.md
   ✓ CONTEXT-SUMMARY.md
   (skipped CLAUDE.md — add later if needed)
+  (handoff.md appears after your first /kit:session-end — template in docs/project-conventions.md if you want to seed it now)
 
 Next steps:
   1. Open README.md and write a one-paragraph description
