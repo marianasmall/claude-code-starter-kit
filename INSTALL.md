@@ -136,10 +136,10 @@ This walks you through the architecture, what each hook does, and the customizat
 **At Claude Code's prompt:**
 
 ```
-/kit:maintain quick
+/kit:verify
 ```
 
-This runs a health-checks-only sweep (Claude Code version, hook wiring, script permissions — it upgrades nothing and modifies nothing). It'll flag any wiring issues.
+This runs the hook fire drill: it proves every installed hook is alive — including staging fake dangerous input to confirm the safety hooks actually block it. Dry-run, changes nothing. All green means you're wired correctly. (For a broader checkup — Claude Code version, packages — there's also `/kit:maintain quick`.)
 
 If something looks wrong, ask Claude:
 
@@ -149,7 +149,7 @@ If something looks wrong, ask Claude:
 
 > ## 🎉 You're done with the basics
 >
-> If `/kit:maintain quick` came back clean, **you're set up.** Steps 7+ below are optional integrations — only do them if you want the specific features they add.
+> If `/kit:verify` came back all green, **you're set up.** Steps 7+ below are optional integrations — only do them if you want the specific features they add.
 >
 > **Try this right now to feel the kit working:** type `/kit:note testing the kit` at Claude Code's prompt. A timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md` (that's a hidden folder — to view it, use the same TextEdit `Cmd+Shift+G` trick from Step 4, or just ask Claude *"show me what's in today's notes file"*). That's a hook + a slash command + a file the kit created, all working together. Welcome aboard.
 

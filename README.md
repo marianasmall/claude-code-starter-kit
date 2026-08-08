@@ -119,13 +119,14 @@ Reusable frameworks Claude loads when relevant:
 - **idea-to-scope** — Turn vague ideas into structured scope docs
 - **kaizen** — Continuous improvement framework
 
-### 14 Slash Commands
+### 15 Slash Commands
 
 Type at Claude Code's prompt. (Installed plugin commands are namespaced under the plugin name, so they all start with `/kit:`.)
 
 | Command | What it does |
 |---|---|
 | `/kit:getting-started` | Guided first-run walkthrough |
+| `/kit:verify` | Fire drill — proves every hook is alive and the safety hooks actually block |
 | `/kit:session-end` | Log session, update active-context for next time |
 | `/kit:reflect [quick\|deep]` | End-of-session retrospective |
 | `/kit:note <text>` | Quick timestamped capture to today's notes |
@@ -311,7 +312,9 @@ claude-code-starter-kit/
 ├── hooks/
 │   ├── hooks.json                # Wires hooks into Claude Code events
 │   └── scripts/                  # 16 hook scripts (15 wired + pushover.sh helper)
-├── commands/                     # 14 slash commands
+├── commands/                     # 15 slash commands
+├── scripts/
+│   └── verify-hooks.sh           # Hook fire drill (run via /kit:verify)
 ├── agents/                       # 5 specialized agents
 ├── skills/                       # 4 generally-useful skills
 ├── examples/

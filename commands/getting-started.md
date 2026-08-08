@@ -65,7 +65,7 @@ Type these in Claude Code. (Installed plugin commands are namespaced, so they al
 - `/kit:checkpoint` — Save mid-session state snapshot
 - `/kit:extract-skill` — Scaffold a new skill from an emerging pattern
 
-> This is a curated subset. The full list of all 14 commands lives in the README.
+> This is a curated subset. The full list of all 15 commands lives in the README.
 
 ### 4. Agents are specialists
 
@@ -101,7 +101,7 @@ Walk the user through this. **For each item, offer to do it for them** — most 
 - [ ] Optional: configure Pushover for phone notifications (see `examples/pushover-setup.md`)
 - [ ] Optional: sync `/kit:debt` items to Notion — `examples/debt-sync.sh.opt-in` is the integration shape to implement your own sync
 - [ ] Optional: log `/kit:session-end` summaries to a Notion database — set the `notionSessionDb` key in `~/.claude/settings.json`
-- [ ] Run `/kit:maintain quick` to verify everything's wired correctly
+- [ ] Run `/kit:verify` — the hook fire drill proves everything's wired and the safety hooks actually block
 - [ ] **First success moment:** ask the user to type `/kit:note testing the kit` — a timestamped line will land in `~/.claude/notes/YYYY-MM-DD.md`. That's a hook + a slash command + a file, all working together.
 
 ## What to do if something feels wrong

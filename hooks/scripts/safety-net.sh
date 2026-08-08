@@ -17,8 +17,15 @@ INPUT=$(cat)
 # python3 parses every field this hook inspects. Without it the checks below
 # see nothing and would wave all commands through, so block loudly instead —
 # the deliberate exception to the fail-open rule the other hooks follow.
-if ! command -v python3 >/dev/null 2>&1; then
+if ! python3 -c 'import json' >/dev/null 2>&1; then
     echo '{"error": "python3 required for kit safety hooks — install python3 or disable these hooks in hooks.json"}'
+    exit 0
+fi
+
+# Unparseable input fails CLOSED: a safety gate that can't read its input
+# must not wave the command through (same reasoning as the python3 guard).
+if ! echo "$INPUT" | python3 -c "import sys,json; json.load(sys.stdin)" >/dev/null 2>&1; then
+    echo '{"error": "safety-net: could not parse hook input — refusing to allow unverified command"}'
     exit 0
 fi
 

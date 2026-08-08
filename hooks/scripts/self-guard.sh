@@ -25,7 +25,7 @@ INPUT=$(cat)
 # brick all file editing on a python3-less machine — instead we fail open but
 # LOUDLY, so the user knows the guard is off. (safety-net.sh, which only gates
 # Bash, is the one that fails closed.)
-if ! command -v python3 >/dev/null 2>&1; then
+if ! python3 -c 'import json' >/dev/null 2>&1; then
     echo '{"ok": true, "systemMessage": "⚠️ kit self-guard inactive: python3 not found — destructive-script protection is OFF until python3 is installed"}'
     exit 0
 fi
