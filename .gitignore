@@ -18,3 +18,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Personal working files — never publish
+active-context.md
