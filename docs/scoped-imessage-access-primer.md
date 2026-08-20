@@ -10,28 +10,32 @@ The OS can't scope this for you. The scoping has to live in how the reader is bu
 
 ## The pattern
 
-1. **Put your work contacts in one place in Contacts.app.** A group (File > New Group, drag people in) works; if your work contacts already live under a separate account (a work Google account, a company CardDAV account), that account is an even cleaner boundary. Contacts merges iCloud and Google sources, so one group can cover both.
+1. **Put your work contacts in one place.** Any of these works as the permission source: a list in Contacts.app (File > New List; older macOS calls it a group), a [label in your work Google contacts](https://support.google.com/contacts/answer/30970), or — cleanest of all — a separate work account (a work Google account, a company CardDAV account) if your work contacts already live under one. Contacts.app merges iCloud and Google sources, so any of them is visible to a reader on the Mac.
 
 2. **Have Claude Code build a read-only reader that derives its allowlist from that group.** The prompt that matters:
 
    > Build a read-only iMessage reader. Derive the allowlist from my [group/account name] in Contacts, and build it so it *cannot* return anything outside that list. Work from a copy of chat.db — the live file is locked while Messages is open. Include a self-test.
 
-3. **Two ground rules**, stated up front:
-   - **Read-only**: no send capability exists in the code at all. Not "doesn't send" but *can't send*.
-   - **Draft-only replies** (if you want replies): the tool may open Messages with recipient and text prefilled, but you press send. There are three ways to put text into Messages and only one is safe: AppleScript genuinely *sends* (disqualified outright); GUI keystroke scripting is one stray Return away from sending; the `imessage:`/`sms:` URL scheme with a `body` parameter opens a compose window prefilled, with no automation permissions and no send verb anywhere in the chain. Use the URL scheme, and test it against a deliberately fake number so nothing can reach a real person.
+3. **One hard rule, stated up front: it never sends.** No send capability exists in the code at all — not "doesn't send" but *can't send*. Drafting, by contrast, is fine by default: the tool may open Messages with recipient and text prefilled, and you press send. There are three ways to put text into Messages and only one is safe: AppleScript genuinely *sends* — it has no draft concept, `send` is its only verb and it delivers instantly (disqualified outright); GUI keystroke scripting is one stray Return away from sending; the `imessage:`/`sms:` URL scheme with a `body` parameter opens a compose window prefilled, with no automation permissions and no send verb anywhere in the chain. Use the URL scheme — there is no code path in it that *can* deliver, even if called wrongly — and test it against a deliberately fake number so nothing can reach a real person.
 
 4. **Verify before trusting it.** Ask for a thread with someone in the group; it should come back. Ask for a **real** personal contact; it should come back empty. A test only proves what it was written to prove, so use a real personal contact, not a made-up name.
 
-## Why a Contacts group instead of a hardcoded list
+## Why a Contacts list instead of a hardcoded allowlist
 
-The group *is* the permission. Add someone and Claude can see that conversation; remove them and access is gone. No config file to edit, no list maintained in two places, no code change when the team changes.
+The list *is* the permission. Add someone and Claude can see that conversation; remove them and access is gone. No config file to edit, no list maintained in two places, no code change when the team changes.
+
+The deeper principle: **make the scope structural, not a filter.** Personal messages shouldn't be filtered out of results — they should live in data the tool never opens. A filter can have a bug; a query that never selects the column, a file that never gets opened, cannot. There's no filter to get wrong.
+
+## Not on a Mac?
+
+The texts part requires one: iMessage's database only exists on Apple devices, so on Windows there is nothing to read. The pattern itself isn't Mac-bound — the same work-contacts label can scope a reader for email or calendar instead. Same prompt shape, same structural-scope requirement, same verification step.
 
 ## Traps a real build hit
 
 These came out of an actual build of this pattern. Expect your own build to meet them:
 
 - **Contact-store discovery can pick the wrong source.** If work colleagues also exist in your personal iCloud contacts, ranking candidate stores by raw match count can tie-break wrong. Rank by *density* (work-domain matches as a share of the store) and refuse to pin a store below a clear threshold.
-- **A passing scope test doesn't mean the reader works.** In one build, all boundary checks passed while every message body came back empty: the text lived in `attributedBody`, an old NeXT-era serialization, not the plain `text` column. Test that you get actual message text, not just the right thread list.
+- **A passing scope test doesn't mean the reader works.** In one build, all boundary checks passed while every message body came back empty: the text lived in `attributedBody`, an old NeXT-era serialization, not the plain `text` column. Containing nothing is trivially "in scope" — scope tests prove the boundary and say nothing about whether the data is real. Make every self-test fail loudly on an empty result.
 - **The live `chat.db` locks while Messages is open.** Work from a copy.
 - **macOS TCC permission is per-application, not per-profile.** If you run multiple Claude Code profiles (work/personal) from the same binary, an OS-level grant made on one side applies to both. The separation is a convention honored in the code, not an OS sandbox, which is exactly why the reader must be structurally unable to return out-of-scope results.
 
