@@ -2,6 +2,14 @@
 
 Give Claude Code access to your work texts without opening your whole message history. The pattern: a group (or account) in the macOS Contacts app becomes the permission. Whoever is in it is visible to Claude; everyone else doesn't exist.
 
+This guide is written to be handed to a Claude Code session directly: paste its URL and say "read this, then build what it describes for my [list/label name] contacts." Everything a fresh session needs — the build spec, the safety rules, the known traps, the verification protocol — is below.
+
+## Prerequisites (the human does these, not Claude)
+
+- **A Mac, signed into Messages.** The message database (`chat.db`) only exists on Apple devices.
+- **Full Disk Access for your terminal.** Reading `chat.db` requires it: System Settings > Privacy & Security > Full Disk Access > enable your terminal app, then restart the terminal. This grant is all-or-nothing at the OS level — which is exactly why everything below insists the scoping be structural in the code.
+- **Your work contacts gathered in one place** in Contacts (step 1 below).
+
 ## The problem
 
 Claude gets much more useful when it can see real context: the thread where a delivery date was confirmed, the text with the address you need. But macOS permissions for Messages are all-or-nothing: Full Disk Access exposes the entire `chat.db`, which holds every conversation on the machine. Family, doctors, everything. That's the wrong trade, so most people never make it.
