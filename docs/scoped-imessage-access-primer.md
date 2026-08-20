@@ -18,7 +18,7 @@ The OS can't scope this for you. The scoping has to live in how the reader is bu
 
 3. **Two ground rules**, stated up front:
    - **Read-only**: no send capability exists in the code at all. Not "doesn't send" but *can't send*.
-   - **Draft-only replies** (if you want replies): the tool may open Messages with recipient and text prefilled, but you press send.
+   - **Draft-only replies** (if you want replies): the tool may open Messages with recipient and text prefilled, but you press send. There are three ways to put text into Messages and only one is safe: AppleScript genuinely *sends* (disqualified outright); GUI keystroke scripting is one stray Return away from sending; the `imessage:`/`sms:` URL scheme with a `body` parameter opens a compose window prefilled, with no automation permissions and no send verb anywhere in the chain. Use the URL scheme, and test it against a deliberately fake number so nothing can reach a real person.
 
 4. **Verify before trusting it.** Ask for a thread with someone in the group; it should come back. Ask for a **real** personal contact; it should come back empty. A test only proves what it was written to prove, so use a real personal contact, not a made-up name.
 
