@@ -18,7 +18,7 @@ The OS can't scope this for you. The scoping has to live in how the reader is bu
 
 ## The pattern
 
-1. **Put your work contacts in one place.** Any of these works as the permission source: a list in Contacts.app (File > New List; older macOS calls it a group), a [label in your work Google contacts](https://support.google.com/contacts/answer/30970), or — cleanest of all — a separate work account (a work Google account, a company CardDAV account) if your work contacts already live under one. Contacts.app merges iCloud and Google sources, so any of them is visible to a reader on the Mac.
+1. **Put your work contacts in one place.** Any of these works as the permission source: a list in Contacts.app (File > New List; older macOS calls it a group), a [label in your work Google contacts](https://support.google.com/contacts/answer/30970), or — cleanest of all — a separate work account (a work Google account, a company CardDAV account) if your work contacts already live under one. Contacts.app merges iCloud and Google sources, so any of them is visible to a reader on the Mac. Multiple lists work too: the allowlist can be the union of several lists or labels (e.g., two brands' contact lists), as long as each is named explicitly.
 
 2. **Have Claude Code build a read-only reader that derives its allowlist from that group.** The prompt that matters:
 
