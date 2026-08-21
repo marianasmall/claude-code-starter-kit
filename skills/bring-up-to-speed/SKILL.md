@@ -16,6 +16,8 @@ Assemble everything the available record holds about a topic into a briefing for
 
 Use whatever sources this conversation can reach: connected email, calendar, or document tools if available; otherwise ask the user to paste threads, attach files, or forward the key documents. Work newest-first (the recent three weeks establish current status), then backfill the timeline.
 
+When asking the user which sources to check, ask for ALL the platforms that hold project state — not just email. Prompt with categories, because people under-name their tools: email and calendar, chat (Slack, Teams), project trackers (Monday, Asana, Jira), databases and wikis (Airtable, Notion), document drives, and meeting-recording tools. A briefing built from email alone misses every decision that happened in chat.
+
 As you gather, establish the **visibility window**: when does the record's coverage begin, and when did the reader first get access? The gap between those two dates is the heart of the brief. Everything before the coverage date is a blind spot — name it, don't guess at it.
 
 ## Weigh sources honestly
