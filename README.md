@@ -111,7 +111,7 @@ If you're new to Claude Code, these terms come up a lot. The kit's quick definit
 
 A curated set of:
 
-### 4 Skills
+### 5 Skills
 
 Reusable frameworks Claude loads when relevant:
 
@@ -119,6 +119,7 @@ Reusable frameworks Claude loads when relevant:
 - **learning-capture** — Pin valuable insights mid-conversation
 - **idea-to-scope** — Turn vague ideas into structured scope docs
 - **kaizen** — Continuous improvement framework
+- **bring-up-to-speed** — Brief anyone on a project whose history is scattered across email, meetings, and docs: source-weighted claims, honest blind spots, bottom line up front
 
 ### 15 Slash Commands
 
