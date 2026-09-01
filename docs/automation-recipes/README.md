@@ -23,6 +23,10 @@ Each recipe is one card: what it does, what you need, the steps, and the prompt 
 connections recipes 5, 7, and 8 reuse), or recipe 10 if you want a win in five minutes
 with nothing to connect.
 
+*Credit where due: the idea list for the first ten recipes was sparked by a use-case
+roundup from [@taki.gpt](https://www.instagram.com/taki.gpt/) on Instagram. All guides
+here were written from scratch for this series.*
+
 ## How these differ from the primers
 
 The [primers](../) explain *features* (plan mode, worktrees, output styles).
