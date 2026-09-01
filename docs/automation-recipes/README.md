@@ -18,10 +18,17 @@ Each recipe is one card: what it does, what you need, the steps, and the prompt 
 | 8 | [Weekly meeting brief](08-weekly-meeting-brief.md) | Next week's meetings combined into one brief with prep notes |
 | 9 | [Sales meeting debrief](09-sales-meeting-debrief.md) | Turn a meeting transcript into outcomes, commitments, and follow-ups |
 | 10 | [Daily news scraper](10-daily-news-scraper.md) | A digest of the sources you care about, on your schedule |
+| 11 | [Explain this letter](11-paperwork-decoder.md) | Any intimidating document decoded: what it says, what to do, by when |
+| 12 | [Subscription audit](12-subscription-audit.md) | Every recurring charge found, price creep flagged, cancel candidates listed |
+| 13 | [Trip itinerary builder](13-trip-itinerary-builder.md) | Booking confirmations pulled into one chronological itinerary |
+| 14 | [Weekly review](14-weekly-review.md) | What actually happened this week: wins, loose ends, next week's shape |
+| 15 | [Inbox unsubscribe sweep](15-inbox-unsubscribe-sweep.md) | The newsletters you never read, ranked — you click unsubscribe |
+| 16 | [Meal planner](16-meal-planner.md) | Seven dinners plus one grocery list, organized by store section |
+| 17 | [Receipts into your money tracker](17-receipts-to-tracker.md) | Monthly receipts filed into your tracker, flagged tax-ready |
 
 **Where to start:** recipe 1 if you want the flagship experience (it also sets up the
-connections recipes 5, 7, and 8 reuse), or recipe 10 if you want a win in five minutes
-with nothing to connect.
+connections many others reuse), recipe 10 or 16 for a win in five minutes with nothing
+to connect, or recipe 11 the next time a confusing letter lands in your mailbox.
 
 *Credit where due: the idea list for the first ten recipes was sparked by a use-case
 roundup from [@taki.gpt](https://www.instagram.com/taki.gpt/) on Instagram. All guides
