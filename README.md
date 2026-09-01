@@ -89,7 +89,8 @@ The repo's other files are alphabetical, which doesn't help you know where to st
    - [`docs/multi-session-coordination-primer.md`](docs/multi-session-coordination-primer.md) — running several sessions as colleagues: shared surfaces, handoffs, wrap rituals
    - [`docs/1password-environments-primer.md`](docs/1password-environments-primer.md) — get your API keys out of plaintext files (if you use 1Password)
    - [`docs/scoped-imessage-access-primer.md`](docs/scoped-imessage-access-primer.md) — give Claude your work texts (and nothing else) via a Contacts group
-6. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
+6. **[docs/automation-recipes/](docs/automation-recipes/README.md)** — ten follow-along recipes for everyday automations (morning brief, budget planner, meeting prep, news digest…). Where the primers explain features, these assemble them into daily habits. A good first stop if you'd rather build something useful than read about architecture.
+7. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
 
 ---
 
