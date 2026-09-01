@@ -6,7 +6,7 @@ A starter setup for Claude Code, ready to install — so you don't have to spend
 
 > 🚀 **Just want to install?** → [Skip to Installation](#installation)
 >
-> 🍳 **New here and want something useful today?** → [**Automation Recipes**](docs/automation-recipes/README.md) — seventeen follow-along guides for everyday automations: a morning brief that emails itself to you, a subscription audit that finds the charges you forgot, a decoder for intimidating paperwork, a trip itinerary built from your inbox. Written for people who don't code. No kit installation required — the recipes work with plain Claude Code.
+> 🍳 **Don't code? Start with the [Automation Recipes](docs/automation-recipes/README.md)** — seventeen follow-along guides (morning brief, subscription audit, paperwork decoder…) that work with plain Claude Code, no installation required.
 
 ---
 
