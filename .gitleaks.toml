@@ -12,5 +12,8 @@ paths = [
     '''\.local$''',
     '''/state/''',
     '''/_backups/''',
-    '''/handoff\.md$''',
+    # Root session-state file only (gitignored, never tracked). The earlier
+    # unanchored /handoff\.md$ also exempted commands/handoff.md — the plugin's
+    # own /handoff command — from every scan (check-gitleaks-allowlists.py, 2026-09-15).
+    '''claude-code-starter-kit/handoff\.md$''',
 ]
