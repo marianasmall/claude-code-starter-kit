@@ -85,6 +85,7 @@ The repo's other files are alphabetical, which doesn't help you know where to st
 3. **[docs/project-conventions.md](docs/project-conventions.md)** — the five-file project pattern (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md, handoff.md) + naming conventions.
 4. **[examples/sample-project/](examples/sample-project/)** — a worked example showing four of those files fully filled in for an imaginary project (handoff.md is generated at runtime). Read this if conventions feel abstract.
 5. **The native CC primers** (read on demand when relevant):
+   - [`docs/claude-md-layering-and-context-primer.md`](docs/claude-md-layering-and-context-primer.md) — layered CLAUDE.md files, the step-count test, skills as folders, `/goal`, subagents vs hooks, keeping sessions focused (from JJ at Tenex's Oct 2026 workshop; start here if you read only one)
    - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — Default / Proactive / Explanatory / Learning
    - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
    - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
