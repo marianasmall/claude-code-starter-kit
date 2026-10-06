@@ -209,6 +209,7 @@ Everything here is editable:
 - **Hooks too noisy?** Edit `hooks/hooks.json` and remove what you don't want.
 - **Command doesn't fit?** Delete the file from `commands/` or rewrite it.
 - **CLAUDE.md template wrong shape?** Strip and rebuild. Use it as a prompt, not a constraint.
+- **Claude keeps asking you to go find files?** The template's *Search and solve before asking* section (added Oct 2026) lets Claude search every connected source, fix your own records and rename badly named files without asking. Sends, spending and deletes still need your OK. Keep it; trim the lists to your own lines.
 
 The kit is a starting point, not a religion. After a week of use, you'll know what to tune.
 
