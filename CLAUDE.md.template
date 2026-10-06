@@ -73,7 +73,7 @@ If you can find the answer yourself, find it. Don't ask me to fetch something a 
 
 **Why:** reading can't break anything, and changes to my own records can be undone when they're logged. Sends and spending can't be taken back. A question I could have been spared costs me more than the search costs you.
 
-**How:** use each tool's own indexed search, not a file-by-file crawl of synced cloud folders, which can run for hours. You can reach whatever is connected to this setup. Accounts it isn't connected to, including other people's inboxes, still come to me.
+**How:** use each tool's own indexed search, not a file-by-file crawl of synced cloud folders, which can run for hours. You can reach whatever is connected to this setup. Accounts it isn't connected to still come to me. That includes other people's inboxes and anything that lives in a different Claude seat (if you run separate work and personal Claudes, they can't see each other's files, so that handoff goes through you).
 
 ### Verification discipline
 Five rules to avoid quietly drifting away from truth:
