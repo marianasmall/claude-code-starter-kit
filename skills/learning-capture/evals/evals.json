@@ -1,0 +1,36 @@
+{
+  "skill_name": "learning-capture",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Pin this: compaction only shrinks the conversation, so if my tools and skills are what's eating context, compacting won't help.",
+      "should_trigger": true,
+      "expected_output": "A structured capture of the insight with a category, confirmed back briefly.",
+      "expectations": [
+        "Records the insight in the user's own meaning without inflating it",
+        "Assigns a category",
+        "Confirms the capture in one or two lines rather than a long reply"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Export the learnings from this session.",
+      "should_trigger": true,
+      "expected_output": "A list of the session's captured learning moments in the skill's export format, or a clear statement that none were captured.",
+      "expectations": [
+        "Uses the skill's export format with an item count",
+        "Does not invent learnings that were never discussed",
+        "Says plainly if nothing was captured"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "What's the weather going to be like tomorrow?",
+      "should_trigger": false,
+      "expected_output": "The skill should not load for an unrelated question.",
+      "expectations": [
+        "Does not create a learning capture"
+      ]
+    }
+  ]
+}

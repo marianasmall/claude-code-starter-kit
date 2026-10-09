@@ -1,0 +1,38 @@
+{
+  "skill_name": "idea-to-scope",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I want to build something that helps my book club pick the next book.",
+      "should_trigger": true,
+      "expected_output": "Guided questions that pin down the goal, users, success criteria, and constraints before any building starts.",
+      "expectations": [
+        "Asks clarifying questions before proposing an implementation",
+        "Asks a small number of questions at a time rather than a long questionnaire",
+        "Asks how the user will know it worked (success criteria)",
+        "Does not start writing code or picking a tech stack in the first reply"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I have an idea for a weekly email to past customers but I'm not sure what's in it yet. Here's what I know: about 300 people, I have their emails in a spreadsheet, I want them to book again.",
+      "should_trigger": true,
+      "expected_output": "Follow-up questions on the gaps, then (once answered) a scope document with goal, success criteria, requirements, constraints, existing assets, and open questions.",
+      "expectations": [
+        "Recognizes the spreadsheet and audience size as existing assets",
+        "Asks about the gaps (content, cadence, how 'book again' is measured) rather than assuming them",
+        "Lists unresolved items as open questions instead of guessing answers"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Rename the file report.pdf to Q3_Board_Report_2026-10-01.pdf.",
+      "should_trigger": false,
+      "expected_output": "The rename is done (or the command given). A clear, small task should not trigger a scoping interview.",
+      "expectations": [
+        "Does not ask scoping questions about goals or success criteria",
+        "Completes or describes the rename directly"
+      ]
+    }
+  ]
+}

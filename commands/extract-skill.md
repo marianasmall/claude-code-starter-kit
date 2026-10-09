@@ -15,7 +15,15 @@ You just solved a problem in a way that:
 - You'd want to apply again in a similar context
 - Has clear-enough triggers that Claude could activate it autonomously next time
 
-If it doesn't pass that bar, use `/kit:note` instead.
+**Or the simplest test of all: you've explained the same thing to Claude twice.** The best skills are usually dull: a format, a checklist, a house style you keep retyping.
+
+If it doesn't pass that bar, use `/kit:note` instead. Something you'd only say once is a prompt, not a skill.
+
+### How skills load (why the shape below matters)
+
+1. **Name + description:** always in context. This is what decides whether the skill ever fires, so write it for the trigger, in the words someone would actually type.
+2. **SKILL.md body:** loads only when the skill triggers. Keep it to the steps and the rules.
+3. **`references/`, `scripts/`, `assets/`:** load only when a run needs them. Long examples, frameworks and tables go here, with a line in the steps saying when to read each one.
 
 ## What to do
 
@@ -79,14 +87,37 @@ description: <Third-person description with explicit trigger phrases. Use when [
 
 ## Examples
 
-<Brief example showing the skill in use, if helpful.>
+<One short example. Longer ones go in references/examples.md.>
 ```
 
-### 5. Confirm
+Keep SKILL.md short: aim for under ~150 lines. If the steps need long examples, a pattern library, or a framework, put them in `<name>/references/<topic>.md` and point to them from the step that needs them. Anything a program can check (word counts, banned phrases, broken links) belongs in `<name>/scripts/`.
+
+### 5. Write evals
+
+Create `<location>/<name>/evals/evals.json` with 2–3 realistic prompts: at least one that should trigger the skill and one near-miss that should not.
+
+```json
+{
+  "skill_name": "<skill-name>",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "<something a user would actually type>",
+      "should_trigger": true,
+      "expected_output": "<what good output looks like>",
+      "expectations": ["<a checkable must or must-not>"]
+    }
+  ]
+}
+```
+
+Re-run these prompts after every edit to the skill. If the skill misbehaves in real use, fix it in the skill file (and add the failing case here), not just in the conversation.
+
+### 6. Confirm
 
 Tell the user:
 ```
-Skill scaffolded: <location>/<name>/SKILL.md
+Skill scaffolded: <location>/<name>/SKILL.md (+ evals/evals.json)
 Triggers: <phrases>
 Test it by asking something that should trigger it (e.g., "<example query>")
 ```

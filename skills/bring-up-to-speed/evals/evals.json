@@ -1,0 +1,38 @@
+{
+  "skill_name": "bring-up-to-speed",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Bring me up to speed on the office move. I was out for three weeks and the history is spread across email and two meetings.",
+      "should_trigger": true,
+      "expected_output": "Before researching, it confirms who the reader is and what decision they face; then a briefing with the bottom line first, sourced claims, and named blind spots.",
+      "expectations": [
+        "Asks or states who the reader is and what they need to decide before gathering",
+        "Puts the bottom line at the top of the briefing",
+        "Attributes claims to their sources and weighs them (e.g. a decision in writing vs a remark in a meeting)",
+        "Names what the record does not show instead of filling gaps with guesses"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Catch our new operations lead up on the vendor dispute. She's deciding next week whether to renew.",
+      "should_trigger": true,
+      "expected_output": "A briefing written for the operations lead, framed around the renewal decision.",
+      "expectations": [
+        "Frames the briefing around the renewal decision",
+        "Writes for someone who was not present (no unexplained insider shorthand)",
+        "Separates settled facts from open or disputed points"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Summarize this one paragraph in a sentence.",
+      "should_trigger": false,
+      "expected_output": "A one-sentence summary. A single short text is not a scattered-history briefing.",
+      "expectations": [
+        "Does not launch a multi-source research process",
+        "Returns one sentence"
+      ]
+    }
+  ]
+}

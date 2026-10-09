@@ -1,0 +1,40 @@
+{
+  "skill_name": "humanizer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Make this sound less like AI wrote it: 'Nestled in the heart of downtown, our vibrant co-working space stands as a testament to our commitment to community, fostering collaboration, innovation, and growth.'",
+      "should_trigger": true,
+      "expected_output": "A plain rewrite that states what the space is and offers, with no promotional language.",
+      "expectations": [
+        "Removes 'nestled', 'vibrant', 'stands as a testament', and 'fostering'",
+        "Does not keep the three-item list 'collaboration, innovation, and growth'",
+        "Uses 'is' or 'has' rather than 'stands as' or 'serves as'",
+        "Does not invent facts that were not in the original (no made-up address, prices, or amenities)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review this paragraph from my newsletter for AI tells and fix them: 'Great question! In today's rapidly evolving landscape, it's not just about working harder — it's about working smarter. Additionally, experts argue that rest is crucial. The future looks bright!'",
+      "should_trigger": true,
+      "expected_output": "A shorter, direct paragraph plus an optional brief list of what changed.",
+      "expectations": [
+        "Removes the chatbot opener 'Great question!'",
+        "Removes the negative parallelism 'not just about X, it's about Y'",
+        "Replaces or drops the vague attribution 'experts argue' rather than leaving it",
+        "Removes the generic upbeat ending 'The future looks bright!'",
+        "Removes the em dash"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Fix the off-by-one error in this loop: for (let i = 0; i <= items.length; i++) { total += items[i]; }",
+      "should_trigger": false,
+      "expected_output": "A code fix. The humanizer skill should not load for a coding task.",
+      "expectations": [
+        "Does not apply prose-editing rules to code",
+        "Changes '<=' to '<' or equivalent"
+      ]
+    }
+  ]
+}
