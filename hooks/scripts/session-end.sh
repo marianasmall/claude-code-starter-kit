@@ -32,46 +32,51 @@ if [ -f "$INDEX_FILE" ] && command -v python3 &>/dev/null; then
   PROJECT="general"
 
   if [ -f "$PROJECT_MAP" ]; then
-    DETECTED=$(python3 -c "
-import json, sys
+    # Values travel via the environment; the Python source is single-quoted
+    # so bash never splices data into code.
+    DETECTED=$(PROJECT_MAP="$PROJECT_MAP" TRANSCRIPT="$TRANSCRIPT" python3 -c '
+import json, sys, os
 try:
-    with open('$PROJECT_MAP') as f:
+    with open(os.environ["PROJECT_MAP"]) as f:
         m = json.load(f)
-    t = '$TRANSCRIPT'
+    t = os.environ["TRANSCRIPT"]
     for pattern, label in m.items():
         if pattern in t:
             print(label)
             sys.exit()
 except Exception:
     pass
-" 2>/dev/null)
+' 2>/dev/null)
     if [ -n "$DETECTED" ]; then
       PROJECT="$DETECTED"
     fi
   fi
 
-  python3 -c "
-import json, sys
+  INDEX_FILE="$INDEX_FILE" SESSION_ID="$SESSION_ID" TIMESTAMP="$TIMESTAMP" \
+  TRANSCRIPT="$TRANSCRIPT" PROJECT="$PROJECT" REASON="$REASON" TODAY="$(date +%Y-%m-%d)" \
+  python3 -c '
+import json, sys, os
+e = os.environ
 try:
-    with open('$INDEX_FILE') as f:
+    with open(e["INDEX_FILE"]) as f:
         idx = json.load(f)
     entry = {
-        'session_id': '$SESSION_ID',
-        'date': '$TIMESTAMP',
-        'transcript': '$TRANSCRIPT',
-        'project': '$PROJECT',
-        'exit_reason': '$REASON'
+        "session_id": e["SESSION_ID"],
+        "date": e["TIMESTAMP"],
+        "transcript": e["TRANSCRIPT"],
+        "project": e["PROJECT"],
+        "exit_reason": e["REASON"]
     }
-    idx.setdefault('sessions', []).append(entry)
-    idx['last_updated'] = '$(date +%Y-%m-%d)'
+    idx.setdefault("sessions", []).append(entry)
+    idx["last_updated"] = e["TODAY"]
     # Keep last 200 sessions max
-    if len(idx['sessions']) > 200:
-        idx['sessions'] = idx['sessions'][-200:]
-    with open('$INDEX_FILE', 'w') as f:
+    if len(idx["sessions"]) > 200:
+        idx["sessions"] = idx["sessions"][-200:]
+    with open(e["INDEX_FILE"], "w") as f:
         json.dump(idx, f, indent=2)
-except Exception as e:
-    sys.stderr.write(f'session-index update failed: {e}\n')
-" 2>/dev/null
+except Exception as ex:
+    sys.stderr.write(f"session-index update failed: {ex}\n")
+' 2>/dev/null
 fi
 
 # macOS notification as a gentle nudge if session ended without /session-end

@@ -132,15 +132,7 @@ fi
 # Block with clear remediation instructions
 REASON_TEXT=$(printf "Destructive logic without DRY_RUN gate in %s:\n%b\nRemediation: add a DRY_RUN gate (e.g., DRY_RUN=\${DRY_RUN:-0} and [ \"\$DRY_RUN\" = \"1\" ] && echo 'would ...' && exit 0) OR dry-run test the script on throwaway inputs, then retry." "$FILE_PATH" "$REASONS")
 
-python3 <<PYEOF
-import json, sys
-reason = """$REASON_TEXT"""
-print(json.dumps({
-    "hookSpecificOutput": {
-        "hookEventName": "PreToolUse",
-        "permissionDecision": "deny",
-        "permissionDecisionReason": reason
-    }
-}))
-PYEOF
+# Reason text (which includes the file path) goes through the environment,
+# never into Python source, so a crafted path can't execute as code.
+REASON_TEXT="$REASON_TEXT" python3 -c 'import os, json; print(json.dumps({"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "deny", "permissionDecisionReason": os.environ["REASON_TEXT"]}}))'
 exit 0

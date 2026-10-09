@@ -36,6 +36,8 @@ send_pushover() {
     # Debounce check
     if [ -f "$DEBOUNCE_FILE" ]; then
         local last_sent=$(cat "$DEBOUNCE_FILE" 2>/dev/null)
+        # Digits only before arithmetic: bash $(( )) evaluates expressions.
+        case "$last_sent" in ''|*[!0-9]*) last_sent=0 ;; esac
         local now=$(date +%s)
         local elapsed=$((now - last_sent))
         if [ "$elapsed" -lt "$DEBOUNCE_SECONDS" ]; then

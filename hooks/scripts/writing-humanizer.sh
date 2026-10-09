@@ -61,14 +61,8 @@ fi
 FILENAME=$(basename "$FILE_PATH")
 MSG="WRITING-HUMANIZER: ${FILENAME} contains ~${WORD_COUNT} words of long-form prose. Before considering this work complete, apply the humanizer skill: scan for AI-tells (em-dash overuse, 'delve', 'multifaceted', 'tapestry', tricolons, hedging openers, every-sentence-same-length rhythm) and rewrite affected sections. Particularly important if this is client-facing or public-facing content."
 
-python3 <<PYEOF
-import json
-print(json.dumps({
-    "hookSpecificOutput": {
-        "hookEventName": "PostToolUse",
-        "additionalContext": """$MSG"""
-    }
-}))
-PYEOF
+# Message (which includes the file name) goes through the environment, never
+# into Python source, so a crafted file name can't execute as code.
+MSG="$MSG" python3 -c 'import os, json; print(json.dumps({"hookSpecificOutput": {"hookEventName": "PostToolUse", "additionalContext": os.environ["MSG"]}}))'
 
 exit 0
