@@ -111,6 +111,7 @@ The repo's other files are alphabetical, which doesn't help you know where to st
    - [`docs/scoped-imessage-access-primer.md`](docs/scoped-imessage-access-primer.md) — give Claude your work texts (and nothing else) via a Contacts group
    - [`docs/plaud-recordings-primer.md`](docs/plaud-recordings-primer.md) — let Claude read your Plaud voice-recorder transcripts: the two-minute claude.ai connector, plus an archive-to-Drive build spec and its traps
    - [`docs/calendar-handoff-primer.md`](docs/calendar-handoff-primer.md) — have Claude put the things only you can do on your calendar, with the links and a paste-back block, instead of leaving them in chat
+   - [`docs/multiple-seats-terminal-profiles-primer.md`](docs/multiple-seats-terminal-profiles-primer.md) — personal + work Claude accounts on one Mac: a coloured Terminal profile per seat, `CLAUDE_CONFIG_DIR`, and the traps (quote marks, sorting, the trust prompt)
 6. **[docs/automation-recipes/](docs/automation-recipes/README.md)** — seventeen follow-along recipes for everyday automations (morning brief, budget planner, meeting prep, news digest…). Where the primers explain features, these assemble them into daily habits. A good first stop if you'd rather build something useful than read about architecture.
 7. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
 
