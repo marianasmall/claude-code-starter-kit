@@ -10,7 +10,7 @@ Run a structured maintenance sweep of the development environment. This keeps to
 
 **Mode selection:**
 - If `$ARGUMENTS` is empty or "full": run all sections below
-- If `$ARGUMENTS` is "quick": run only Sections 2-3 (Claude Code + hook/script health checks — no package upgrades, no audits, nothing modified). Safe as a first-run wiring check.
+- If `$ARGUMENTS` is "quick": run only Sections 2-3 (Claude Code + hook/script health checks — no package upgrades, no audits, nothing modified). Safe as a first-run wiring check. The monthly context readout in 2e still runs when it's due; it only writes to `~/.claude/context-log.md`.
 
 ---
 
@@ -61,6 +61,7 @@ Check which MCP servers are configured and whether they respond:
 - Read MCP config from `~/.claude.json` and any `.mcp.json` files
 - For each server, note if it's configured and check for obvious issues (missing binaries, expired tokens)
 - Flag any servers that haven't been used recently or have known issues
+- If a server was added since the last run, ask the user to run `/context` and check the MCP tools line. A connected server costs context even when idle; suggest toggling unused ones off in `/mcp` rather than deleting them
 
 ### 2c. Plugin health
 - List installed plugins (`/plugin` in Claude Code, or check `~/.claude/settings.json` `enabledPlugins`)
@@ -76,6 +77,14 @@ Check what's new in Claude Code since the last maintenance run:
    - **Breaking changes** — anything that might affect current setup
    - **New docs pages** — topics that didn't exist before
 5. If any new capability is relevant to the user's workflows, flag it with a one-line "why this matters for you"
+
+### 2e. Monthly context readout (first run of each month, full or quick)
+`/context` is a command only the user can type, so this step is a handoff:
+1. Read `~/.claude/context-log.md`. If the newest entry is from this calendar month, skip this step and say so.
+2. Ask the user: *"Please run `/context` and paste the output here."*
+3. Log one dated entry to `~/.claude/context-log.md` (create it if missing) with the token total for each category: system prompt, system tools, MCP tools, custom agents, memory files, skills, messages, free space. Also list the files under **Memory files**.
+4. Compare with the previous entry. Flag any category the user controls (memory files, custom agents, skills, MCP tools) that grew by more than 20%, and any CLAUDE.md over ~200 lines (user file over ~60).
+5. Suggest one concrete trim for the biggest controllable category, e.g. move a project-specific section out of the user CLAUDE.md, shorten a long agent description, toggle off an unused MCP server. See `docs/context-budget-primer.md` in the kit.
 
 ---
 
@@ -179,6 +188,7 @@ MAINTENANCE SUMMARY — [date]
 Packages updated:    X of Y outdated packages upgraded
 Hooks:               All OK / N issues found
 MCP servers:         All responding / N issues
+Context readout:     Logged (biggest controllable: X) / Already done this month
 Repos:               X with uncommitted work / Y stale (60d+)
 Credentials:         All valid / N expired
 Cleanup:             Xmb recovered / nothing to clean

@@ -161,7 +161,7 @@ Tradeoffs in [`project-conventions.md`](project-conventions.md).
 
 ## What not to do
 
-**Where it belongs:** user file for habits; the project's CLAUDE.md for repo rules; a hook if skipping it is never acceptable (see [`context-budget-primer.md`](context-budget-primer.md#hooks-only-for-rules-that-can-never-be-skipped)).
+**Where it belongs:** user file for habits; the project's CLAUDE.md for repo rules; a hook if skipping it is never acceptable (see [`context-budget-primer.md`](context-budget-primer.md#3-hooks-only-for-rules-that-can-never-be-skipped)).
 
 - "Don't reorganize Downloads or Desktop without flagging."
 - "Don't commit and push to main without showing the diff first."
