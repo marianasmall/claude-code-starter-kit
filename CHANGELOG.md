@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.1 — 2026-10-09
+
+**Hooks fix (please read if you installed earlier).** `hooks/hooks.json` listed its hook events at the top level of the file. Claude Code's plugin format expects them inside a `"hooks"` object, so **earlier installs may not have loaded the kit's hooks at all, including the safety and backup hooks. Reinstall to get them:** `/plugin update kit` (or `/plugin uninstall kit`, then install again), then run `/kit:verify` to confirm they fire.
+
+- `hooks/hooks.json` now uses the documented shape, has a description, and quotes every plugin path so install folders with spaces work. `claude plugin validate` passes with no warnings.
+- Two hooks that did nothing by default came out of the wiring: `stop-check` (returned "ok" and nothing else) and `scope-creep-detector` (off unless `SCOPE_CREEP_ENABLED=1`). Their scripts are in `hooks/_optional/` with instructions for wiring them back in. **13 hooks are wired:** 4 safeguards, 3 notifications, 6 nudges.
+- The CLAUDE.md template gets back the finer search-and-verification habits (follow loose ends, the filename-rename exceptions, stop long searches, cold-read docs before they go out). It's now 53 lines.
+- Docs pass: every count and file list in README, INSTALL, getting-started, ARCHITECTURE and the primers now matches the repo (13 hooks, 15 commands, 6 agents, 5 skills, 17 recipes). The calendar-handoff primer is now linked from the README. The layering primer's `/goal` section was checked against the official command reference (it is a built-in) and now links the docs and explains how it differs from `/loop`.
+
 ## 0.2.0 — 2026-10-09
 
 Practices informed by the Anthropic × Tenex Claude Code workshop (Oct 2026).

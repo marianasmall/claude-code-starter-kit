@@ -14,7 +14,9 @@ A starter setup for Claude Code, ready to install — so you don't have to spend
 
 Practices informed by the Anthropic × Tenex Claude Code workshop (Oct 2026). Full list in [CHANGELOG.md](CHANGELOG.md).
 
-- **A much shorter CLAUDE.md template** (47 lines, was 219). Your user file now holds only how you work. Everything else moved to a [section library](docs/claude-md-section-library.md) that says which layer each piece belongs in.
+> **0.2.1 fixes the hook wiring.** Earlier installs may not have loaded the kit's hooks at all, including the safety and backup hooks. Run `/plugin update kit` (or reinstall), then `/kit:verify`.
+
+- **A much shorter CLAUDE.md template** (53 lines, was 219). Your user file now holds only how you work. Everything else moved to a [section library](docs/claude-md-section-library.md) that says which layer each piece belongs in.
 - **`# Compact instructions`** in the template, so every compaction keeps your open loops, decisions and exact IDs.
 - **A [layered-repo example](examples/layered-repo/)**: root CLAUDE.md, an app-folder note, a path-scoped rule, and a personal `CLAUDE.local.md`.
 - **A [context-budget primer](docs/context-budget-primer.md)**: what loads when, `/context` habits, compacting at about half, when a hook is the right tool (and a review of the kit's own hooks), and how skills load.
@@ -108,7 +110,8 @@ The repo's other files are alphabetical, which doesn't help you know where to st
    - [`docs/1password-environments-primer.md`](docs/1password-environments-primer.md) — get your API keys out of plaintext files (if you use 1Password)
    - [`docs/scoped-imessage-access-primer.md`](docs/scoped-imessage-access-primer.md) — give Claude your work texts (and nothing else) via a Contacts group
    - [`docs/plaud-recordings-primer.md`](docs/plaud-recordings-primer.md) — let Claude read your Plaud voice-recorder transcripts: the two-minute claude.ai connector, plus an archive-to-Drive build spec and its traps
-6. **[docs/automation-recipes/](docs/automation-recipes/README.md)** — ten follow-along recipes for everyday automations (morning brief, budget planner, meeting prep, news digest…). Where the primers explain features, these assemble them into daily habits. A good first stop if you'd rather build something useful than read about architecture.
+   - [`docs/calendar-handoff-primer.md`](docs/calendar-handoff-primer.md) — have Claude put the things only you can do on your calendar, with the links and a paste-back block, instead of leaving them in chat
+6. **[docs/automation-recipes/](docs/automation-recipes/README.md)** — seventeen follow-along recipes for everyday automations (morning brief, budget planner, meeting prep, news digest…). Where the primers explain features, these assemble them into daily habits. A good first stop if you'd rather build something useful than read about architecture.
 7. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
 
 ---
@@ -176,19 +179,19 @@ Specialists Claude can spawn for complex tasks:
 - **communication-excellence-coach** — Email refinement, difficult conversations
 - **skill-diagnostics** — Debug skill triggering issues
 
-### 16 hook scripts — 15 wired events + 1 shared helper (most run silently)
+### 13 wired hooks + 1 shared helper (most run silently)
 
-Background automation. The most-relatable:
+**A hook is the right tool only when skipping the rule is never OK.** Most setups need three or four of those. The kit groups its 13 hooks that way:
 
-- **safety-net** — Blocks destructive shell commands before they run
-- **backup-before-edit** — Auto-backs up files before Claude edits them
-- **idle-summary** — When you return after >15min, Claude knows where you left off
-- **context-monitor** — Warns when context is getting low (with phone notification, optional)
-- **retry-nudge** — Coaches Claude to retry validation errors before escalating
+| Group | Hooks | What they do |
+|---|---|---|
+| **Safeguards** (keep these) | `safety-net`, `self-guard`, `backup-before-edit`, `session-end` | Block destructive shell commands; block destructive scripts that have no dry-run gate; back up every file before Claude edits it; log each session's transcript path so nothing is lost if you forget to wrap up |
+| **Notifications** (no context cost) | `notify-done`, `permission-ding`, `pre-compact` | A sound when Claude finishes, a different sound when it's waiting for your approval, an alert when the conversation is being compacted |
+| **Nudges** (advice, safe to turn off) | `user-prompt-context`, `idle-summary`, `context-monitor`, `retry-nudge`, `persistence-rule`, `writing-humanizer` | Inject your current-state file each prompt, re-orient you after a break, warn when context runs low, push Claude to retry a fixable error, save research findings as it goes, and run the humanizer on long prose |
 
-…plus 10 more wired events covering session logging, scope-creep detection, writing-humanizer passes, project-state injection, and more — 15 wired hooks total, plus a shared notification helper (`pushover.sh`). Full list in [`hooks/scripts/`](hooks/scripts/).
+`pushover.sh` is a shared helper for optional phone notifications, not a hook. Two optional hooks that don't run by default (`scope-creep-detector`, `stop-check`) are parked in [`hooks/_optional/`](hooks/_optional/) with instructions for wiring them in. The reasoning behind the groups is in the [context-budget primer](docs/context-budget-primer.md#3-hooks-only-for-rules-that-can-never-be-skipped).
 
-**A hook is the right tool only when skipping the rule is never OK.** Most setups need three or four of those. The kit's four are `safety-net`, `backup-before-edit`, `self-guard` and `session-end`; the rest are notifications or advice delivered by hook, and you can turn them off without losing a safeguard. The full review is in the [context-budget primer](docs/context-budget-primer.md#3-hooks-only-for-rules-that-can-never-be-skipped).
+> **Installed before 0.2.1?** Earlier versions had a malformed `hooks/hooks.json`, so the kit's hooks may never have loaded. Run `/plugin update kit` (or uninstall and reinstall), then `/kit:verify`.
 
 ---
 
@@ -229,7 +232,7 @@ Everything here is editable:
 - **Hooks too noisy?** Edit `hooks/hooks.json` and remove what you don't want.
 - **Command doesn't fit?** Delete the file from `commands/` or rewrite it.
 - **CLAUDE.md template wrong shape?** Strip and rebuild. Use it as a prompt, not a constraint. Need a section it doesn't have? Take it from the [section library](docs/claude-md-section-library.md), which also tells you whether it belongs in your user file at all.
-- **Claude keeps asking you to go find files?** The template's *Search and solve before asking* section lets Claude search every connected source, fix your own records and rename badly named files without asking. Sends, spending and deletes still need your OK. The template carries the short form; the full version is in the section library.
+- **Claude keeps asking you to go find files?** The template's *Search and solve before asking* section lets Claude search every connected source, fix your own records and rename badly named files without asking. Sends, spending and deletes still need your OK. The template carries a compact version of every rule; the section library has the longer write-up with the reasoning behind it.
 
 The kit is a starting point, not a religion. After a week of use, you'll know what to tune.
 
@@ -326,6 +329,10 @@ Want to understand how Claude Code actually works under the hood? The official d
 - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — when to use each style
 - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
 - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
+- [`docs/claude-md-layering-and-context-primer.md`](docs/claude-md-layering-and-context-primer.md) — layered CLAUDE.md files and focused sessions
+- [`docs/context-budget-primer.md`](docs/context-budget-primer.md) — what loads when, `/context` habits, the hook test, skill loading
+- [`docs/claude-md-section-library.md`](docs/claude-md-section-library.md) — optional CLAUDE.md sections and which layer each belongs in
+- The full reading list, including the integration primers, is under [Reading order](#reading-order)
 
 ---
 
@@ -342,7 +349,8 @@ claude-code-starter-kit/
 ├── settings.json.template        # Sensible-default settings.json
 ├── hooks/
 │   ├── hooks.json                # Wires hooks into Claude Code events
-│   └── scripts/                  # 16 hook scripts (15 wired + pushover.sh helper)
+│   ├── scripts/                  # 13 wired hook scripts + pushover.sh helper
+│   └── _optional/                # 2 unwired hooks you can opt into
 ├── commands/                     # 15 slash commands
 ├── scripts/
 │   └── verify-hooks.sh           # Hook fire drill (run via /kit:verify)
@@ -361,9 +369,14 @@ claude-code-starter-kit/
     ├── project-conventions.md    # README/PLANNING/CONTEXT-SUMMARY templates + workflow
     ├── output-styles-primer.md   # Native CC feature: output styles
     ├── plan-mode-primer.md       # Native CC feature: plan mode
+    ├── claude-md-layering-and-context-primer.md  # Layered CLAUDE.md files, focused sessions
     ├── multi-session-coordination-primer.md  # Running parallel sessions as colleagues
     ├── 1password-environments-primer.md      # Secrets out of plaintext files
-    └── worktrees-primer.md       # Parallel work via worktrees
+    ├── scoped-imessage-access-primer.md      # Work texts only, via a Contacts group
+    ├── plaud-recordings-primer.md            # Voice-recorder transcripts
+    ├── calendar-handoff-primer.md            # Your to-dos onto your calendar
+    ├── worktrees-primer.md       # Parallel work via worktrees
+    └── automation-recipes/       # 17 follow-along recipes
 ```
 
 ---

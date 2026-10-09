@@ -117,7 +117,7 @@ Inside the file, you'll find placeholders in brackets like `[YOUR_NAME]` and sho
 | Who I am | "Marketing executive who understands code conceptually but doesn't write it" or "Senior backend engineer at a fintech startup" |
 | Partnership | "Thinking partner: push back and flag blind spots" |
 
-**Keep it short.** The template is under 50 lines on purpose. This file loads on every turn of every session in every project, so it should only describe *how you work*. Facts about a specific project go in that project's own `CLAUDE.md`; what's in flight this week goes in `~/.claude/active-context.md`. If you want a section the template doesn't have (file routing, naming conventions, a fuller "search before asking" policy), take it from [`docs/claude-md-section-library.md`](docs/claude-md-section-library.md), which also says which layer it belongs in. [`examples/layered-repo/`](examples/layered-repo/) shows a project set up the same way.
+**Keep it short.** The template is under 60 lines on purpose. This file loads on every turn of every session in every project, so it should only describe *how you work*. Facts about a specific project go in that project's own `CLAUDE.md`; what's in flight this week goes in `~/.claude/active-context.md`. If you want a section the template doesn't have (file routing, naming conventions, a fuller "search before asking" policy), take it from [`docs/claude-md-section-library.md`](docs/claude-md-section-library.md), which also says which layer it belongs in. [`examples/layered-repo/`](examples/layered-repo/) shows a project set up the same way.
 
 **Leave the `# Compact instructions` section in.** It tells Claude what to keep every time the conversation gets compacted. Edit the list if you track something it doesn't mention.
 
@@ -217,9 +217,10 @@ If one specific hook is annoying you (the writing-humanizer keeps nudging when y
 
 **Some hooks have built-in env-var disables:**
 - `IDLE_SUMMARY_DISABLE=1` — turns off idle-summary for the current session
-- `SCOPE_CREEP_ENABLED=0` — keeps scope-creep off (it's off by default anyway)
 
-Add these to your shell environment (`~/.zshrc` or similar) to make them permanent.
+Add it to your shell environment (`~/.zshrc` or similar) to make it permanent.
+
+**Want one of the optional hooks instead?** Two hooks ship unwired (`scope-creep-detector`, `stop-check`) in `hooks/_optional/`. Its README explains how to wire one in.
 
 ### Level 2 (medium): Disable the whole plugin
 
