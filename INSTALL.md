@@ -107,19 +107,25 @@ Once `~/.claude/CLAUDE.md` is in place (whether Claude copied it fresh in Step 3
 > - **In vim:** Run `vim ~/.claude/CLAUDE.md` in your terminal
 > - **Easiest of all:** Just ask Claude — *"Open my CLAUDE.md so I can edit it."* Claude can show you the contents and even make edits if you tell it what to change.
 
-Inside the file, you'll find placeholders in brackets like `[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]`. Replace them with your real context.
+Inside the file, you'll find placeholders in brackets like `[YOUR_NAME]` and short bracketed prompts (*"1–3 sentences: role, expertise, how you think"*, *"pick one"*). Replace them with your real context.
 
 **Examples of good fill-ins:**
 
 | Placeholder | Example |
 |---|---|
 | `[YOUR_NAME]` | Your first name |
-| `[YOUR_ROLE]` | "Marketing executive who understands code conceptually but doesn't write it" or "Senior backend engineer at a fintech startup" |
-| `[YOUR_PROJECTS]` | "Building a fractional CMO consulting practice + a course on AI literacy" |
+| Who I am | "Marketing executive who understands code conceptually but doesn't write it" or "Senior backend engineer at a fintech startup" |
+| Partnership | "Thinking partner: push back and flag blind spots" |
+
+**Keep it short.** The template is under 50 lines on purpose. This file loads on every turn of every session in every project, so it should only describe *how you work*. Facts about a specific project go in that project's own `CLAUDE.md`; what's in flight this week goes in `~/.claude/active-context.md`. If you want a section the template doesn't have (file routing, naming conventions, a fuller "search before asking" policy), take it from [`docs/claude-md-section-library.md`](docs/claude-md-section-library.md), which also says which layer it belongs in. [`examples/layered-repo/`](examples/layered-repo/) shows a project set up the same way.
+
+**Leave the `# Compact instructions` section in.** It tells Claude what to keep every time the conversation gets compacted. Edit the list if you track something it doesn't mention.
 
 **Spend 15-30 minutes on this.** It's the highest-leverage time you'll spend on your setup.
 
 You don't need to fill every section. Strip what doesn't apply. The template is a prompt, not a constraint.
+
+**Check that it loaded:** at Claude Code's prompt, run `/context` and look under **Memory files**. If `~/.claude/CLAUDE.md` isn't listed, Claude can't see it.
 
 ## Step 5: Walk through `/kit:getting-started`
 
@@ -205,7 +211,7 @@ None of this is one-way. Three levels of revert, light to heavy:
 
 ### Level 1 (lightest): Disable a single hook
 
-If one specific hook is annoying you (the writing-humanizer keeps nudging when you don't want it, the idle-summary fires too often), disable just that one.
+If one specific hook is annoying you (the writing-humanizer keeps nudging when you don't want it, the idle-summary fires too often), disable just that one. Not sure which are safe to turn off? The [context-budget primer](docs/context-budget-primer.md#3-hooks-only-for-rules-that-can-never-be-skipped) sorts the kit's hooks into safeguards (keep), notifications, and nudges (fine to cut).
 
 **Easiest way:** ask Claude — *"Disable the writing-humanizer hook from the starter kit."* Claude will edit the plugin's `hooks/hooks.json` to remove that entry. The other hooks keep working.
 
@@ -263,7 +269,8 @@ Once you've customized CLAUDE.md and verified everything works:
 1. Use Claude Code for a real task and see how the hooks feel
 2. After a session, run `/kit:reflect` and `/kit:session-end` to start building habits
 3. After a week, run `/kit:permissions-audit` to clean up any permissions that accumulated
-4. Edit ruthlessly — this kit is a starting point, not a religion
+4. Build the context habits: `/context` when you start in a new project and after adding an MCP server, compact at about half full, `/clear` between unrelated tasks. [`docs/context-budget-primer.md`](docs/context-budget-primer.md) explains why
+5. Edit ruthlessly — this kit is a starting point, not a religion
 
 Welcome aboard.
 

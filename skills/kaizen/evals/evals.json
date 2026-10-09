@@ -1,0 +1,39 @@
+{
+  "skill_name": "kaizen",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I need a function that logs errors to the console for my small CLI tool. Build it so it's ready for anything we might need later: files, remote logging, rate limiting.",
+      "should_trigger": true,
+      "expected_output": "A minimal console logger that meets the current need, with a short note on why the speculative features were left out and when to add them.",
+      "expectations": [
+        "Implements only console logging",
+        "Does not build transport interfaces, queues, or rate limiters",
+        "Explains the YAGNI reasoning briefly and names what would justify adding more (a real second use case or measured need)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Refactor this 400-line settings module. It has unclear names, duplicated validation, and a few dead functions.",
+      "should_trigger": true,
+      "expected_output": "An incremental plan or sequence of small refactors, one smell at a time, keeping behavior unchanged between steps.",
+      "expectations": [
+        "Proposes or performs changes in small steps rather than one rewrite",
+        "Suggests running tests or verifying after each step",
+        "Moves validation to a single boundary rather than duplicating it",
+        "Does not change behavior while refactoring"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Our order status is a plain string and we keep getting typos like 'shiped' in the database. How do we stop this?",
+      "should_trigger": true,
+      "expected_output": "An error-proofing design that makes invalid statuses impossible to represent, plus validation at the boundary.",
+      "expectations": [
+        "Recommends a constrained type (union, enum, or database constraint) instead of a free string",
+        "Recommends validating input once at the system boundary",
+        "Does not rely only on 'tell people to be careful'"
+      ]
+    }
+  ]
+}

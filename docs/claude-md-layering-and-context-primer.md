@@ -56,6 +56,8 @@ Every message you send resends the **whole conversation** to the model, so long 
 - Watch the **context indicator** (bottom-right in the desktop app). If most of your tokens go to skills or MCP tools, you've loaded more than you need.
 
 > **Fits with this kit:** the kit's context bar and low-context warnings tell you when to act. [`multi-session-coordination-primer.md`](multi-session-coordination-primer.md) covers running several sessions side by side.
+>
+> **Later update:** [`context-budget-primer.md`](context-budget-primer.md) adds `/context` habits and a more conservative compaction point (about half the window), plus a `# Compact instructions` section you can put in CLAUDE.md so every compaction keeps what matters.
 
 ---
 

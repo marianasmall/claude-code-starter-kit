@@ -1,0 +1,8 @@
+# CLAUDE.local.md — personal, this repo only
+
+> Rename this file to `CLAUDE.local.md`. It's in `.gitignore`, so it stays on your machine and never reaches teammates.
+> Use it for shortcuts that help you in this repo but would be noise for anyone else.
+
+- I preview on my phone: after `npm run dev`, also print the network URL so I can open it there.
+- I draft newsletter issues on Sunday nights. If I open an issue file, remind me which events in `site/content/events/` fall in the next 10 days.
+- My local checkout has an untracked `scratch/` folder. Ignore it.

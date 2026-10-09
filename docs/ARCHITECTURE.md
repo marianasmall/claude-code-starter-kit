@@ -88,9 +88,11 @@ The template isn't a fill-in-the-blank form. It's a *prompt* for thinking about 
 
 You're meant to:
 1. Read it once
-2. Strip 50% of it (the parts that don't apply)
-3. Add your own sections (the things only you need)
+2. Strip what doesn't apply
+3. Add your own sections (the things only you need), pulling from [`claude-md-section-library.md`](claude-md-section-library.md) if useful
 4. Edit it when something feels off
+
+It's short on purpose. Your user-level CLAUDE.md loads on every turn of every session, so it holds only how you work. Anything about a specific project lives in that project's own CLAUDE.md, folder notes, or path-scoped rules ([`examples/layered-repo/`](../examples/layered-repo/)), and anything in flight lives in `active-context.md`. If your user file grows past ~60 lines, something is in the wrong layer.
 
 A good CLAUDE.md after 6 months looks nothing like the template — it's been weathered into a shape that fits *your* work. That's the goal.
 

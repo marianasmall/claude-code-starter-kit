@@ -9,7 +9,7 @@ This file is Claude's tactical memory — auto-written observations, patterns, a
 | **Who writes it** | You (curated) | Claude (auto-observations) |
 | **Pace of change** | Slow, intentional | Fast, organic |
 | **Content** | Strategic instructions | Tactical observations |
-| **Length goal** | Under 500 lines | Index of topic files |
+| **Length goal** | ~60 lines (user file); ~200 max for any CLAUDE.md | Index of topic files |
 | **First load** | Every session | First 200 lines auto-loaded |
 
 ## Topic Files (read on demand)
