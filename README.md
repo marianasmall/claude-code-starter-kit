@@ -10,6 +10,20 @@ A starter setup for Claude Code, ready to install — so you don't have to spend
 
 ---
 
+## What's new (October 2026)
+
+Practices informed by the Anthropic × Tenex Claude Code workshop (Oct 2026). Full list in [CHANGELOG.md](CHANGELOG.md).
+
+- **A much shorter CLAUDE.md template** (47 lines, was 219). Your user file now holds only how you work. Everything else moved to a [section library](docs/claude-md-section-library.md) that says which layer each piece belongs in.
+- **`# Compact instructions`** in the template, so every compaction keeps your open loops, decisions and exact IDs.
+- **A [layered-repo example](examples/layered-repo/)**: root CLAUDE.md, an app-folder note, a path-scoped rule, and a personal `CLAUDE.local.md`.
+- **A [context-budget primer](docs/context-budget-primer.md)**: what loads when, `/context` habits, compacting at about half, when a hook is the right tool (and a review of the kit's own hooks), and how skills load.
+- **Thinner skills with evals.** The two longest skills moved their detail into `references/`, and every skill now ships `evals/evals.json`.
+- **A read-only `investigator` agent** that diagnoses and never fixes.
+- **`/kit:maintain` asks for a monthly `/context` readout** and logs it.
+
+---
+
 ## Philosophy
 
 This is a *partnership* setup, not a *power-user* setup. The hooks aren't trying to make Claude faster — they're trying to make Claude **correct** and **safe**. The CLAUDE.md template isn't trying to be exhaustive — it's trying to give Claude enough context to be a thoughtful partner.
@@ -86,6 +100,7 @@ The repo's other files are alphabetical, which doesn't help you know where to st
 4. **[examples/sample-project/](examples/sample-project/)** — a worked example showing four of those files fully filled in for an imaginary project (handoff.md is generated at runtime). Read this if conventions feel abstract.
 5. **The native CC primers** (read on demand when relevant):
    - [`docs/claude-md-layering-and-context-primer.md`](docs/claude-md-layering-and-context-primer.md) — layered CLAUDE.md files, the step-count test, skills as folders, `/goal`, subagents vs hooks, keeping sessions focused (from JJ at Tenex's Oct 2026 workshop; start here if you read only one)
+   - [`docs/context-budget-primer.md`](docs/context-budget-primer.md) — what loads when and what it costs, `/context` and compaction habits, the hook test, skill loading levels and evals, the read-only investigator. Pairs with [`examples/layered-repo/`](examples/layered-repo/) and the [section library](docs/claude-md-section-library.md)
    - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — Default / Proactive / Explanatory / Learning
    - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
    - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
@@ -126,6 +141,8 @@ Reusable frameworks Claude loads when relevant:
 - **kaizen** — Continuous improvement framework
 - **bring-up-to-speed** — Brief anyone on a project whose history is scattered across email, meetings, and docs: source-weighted claims, honest blind spots, bottom line up front
 
+Each skill is a folder: a short `SKILL.md`, detail in `references/` where needed, and test prompts in `evals/evals.json` so you can check it still behaves after you edit it.
+
 ### 15 Slash Commands
 
 Type at Claude Code's prompt. (Installed plugin commands are namespaced under the plugin name, so they all start with `/kit:`.)
@@ -148,10 +165,11 @@ Type at Claude Code's prompt. (Installed plugin commands are namespaced under th
 | `/kit:consistency-check [path]` | Pre-ship audit for doc bundles — catches count drift, broken anchors, ambiguous pronouns, audience assumptions, jargon |
 | `/kit:handoff` | Refresh `<project>/handoff.md` without the full session-end ritual (mid-session context switch) |
 
-### 5 Agents
+### 6 Agents
 
 Specialists Claude can spawn for complex tasks:
 
+- **investigator** — Read-only diagnosis: finds the root cause with file-and-line evidence and never changes anything
 - **deep-research** — Multi-source research with confidence calibration
 - **strategic-reviewer** — Devil's advocate for plans, proposals, decisions
 - **task-decomposition-expert** — Break complex goals into ordered steps
@@ -169,6 +187,8 @@ Background automation. The most-relatable:
 - **retry-nudge** — Coaches Claude to retry validation errors before escalating
 
 …plus 10 more wired events covering session logging, scope-creep detection, writing-humanizer passes, project-state injection, and more — 15 wired hooks total, plus a shared notification helper (`pushover.sh`). Full list in [`hooks/scripts/`](hooks/scripts/).
+
+**A hook is the right tool only when skipping the rule is never OK.** Most setups need three or four of those. The kit's four are `safety-net`, `backup-before-edit`, `self-guard` and `session-end`; the rest are notifications or advice delivered by hook, and you can turn them off without losing a safeguard. The full review is in the [context-budget primer](docs/context-budget-primer.md#3-hooks-only-for-rules-that-can-never-be-skipped).
 
 ---
 
@@ -208,8 +228,8 @@ Everything here is editable:
 
 - **Hooks too noisy?** Edit `hooks/hooks.json` and remove what you don't want.
 - **Command doesn't fit?** Delete the file from `commands/` or rewrite it.
-- **CLAUDE.md template wrong shape?** Strip and rebuild. Use it as a prompt, not a constraint.
-- **Claude keeps asking you to go find files?** The template's *Search and solve before asking* section (added Oct 2026) lets Claude search every connected source, fix your own records and rename badly named files without asking. Sends, spending and deletes still need your OK. Keep it; trim the lists to your own lines.
+- **CLAUDE.md template wrong shape?** Strip and rebuild. Use it as a prompt, not a constraint. Need a section it doesn't have? Take it from the [section library](docs/claude-md-section-library.md), which also tells you whether it belongs in your user file at all.
+- **Claude keeps asking you to go find files?** The template's *Search and solve before asking* section lets Claude search every connected source, fix your own records and rename badly named files without asking. Sends, spending and deletes still need your OK. The template carries the short form; the full version is in the section library.
 
 The kit is a starting point, not a religion. After a week of use, you'll know what to tune.
 
@@ -227,7 +247,9 @@ These aren't part of the kit — they ship with Claude Code itself — but they'
 
 **4. `Esc` to interrupt.** When Claude is heading down the wrong path, hit `Esc` to interrupt the current tool call. You can then redirect with a corrective prompt instead of waiting for a multi-step task to finish before pivoting.
 
-**5. `/recap` to re-orient.** Returning to a session you started yesterday? `/recap` summarizes what's happened so far, what was decided, and where you left off. Cheaper than re-reading the whole transcript.
+**5. `/context` to see what's loaded.** Run it when you start in a new project and right after adding an MCP server. The **Memory files** list shows which CLAUDE.md files Claude can actually see; the other rows show what tools, skills and servers cost before you've typed anything. Compact at about half full, and `/clear` between unrelated tasks.
+
+**6. `/recap` to re-orient.** Returning to a session you started yesterday? `/recap` summarizes what's happened so far, what was decided, and where you left off. Cheaper than re-reading the whole transcript.
 
 Other power features worth exploring once these feel natural: `/color blue` (persistent prompt-bar accent per session — pairs with named tabs for telling parallel sessions apart; needs v2.1.205+), `/usage` (context, cost, rate limits at a glance), `/effort` (raise reasoning depth for hard tasks — Pro/Max only), `Ctrl+R` (search past prompts across sessions), `--worktree` (parallel work on the same repo with no merge headaches).
 
@@ -314,7 +336,8 @@ For reference (most users won't need to navigate this directly):
 ```
 claude-code-starter-kit/
 ├── .claude-plugin/plugin.json    # Plugin manifest
-├── CLAUDE.md.template            # Your customization starting point
+├── CHANGELOG.md                  # What changed, by release
+├── CLAUDE.md.template            # Your user-level CLAUDE.md (working style only)
 ├── MEMORY.md.template            # Memory architecture scaffold
 ├── settings.json.template        # Sensible-default settings.json
 ├── hooks/
@@ -323,15 +346,18 @@ claude-code-starter-kit/
 ├── commands/                     # 15 slash commands
 ├── scripts/
 │   └── verify-hooks.sh           # Hook fire drill (run via /kit:verify)
-├── agents/                       # 5 specialized agents
-├── skills/                       # 4 generally-useful skills
+├── agents/                       # 6 specialized agents
+├── skills/                       # 5 skills, each with evals/ (and references/ where needed)
 ├── examples/
 │   ├── statusline.sh             # Custom status line with context bar
 │   ├── debt-sync.sh.opt-in       # Optional Notion integration
 │   ├── pushover-setup.md         # Phone notification setup
+│   ├── layered-repo/             # Worked example: CLAUDE.md layers, a path-scoped rule, CLAUDE.local.md
 │   └── sample-project/           # Worked example: filled-in project files
 └── docs/
     ├── ARCHITECTURE.md           # The philosophy
+    ├── context-budget-primer.md  # What loads when, /context habits, hooks test, skill loading
+    ├── claude-md-section-library.md  # Optional CLAUDE.md sections + which layer each belongs in
     ├── project-conventions.md    # README/PLANNING/CONTEXT-SUMMARY templates + workflow
     ├── output-styles-primer.md   # Native CC feature: output styles
     ├── plan-mode-primer.md       # Native CC feature: plan mode

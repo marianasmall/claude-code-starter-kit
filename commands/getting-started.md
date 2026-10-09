@@ -32,7 +32,9 @@ Tell the user (the human reading this):
 
 Located at `~/.claude/CLAUDE.md`. It's loaded into every Claude Code session. The starter kit shipped with a template you can use as your starting point.
 
-**Action item:** Offer to copy the template to `~/.claude/CLAUDE.md` for the user (you have the plugin path; they don't). Then tell them to open it and replace the `[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]` placeholders. Tell them to spend 15 minutes on this — it's the highest-leverage time they'll spend on their setup.
+**Action item:** Offer to copy the template to `~/.claude/CLAUDE.md` for the user (you have the plugin path; they don't). Then tell them to open it and fill in `[YOUR_NAME]` and the bracketed prompts (who they are, tone, partnership style). Tell them to spend 15 minutes on this — it's the highest-leverage time they'll spend on their setup.
+
+Explain that the template is short on purpose: it loads on every turn of every session, so it holds only how they work. Project facts go in each project's own CLAUDE.md (see `examples/layered-repo/` in the kit), and extra sections are in `docs/claude-md-section-library.md`. Once it's in place, ask them to run `/context` and confirm `~/.claude/CLAUDE.md` appears under **Memory files**.
 
 ### 2. Hooks run automatically
 
@@ -49,6 +51,8 @@ Hooks are scripts that run on Claude Code events. The kit installs:
 - (...and a few more — see `hooks/scripts/`)
 
 You don't run these. They run themselves. Read `hooks/scripts/*.sh` if you want to understand what's happening.
+
+Only four are true safeguards: safety-net, self-guard, backup-before-edit and session-end. The rest are notifications or nudges, and turning one off loses no protection. `docs/context-budget-primer.md` has the full sort.
 
 ### 3. Slash commands are your shortcuts
 
@@ -71,6 +75,7 @@ Type these in Claude Code. (Installed plugin commands are namespaced, so they al
 
 When a task is big enough, Claude can spawn an agent to handle it:
 
+- **investigator** — Read-only diagnosis with file-and-line evidence; never changes anything
 - **deep-research** — Multi-source research with confidence calibration
 - **strategic-reviewer** — Devil's advocate review of plans/proposals
 - **skill-diagnostics** — Debug skill triggering issues
@@ -87,13 +92,16 @@ Generic frameworks Claude loads on demand:
 - **learning-capture** — Pin valuable insights mid-conversation
 - **idea-to-scope** — Transform vague ideas into structured scope docs
 - **kaizen** — Continuous improvement framework
+- **bring-up-to-speed** — Brief someone on a project whose history is scattered across email, meetings and docs
+
+Each skill is a folder: a short `SKILL.md`, detail in `references/`, and test prompts in `evals/evals.json`. If you catch yourself explaining the same thing to Claude twice, `/kit:extract-skill` turns it into a skill.
 
 ## Setup checklist
 
 Walk the user through this. **For each item, offer to do it for them** — most users don't want to type `cp` commands. The plugin variables (`$CLAUDE_PLUGIN_ROOT`) only resolve when Claude runs commands, not when the user runs them in a regular terminal.
 
 - [ ] Copy CLAUDE.md template to `~/.claude/CLAUDE.md` (offer to do it for them, then they edit)
-- [ ] Customize `~/.claude/CLAUDE.md` placeholders (`[YOUR_NAME]`, `[YOUR_ROLE]`, `[YOUR_PROJECTS]`)
+- [ ] Customize `~/.claude/CLAUDE.md` (`[YOUR_NAME]` and the bracketed prompts), then run `/context` to confirm it loaded
 - [ ] Copy `MEMORY.md.template` to `~/.claude/MEMORY.md` (used by `/kit:reflect` for tactical pattern-tracking)
 - [ ] Optionally install the statusline (offer to copy `examples/statusline.sh` to `~/.claude/statusline.sh` and chmod it executable)
 - [ ] Optionally add `statusLine` block to `~/.claude/settings.json`
