@@ -6,10 +6,9 @@ useDefault = true
 [allowlist]
 description = "Local-only paths from .gitignore — never committed to repo"
 # Patterns match both absolute (--no-git) and relative (git-history) paths. No leading anchor.
+# No .env / *.local entries: path allowlists apply to every scan, so a
+# force-added .env would pass unflagged. .gitignore keeps them out instead.
 paths = [
-    '''/\.env$''',
-    '''/\.env\.''',
-    '''\.local$''',
     '''/state/''',
     '''/_backups/''',
     # Root session-state file only (gitignored, never tracked). The earlier
