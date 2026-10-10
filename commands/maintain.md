@@ -102,7 +102,16 @@ For every hook configured in `~/.claude/settings.json` and any plugin `hooks.jso
 - Test it with a mock JSON input to verify it produces output without errors
 
 ### 3c. Plugin integrity
-- Run `claude --debug` briefly and watch for plugin load errors
+Validate every installed plugin with Claude Code's own checker. This matters because a plugin whose hooks can't load still shows as **enabled with no error** in `/plugin` and `claude plugin list`. That's how the kit's 0.2.0 hooks went unnoticed.
+
+```
+claude plugin list --json | jq -r '.[] | select(.enabled) | .installPath // empty' | while read -r p; do
+  claude plugin validate --strict "$p" >/dev/null 2>&1 && echo "ok    $p" || echo "FAIL  $p"
+done
+```
+
+- For each FAIL, re-run `claude plugin validate "<path>"` without `--strict` and show the errors in plain language. Errors mean part of that plugin isn't loading; warnings alone are degradations. The usual fix is `/plugin update <name>`. If it still fails after updating, the plugin itself is broken: tell the user and offer to draft a bug report to its author.
+- Run `/kit:verify` (the hook fire drill) and report its PASS/FAIL count.
 - Check that plugin paths in settings.json point to existing directories
 
 ---
@@ -187,6 +196,7 @@ MAINTENANCE SUMMARY — [date]
 🚨 Secrets exposure:   Clean / N findings (ROTATION REQUIRED)
 Packages updated:    X of Y outdated packages upgraded
 Hooks:               All OK / N issues found
+Plugins:             N validated, all load / N failing (named)
 MCP servers:         All responding / N issues
 Context readout:     Logged (biggest controllable: X) / Already done this month
 Repos:               X with uncommitted work / Y stale (60d+)

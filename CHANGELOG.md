@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.2 — 2026-10-10
+
+**Automatic checks, so a broken kit can't ship again.** Both 0.2.0 bugs passed every check we had, because we only ever tested from the repo folder. Now:
+
+- `.github/workflows/check.yml` runs on every PR, every push to main, and every Monday, on Linux and macOS with the latest Claude Code. It runs Claude Code's strict plugin checker, the hook fire drill, and the new install test. The weekly run catches a Claude Code update tightening the rules even when nothing in the kit changed.
+- New `scripts/install-test.sh` installs the kit into a throwaway Claude config the way a user does. It then runs `/kit:verify`'s own lookup, read straight from `commands/verify.md`, and the fire drill from the installed copy. Run against 0.2.0, it fails at the lookup, and the plugin checker rejects that version's `hooks.json`.
+- New `RELEASING.md`: what runs automatically, plus the by-hand steps (version bump, doc counts, a Windows/WSL install).
+
+- **`/kit:maintain` now validates every installed plugin** with `claude plugin validate --strict` and runs the `/kit:verify` drill. A plugin whose hooks can't load still shows as enabled with no error in `/plugin`, so this is the only way your regular sweep would notice. The summary gets a Plugins row.
+
+To get the `/kit:maintain` change, run `/plugin update kit`. Nothing else to do.
+
 ## 0.2.1 — 2026-10-09
 
 **Hooks fix (please read if you installed earlier).** `hooks/hooks.json` listed its hook events at the top level of the file. Claude Code's plugin format expects them inside a `"hooks"` object, so **earlier installs may not have loaded the kit's hooks at all, including the safety and backup hooks. Reinstall to get them:** `/plugin update kit` (or `/plugin uninstall kit`, then install again), then run `/kit:verify` to confirm they fire.
