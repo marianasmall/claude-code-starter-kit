@@ -4,6 +4,8 @@
 *.local
 .env
 .env.local
+.env.*
+!.env.example
 handoff.md
 
 # OS
