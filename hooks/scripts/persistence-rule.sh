@@ -44,21 +44,16 @@ COUNT=0
 if [ -f "$STATE_FILE" ]; then
     COUNT=$(cat "$STATE_FILE" 2>/dev/null || echo 0)
 fi
+# Digits only before arithmetic: bash $(( )) evaluates expressions, so a
+# tampered state file must never reach it.
+case "$COUNT" in ''|*[!0-9]*) COUNT=0 ;; esac
 COUNT=$((COUNT + 1))
 echo "$COUNT" > "$STATE_FILE"
 
 # Threshold met — nudge to persist
 if [ "$COUNT" -ge 2 ]; then
     MSG="PERSISTENCE-RULE: ${COUNT} consecutive research actions without a Write/Edit. Per the 2-action write rule, persist findings to a file (or notes) before continuing further research. Findings evaporate during long sessions or context compaction. Reset by writing what you've found so far before the next search/fetch."
-    python3 <<PYEOF
-import json
-print(json.dumps({
-    "hookSpecificOutput": {
-        "hookEventName": "PostToolUse",
-        "additionalContext": """$MSG"""
-    }
-}))
-PYEOF
+    MSG="$MSG" python3 -c 'import os, json; print(json.dumps({"hookSpecificOutput": {"hookEventName": "PostToolUse", "additionalContext": os.environ["MSG"]}}))'
 fi
 
 exit 0

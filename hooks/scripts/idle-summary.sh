@@ -43,6 +43,8 @@ GAP=0
 
 if [ -f "$TS_FILE" ]; then
     LAST=$(cat "$TS_FILE" 2>/dev/null)
+    # Digits only before arithmetic: bash $(( )) evaluates expressions.
+    case "$LAST" in *[!0-9]*) LAST="" ;; esac
     if [ -n "$LAST" ]; then
         GAP=$((NOW - LAST))
     fi
@@ -90,9 +92,8 @@ SUMMARY="${SUMMARY}
 
 When responding to the user's next message, briefly recap where we left off (1-2 sentences) before answering — they may have lost the thread during the pause."
 
-# Emit as additionalContext (visible to Claude, not to the user directly)
-python3 <<PYEOF
-import json
-print(json.dumps({"additionalContext": """$SUMMARY"""}))
-PYEOF
+# Emit as additionalContext (visible to Claude, not to the user directly).
+# Text is passed via the environment, never spliced into Python source, so
+# file contents containing quotes can't break out and run as code.
+SUMMARY="$SUMMARY" python3 -c 'import os, json; print(json.dumps({"additionalContext": os.environ["SUMMARY"]}))'
 exit 0

@@ -24,7 +24,7 @@ It builds on [`claude-md-layering-and-context-primer.md`](claude-md-layering-and
 | Subagent's own work | In its own separate context | You get back a summary |
 | MCP servers | Tool names + server instructions at start; full schemas when used | Grows with every server connected |
 
-**Size targets:** keep your user file to ~60 lines of working style (the kit's template is under 50), and any single CLAUDE.md under ~200 lines. Longer files cost more and get followed less closely.
+**Size targets:** keep your user file to ~60 lines of working style (the kit's template is 53), and any single CLAUDE.md under ~200 lines. Longer files cost more and get followed less closely.
 
 **The user file is about how you work.** If a line describes a project, a repo, a folder, or a kind of file, it's in the wrong layer. [`claude-md-section-library.md`](claude-md-section-library.md) has a routing table, and [`examples/layered-repo/`](../examples/layered-repo/) shows every layer filled in.
 
@@ -61,15 +61,15 @@ CLAUDE.md, skills and subagents are advice. Claude follows them most of the time
 
 ### The kit's own hooks against that test
 
-The kit wires 15 hook scripts. Read them in three groups:
+The kit wires 13 hooks. Read them in three groups:
 
 | Group | Hooks | Verdict |
 |---|---|---|
 | **Enforcement** (skipping is never OK) | `safety-net` (blocks destructive shell commands), `backup-before-edit` (copy before every edit), `self-guard` (blocks destructive scripts with no dry-run gate), `session-end` (transcript breadcrumb, runs after Claude can't) | **Keep.** These are the kit's three-or-four. |
 | **Signals** (sounds and notifications; add nothing to context) | `notify-done`, `permission-ding`, `pre-compact` | Keep if you like them. They aren't rules, so the test doesn't apply, and they cost nothing in context. |
-| **Nudges** (inject advice into context) | `user-prompt-context`, `context-monitor`, `idle-summary`, `retry-nudge`, `persistence-rule`, `writing-humanizer`, `scope-creep-detector` (off by default), `stop-check` (a no-op) | **Review.** These are judgment calls delivered by hook. Each could be a line in CLAUDE.md or a skill description instead. `user-prompt-context` re-injects `active-context.md` on every prompt, so keep that file short. |
+| **Nudges** (inject advice into context) | `user-prompt-context`, `context-monitor`, `idle-summary`, `retry-nudge`, `persistence-rule`, `writing-humanizer` | **Review.** These are judgment calls delivered by hook. Each could be a line in CLAUDE.md or a skill description instead. `user-prompt-context` re-injects `active-context.md` on every prompt, so keep that file short. |
 
-None of these are removed in this release. If you want a leaner setup, the nudges are the ones to turn off first (see [INSTALL.md](../INSTALL.md#level-1-lightest-disable-a-single-hook)).
+Two hooks that did nothing by default (`scope-creep-detector`, which needed an environment variable to switch on, and `stop-check`, which only returned "ok") were taken out of the wiring in 0.2.1. Their scripts are in `hooks/_optional/` if you want them. If you want a leaner setup still, the nudges are the ones to turn off first (see [INSTALL.md](../INSTALL.md#level-1-lightest-disable-a-single-hook)).
 
 ---
 

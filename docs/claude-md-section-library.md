@@ -61,7 +61,7 @@ See [`examples/layered-repo/`](../examples/layered-repo/) for all of these worki
 
 ## Search and solve before asking (full version)
 
-**Where it belongs:** user file. The template carries a three-line summary; swap in this full version if you want the detail.
+**Where it belongs:** user file. The template carries a compact version of every rule below; this longer version adds the reasoning ("Why" and "How"). Swap it in if you want Claude to have that context.
 
 If you can find the answer yourself, find it. Don't ask me to fetch something a quick search would turn up.
 
@@ -93,7 +93,7 @@ If you can find the answer yourself, find it. Don't ask me to fetch something a 
 
 ## Verification discipline (full version)
 
-**Where it belongs:** user file. The template carries the short form.
+**Where it belongs:** user file. The template carries a compact version of all five.
 
 - **Verify before propagating a claim to 3+ files.** Memory and recollections degrade; they reflect what was true when written. Verify against the primary source first and cite it inline.
 - **Verify cross-surface "saved/pushed" claims.** When a tool, hook, or MCP server reports success, check the artifact actually arrived.

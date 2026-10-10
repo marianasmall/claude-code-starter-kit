@@ -58,7 +58,7 @@ Hooks that block (`safety-net`, `self-guard`) only block well-defined patterns. 
 
 ### 3. Information, not enforcement
 
-Hooks like `retry-nudge`, `persistence-rule`, `writing-humanizer`, `scope-creep-detector` emit *advisory* messages via `additionalContext`. They never prevent Claude from proceeding. Claude is trusted to read the advice and act on it.
+Hooks like `retry-nudge`, `persistence-rule`, `writing-humanizer` emit *advisory* messages via `additionalContext`. They never prevent Claude from proceeding. Claude is trusted to read the advice and act on it.
 
 ### 4. Degrade gracefully
 

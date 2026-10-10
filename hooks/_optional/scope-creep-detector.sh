@@ -53,6 +53,9 @@ COUNT=0
 if [ -f "$COUNT_FILE" ]; then
     COUNT=$(cat "$COUNT_FILE" 2>/dev/null || echo 0)
 fi
+# Digits only before arithmetic: bash $(( )) evaluates expressions.
+case "$COUNT" in ''|*[!0-9]*) COUNT=0 ;; esac
+case "$THRESHOLD" in ''|*[!0-9]*) THRESHOLD=10 ;; esac
 COUNT=$((COUNT + 1))
 echo "$COUNT" > "$COUNT_FILE"
 
@@ -64,10 +67,13 @@ fi
 
 # Compute keyword overlap between original and current prompt
 ORIGINAL=$(cat "$ORIG_FILE" 2>/dev/null)
-OVERLAP=$(python3 <<PYEOF 2>/dev/null
-import re
-orig = """$ORIGINAL""".lower()
-curr = """$PROMPT""".lower()
+# Prompt text reaches Python only through the environment, and the heredoc
+# delimiter is quoted so bash never expands it. A prompt containing """ or
+# any other quoting can't break out and run as code.
+OVERLAP=$(ORIG="$ORIGINAL" CURR="$PROMPT" python3 - <<'PYEOF' 2>/dev/null
+import re, os
+orig = os.environ["ORIG"].lower()
+curr = os.environ["CURR"].lower()
 
 # Tokenize: alphanumeric words, length > 3 (skip stopwords roughly)
 def tokens(s):
@@ -87,7 +93,13 @@ PYEOF
 )
 
 # Drift threshold: <0.05 overlap = significant scope creep
-DRIFTED=$(python3 -c "print(1 if float('$OVERLAP') < 0.05 else 0)" 2>/dev/null)
+DRIFTED=$(OVERLAP="$OVERLAP" python3 -c '
+import os
+try:
+    print(1 if float(os.environ["OVERLAP"]) < 0.05 else 0)
+except ValueError:
+    print(0)
+' 2>/dev/null)
 
 if [ "$DRIFTED" = "1" ]; then
     # Reset counter so we don't nag every prompt afterwards (waits for another threshold cycle)
@@ -96,10 +108,7 @@ if [ "$DRIFTED" = "1" ]; then
     SHORT_ORIG=$(echo "$ORIGINAL" | head -c 120)
     MSG="SCOPE-CREEP CHECK: After ${COUNT} prompts, the conversation has drifted significantly from the original ask: '${SHORT_ORIG}...'. Worth pausing to check: are we still working the original problem? Or did we wander into a tangent that should be a separate session/note?"
 
-    python3 <<PYEOF
-import json
-print(json.dumps({"additionalContext": """$MSG"""}))
-PYEOF
+    MSG="$MSG" python3 -c 'import os, json; print(json.dumps({"additionalContext": os.environ["MSG"]}))'
     exit 0
 fi
 

@@ -162,10 +162,12 @@ STATE_DIR="$HOME/.claude/hooks/state"
 STATE_FILE="$STATE_DIR/retry-${SESSION_ID}.json"
 mkdir -p "$STATE_DIR" 2>/dev/null
 
-COUNT=$(python3 - <<PYEOF 2>/dev/null
+# Quoted delimiter: bash does not expand inside the heredoc. Values arrive
+# via the environment, so a crafted tool name can't break out of the source.
+COUNT=$(STATE_FILE="$STATE_FILE" STATE_KEY="${TOOL_NAME}:${ERROR_SIG}" python3 - <<'PYEOF' 2>/dev/null
 import json, os
-path = "$STATE_FILE"
-key = "${TOOL_NAME}:${ERROR_SIG}"
+path = os.environ["STATE_FILE"]
+key = os.environ["STATE_KEY"]
 state = {}
 if os.path.exists(path):
     try:
@@ -180,9 +182,7 @@ print(state[key])
 PYEOF
 )
 
-if [ -z "$COUNT" ]; then
-    COUNT=1
-fi
+case "$COUNT" in ''|*[!0-9]*) COUNT=1 ;; esac
 
 # Emit nudge via hookSpecificOutput additionalContext (visible to Claude)
 if [ "$COUNT" -le 2 ]; then
@@ -193,13 +193,5 @@ else
     exit 0
 fi
 
-python3 <<PYEOF
-import json
-print(json.dumps({
-    "hookSpecificOutput": {
-        "hookEventName": "PostToolUse",
-        "additionalContext": """$MSG"""
-    }
-}))
-PYEOF
+MSG="$MSG" python3 -c 'import os, json; print(json.dumps({"hookSpecificOutput": {"hookEventName": "PostToolUse", "additionalContext": os.environ["MSG"]}}))'
 exit 0

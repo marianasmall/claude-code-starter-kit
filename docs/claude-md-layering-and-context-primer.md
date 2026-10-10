@@ -68,7 +68,7 @@ Tenex engineers report spending roughly **60-70% of their time planning and revi
 A good plan decides up front what's in scope, what's **out** of scope, and **how you'll know it's done**. Then:
 
 - **Plan mode** lets Claude propose before it touches anything (see [`plan-mode-primer.md`](plan-mode-primer.md)).
-- **`/goal`** (built into Claude Code) sets a goal with a "done when..." condition. Claude keeps working until the condition is met, then stops and tells you. Pair it with your written plan: *"/goal Build what's in docs/plan.md. Done when every acceptance criterion is met and the tests pass."*
+- **`/goal`** (built into Claude Code; see the [goal docs](https://code.claude.com/docs/en/goal)) sets a goal with a "done when..." condition. Claude keeps working across turns until the condition is met, then stops and tells you. `/goal clear` cancels it early. Its cousin **`/loop`** re-runs a prompt on an interval instead; use it for work that recurs (a check every 15 minutes), and `/goal` for work that finishes. Pair it with your written plan: *"/goal Build what's in docs/plan.md. Done when every acceptance criterion is met and the tests pass."*
 
 The "done when" line is the whole game. Vague goals stop too early or wander.
 
