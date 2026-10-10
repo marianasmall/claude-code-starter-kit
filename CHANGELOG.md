@@ -1,7 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.2.3 — 2026-10-10
 
+- **The safety hooks now fail closed.** `safety-net` and `self-guard` carry `"onFailure": "block"`. If either can't start, times out or crashes, Claude Code blocks the action instead of letting it through. Needs Claude Code 2.1.295 or later. On older versions the setting has no effect and the hooks behave as before.
+- **Auto mode explained.** Since Claude Code 2.1.285, auto mode is the default permission mode. The README's Plan mode tip now says what that means, how to switch modes, and that the kit's safety hooks still run underneath.
+- **`/kit:maintain` gets a monthly instruction tune-up** (new step 2f): it asks you to run Claude Code's built-in `/doctor prompt-audit`, then sorts the findings into quick fixes and judgment calls.
 - New [`docs/choosing-plugins-and-connectors-primer.md`](docs/choosing-plugins-and-connectors-primer.md): pick plugins by goal, red flags to check before installing, turning off claude.ai plugin sync (`syncClaudeAiPlugins`), connector and settings hygiene, and a starter set. Linked from the README's plugin section, which now notes that the productivity plugin creates its own task files.
 
 ## 0.2.2 — 2026-10-10
