@@ -248,6 +248,8 @@ These aren't part of the kit — they ship with Claude Code itself — but they'
 
 **2. Plan mode (Shift+Tab cycles modes).** Hit `Shift+Tab` to cycle between auto-accept, plan-first, and manual-confirm modes. Plan mode forces Claude to outline its approach before touching anything — invaluable for risky changes (refactors, deletions, multi-file edits) where you want to review the plan before approving execution.
 
+**Auto mode is the default now.** Since Claude Code 2.1.285, a session with no permission mode set starts in **auto mode**: Claude runs routine actions itself and checks with you before risky ones, instead of asking about every step. The status line under the prompt shows the current mode, and `Shift+Tab` switches it. To choose your own default, set `permissions.defaultMode` in `~/.claude/settings.json`. The kit's safety hooks run in every mode, so commands like `rm -rf` on important paths or a force-push to `main` are still blocked. Since 0.2.3 they also block the action if the safety check itself fails to run.
+
 **3. `@<filename>` to reference files.** Inside a prompt, type `@` and start typing a filename — Claude Code autocompletes from your project. Beats copy-pasting code into the prompt, and Claude reads the file directly so you don't burn context on quoted blocks.
 
 **4. `Esc` to interrupt.** When Claude is heading down the wrong path, hit `Esc` to interrupt the current tool call. You can then redirect with a corrective prompt instead of waiting for a multi-step task to finish before pivoting.

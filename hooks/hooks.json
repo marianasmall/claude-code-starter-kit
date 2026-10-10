@@ -9,6 +9,7 @@
             "type": "command",
             "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/safety-net.sh\"",
             "timeout": 5,
+            "onFailure": "block",
             "statusMessage": "Safety check..."
           }
         ]
@@ -20,6 +21,7 @@
             "type": "command",
             "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/self-guard.sh\"",
             "timeout": 5,
+            "onFailure": "block",
             "statusMessage": "Self-guard check..."
           },
           {

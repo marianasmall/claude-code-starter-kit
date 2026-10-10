@@ -86,6 +86,12 @@ Check what's new in Claude Code since the last maintenance run:
 4. Compare with the previous entry. Flag any category the user controls (memory files, custom agents, skills, MCP tools) that grew by more than 20%, and any CLAUDE.md over ~200 lines (user file over ~60).
 5. Suggest one concrete trim for the biggest controllable category, e.g. move a project-specific section out of the user CLAUDE.md, shorten a long agent description, toggle off an unused MCP server. See `docs/context-budget-primer.md` in the kit.
 
+### 2f. Instruction tune-up (first run of each month)
+Claude Code has a built-in checker for instructions written for older models: `/doctor prompt-audit` (Claude Code 2.1.282 or later). It reviews CLAUDE.md, skills, agents and commands. Like `/context`, only the user can type it:
+1. Ask the user: *"Monthly tune-up: please run `/doctor prompt-audit` and paste the result here."*
+2. Sort what it flags into **quick fixes** (outdated phrasing, instructions the model now follows by default) and **judgment calls** (anything that changes behavior). Offer to apply the quick fixes. Ask before touching the judgment calls.
+3. If the command doesn't exist, say the user's Claude Code version is older than 2.1.282 and skip this step.
+
 ---
 
 ## Section 3: Hook & Script Health
