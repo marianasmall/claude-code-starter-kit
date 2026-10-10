@@ -344,7 +344,9 @@ For reference (most users won't need to navigate this directly):
 ```
 claude-code-starter-kit/
 ├── .claude-plugin/plugin.json    # Plugin manifest
+├── .github/workflows/check.yml   # Automatic checks on every PR, push to main, and weekly
 ├── CHANGELOG.md                  # What changed, by release
+├── RELEASING.md                  # Checklist before shipping a change
 ├── CLAUDE.md.template            # Your user-level CLAUDE.md (working style only)
 ├── MEMORY.md.template            # Memory architecture scaffold
 ├── settings.json.template        # Sensible-default settings.json
@@ -354,7 +356,8 @@ claude-code-starter-kit/
 │   └── _optional/                # 2 unwired hooks you can opt into
 ├── commands/                     # 15 slash commands
 ├── scripts/
-│   └── verify-hooks.sh           # Hook fire drill (run via /kit:verify)
+│   ├── verify-hooks.sh           # Hook fire drill (run via /kit:verify)
+│   └── install-test.sh           # Installs the kit like a user, then runs the drill from the installed copy
 ├── agents/                       # 6 specialized agents
 ├── skills/                       # 5 skills, each with evals/ (and references/ where needed)
 ├── examples/
