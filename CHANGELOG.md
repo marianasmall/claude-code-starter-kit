@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- New [`docs/choosing-plugins-and-connectors-primer.md`](docs/choosing-plugins-and-connectors-primer.md): pick plugins by goal, red flags to check before installing, turning off claude.ai plugin sync (`syncClaudeAiPlugins`), connector and settings hygiene, and a starter set. Linked from the README's plugin section, which now notes that the productivity plugin creates its own task files.
+
 ## 0.2.2 — 2026-10-10
 
 **Automatic checks, so a broken kit can't ship again.** Both 0.2.0 bugs passed every check we had, because we only ever tested from the repo folder. Now:

@@ -112,6 +112,7 @@ The repo's other files are alphabetical, which doesn't help you know where to st
    - [`docs/plaud-recordings-primer.md`](docs/plaud-recordings-primer.md) — let Claude read your Plaud voice-recorder transcripts: the two-minute claude.ai connector, plus an archive-to-Drive build spec and its traps
    - [`docs/calendar-handoff-primer.md`](docs/calendar-handoff-primer.md) — have Claude put the things only you can do on your calendar, with the links and a paste-back block, instead of leaving them in chat
    - [`docs/multiple-seats-terminal-profiles-primer.md`](docs/multiple-seats-terminal-profiles-primer.md) — personal + work Claude accounts on one Mac: a coloured Terminal profile per seat, `CLAUDE_CONFIG_DIR`, and the traps (quote marks, sorting, the trust prompt)
+   - [`docs/choosing-plugins-and-connectors-primer.md`](docs/choosing-plugins-and-connectors-primer.md) — which plugins, connectors and skills earn a place: a five-goal test, red flags, the claude.ai sync trap, a monthly check, and a starter set
 6. **[docs/automation-recipes/](docs/automation-recipes/README.md)** — seventeen follow-along recipes for everyday automations (morning brief, budget planner, meeting prep, news digest…). Where the primers explain features, these assemble them into daily habits. A good first stop if you'd rather build something useful than read about architecture.
 7. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
 
@@ -263,13 +264,15 @@ Other power features worth exploring once these feel natural: `/color blue` (per
 
 The kit is intentionally lean. Once you have it installed, here's what most users grab next, organized by what they do.
 
+> **Before you add anything, read [Choosing plugins, connectors and skills](docs/choosing-plugins-and-connectors-primer.md):** a five-goal test for what earns a place, red flags to check before installing, and how to stop claude.ai plugins syncing into your terminal.
+
 **Foundational** (most people benefit):
 - `superpowers@claude-plugins-official` — brainstorming, systematic debugging, plan-writing skills. This kit's discipline-first philosophy is influenced by it; install for the full skill set.
 - `context7@claude-plugins-official` — fetches current library/framework docs on demand.
 - `github@claude-plugins-official` — manage repos, PRs, issues conversationally. **Setup note:** needs `GITHUB_PERSONAL_ACCESS_TOKEN` in your `~/.claude/settings.json` env block. The `gh` CLI's token works — run `gh auth token` to get the value.
 
 **Knowledge workers** (pick by role):
-- `productivity@knowledge-work-plugins` — Notion / Asana / Linear / Monday / ClickUp connectors for tasks, calendars, personal context.
+- `productivity@knowledge-work-plugins` — Notion / Asana / Linear / Monday / ClickUp connectors for tasks, calendars, personal context. Its memory and task skills create their own files (`TASKS.md`, a memory folder) in the folder you're working in, so skip it if you already keep tasks elsewhere.
 - `data@knowledge-work-plugins` — SQL queries, dashboards, statistical analysis.
 - `marketing@knowledge-work-plugins` — Figma / Notion / Ahrefs / SimilarWeb integrations for marketers.
 - `cowork-plugin-management@knowledge-work-plugins` — for customizing or building your own plugins (like this one).
@@ -379,6 +382,7 @@ claude-code-starter-kit/
     ├── scoped-imessage-access-primer.md      # Work texts only, via a Contacts group
     ├── plaud-recordings-primer.md            # Voice-recorder transcripts
     ├── calendar-handoff-primer.md            # Your to-dos onto your calendar
+    ├── choosing-plugins-and-connectors-primer.md  # Which add-ons earn a place
     ├── worktrees-primer.md       # Parallel work via worktrees
     └── automation-recipes/       # 17 follow-along recipes
 ```
