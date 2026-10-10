@@ -14,12 +14,15 @@ really BLOCK dangerous input. It changes nothing and is safe to run any time.
 ### 1. Locate the kit and run the drill
 
 Use `$CLAUDE_PLUGIN_ROOT` if it's set in your environment. If it isn't (common when
-running via the Bash tool), find the installed kit yourself — it's the newest
-`claude-code-starter-kit` directory under `~/.claude/plugins/cache/`:
+running via the Bash tool), find the installed kit yourself. Plugins install to
+`~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/`, so for this kit that's
+`~/.claude/plugins/cache/claude-code-starter-kit/kit/0.2.1/`. Look for the drill
+script itself rather than a folder name, so a renamed marketplace still resolves:
 
 ```
-KIT_ROOT="${CLAUDE_PLUGIN_ROOT:-$(ls -dt ~/.claude/plugins/cache/*/claude-code-starter-kit* 2>/dev/null | head -1)}"
-bash "$KIT_ROOT/scripts/verify-hooks.sh"
+VERIFY="${CLAUDE_PLUGIN_ROOT:+$CLAUDE_PLUGIN_ROOT/scripts/verify-hooks.sh}"
+[ -f "$VERIFY" ] || VERIFY="$(ls -t ~/.claude/plugins/cache/*/kit/*/scripts/verify-hooks.sh 2>/dev/null | head -1)"
+bash "$VERIFY"
 ```
 
 If neither resolves, ask the user whether they're running from a repo checkout and use

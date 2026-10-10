@@ -287,7 +287,7 @@ After installing the plugin, ask Claude:
 
 > Where is this plugin installed? Print the absolute path.
 
-Claude will respond with something like `/Users/yourname/.claude/plugins/cache/<id>/claude-code-starter-kit/`. Copy that path — you'll use it as `<PLUGIN_PATH>` below.
+Claude will respond with something like `/Users/yourname/.claude/plugins/cache/claude-code-starter-kit/kit/0.2.1/`. Copy that path — you'll use it as `<PLUGIN_PATH>` below.
 
 ### Copy the CLAUDE.md template
 

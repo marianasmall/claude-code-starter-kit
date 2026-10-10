@@ -75,6 +75,23 @@ walk(d)
 print('\n'.join(sorted(names)))
 PY
 )
+    # Shape: events must sit inside a top-level "hooks" object. Events at the
+    # top level parse fine and still reference every script, but Claude Code
+    # refuses to load the file — the bug that shipped in 0.2.0.
+    SHAPE=$(python3 - "$HOOKS_JSON" <<'PY' 2>/dev/null
+import json, sys
+d = json.load(open(sys.argv[1]))
+h = d.get('hooks') if isinstance(d, dict) else None
+stray = [k for k in (d if isinstance(d, dict) else {}) if k not in ('hooks', 'description')]
+if not isinstance(h, dict) or not h:
+    print('no "hooks" object at the top level')
+elif stray:
+    print('outside the "hooks" object: ' + ', '.join(stray))
+PY
+)
+    if [ -n "$SHAPE" ]; then
+        fail "hooks.json — wrong shape ($SHAPE); Claude Code will not load these hooks"
+    fi
     if [ -z "$WIRED" ]; then
         fail "hooks.json — did not parse as JSON"
     else
