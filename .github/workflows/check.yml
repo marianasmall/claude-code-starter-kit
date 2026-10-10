@@ -1,0 +1,50 @@
+# Runs before anything merges, and weekly, so a broken kit never reaches users.
+#
+# 1. claude plugin validate --strict: Claude Code's own checker. It would have
+#    rejected the 0.2.0 hooks.json.
+# 2. verify-hooks.sh from the repo: the /kit:verify fire drill.
+# 3. install-test.sh: installs the kit into a throwaway config, the way a user
+#    does, and runs /kit:verify's own lookup and drill from the installed copy.
+#    It would have caught the 0.2.0 /kit:verify path bug.
+#
+# Uses the latest Claude Code on purpose. New releases have tightened plugin
+# rules before, and the weekly run catches that even when nothing here changed.
+# No login or API key needed: none of these steps talk to the model.
+
+name: Kit checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 15 * * 1"   # Mondays, 15:17 UTC
+  workflow_dispatch:
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Install Claude Code
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude --version
+
+      - name: Validate plugin (strict)
+        run: claude plugin validate --strict .
+
+      - name: Fire drill from repo
+        run: bash scripts/verify-hooks.sh
+
+      - name: Install like a user, then run /kit:verify from the installed copy
+        run: bash scripts/install-test.sh
