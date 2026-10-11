@@ -417,3 +417,7 @@ MIT — do what you want with it. If you build on it, attribution is nice but no
 ## Contributing
 
 If you build something useful on top, open a PR. The kit should evolve with the community's patterns, not stay frozen.
+
+---
+
+Made by Mariana Small · [Resonant Growth](https://resonantgrowth.ai) · [marianasmall.ai](https://marianasmall.ai)
