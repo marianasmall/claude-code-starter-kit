@@ -1,22 +1,20 @@
 {
-  "_comment": "Template for ~/.claude/settings.json. Copy this file to ~/.claude/settings.json and edit. Items marked [CUSTOMIZE] need your input.",
+  "_comment": "Template for ~/.claude/settings.json. Copy this file to ~/.claude/settings.json and edit. Replace the notionSessionDb placeholder or delete that line.",
 
   "cleanupPeriodDays": 120,
 
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "ENABLE_PROMPT_CACHING_1H": "1",
-    "CLAUDE_CODE_FORK_SUBAGENT": "1",
     "ENABLE_TOOL_SEARCH": "auto"
   },
 
+  "_env_note": "Optional: if you pay through an API key (not a Claude subscription), you can add \"ENABLE_PROMPT_CACHING_1H\": \"1\" to env for a longer prompt cache. It costs more per cache write. Claude subscription plans already get the longer cache on the main conversation, so most people should leave it out. Forked subagents are on by default now, so CLAUDE_CODE_FORK_SUBAGENT is no longer needed either.",
+
   "permissions": {
-    "_comment": "Sensible-default allowlist. The /permissions-audit command can review and prune these later.",
+    "_comment": "allow = runs with no check. ask = always asks you first, even in auto mode. Rules are checked deny, then ask, then allow, so an ask rule wins over an allow rule. In auto mode (the default since Claude Code 2.1.284), anything not on the allow list goes to Claude Code's safety check instead of to you, so a short allow list does not mean more prompts. That is why risky commands (rm, mv, git, gh, brew, python, npm) are NOT on the allow list: the safety check reviews each one. The ask list is a seatbelt, not a wall: a reworded command can slip past it, and the kit's safety-net hook and the safety check carry the rest. Full explanation: INSTALL.md, 'Copy the settings.json template'.",
     "allow": [
-      "// === Shell read-only ===",
       "Bash(ls:*)",
       "Bash(cat:*)",
-      "Bash(find:*)",
       "Bash(grep:*)",
       "Bash(head:*)",
       "Bash(tail:*)",
@@ -24,47 +22,42 @@
       "Bash(diff:*)",
       "Bash(stat:*)",
       "Bash(which:*)",
-      "Bash(env)",
       "Bash(date)",
       "Bash(echo:*)",
-
-      "// === Shell mutating (review for your comfort) ===",
       "Bash(mkdir:*)",
       "Bash(touch:*)",
-      "Bash(cp:*)",
-      "Bash(mv:*)",
-      "Bash(chmod:*)",
-      "Bash(rm:*)",
-
-      "// === Git ===",
-      "Bash(git:*)",
-      "Bash(gh:*)",
-
-      "// === Dev tools ===",
-      "Bash(python3:*)",
-      "Bash(pip3 install:*)",
-      "Bash(npm:*)",
-      "Bash(npx:*)",
-      "Bash(node:*)",
-      "Bash(brew:*)",
-
-      "// === Web access ===",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh repo view:*)",
       "WebSearch",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:code.claude.com)",
+      "WebFetch(domain:platform.claude.com)",
       "WebFetch(domain:claude.com)",
-
-      "// === Skills (let Claude use any installed skill) ===",
-      "Skill(*)",
-
-      "// === File operations on Claude config ===",
-      "Edit(/Users/[CUSTOMIZE]/.claude/**)",
-      "Write(/Users/[CUSTOMIZE]/.claude/**)"
+      "Skill(*)"
+    ],
+    "ask": [
+      "Bash(rm -rf:*)",
+      "Bash(rm -fr:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(gh repo delete:*)",
+      "Bash(gh repo edit:*)",
+      "Bash(gh release delete:*)"
     ]
   },
 
   "_hooks_note": "Hooks come from the claude-code-starter-kit plugin via hooks/hooks.json. You don't need to wire them here.",
+
+  "_enabledPlugins_note": "kit@claude-code-starter-kit appears in enabledPlugins automatically after /plugin install.",
 
   "statusLine": {
     "_comment": "Optional — install the bundled statusline first: cp $CLAUDE_PLUGIN_ROOT/examples/statusline.sh ~/.claude/statusline.sh && chmod +x ~/.claude/statusline.sh",
@@ -74,7 +67,6 @@
   },
 
   "enabledPlugins": {
-    "_comment": "kit@claude-code-starter-kit appears here automatically after /plugin install",
     "kit@claude-code-starter-kit": true,
     "superpowers@claude-plugins-official": true
   },

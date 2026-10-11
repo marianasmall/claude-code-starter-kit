@@ -8,7 +8,7 @@ Step-by-step setup for `claude-code-starter-kit`. Plain language. Light-technica
 
 Follow the official setup guide to get Claude Code installed: **https://code.claude.com/docs/en/setup**
 
-Claude Code requires a Claude paid plan (Pro or Max) or Anthropic API billing.
+Claude Code needs a paid Claude plan (Pro, Max, Team or Enterprise) or a Console (API) account. The free claude.ai plan doesn't include it.
 
 ---
 
@@ -53,13 +53,12 @@ If `claude` says "command not found," Claude Code isn't installed yet. Scroll ba
 /plugin install kit@claude-code-starter-kit
 ```
 
-Then activate:
+The install command opens a panel. Pick **Install for you (user scope)**, then read the last line of the install summary:
 
-```
-/reload-plugins
-```
+- `Plugin is now active.` You're done. No reload needed.
+- `Run /reload-plugins to apply.` Claude Code runs that reload for you when the panel closes. If it warns instead, type `/reload-plugins` yourself.
 
-**What's happening:** the first command registers this repo as a *marketplace* on your machine (one-time per machine — Claude Code keeps a local registry of trusted plugin sources). The second installs the plugin from that registered source. The third reloads the active session so the new hooks, commands, agents, and skills become available without restarting.
+**What's happening:** the first command registers this repo as a *marketplace* on your machine (one-time per machine — Claude Code keeps a local registry of trusted plugin sources). The second installs the plugin from that registered source, and the reload makes the new hooks, commands, agents, and skills available without restarting.
 
 > **Why the HTTPS URL?** The `owner/repo` shortform works on most machines, but on some setups it resolves to an SSH clone (`git@github.com`), which fails if you've never SSH'd to GitHub before (you'll see a "Host key verification failed" error). The HTTPS URL sidesteps SSH entirely, so it's the safer default for a first install.
 
@@ -78,13 +77,13 @@ The friendliest path: just ask Claude to do the file setup for you. Pick the pro
 
 Type this at Claude Code's prompt:
 
-> Set me up with the starter kit defaults. Copy the CLAUDE.md template, settings.json template, and statusline to my ~/.claude/ directory. Make the statusline executable. Tell me what you did.
+> Set me up with the starter kit defaults. Copy the CLAUDE.md template, settings.json template, and statusline to my ~/.claude/ directory. Make the statusline executable. Create and change files with your Edit and Write tools, not shell commands, so the backup hook runs. Tell me what you did.
 
 ### If you already have a CLAUDE.md or settings.json (existing setup)
 
 Type this instead — it tells Claude **not** to overwrite anything:
 
-> I already have a CLAUDE.md and/or settings.json. Show me what's in the starter kit templates so I can decide what to merge. Don't overwrite my existing files. For the statusline, copy it only if I don't have one.
+> I already have a CLAUDE.md and/or settings.json. Show me what's in the starter kit templates so I can decide what to merge. Don't overwrite my existing files. For the statusline, copy it only if I don't have one. Make any file changes with your Edit and Write tools, not shell commands, so the backup hook runs.
 
 Claude will read the template files and surface what's worth merging (e.g., new spinner verbs, new permissions, the `enabledPlugins` block) without touching your existing customization.
 
@@ -92,7 +91,7 @@ Claude will read the template files and surface what's worth merging (e.g., new 
 
 Claude already knows where the plugin's files live (it has the `$CLAUDE_PLUGIN_ROOT` variable available). It'll handle the templates, set permissions, and report back. The file paths use environment variables that only exist *inside* Claude Code — if you tried to run them in a regular terminal, they'd fail silently.
 
-> **Extra safety:** Even if Claude does try to overwrite a file via the Edit or Write tools, the kit's `backup-before-edit` hook automatically creates a timestamped `.bak` copy first. So you can recover if anything unexpected happens.
+> **Extra safety:** Even if Claude does try to overwrite a file via the Edit or Write tools, the kit's `backup-before-edit` hook automatically creates a timestamped `.bak` copy first. So you can recover if anything unexpected happens. The hook only sees the Edit and Write tools. In auto mode Claude may choose shell commands like `cp` for simple file changes, and those skip the backup, which is why both prompts above ask it to use Edit and Write.
 
 If you'd rather do it yourself manually, see **Manual Setup** at the bottom of this file.
 
@@ -199,9 +198,18 @@ If you already have hooks in `~/.claude/settings.json`, they'll continue to fire
 
 ### "How do I update the plugin?"
 
-```
-/plugin update kit
-```
+The kit doesn't update itself. By default Claude Code doesn't auto-update plugins from marketplaces like this one, so you get new versions of the kit by hand:
+
+1. Open a regular terminal (not inside Claude Code) and run:
+
+   ```
+   claude plugin update kit@claude-code-starter-kit
+   ```
+
+2. Quit Claude Code and start it again. The update only takes effect in a new session.
+3. Run `/kit:verify` to confirm the hooks fire.
+
+Prefer to stay inside Claude Code? Type `/plugin`, go to the **Installed** tab, select `kit`, and choose **Update now**. Then restart and run `/kit:verify` the same way.
 
 ---
 
@@ -303,11 +311,28 @@ If you don't already have `~/.claude/settings.json`:
 cp <PLUGIN_PATH>/settings.json.template ~/.claude/settings.json
 ```
 
-If you already have one, **don't overwrite it** — open both files in a text editor and merge the useful sections (`enabledPlugins`, `spinnerVerbs`, any permissions you want). Replace `[CUSTOMIZE]` placeholders (mostly your username in path patterns).
+If you already have one, **don't overwrite it** — open both files in a text editor and merge the useful sections (`enabledPlugins`, `spinnerVerbs`, any permissions you want). Replace the `notionSessionDb` placeholder with your own database ID, or delete that line.
+
+#### What the permissions section does (and why it changed in 0.2.4)
+
+The `permissions` block has two lists:
+
+- **`allow`**: commands Claude can run with no check at all. The kit keeps this to commands that only look at things (`ls`, `cat`, `git status`, `git diff`, `gh pr view`) plus `mkdir` and `touch`.
+- **`ask`**: commands that always stop and ask you first, even in auto mode. The kit lists the ones you can't undo: `rm -rf`, force-pushing (`git push --force` or `-f`), `git reset --hard`, and deleting or changing a GitHub repo or release.
+
+If a command matches both lists, `ask` wins. Claude Code checks deny rules first, then ask, then allow.
+
+**Why the allow list got shorter.** Since Claude Code 2.1.284, sessions start in **auto mode**. In auto mode a built-in safety check reviews each action and stops risky ones, so you aren't asked about routine work. But anything on your `allow` list skips that check. Before 0.2.4 the template allowed every `rm`, `mv`, `chmod`, `git`, `gh` and `brew` command, so in auto mode something like `git reset --hard` or deleting a GitHub repo could run with no review at all. Those are now off the allow list. In auto mode that doesn't add prompts: the safety check reviews those commands instead of you. (In manual mode you'll be asked about them, which is the point of manual mode.)
+
+The template also dropped `python3`, `node`, `npm`, `npx` and `pip3` (auto mode ignores broad rules like these anyway), the `Edit`/`Write` rules for `~/.claude` (Claude Code always protects that folder, so the rules did nothing), and two `env` settings that are now on by default or cost extra (the template's notes say which).
+
+The `ask` list is a seatbelt, not a wall: a reworded command can slip past it. The kit's `safety-net` hook and auto mode's safety check carry the rest.
+
+**Copied the template before 0.2.4?** Open your `~/.claude/settings.json` and compare its `permissions` block with the new [`settings.json.template`](settings.json.template). Remove the broad rules listed above from `allow` and add the `ask` list. Or paste this to Claude Code: *"Compare the permissions in my ~/.claude/settings.json with the kit's settings.json.template. Show me which allow rules the new template dropped and the ask list it added, and ask me before changing anything."* The [permissions docs](https://code.claude.com/docs/en/permissions) and [permission modes docs](https://code.claude.com/docs/en/permission-modes) have the full details.
 
 ### Install the statusline (optional, recommended)
 
-The statusline shows context window remaining, cost, duration, and rate limits at the bottom of your terminal — and names your terminal tab after the conversation (Claude Code's auto-generated session title, or whatever you set with `/rename`), so parallel sessions stay tellable-apart.
+The statusline shows context window remaining, cost, duration, and (on Pro and Max plans, once Claude has replied) how much of your 5-hour usage limit you've used, at the bottom of your terminal — and names your terminal tab after the conversation (Claude Code's auto-generated session title, or whatever you set with `/rename`), so parallel sessions stay tellable-apart.
 
 ```
 cp <PLUGIN_PATH>/examples/statusline.sh ~/.claude/statusline.sh

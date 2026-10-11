@@ -12,7 +12,10 @@ Output styles change *how* Claude responds — role, tone, and output format —
 Standard Claude Code output, tuned for efficient software engineering work. Use this most of the time.
 
 ### `Proactive`
-Claude acts first and asks less — it makes reasonable assumptions instead of pausing for routine decisions. Good when you trust it with routine calls. (You still see permission prompts before tools run.)
+Claude acts first and asks less — it makes reasonable assumptions instead of pausing for routine decisions. Good when you trust it with routine calls. It doesn't change your permission mode. Note that since Claude Code 2.1.284 sessions start in auto mode, where a safety check approves most actions instead of asking you, so don't count on permission prompts as your backstop. Proactive still tells Claude to check with you in the conversation before deleting data or touching shared systems.
+
+### `Concise`
+Claude leads with the result and skips the lead-in, the step-by-step narration and the closing recap. Simple questions get one to three sentences. The work itself is just as thorough, and error reports, security warnings and confirmations for destructive actions stay complete. Good when Default feels too long. (Needs Claude Code 2.1.237 or later.)
 
 ### `Explanatory`
 Adds `★ Insight ─` boxes with educational asides while working. Good for:
@@ -35,7 +38,7 @@ Collaborative learn-by-doing mode: Claude shares insights *and* leaves small, st
 
 ## How to switch
 
-Run `/config` and pick a style under **Output style**. Or set it directly in `~/.claude/settings.json`:
+Run `/output-style` to see the styles and switch, for example `/output-style concise`. Or run `/config` and pick a style under **Output style**. Or set it directly in `~/.claude/settings.json`:
 
 ```json
 {
@@ -43,9 +46,9 @@ Run `/config` and pick a style under **Output style**. Or set it directly in `~/
 }
 ```
 
-Style changes take effect after `/clear` or a new session.
+A style change applies from your next message. The one exception: if you create or edit a custom style file during a session, restart Claude Code to pick it up. In `settings.json` the name is case-sensitive (`Explanatory`, not `explanatory`); the `/output-style` command ignores case.
 
-> **Note:** older guides mention an `/output-style` command — it was removed in v2.1.91. Everything lives in `/config` now.
+> **Note:** the `/output-style` command was removed for a while and came back in Claude Code 2.1.269. If a guide says it's gone, it's out of date.
 
 ## Custom styles
 

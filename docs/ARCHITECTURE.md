@@ -37,10 +37,10 @@ Borrowed loosely from cognitive architectures: memory works best when separated 
 
 - `~/.claude/active-context.md` — Current state, injected before every prompt
 - `~/.claude/session-summaries.md` — Session log
-- `~/.claude/debt.md` — Operational debt (`/debt`)
-- `~/.claude/notes/YYYY-MM-DD.md` — Daily notes (`/note`)
-- `~/.claude/decision-log.md` — Structured decisions (`/decision`)
-- `~/.claude/checkpoints/` — Mid-session snapshots (`/checkpoint`)
+- `~/.claude/debt.md` — Operational debt (`/kit:debt`)
+- `~/.claude/notes/YYYY-MM-DD.md` — Daily notes (`/kit:note`)
+- `~/.claude/decision-log.md` — Structured decisions (`/kit:decision`)
+- `~/.claude/checkpoints/` — Mid-session snapshots (`/kit:checkpoint`)
 
 **Why three spaces matter:** Mixing them causes retrieval pollution. Session logs in domain knowledge = search noise. Identity docs in operations = stale context loaded unnecessarily. Keep them separate; load from the right space for the task at hand.
 
@@ -74,11 +74,11 @@ Commands here follow a different principle than typical CLI tools:
 
 **Commands aren't shortcuts. They're rituals.**
 
-`/session-end` isn't faster than typing "log a session summary" — it's a *consistent* prompt that produces a *consistent* shape. The discipline is the value, not the time saved.
+`/kit:session-end` isn't faster than typing "log a session summary" — it's a *consistent* prompt that produces a *consistent* shape. The discipline is the value, not the time saved.
 
-`/reflect` doesn't surface novel insights — it forces you to ask the same six questions every time. That's the point. Variation breeds drift.
+`/kit:reflect` doesn't surface novel insights — it forces you to ask the same six questions every time. That's the point. Variation breeds drift.
 
-`/debt`, `/decision`, `/note` — they all create *append-only logs* with consistent formatting. You can grep them in a year. You can review them in aggregate.
+`/kit:debt`, `/kit:decision`, `/kit:note` — they all create *append-only logs* with consistent formatting. You can grep them in a year. You can review them in aggregate.
 
 The slash commands are how you build a *practice*, not a *workflow*.
 
@@ -124,7 +124,7 @@ Skip the kit if:
 
 ## Versioning + evolution
 
-This kit is at **v0.1.0** — early. Expect:
+This kit is at **v0.2.4**, still early. [CHANGELOG.md](../CHANGELOG.md) lists what changed in each version. Expect:
 - Hooks to be added or refined as new Claude Code events become available
 - Commands to absorb good patterns from the community
 - Templates to get cleaner as feedback accumulates

@@ -17,7 +17,7 @@ It only covers what showed up as a confirmation email. A reservation your travel
 
 ## What you need
 
-- **Gmail connected**, so Claude can search for the confirmation emails itself. In Claude Code, connect it with the `/mcp` command; on claude.ai, turn it on under Settings → Connectors. [Recipe 1, the daily morning brief](01-morning-brief.md), walks through this same one-time setup if you haven't done it yet.
+- **Gmail connected**, so Claude can search for the confirmation emails itself. In Claude Code, connect it with the `/mcp` command; on claude.ai, turn it on under Customize → Connectors. [Recipe 1, the daily morning brief](01-morning-brief.md), walks through this same one-time setup if you haven't done it yet.
 - If your inbox isn't connected, this still works too. Forward or paste the confirmation emails into the conversation and Claude builds the itinerary from those instead.
 - No coding knowledge needed. This is a conversation, not a setup project.
 

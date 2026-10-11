@@ -10,7 +10,7 @@ Think of it as the few minutes you'd normally spend clicking between your calend
 
 ## What you need
 
-- **Google Calendar and Gmail connected.** In Claude Code, connect both with the `/mcp` command. On claude.ai, turn them on under Settings → Connectors. Either way, this is a one-time setup — once it's done, every recipe that touches your calendar or inbox can use it.
+- **Google Calendar and Gmail connected.** In Claude Code, connect both with the `/mcp` command. On claude.ai, turn them on under Customize → Connectors. Either way, this is a one-time setup — once it's done, every recipe that touches your calendar or inbox can use it.
 - **A few minutes for that first connection.** The first time you connect Calendar or Gmail, you'll be asked to sign in and approve access in a browser window. After that one-time step, Claude reads what it needs automatically each time you ask.
 - **A time zone in mind, if you travel.** Claude uses your calendar's default time zone unless you say otherwise — worth mentioning up front if you're often somewhere else.
 - No coding knowledge needed. Once those two are connected, everything below is just a conversation.

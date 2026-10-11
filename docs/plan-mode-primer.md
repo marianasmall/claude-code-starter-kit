@@ -10,7 +10,7 @@ In plan mode, Claude:
 3. Waits for your approval
 4. Only then begins executing
 
-While in plan mode, Claude **cannot edit files, run commands, or take actions** until you approve the plan.
+While in plan mode, Claude **can't edit your files** until you approve the plan. It can still read files and run commands that look around (searching, listing, checking git status), and in auto mode a safety check approves those for you. So plan mode means "no changes yet", not "no commands at all".
 
 ## When to use it
 
@@ -56,10 +56,13 @@ Claude can be invoked with restricted tools (no Edit, no Bash) and forced to pla
 
 ## How to exit plan mode
 
-When Claude presents the plan, respond with:
-- **"approved"** / **"go ahead"** / **"do it"** — Claude executes the plan
-- **Edits to the plan** — Claude updates and re-presents
-- **"abandon plan, just X"** — Claude exits plan mode without executing
+When the plan is ready, Claude shows it with a menu of choices:
+
+- **Yes, and use auto mode**: approve the plan and let Claude work through it in auto mode. Note that this switches the whole session into auto mode, not just this plan. (If auto mode isn't available to you, this option reads **Yes, auto-accept edits**.)
+- **Yes, manually approve edits**: approve the plan and review each file change as Claude makes it.
+- **No, keep planning**: stay in plan mode and tell Claude what to change.
+
+To leave plan mode without approving anything, press **Shift+Tab** to switch to another mode. To plan again later, press Shift+Tab until plan mode shows, or start your message with `/plan`. Details: [permission modes docs](https://code.claude.com/docs/en/permission-modes#review-and-approve-a-plan).
 
 ## What a good plan looks like
 

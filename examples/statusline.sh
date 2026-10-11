@@ -43,7 +43,9 @@ esac
 COST=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
 DURATION_MS=$(echo "$input" | jq -r '.cost.total_duration_ms // 0')
 
-RATE_5H=$(echo "$input" | jq -r '.rate_limits.five_hour.percentage_used // empty' 2>/dev/null | cut -d. -f1)
+# 5-hour rate-limit use, 0-100. Claude Code only sends rate_limits to Pro and Max
+# subscribers, after the first reply in a session, so this segment can be absent.
+RATE_5H=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty' 2>/dev/null | cut -d. -f1)
 
 SESSION_ID=$(echo "$input" | jq -r '.session_id // empty' | cut -c1-6)
 SESSION_ID_FULL=$(echo "$input" | jq -r '.session_id // empty')

@@ -14,7 +14,9 @@ A starter setup for Claude Code, ready to install — so you don't have to spend
 
 Practices informed by the Anthropic × Tenex Claude Code workshop (Oct 2026). Full list in [CHANGELOG.md](CHANGELOG.md).
 
-> **0.2.1 fixes the hook wiring.** Earlier installs may not have loaded the kit's hooks at all, including the safety and backup hooks. Run `/plugin update kit` (or reinstall), then `/kit:verify`.
+> **0.2.1 fixes the hook wiring.** Earlier installs may not have loaded the kit's hooks at all, including the safety and backup hooks. The kit doesn't update itself, so update it by hand: see [Updating the kit](INSTALL.md#how-do-i-update-the-plugin). Then run `/kit:verify`.
+>
+> **0.2.4 tightens the settings template.** If you copied `settings.json.template` before 0.2.4, its allow list let commands like `rm`, `git` and `gh` run with no safety check in auto mode. See [what changed and how to fix your copy](INSTALL.md#copy-the-settingsjson-template-optional).
 
 - **A much shorter CLAUDE.md template** (53 lines, was 219). Your user file now holds only how you work. Everything else moved to a [section library](docs/claude-md-section-library.md) that says which layer each piece belongs in.
 - **`# Compact instructions`** in the template, so every compaction keeps your open loops, decisions and exact IDs.
@@ -103,7 +105,7 @@ The repo's other files are alphabetical, which doesn't help you know where to st
 5. **The native CC primers** (read on demand when relevant):
    - [`docs/claude-md-layering-and-context-primer.md`](docs/claude-md-layering-and-context-primer.md) — layered CLAUDE.md files, the step-count test, skills as folders, `/goal`, subagents vs hooks, keeping sessions focused (from JJ at Tenex's Oct 2026 workshop; start here if you read only one)
    - [`docs/context-budget-primer.md`](docs/context-budget-primer.md) — what loads when and what it costs, `/context` and compaction habits, the hook test, skill loading levels and evals, the read-only investigator. Pairs with [`examples/layered-repo/`](examples/layered-repo/) and the [section library](docs/claude-md-section-library.md)
-   - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — Default / Proactive / Explanatory / Learning
+   - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — Default / Proactive / Concise / Explanatory / Learning
    - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
    - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
    - [`docs/multi-session-coordination-primer.md`](docs/multi-session-coordination-primer.md) — running several sessions as colleagues: shared surfaces, handoffs, wrap rituals
@@ -193,7 +195,7 @@ Specialists Claude can spawn for complex tasks:
 
 `pushover.sh` is a shared helper for optional phone notifications, not a hook. Two optional hooks that don't run by default (`scope-creep-detector`, `stop-check`) are parked in [`hooks/_optional/`](hooks/_optional/) with instructions for wiring them in. The reasoning behind the groups is in the [context-budget primer](docs/context-budget-primer.md#3-hooks-only-for-rules-that-can-never-be-skipped).
 
-> **Installed before 0.2.1?** Earlier versions had a malformed `hooks/hooks.json`, so the kit's hooks may never have loaded. Run `/plugin update kit` (or uninstall and reinstall), then `/kit:verify`.
+> **Installed before 0.2.1?** Earlier versions had a malformed `hooks/hooks.json`, so the kit's hooks may never have loaded. Update the kit (in a terminal, outside Claude Code: `claude plugin update kit@claude-code-starter-kit`), restart Claude Code, then run `/kit:verify`.
 
 ---
 
@@ -210,14 +212,14 @@ This kit deliberately doesn't include:
 
 ## Installation
 
-**Prerequisites:** Claude Code on a Pro/Max plan or API billing, plus `jq` and Python 3 on your `$PATH` (`jq --version` / `python3 --version` to check — most systems have both).
+**Prerequisites:** Claude Code on a paid Claude plan (Pro, Max, Team or Enterprise) or a Console (API) account, plus `jq` and Python 3 on your `$PATH` (`jq --version` / `python3 --version` to check — most systems have both).
 
 > **The friendly version:** Open a terminal, type `claude`, then at Claude Code's prompt run these two commands:
 > ```
 > /plugin marketplace add https://github.com/marianasmall/claude-code-starter-kit
 > /plugin install kit@claude-code-starter-kit
 > ```
-> Then `/reload-plugins` to activate, and `/kit:getting-started` for the guided walkthrough.
+> Pick an install scope when asked, then read the last line of the install summary. If it says `Run /reload-plugins to apply`, Claude Code runs that for you when the panel closes. Then run `/kit:getting-started` for the guided walkthrough.
 >
 > **Heads-up on command names:** the kit's own commands are namespaced under the plugin name, so you type `/kit:getting-started`, `/kit:session-end`, `/kit:note`, etc. — not the bare names. (That's standard for any installed plugin; the `/kit:` prefix is just this plugin's namespace.)
 >
@@ -246,9 +248,9 @@ These aren't part of the kit — they ship with Claude Code itself — but they'
 
 **1. Name your sessions.** Claude Code auto-names each session based on your first prompt, but you can override it. Launch with `claude -n "session-name"`, or use `/branch <name>` and `/rename <name>` mid-session. Names show in the terminal tab, the prompt box, and the `/resume` picker — useful when you have multiple sessions running at once.
 
-**2. Plan mode (Shift+Tab cycles modes).** Hit `Shift+Tab` to cycle between auto-accept, plan-first, and manual-confirm modes. Plan mode forces Claude to outline its approach before touching anything — invaluable for risky changes (refactors, deletions, multi-file edits) where you want to review the plan before approving execution.
+**2. Plan mode (Shift+Tab cycles modes).** Hit `Shift+Tab` to move through the modes. From auto mode, where sessions start, the order is manual (asks before most actions), then accept edits, then plan, then back to auto. Plan mode has Claude look around and write out its approach before it changes any files. It's invaluable for risky changes (refactors, deletions, multi-file edits) where you want to review the plan before approving execution.
 
-**Auto mode is the default now.** Since Claude Code 2.1.285, a session with no permission mode set starts in **auto mode**: Claude runs routine actions itself and checks with you before risky ones, instead of asking about every step. The status line under the prompt shows the current mode, and `Shift+Tab` switches it. To choose your own default, set `permissions.defaultMode` in `~/.claude/settings.json`. The kit's safety hooks run in every mode, so commands like `rm -rf` on important paths or a force-push to `main` are still blocked. Since 0.2.3 they also block the action if the safety check itself fails to run.
+**Auto mode is the default now.** Since Claude Code 2.1.284, a session with no permission mode set starts in **auto mode**: a built-in safety check reviews Claude's actions and stops risky ones, instead of asking you about every step. The status line under the prompt shows the current mode, and `Shift+Tab` switches it. To choose your own default, set `permissions.defaultMode` in `~/.claude/settings.json` (for example `"default"` to be asked before most actions). Anything on your `allow` list skips that safety check, so keep the list short; the kit's [settings template](settings.json.template) shows how. The kit's safety hooks run in every mode, so commands like `rm -rf` on important paths or a force-push to `main` are still blocked. Since 0.2.3 they also block the action if the safety check itself fails to run. That last part needs Claude Code 2.1.295 or later; on older versions a hook that crashes lets the command through, so keep Claude Code updated (`claude --version` shows yours).
 
 **3. `@<filename>` to reference files.** Inside a prompt, type `@` and start typing a filename — Claude Code autocompletes from your project. Beats copy-pasting code into the prompt, and Claude reads the file directly so you don't burn context on quoted blocks.
 
@@ -256,9 +258,9 @@ These aren't part of the kit — they ship with Claude Code itself — but they'
 
 **5. `/context` to see what's loaded.** Run it when you start in a new project and right after adding an MCP server. The **Memory files** list shows which CLAUDE.md files Claude can actually see; the other rows show what tools, skills and servers cost before you've typed anything. Compact at about half full, and `/clear` between unrelated tasks.
 
-**6. `/recap` to re-orient.** Returning to a session you started yesterday? `/recap` summarizes what's happened so far, what was decided, and where you left off. Cheaper than re-reading the whole transcript.
+**6. `/recap` to re-orient.** Returning to a session you started yesterday? `/recap` gives you a one-line summary of the session so far. It's a quick reminder of where you were, not a full list of decisions, and it's cheaper than re-reading the whole transcript.
 
-Other power features worth exploring once these feel natural: `/color blue` (persistent prompt-bar accent per session — pairs with named tabs for telling parallel sessions apart; needs v2.1.205+), `/usage` (context, cost, rate limits at a glance), `/effort` (raise reasoning depth for hard tasks — Pro/Max only), `Ctrl+R` (search past prompts across sessions), `--worktree` (parallel work on the same repo with no merge headaches).
+Other power features worth exploring once these feel natural: `/color blue` (persistent prompt-bar accent per session — pairs with named tabs for telling parallel sessions apart), `/usage` (context, cost, rate limits at a glance), `/effort` (raise reasoning depth for hard tasks), `Ctrl+R` (search past prompts across sessions), `--worktree` (parallel work on the same repo with no merge headaches).
 
 ---
 
@@ -273,7 +275,7 @@ The kit is intentionally lean. Once you have it installed, here's what most user
 - `context7@claude-plugins-official` — fetches current library/framework docs on demand.
 - `github@claude-plugins-official` — manage repos, PRs, issues conversationally. **Setup note:** needs `GITHUB_PERSONAL_ACCESS_TOKEN` in your `~/.claude/settings.json` env block. The `gh` CLI's token works — run `gh auth token` to get the value.
 
-**Knowledge workers** (pick by role):
+**Knowledge workers** (pick by role). These come from Anthropic's `knowledge-work-plugins` marketplace, which Claude Code doesn't add for you. Add it once first, or the installs fail with "not found": `/plugin marketplace add anthropics/knowledge-work-plugins`
 - `productivity@knowledge-work-plugins` — Notion / Asana / Linear / Monday / ClickUp connectors for tasks, calendars, personal context. Its memory and task skills create their own files (`TASKS.md`, a memory folder) in the folder you're working in, so skip it if you already keep tasks elsewhere.
 - `data@knowledge-work-plugins` — SQL queries, dashboards, statistical analysis.
 - `marketing@knowledge-work-plugins` — Figma / Notion / Ahrefs / SimilarWeb integrations for marketers.
@@ -298,6 +300,10 @@ The kit is intentionally lean. Once you have it installed, here's what most user
 
 **Install commands:**
 ```bash
+# Only Anthropic's official marketplace (claude-plugins-official) is there by default.
+# For any other @<marketplace>, add it once first, for example:
+claude plugin marketplace add anthropics/knowledge-work-plugins
+
 # From your terminal
 claude plugin install <name>@<marketplace>
 
@@ -322,8 +328,8 @@ Want to understand how Claude Code actually works under the hood? The official d
 - [Sub-agents](https://code.claude.com/docs/en/sub-agents) — specialists Claude can spawn
 - [Plugins](https://code.claude.com/docs/en/plugins) — how this kit packages itself
 - [Memory & CLAUDE.md](https://code.claude.com/docs/en/memory) — the file at the heart of customization
-- [Output styles](https://code.claude.com/docs/en/output-styles) — Default, Proactive, Explanatory, Learning + custom styles
-- [Plan mode](https://code.claude.com/docs/en/interactive-mode) — when to plan before executing
+- [Output styles](https://code.claude.com/docs/en/output-styles) — Default, Proactive, Concise, Explanatory, Learning + custom styles
+- [Permission modes](https://code.claude.com/docs/en/permission-modes) — auto mode, plan mode, and the others
 - [MCP servers](https://code.claude.com/docs/en/mcp) — connecting external tools
 
 **Broader Claude ecosystem:**

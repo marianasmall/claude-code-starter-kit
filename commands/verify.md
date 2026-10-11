@@ -34,7 +34,7 @@ If neither resolves, ask the user whether they're running from a repo checkout a
 - **Any FAIL** → For each failing line, explain what protection is currently OFF in plain terms (e.g., "backup-before-edit failing means your files are NOT being backed up before edits right now"), then diagnose and fix:
   - `prereq` failures → offer to install python3/jq (brew on macOS)
   - `NOT executable` → offer to run the chmod
-  - `syntax` / `wiring` failures → the install may be corrupted; offer `/plugin update kit` or reinstall
+  - `syntax` / `wiring` failures → the install may be corrupted; tell the user to update the kit (in a terminal: `claude plugin update kit@claude-code-starter-kit`, then restart Claude Code) or reinstall it, then run `/kit:verify` again
   - Functional failures (safety-net, self-guard, backup) → read the failing script, find the cause, fix it — these are the kit's safety spine, don't leave them red
 - **WARNs** → mention briefly; they're degradations, not dead protections.
 
