@@ -45,4 +45,4 @@ Twice a month or so:
 - Demote outdated CLAUDE.md rules → MEMORY.md (with sunset date)
 - Keep this index under ~50 lines. If it's longer, consolidate adjacent topics.
 
-> WARNING: Files larger than ~200 lines or 30KB get partially loaded. Keep index entries to one line and move detail into topic files.
+> WARNING: Claude Code's auto memory loads only the first 200 lines or 25KB of its MEMORY.md, whichever comes first. Keep index entries to one line and move detail into topic files.

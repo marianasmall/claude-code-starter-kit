@@ -26,12 +26,12 @@ description: >-
   and identify dominant patterns."
   <commentary>Strategic exploration requiring pattern mapping across multiple
   sources and contexts.</commentary></example>
-tools: Read, Write, Edit, Glob, Grep, WebSearch, WebFetch, Task
+tools: Read, Write, Edit, Glob, Grep, WebSearch, WebFetch, Agent
 model: opus
 category: Strategic / Decision Support
 purpose: Structured research with source evaluation for consulting and strategy
 status: Active
-trigger: Manual — invoke via the Task tool for research-heavy questions
+trigger: Manual — invoke via the Agent tool for research-heavy questions
 ---
 
 # Deep Research Agent
@@ -117,7 +117,7 @@ Write the research plan to a working file (e.g., `research-plan-[topic].md` in t
 
 ## Phase 3: Deep Research
 
-Execute sub-question research. For truly independent sub-questions, use the Task tool to spawn parallel research threads.
+Execute sub-question research. For truly independent sub-questions, use the Agent tool to spawn parallel research threads.
 
 ### Source Evaluation (SIFT Method)
 

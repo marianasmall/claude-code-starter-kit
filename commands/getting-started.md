@@ -102,7 +102,7 @@ Walk the user through this. **For each item, offer to do it for them** — most 
 
 - [ ] Copy CLAUDE.md template to `~/.claude/CLAUDE.md` (offer to do it for them, then they edit)
 - [ ] Customize `~/.claude/CLAUDE.md` (`[YOUR_NAME]` and the bracketed prompts), then run `/context` to confirm it loaded
-- [ ] Copy `MEMORY.md.template` to `~/.claude/MEMORY.md` (used by `/kit:reflect` for tactical pattern-tracking)
+- [ ] Optional: copy `MEMORY.md.template` to `~/.claude/MEMORY.md` as the index `/kit:reflect` and `/kit:recall` use for tactical pattern-tracking. Tell the user plainly: Claude Code doesn't load this file on its own. Its built-in auto memory is a separate `MEMORY.md` per project, in `~/.claude/projects/<project>/memory/`, which Claude writes and loads automatically.
 - [ ] Optionally install the statusline (offer to copy `examples/statusline.sh` to `~/.claude/statusline.sh` and chmod it executable)
 - [ ] Optionally add `statusLine` block to `~/.claude/settings.json`
 - [ ] Optional: set `"outputStyle": "Explanatory"` in `~/.claude/settings.json` for `★ Insight` boxes (built-in style — see `docs/output-styles-primer.md`)

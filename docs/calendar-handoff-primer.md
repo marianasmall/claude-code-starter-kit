@@ -24,8 +24,8 @@ The rule is identical on both. Only two things differ: where you paste it, and h
 
 ### On claude.ai (the website)
 
-1. Enable the **Google Calendar connector**: Settings → Connectors. Without it your assistant cannot create anything, and it should say so rather than silently skipping.
-2. Paste the rule into **Settings → Profile → custom instructions** so it applies to every chat. To scope it to one body of work instead, paste it into a **Project's** instructions.
+1. Enable the **Google Calendar connector**: Customize → Connectors. Without it your assistant cannot create anything, and it should say so rather than silently skipping.
+2. Paste the rule into **Settings → Instructions for Claude** (click your initials in the lower left, then Settings) so it applies to every chat. To scope it to one body of work instead, paste it into a **Project's** instructions.
 
 ### In Claude Code (the terminal app)
 

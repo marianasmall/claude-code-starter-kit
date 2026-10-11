@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.4 — 2026-10-10
+
+**Safer settings template, and out-of-date advice fixed.** Every change was checked against the official Claude Code docs, release notes or `claude --help`.
+
+- **The settings template no longer lets risky commands skip auto mode's safety check.** Since Claude Code 2.1.284, sessions start in auto mode, and anything on your `allow` list runs with no review. The old template allowed every `rm`, `mv`, `chmod`, `git`, `gh` and `brew` command. Those are gone; the list now holds commands that only look at things (`ls`, `cat`, `git status`, `git diff`, `gh pr view` and similar) plus `mkdir` and `touch`. In auto mode this doesn't add prompts: the safety check reviews the dropped commands instead of you.
+- **New `ask` list** in the template for things you can't undo: `rm -rf`, `git push --force`/`-f`, `git reset --hard`, and deleting or editing a GitHub repo or release. Ask rules win over allow rules and still ask you in auto mode.
+- Also out of the template: the `python3`/`node`/`npm`/`npx`/`pip3` rules (auto mode drops them anyway), the `Edit`/`Write` rules for `~/.claude` (that folder is always protected, and `Write` path rules are never checked), `ENABLE_PROMPT_CACHING_1H` (subscribers already get it; API users pay more, so it's now an explained opt-in), `CLAUDE_CODE_FORK_SUBAGENT` (on by default now), the `"// ==="` strings inside the allow list, and the `_comment` inside `enabledPlugins`. `WebFetch` now allows `code.claude.com` and `platform.claude.com` instead of the old `docs.anthropic.com`. INSTALL.md explains each change in plain language.
+- **Updating the kit:** the docs now give the documented commands. In a terminal, `claude plugin update kit@claude-code-starter-kit`, then restart Claude Code, then `/kit:verify`. Or `/plugin` → **Installed** → kit → **Update now**. (`/plugin update kit` isn't a documented command.)
+- **Windows:** the plugins primer said settings live only inside WSL. Claude Code runs natively on Windows too, where the file is `%USERPROFILE%\.claude\settings.json`.
+- **Status line:** `examples/statusline.sh` read a rate-limit field that doesn't exist (`percentage_used`), so the 5-hour usage segment never showed. It now reads `used_percentage`.
+- README: auto mode became the default in **2.1.284** (0.2.3 said 2.1.285); the fail-closed safety hooks need Claude Code **2.1.295** or later; the Shift+Tab order includes auto mode; `knowledge-work-plugins` must be added as a marketplace before installing from it; `/recap` gives a one-line summary; `/color` and `/effort` have no version or plan limits worth noting; plan requirements include Team, Enterprise and Console; the Concise output style is listed; the plan-mode link points to the permission modes page; `/reload-plugins` is no longer a required install step.
+- Primers: `/output-style` is back (since 2.1.269) and style changes apply from your next message; the Concise style is added; Proactive no longer promises permission prompts; plan mode can run exploring commands and ends with an approval menu; claude.ai paths are now **Customize → Connectors** and **Settings → Instructions for Claude**; `pdf-viewer` installs from `knowledge-work-plugins`.
+- Smaller fixes: the getting-started step explains that `~/.claude/MEMORY.md` isn't auto-loaded; the memory template's limit is 25KB; `/doctor prompt-audit` needs 2.1.283; the deep-research agent uses the `Agent` tool name; hooks.json says six nudges; ARCHITECTURE.md shows the current version and `/kit:` command names.
+
+**If you copied `settings.json.template` before 0.2.4,** your `~/.claude/settings.json` still has the old allow list. See [INSTALL.md, "Copy the settings.json template"](INSTALL.md#copy-the-settingsjson-template-optional) for what to remove and a prompt that has Claude walk you through it. To get the rest of 0.2.4, update the kit as above.
+
 ## 0.2.3 — 2026-10-10
 
 - **The safety hooks now fail closed.** `safety-net` and `self-guard` carry `"onFailure": "block"`. If either can't start, times out or crashes, Claude Code blocks the action instead of letting it through. Needs Claude Code 2.1.295 or later. On older versions the setting has no effect and the hooks behave as before.

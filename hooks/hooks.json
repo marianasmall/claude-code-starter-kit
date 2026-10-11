@@ -1,5 +1,5 @@
 {
-  "description": "Starter kit hooks: four safeguards (safety-net, self-guard, backup-before-edit, session-end), three notifications, and five advisory nudges. Optional extras live in hooks/_optional/.",
+  "description": "Starter kit hooks: four safeguards (safety-net, self-guard, backup-before-edit, session-end), three notifications, and six advisory nudges. Optional extras live in hooks/_optional/.",
   "hooks": {
     "PreToolUse": [
       {

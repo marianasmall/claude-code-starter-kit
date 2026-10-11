@@ -14,7 +14,7 @@
 |---|---|---|
 | **Skill** | A folder of instructions Claude reads when a request matches its description. Claude sees every skill's name and one-line description all the time, and reads the rest only when it uses one. | `~/.claude/skills/`, or inside a plugin |
 | **Plugin** | A bundle that can hold skills, slash commands, agents, hooks (scripts that run automatically on events), output styles and connectors. | `/plugin` in Claude Code, or the claude.ai app |
-| **Connector** | A live link to another service (Gmail, Drive, Airtable, Slack…) so Claude can read from it or act in it. Also called an MCP server. | claude.ai **Settings → Connectors**, or `/mcp` in Claude Code |
+| **Connector** | A live link to another service (Gmail, Drive, Airtable, Slack…) so Claude can read from it or act in it. Also called an MCP server. | claude.ai **Customize → Connectors**, or `/mcp` in Claude Code |
 
 The part people miss: **a plugin is more than its skills.** A plugin that looks like "a few marketing prompts" can also ship a hook that runs on every command you approve, or a style that rewrites how Claude talks to you. You're installing all of it.
 
@@ -77,16 +77,17 @@ You have two options.
 Then install the plugins you've chosen straight into Claude Code, for example:
 
 ```bash
-claude plugin install pdf-viewer@anthropic-plugin-directory
+claude plugin marketplace add anthropics/knowledge-work-plugins
+claude plugin install pdf-viewer@knowledge-work-plugins
 ```
 
-If that marketplace name isn't found on your machine, run `/plugin`, find the plugin under **Discover**, and use the marketplace name it shows. Nothing new appears in your terminal unless you install it, and a separate setting, `"syncClaudeAiSkills": false`, does the same for skills you uploaded to claude.ai.
+The first line is a one-time step: Claude Code only comes with Anthropic's main marketplace (`claude-plugins-official`), so any other marketplace has to be added before you can install from it. If a plugin isn't where you expect, run `/plugin`, find it under **Discover**, and use the marketplace name it shows. Nothing new appears in your terminal unless you install it, and a separate setting, `"syncClaudeAiSkills": false`, does the same for skills you uploaded to claude.ai.
 
 The cost: something you add in the claude.ai app later won't reach the terminal on its own. You'd install it there too.
 
 **Option B: leave sync on and switch plugins off one by one** in `/plugin`. That works until the next plugin you add in the claude.ai app, which arrives in the terminal switched on.
 
-Restart Claude Code after changing either setting. **On Windows, do this inside WSL:** the file is `~/.claude/settings.json` in your Linux home folder, not anything under `C:\Users\`.
+Restart Claude Code after changing either setting. **On Windows, edit the settings file for the place you run Claude Code.** If you run it straight from PowerShell or CMD, the file is `%USERPROFILE%\.claude\settings.json` (for example `C:\Users\you\.claude\settings.json`). If you run it inside WSL, it's `~/.claude/settings.json` in your Linux home folder instead. Not sure which? Think about where you type `claude`: a PowerShell or Command Prompt window means the Windows file, and an Ubuntu (WSL) window means the Linux one. After you save, run `/status` in Claude Code and check that the `Setting sources` line lists `User settings`.
 
 ---
 
@@ -94,7 +95,7 @@ Restart Claude Code after changing either setting. **On Windows, do this inside 
 
 Connectors are easy to add and easy to forget. Each connected one adds its tool list to every session, whether you use it that day or not.
 
-- **Keep only what you use.** Open claude.ai **Settings → Connectors** and ask of each one: did I use this in the last month?
+- **Keep only what you use.** Open claude.ai **Customize → Connectors** and ask of each one: did I use this in the last month?
 - **Disconnect "Community" ones you don't recognize.** Connectors labeled Community are built by third parties, not the service itself. If you don't remember adding it, remove it.
 - **Fix or remove broken ones.** A connector that shows a sign-in error, or that Claude Code reports as failing at startup, is doing nothing for you. Reconnect it if you want it. Remove it if you don't.
 - **Watch for duplicates.** The same service connected twice (once in claude.ai, once inside a plugin) gives Claude two sets of near-identical tools to choose between.

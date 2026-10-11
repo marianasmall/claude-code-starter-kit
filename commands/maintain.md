@@ -87,10 +87,10 @@ Check what's new in Claude Code since the last maintenance run:
 5. Suggest one concrete trim for the biggest controllable category, e.g. move a project-specific section out of the user CLAUDE.md, shorten a long agent description, toggle off an unused MCP server. See `docs/context-budget-primer.md` in the kit.
 
 ### 2f. Instruction tune-up (first run of each month)
-Claude Code has a built-in checker for instructions written for older models: `/doctor prompt-audit` (Claude Code 2.1.282 or later). It reviews CLAUDE.md, skills, agents and commands. Like `/context`, only the user can type it:
+Claude Code has a built-in checker for instructions written for older models: `/doctor prompt-audit` (Claude Code 2.1.283 or later). It reviews CLAUDE.md, skills, agents and commands. Like `/context`, only the user can type it:
 1. Ask the user: *"Monthly tune-up: please run `/doctor prompt-audit` and paste the result here."*
 2. Sort what it flags into **quick fixes** (outdated phrasing, instructions the model now follows by default) and **judgment calls** (anything that changes behavior). Offer to apply the quick fixes. Ask before touching the judgment calls.
-3. If the command doesn't exist, say the user's Claude Code version is older than 2.1.282 and skip this step.
+3. If the command doesn't exist, say the user's Claude Code version is older than 2.1.283 and skip this step.
 
 ---
 
@@ -116,7 +116,7 @@ claude plugin list --json | jq -r '.[] | select(.enabled) | .installPath // empt
 done
 ```
 
-- For each FAIL, re-run `claude plugin validate "<path>"` without `--strict` and show the errors in plain language. Errors mean part of that plugin isn't loading; warnings alone are degradations. The usual fix is `/plugin update <name>`. If it still fails after updating, the plugin itself is broken: tell the user and offer to draft a bug report to its author.
+- For each FAIL, re-run `claude plugin validate "<path>"` without `--strict` and show the errors in plain language. Errors mean part of that plugin isn't loading; warnings alone are degradations. The usual fix is updating it: `claude plugin update <name>@<marketplace>` in a terminal (or `/plugin` → **Installed** → the plugin → **Update now**), then restart Claude Code. If it still fails after updating, the plugin itself is broken: tell the user and offer to draft a bug report to its author.
 - Run `/kit:verify` (the hook fire drill) and report its PASS/FAIL count.
 - Check that plugin paths in settings.json point to existing directories
 

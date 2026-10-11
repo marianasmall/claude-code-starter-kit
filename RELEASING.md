@@ -16,7 +16,7 @@ You can run all three locally the same way. None of them need a login.
 
 ## By hand, before tagging a release
 
-1. **Bump the version** in `.claude-plugin/plugin.json` and add a `CHANGELOG.md` entry. Users only get the update through `/plugin update kit` when the version changes.
+1. **Bump the version** in `.claude-plugin/plugin.json` and add a `CHANGELOG.md` entry. Users only get the update (`claude plugin update kit@claude-code-starter-kit` in a terminal, or `/plugin` → Installed → kit → **Update now**) when the version changes.
 2. **Check the counts in the docs.** If you added or removed a hook, command, agent, skill or recipe, make sure README, INSTALL, getting-started and ARCHITECTURE all give the same numbers.
-3. **Fresh install on Windows (WSL).** CI covers Linux and macOS. Ask a Windows tester to run `/plugin update kit` (or a fresh install), then `/kit:verify`, and to send the output.
-4. **If the change fixes something users already have installed,** say in the CHANGELOG what they need to do (usually `/plugin update kit`, then `/kit:verify`).
+3. **Fresh install on Windows (WSL).** CI covers Linux and macOS. Ask a Windows tester to run `claude plugin update kit@claude-code-starter-kit` (or a fresh install), restart Claude Code, then run `/kit:verify` and send the output.
+4. **If the change fixes something users already have installed,** say in the CHANGELOG what they need to do (usually: `claude plugin update kit@claude-code-starter-kit` in a terminal, restart Claude Code, then `/kit:verify`).
