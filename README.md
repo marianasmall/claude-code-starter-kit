@@ -138,7 +138,7 @@ If you're new to Claude Code, these terms come up a lot. The kit's quick definit
 
 A curated set of:
 
-### 5 Skills
+### 6 Skills
 
 Reusable frameworks Claude loads when relevant:
 
@@ -147,6 +147,7 @@ Reusable frameworks Claude loads when relevant:
 - **idea-to-scope** — Turn vague ideas into structured scope docs
 - **kaizen** — Continuous improvement framework
 - **bring-up-to-speed** — Brief anyone on a project whose history is scattered across email, meetings, and docs: source-weighted claims, honest blind spots, bottom line up front
+- **meeting-recap** — turns a meeting transcript from any connected tool into an eight-section recap delivered as an email draft or a note, never a sent message.
 
 Each skill is a folder: a short `SKILL.md`, detail in `references/` where needed, and test prompts in `evals/evals.json` so you can check it still behaves after you edit it.
 
@@ -370,7 +371,7 @@ claude-code-starter-kit/
 │   ├── verify-hooks.sh           # Hook fire drill (run via /kit:verify)
 │   └── install-test.sh           # Installs the kit like a user, then runs the drill from the installed copy
 ├── agents/                       # 6 specialized agents
-├── skills/                       # 5 skills, each with evals/ (and references/ where needed)
+├── skills/                       # 6 skills, each with evals/ (and references/ where needed)
 ├── examples/
 │   ├── statusline.sh             # Custom status line with context bar
 │   ├── debt-sync.sh.opt-in       # Optional Notion integration
