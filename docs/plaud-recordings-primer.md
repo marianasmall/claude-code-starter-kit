@@ -82,3 +82,5 @@ Unpair it from your Plaud account first, have them pair it to theirs, and have t
 ## Make it yours
 
 Everything above is one way to run it. Tell your Claude what to change, whether that is the file layout or the prefix you use for spoken instructions, and it will rebuild any of this to fit how you work.
+
+Plaud is one piece of the setup. The rest of what I use day to day, with notes on each, is on [marianasmall.ai](https://marianasmall.ai/where-to-start-with-ai.html#section-6).

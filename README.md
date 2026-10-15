@@ -421,4 +421,4 @@ If you build something useful on top, open a PR. The kit should evolve with the 
 
 ---
 
-Made by Mariana Small · [Resonant Growth](https://resonantgrowth.ai) · [marianasmall.ai](https://marianasmall.ai)
+Made by Mariana Small · [Resonant Growth](https://resonantgrowth.ai) · [marianasmall.ai](https://marianasmall.ai) · [The tools I use](https://marianasmall.ai/where-to-start-with-ai.html#section-6)
