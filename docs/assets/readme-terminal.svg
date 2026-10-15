@@ -27,7 +27,7 @@
     <tspan x="24" y="180"><tspan class="ok">✔</tspan> Successfully installed plugin: kit@claude-code-starter-kit (scope: user)</tspan>
     <tspan x="24" y="208" class="step">── 2. Find the kit using the exact lookup in commands/verify.md</tspan>
     <tspan x="24" y="230"><tspan class="ok">PASS</tspan>  found installed kit:</tspan>
-    <tspan x="24" y="252">      .claude/plugins/cache/claude-code-starter-kit/kit/0.2.4/scripts/verify-hooks.sh</tspan>
+    <tspan x="24" y="252">      .claude/plugins/cache/claude-code-starter-kit/kit/&lt;version&gt;/scripts/verify-hooks.sh</tspan>
     <tspan x="24" y="280" class="step">── 3. Run the fire drill from the installed copy</tspan>
     <tspan x="24" y="302"><tspan class="ok">PASS</tspan>  hooks.json — parses, 13 wired script(s)</tspan>
     <tspan x="24" y="324"><tspan class="ok">PASS</tspan>  safety-net — blocks a force-push payload</tspan>
