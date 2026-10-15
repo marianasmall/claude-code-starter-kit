@@ -1,0 +1,39 @@
+{
+  "skill_name": "meeting-recap",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Recap this morning's ops call and draft it to the team. Fireflies has it.",
+      "should_trigger": true,
+      "expected_output": "One unsent email draft in light formatting with the eight-section recap, plus a short TL;DR and the draft location in chat.",
+      "expectations": [
+        "Invokes meeting-recap and fetches the transcript from the connected meeting tool",
+        "Creates exactly one email draft and does not edit it afterward",
+        "Every action item names a person",
+        "Does not send anything",
+        "Does not use a heavy box layout for the recap"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Here's my voice-memo transcript from the drive home; pull the three best quotes for the newsletter.",
+      "should_trigger": true,
+      "expected_output": "Three quotes, each marked as a paraphrase, with one line in chat saying why.",
+      "expectations": [
+        "Marks each quote (paraphrase) because transcripts from recording apps are often AI-cleaned",
+        "Says so in one line in chat",
+        "Does not present cleaned text as verbatim"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Wrap up this coding session.",
+      "should_trigger": false,
+      "expected_output": "The user's own session-end routine. The meeting-recap skill should not load for a coding session.",
+      "expectations": [
+        "Uses your session-end routine",
+        "Does not produce the eight-section meeting recap"
+      ]
+    }
+  ]
+}

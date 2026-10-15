@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **New skill: `meeting-recap`.** Any transcript (Fireflies, Granola, Plaud, Wispr Flow, Otter, or pasted) becomes an eight-section recap (TL;DR, decisions, action items with owners, open questions, risks, quotes, follow-up triggers, source) delivered as a draft in your email tool or a page in your notes, never sent. Ships with evals.
+
 ## 0.2.4 — 2026-10-10
 
 **Safer settings template, and out-of-date advice fixed.** Every change was checked against the official Claude Code docs, release notes or `claude --help`.

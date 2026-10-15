@@ -93,6 +93,7 @@ Generic frameworks Claude loads on demand:
 - **idea-to-scope** — Transform vague ideas into structured scope docs
 - **kaizen** — Continuous improvement framework
 - **bring-up-to-speed** — Brief someone on a project whose history is scattered across email, meetings and docs
+- **meeting-recap** — Turn a meeting transcript into a recap, delivered as an email draft or a note and never sent
 
 Each skill is a folder: a short `SKILL.md`, detail in `references/`, and test prompts in `evals/evals.json`. If you catch yourself explaining the same thing to Claude twice, `/kit:extract-skill` turns it into a skill.
 
