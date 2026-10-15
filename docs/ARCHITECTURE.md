@@ -124,7 +124,7 @@ Skip the kit if:
 
 ## Versioning + evolution
 
-This kit is at **v0.2.4**, still early. [CHANGELOG.md](../CHANGELOG.md) lists what changed in each version. Expect:
+This kit is still early. The current version is in [plugin.json](../.claude-plugin/plugin.json), and [CHANGELOG.md](../CHANGELOG.md) lists what changed in each version. Expect:
 - Hooks to be added or refined as new Claude Code events become available
 - Commands to absorb good patterns from the community
 - Templates to get cleaner as feedback accumulates
