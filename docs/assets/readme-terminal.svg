@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="528" viewBox="0 0 880 528" role="img" aria-labelledby="title desc">
+  <title id="title">Installing the kit and running its hook fire drill</title>
+  <desc id="desc">Real terminal output from scripts/install-test.sh: the kit is added as a marketplace, installed, found by /kit:verify, and all 34 hook checks pass.</desc>
+  <style>
+    .t { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 12.5px; fill: #d4d4d4; white-space: pre; }
+    .dim { fill: #8a8a8a; }
+    .cmd { fill: #f0f0f0; font-weight: 600; }
+    .prompt { fill: #d97757; font-weight: 600; }
+    .step { fill: #7cc7e8; }
+    .ok { fill: #6fcf7a; font-weight: 600; }
+    .res { fill: #6fcf7a; }
+  </style>
+  <rect x="0" y="0" width="880" height="528" rx="10" fill="#1b1b1d"/>
+  <rect x="0" y="0" width="880" height="34" rx="10" fill="#2a2a2d"/>
+  <rect x="0" y="24" width="880" height="10" fill="#2a2a2d"/>
+  <circle cx="20" cy="17" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="17" r="6" fill="#febc2e"/>
+  <circle cx="60" cy="17" r="6" fill="#28c840"/>
+  <text x="440" y="21" text-anchor="middle" class="t dim">claude-code-starter-kit</text>
+
+  <text xml:space="preserve" class="t">
+    <tspan x="24" y="64"><tspan class="prompt">$</tspan> <tspan class="cmd">bash scripts/install-test.sh</tspan></tspan>
+    <tspan x="24" y="92" class="step">── 1. Add the marketplace and install the plugin</tspan>
+    <tspan x="24" y="114">Adding marketplace…</tspan>
+    <tspan x="24" y="136"><tspan class="ok">✔</tspan> Successfully added marketplace: claude-code-starter-kit (declared in user settings)</tspan>
+    <tspan x="24" y="158">Installing plugin "kit@claude-code-starter-kit"...</tspan>
+    <tspan x="24" y="180"><tspan class="ok">✔</tspan> Successfully installed plugin: kit@claude-code-starter-kit (scope: user)</tspan>
+    <tspan x="24" y="208" class="step">── 2. Find the kit using the exact lookup in commands/verify.md</tspan>
+    <tspan x="24" y="230"><tspan class="ok">PASS</tspan>  found installed kit:</tspan>
+    <tspan x="24" y="252">      .claude/plugins/cache/claude-code-starter-kit/kit/0.2.4/scripts/verify-hooks.sh</tspan>
+    <tspan x="24" y="280" class="step">── 3. Run the fire drill from the installed copy</tspan>
+    <tspan x="24" y="302"><tspan class="ok">PASS</tspan>  hooks.json — parses, 13 wired script(s)</tspan>
+    <tspan x="24" y="324"><tspan class="ok">PASS</tspan>  safety-net — blocks a force-push payload</tspan>
+    <tspan x="24" y="346"><tspan class="ok">PASS</tspan>  safety-net — fails closed on unparseable input</tspan>
+    <tspan x="24" y="368"><tspan class="ok">PASS</tspan>  self-guard — denies a destructive hook-script write</tspan>
+    <tspan x="24" y="390"><tspan class="ok">PASS</tspan>  backup-before-edit — backup copy created before edit</tspan>
+    <tspan x="24" y="412" class="dim">⋮</tspan>
+    <tspan x="24" y="440" class="dim">────────────────────────────────────────</tspan>
+    <tspan x="24" y="462" class="res">PASS: 34   FAIL: 0   WARN: 0</tspan>
+    <tspan x="24" y="484" class="res">RESULT: hook layer verified alive.</tspan>
+    <tspan x="24" y="506" class="res">RESULT: install test passed.</tspan>
+  </text>
+</svg>

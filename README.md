@@ -1,12 +1,55 @@
 # claude-code-starter-kit
 
-A starter setup for Claude Code, ready to install — so you don't have to spend months figuring out what to build yourself.
+A starter setup for Claude Code, ready to install, so you don't have to spend months figuring out what to build yourself.
+
+**Who this is for:** knowledge workers and operators, not developers. No coding required.
+
+[![License](https://img.shields.io/github/license/marianasmall/claude-code-starter-kit)](LICENSE)
+[![Built with Claude Code](https://img.shields.io/badge/built%20with-Claude%20Code-D97757)](https://code.claude.com/docs/en/overview)
+[![Kit checks](https://github.com/marianasmall/claude-code-starter-kit/actions/workflows/check.yml/badge.svg)](https://github.com/marianasmall/claude-code-starter-kit/actions/workflows/check.yml)
+[![Last commit](https://img.shields.io/github/last-commit/marianasmall/claude-code-starter-kit)](https://github.com/marianasmall/claude-code-starter-kit/commits/main)
+[![GitHub stars](https://img.shields.io/github/stars/marianasmall/claude-code-starter-kit?style=social)](https://github.com/marianasmall/claude-code-starter-kit)
+
+![What the install looks like](docs/assets/readme-terminal.svg)
+
+*Real output from the kit's install test, trimmed: it installs the kit into a throwaway Claude config, finds it, and runs the hook fire drill (34 checks, 0 failures).*
 
 > Built and depersonalized from a real working setup so anyone can start with what took months to figure out.
-
-> 🚀 **Just want to install?** → [Skip to Installation](#installation)
 >
-> 🍳 **Don't code? Start with the [Automation Recipes](docs/automation-recipes/README.md)** — seventeen follow-along guides (morning brief, subscription audit, paperwork decoder…) that work with plain Claude Code, no installation required.
+> 🍳 **Don't code? Start with the [Automation Recipes](docs/automation-recipes/README.md)**: seventeen follow-along guides (morning brief, subscription audit, paperwork decoder…) that work with plain Claude Code, no installation required.
+
+## Quick start
+
+Open a terminal, type `claude`, then run these at Claude Code's prompt:
+
+```
+/plugin marketplace add https://github.com/marianasmall/claude-code-starter-kit
+/plugin install kit@claude-code-starter-kit
+/kit:getting-started
+```
+
+Prerequisites, install scopes, and what to do if you already have your own `CLAUDE.md` are under [Installation](#installation) and in [INSTALL.md](INSTALL.md).
+
+**Contents:**
+[What's new](#whats-new-october-2026) ·
+[Philosophy](#philosophy) ·
+[What this is](#what-this-is) ·
+[What you get](#what-you-get) ·
+[How this is different](#how-this-is-different-from-claude-code-out-of-the-box) ·
+[Already using Claude Code?](#already-using-claude-code-or-starting-fresh) ·
+[Reading order](#reading-order) ·
+[Quick glossary](#quick-glossary) ·
+[What's in the kit](#whats-in-the-kit) ·
+[What's NOT in here](#whats-not-in-here-and-what-the-kit-touches) ·
+[Installation](#installation) ·
+[Customization](#customization) ·
+[Pro tips](#pro-tips-native-claude-code-features-worth-knowing) ·
+[Recommended plugins](#recommended-plugins-to-add) ·
+[Going deeper](#going-deeper) ·
+[Repository structure](#repository-structure) ·
+[Credits](#credits) ·
+[License](#license) ·
+[Contributing](#contributing)
 
 ---
 
@@ -30,7 +73,7 @@ Practices informed by the Anthropic × Tenex Claude Code workshop (Oct 2026). Fu
 
 ## Philosophy
 
-This is a *partnership* setup, not a *power-user* setup. The hooks aren't trying to make Claude faster — they're trying to make Claude **correct** and **safe**. The CLAUDE.md template isn't trying to be exhaustive — it's trying to give Claude enough context to be a thoughtful partner.
+This is a *partnership* setup, not a *power-user* setup. The hooks aren't trying to make Claude faster. They're trying to make Claude **correct** and **safe**. The CLAUDE.md template isn't trying to be exhaustive. It's trying to give Claude enough context to be a thoughtful partner.
 
 If you find yourself fighting the kit, change it. None of this is sacred.
 
@@ -41,7 +84,7 @@ If you find yourself fighting the kit, change it. None of this is sacred.
 This plugin structures Claude Code so you start with:
 
 - **A memory system** that survives across sessions
-- **Visual polish** — a context bar at the bottom of your terminal, structured insights when Claude is teaching, distinct sounds for "done" vs "waiting"
+- **Visual polish**: a context bar at the bottom of your terminal, structured insights when Claude is teaching, distinct sounds for "done" vs "waiting"
 - **Safety hooks** that block destructive commands before they run
 - **A library of slash commands** for common rituals (logging sessions, capturing notes, reviewing decisions)
 - **Specialists Claude can call on** for complex work (deep research, devil's-advocate review)
@@ -55,25 +98,25 @@ All curated, depersonalized from a real working setup, installable in under five
 
 Installing this gets you a Claude Code that's:
 
-- **Safe** — Destructive commands get blocked before they run. Files get backed up before edits. Risky scripts require explicit dry-run gates. Critical claims get verified against primary sources before propagating across files.
-- **Proactive** — Claude retries validation errors before escalating to you. Warns when context is running low. Reminds you to persist findings before they evaporate.
-- **Memorable** — Remembers where you left off across sessions. Tracks decisions, notes, and operational debt. Surfaces past context when you ask *"didn't we decide X already?"*
-- **Continuable** — When a thread fills up, `/kit:session-end` auto-generates a `handoff.md` in your project folder. Copy it into a new thread to pick up exactly where you left off — no re-explaining required. (See [project conventions](docs/project-conventions.md#the-handoff-ritual-how-to-continue-work-in-a-new-thread) for the full ritual.)
-- **Polished** — Custom statusline at the bottom of your terminal showing context, cost, and time. `★ Insight ─` boxes when Claude is teaching. Notifications when you've stepped away.
-- **Invested in your success** — A CLAUDE.md framework captures who you are and how you work. After 15 minutes of customization, Claude works *with* your specific shape — not against it.
+- **Safe**: Destructive commands get blocked before they run. Files get backed up before edits. Risky scripts require explicit dry-run gates. Critical claims get verified against primary sources before propagating across files.
+- **Proactive**: Claude retries validation errors before escalating to you. Warns when context is running low. Reminds you to persist findings before they evaporate.
+- **Memorable**: Remembers where you left off across sessions. Tracks decisions, notes, and operational debt. Surfaces past context when you ask *"didn't we decide X already?"*
+- **Continuable**: When a thread fills up, `/kit:session-end` auto-generates a `handoff.md` in your project folder. Copy it into a new thread to pick up exactly where you left off, with no re-explaining required. (See [project conventions](docs/project-conventions.md#the-handoff-ritual-how-to-continue-work-in-a-new-thread) for the full ritual.)
+- **Polished**: Custom statusline at the bottom of your terminal showing context, cost, and time. `★ Insight ─` boxes when Claude is teaching. Notifications when you've stepped away.
+- **Invested in your success**: A CLAUDE.md framework captures who you are and how you work. After 15 minutes of customization, Claude works *with* your specific shape, not against it.
 
-> The metaphor: Claude Code out of the box is a brilliant intern on day one — capable, but unfamiliar with how you work. This kit is the intern with three months of context already loaded.
+> The metaphor: Claude Code out of the box is a brilliant intern on day one: capable, but unfamiliar with how you work. This kit is the intern with three months of context already loaded.
 
 ---
 
 ## How this is different from Claude Code out of the box
 
-Out of the box, Claude Code is powerful but generic. To get this same setup yourself, you'd need to:
+Out of the box, Claude Code is capable but generic. To get this same setup yourself, you'd need to:
 
 - Learn Anthropic's hook system, plugin structure, slash command syntax, and output styles
 - Find and adopt skills scattered across various repos
 - Build hook scripts for safety, backups, context monitoring, retry coaching
-- Write a CLAUDE.md that actually captures how you work (this is the step most people underestimate — strong CLAUDE.md files are rare in the wild)
+- Write a CLAUDE.md that actually captures how you work (this is the step most people underestimate: strong CLAUDE.md files are rare in the wild)
 - Figure out project-level conventions (PLANNING.md, CONTEXT-SUMMARY.md) that let Claude resume cold
 
 That's months of "I wish I'd done this earlier" learning, scattered across blog posts and trial-and-error.
@@ -84,9 +127,9 @@ This plugin shortcuts that. Install it, customize one file, you're set up.
 
 ## Already using Claude Code? Or starting fresh?
 
-**If you've been using Claude Code for a while** and want to refine your setup, this won't override what you have. The hooks, commands, agents, and skills all install alongside your existing setup — they live in their own plugin namespace.
+**If you've been using Claude Code for a while** and want to refine your setup, this won't override what you have. The hooks, commands, agents, and skills all install alongside your existing setup. They live in their own plugin namespace.
 
-The only two files to think about are `CLAUDE.md` and `settings.json` (your personal config files in `~/.claude/`). If you already have them, **add a `.backup` suffix to the filename first** — so `~/.claude/CLAUDE.md` becomes `~/.claude/CLAUDE.md.backup`, and `~/.claude/settings.json` becomes `~/.claude/settings.json.backup`. Or during install, tell Claude: *"I already have these — show me the templates so I can decide what to merge."*
+The only two files to think about are `CLAUDE.md` and `settings.json` (your personal config files in `~/.claude/`). If you already have them, **add a `.backup` suffix to the filename first**, so `~/.claude/CLAUDE.md` becomes `~/.claude/CLAUDE.md.backup`, and `~/.claude/settings.json` becomes `~/.claude/settings.json.backup`. Or during install, tell Claude: *"I already have these, show me the templates so I can decide what to merge."*
 
 **If you're starting fresh,** you'll be ahead of the game. The kit is months of "I wish I'd done this earlier" learning packaged for one install + 15 minutes of customization.
 
@@ -98,25 +141,25 @@ The only two files to think about are `CLAUDE.md` and `settings.json` (your pers
 
 The repo's other files are alphabetical, which doesn't help you know where to start. Here's the recommended sequence:
 
-1. **[INSTALL.md](INSTALL.md)** — if you're about to install. Step-by-step setup.
-2. **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — the philosophy + the "three-space memory" model (why CLAUDE.md, MEMORY.md, and project files all play different roles).
-3. **[docs/project-conventions.md](docs/project-conventions.md)** — the five-file project pattern (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md, handoff.md) + naming conventions.
-4. **[examples/sample-project/](examples/sample-project/)** — a worked example showing four of those files fully filled in for an imaginary project (handoff.md is generated at runtime). Read this if conventions feel abstract.
+1. **[INSTALL.md](INSTALL.md)**: if you're about to install. Step-by-step setup.
+2. **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**: the philosophy + the "three-space memory" model (why CLAUDE.md, MEMORY.md, and project files all play different roles).
+3. **[docs/project-conventions.md](docs/project-conventions.md)**: the five-file project pattern (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md, handoff.md) + naming conventions.
+4. **[examples/sample-project/](examples/sample-project/)**: a worked example showing four of those files fully filled in for an imaginary project (handoff.md is generated at runtime). Read this if conventions feel abstract.
 5. **The native CC primers** (read on demand when relevant):
-   - [`docs/claude-md-layering-and-context-primer.md`](docs/claude-md-layering-and-context-primer.md) — layered CLAUDE.md files, the step-count test, skills as folders, `/goal`, subagents vs hooks, keeping sessions focused (from JJ at Tenex's Oct 2026 workshop; start here if you read only one)
-   - [`docs/context-budget-primer.md`](docs/context-budget-primer.md) — what loads when and what it costs, `/context` and compaction habits, the hook test, skill loading levels and evals, the read-only investigator. Pairs with [`examples/layered-repo/`](examples/layered-repo/) and the [section library](docs/claude-md-section-library.md)
-   - [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — Default / Proactive / Concise / Explanatory / Learning
-   - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
-   - [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
-   - [`docs/multi-session-coordination-primer.md`](docs/multi-session-coordination-primer.md) — running several sessions as colleagues: shared surfaces, handoffs, wrap rituals
-   - [`docs/1password-environments-primer.md`](docs/1password-environments-primer.md) — get your API keys out of plaintext files (if you use 1Password)
-   - [`docs/scoped-imessage-access-primer.md`](docs/scoped-imessage-access-primer.md) — give Claude your work texts (and nothing else) via a Contacts group
-   - [`docs/plaud-recordings-primer.md`](docs/plaud-recordings-primer.md) — let Claude read your Plaud voice-recorder transcripts: the two-minute claude.ai connector, plus an archive-to-Drive build spec and its traps
-   - [`docs/calendar-handoff-primer.md`](docs/calendar-handoff-primer.md) — have Claude put the things only you can do on your calendar, with the links and a paste-back block, instead of leaving them in chat
-   - [`docs/multiple-seats-terminal-profiles-primer.md`](docs/multiple-seats-terminal-profiles-primer.md) — personal + work Claude accounts on one Mac: a coloured Terminal profile per seat, `CLAUDE_CONFIG_DIR`, and the traps (quote marks, sorting, the trust prompt)
-   - [`docs/choosing-plugins-and-connectors-primer.md`](docs/choosing-plugins-and-connectors-primer.md) — which plugins, connectors and skills earn a place: a five-goal test, red flags, the claude.ai sync trap, a monthly check, and a starter set
-6. **[docs/automation-recipes/](docs/automation-recipes/README.md)** — seventeen follow-along recipes for everyday automations (morning brief, budget planner, meeting prep, news digest…). Where the primers explain features, these assemble them into daily habits. A good first stop if you'd rather build something useful than read about architecture.
-7. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)** — open these when customizing your own setup.
+   - [`docs/claude-md-layering-and-context-primer.md`](docs/claude-md-layering-and-context-primer.md): layered CLAUDE.md files, the step-count test, skills as folders, `/goal`, subagents vs hooks, keeping sessions focused (from JJ at Tenex's Oct 2026 workshop; start here if you read only one)
+   - [`docs/context-budget-primer.md`](docs/context-budget-primer.md): what loads when and what it costs, `/context` and compaction habits, the hook test, skill loading levels and evals, the read-only investigator. Pairs with [`examples/layered-repo/`](examples/layered-repo/) and the [section library](docs/claude-md-section-library.md)
+   - [`docs/output-styles-primer.md`](docs/output-styles-primer.md): Default / Proactive / Concise / Explanatory / Learning
+   - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md): when to plan vs just go
+   - [`docs/worktrees-primer.md`](docs/worktrees-primer.md): parallel work on the same repo
+   - [`docs/multi-session-coordination-primer.md`](docs/multi-session-coordination-primer.md): running several sessions as colleagues: shared surfaces, handoffs, wrap rituals
+   - [`docs/1password-environments-primer.md`](docs/1password-environments-primer.md): get your API keys out of plaintext files (if you use 1Password)
+   - [`docs/scoped-imessage-access-primer.md`](docs/scoped-imessage-access-primer.md): give Claude your work texts (and nothing else) via a Contacts group
+   - [`docs/plaud-recordings-primer.md`](docs/plaud-recordings-primer.md): let Claude read your Plaud voice-recorder transcripts: the two-minute claude.ai connector, plus an archive-to-Drive build spec and its traps
+   - [`docs/calendar-handoff-primer.md`](docs/calendar-handoff-primer.md): have Claude put the things only you can do on your calendar, with the links and a paste-back block, instead of leaving them in chat
+   - [`docs/multiple-seats-terminal-profiles-primer.md`](docs/multiple-seats-terminal-profiles-primer.md): personal + work Claude accounts on one Mac: a coloured Terminal profile per seat, `CLAUDE_CONFIG_DIR`, and the traps (quote marks, sorting, the trust prompt)
+   - [`docs/choosing-plugins-and-connectors-primer.md`](docs/choosing-plugins-and-connectors-primer.md): which plugins, connectors and skills earn a place: a five-goal test, red flags, the claude.ai sync trap, a monthly check, and a starter set
+6. **[docs/automation-recipes/](docs/automation-recipes/README.md)**: seventeen follow-along recipes for everyday automations (morning brief, budget planner, meeting prep, news digest…). Where the primers explain features, these assemble them into daily habits. A good first stop if you'd rather build something useful than read about architecture.
+7. **[CLAUDE.md.template](CLAUDE.md.template)** + **[settings.json.template](settings.json.template)**: open these when customizing your own setup.
 
 ---
 
@@ -128,7 +171,7 @@ If you're new to Claude Code, these terms come up a lot. The kit's quick definit
 |---|---|
 | **Hook** | A small script that runs automatically on Claude Code events (before a tool runs, after a session ends). Background safety + automation. |
 | **Slash command** | A shortcut you type at Claude Code's prompt, like `/kit:note` or `/kit:session-end`. Triggers pre-written instructions. |
-| **Agent** | A specialist Claude can spawn for a complex task — deep research, strategic review. You don't usually invoke them directly. |
+| **Agent** | A specialist Claude can spawn for a complex task (deep research, strategic review). You don't usually invoke them directly. |
 | **Skill** | A piece of reusable knowledge Claude loads on demand when relevant. Like a framework or methodology. |
 | **CLAUDE.md** | A file loaded into every Claude Code session. Your personal instructions to Claude. The most important file in your setup. |
 
@@ -142,12 +185,12 @@ A curated set of:
 
 Reusable frameworks Claude loads when relevant:
 
-- **humanizer** — Removes AI tells from your writing
-- **learning-capture** — Pin valuable insights mid-conversation
-- **idea-to-scope** — Turn vague ideas into structured scope docs
-- **kaizen** — Continuous improvement framework
-- **bring-up-to-speed** — Brief anyone on a project whose history is scattered across email, meetings, and docs: source-weighted claims, honest blind spots, bottom line up front
-- **meeting-recap** — turns a meeting transcript from any connected tool into an eight-section recap delivered as an email draft or a note, never a sent message.
+- **humanizer**: Removes AI tells from your writing
+- **learning-capture**: Pin valuable insights mid-conversation
+- **idea-to-scope**: Turn vague ideas into structured scope docs
+- **kaizen**: Continuous improvement framework
+- **bring-up-to-speed**: Brief anyone on a project whose history is scattered across email, meetings, and docs: source-weighted claims, honest blind spots, bottom line up front
+- **meeting-recap**: turns a meeting transcript from any connected tool into an eight-section recap delivered as an email draft or a note, never a sent message.
 
 Each skill is a folder: a short `SKILL.md`, detail in `references/` where needed, and test prompts in `evals/evals.json` so you can check it still behaves after you edit it.
 
@@ -158,7 +201,7 @@ Type at Claude Code's prompt. (Installed plugin commands are namespaced under th
 | Command | What it does |
 |---|---|
 | `/kit:getting-started` | Guided first-run walkthrough |
-| `/kit:verify` | Fire drill — proves every hook is alive and the safety hooks actually block |
+| `/kit:verify` | Fire drill: proves every hook is alive and the safety hooks actually block |
 | `/kit:session-end` | Log session, update active-context for next time |
 | `/kit:reflect [quick\|deep]` | End-of-session retrospective |
 | `/kit:note <text>` | Quick timestamped capture to today's notes |
@@ -170,19 +213,19 @@ Type at Claude Code's prompt. (Installed plugin commands are namespaced under th
 | `/kit:permissions-audit` | Review and prune settings.json permissions |
 | `/kit:extract-skill <name>` | Scaffold a new skill from a pattern |
 | `/kit:scaffold-project [name]` | Drop project files (README, PLANNING, CONTEXT-SUMMARY) into the current directory |
-| `/kit:consistency-check [path]` | Pre-ship audit for doc bundles — catches count drift, broken anchors, ambiguous pronouns, audience assumptions, jargon |
+| `/kit:consistency-check [path]` | Pre-ship audit for doc bundles: catches count drift, broken anchors, ambiguous pronouns, audience assumptions, jargon |
 | `/kit:handoff` | Refresh `<project>/handoff.md` without the full session-end ritual (mid-session context switch) |
 
 ### 6 Agents
 
 Specialists Claude can spawn for complex tasks:
 
-- **investigator** — Read-only diagnosis: finds the root cause with file-and-line evidence and never changes anything
-- **deep-research** — Multi-source research with confidence calibration
-- **strategic-reviewer** — Devil's advocate for plans, proposals, decisions
-- **task-decomposition-expert** — Break complex goals into ordered steps
-- **communication-excellence-coach** — Email refinement, difficult conversations
-- **skill-diagnostics** — Debug skill triggering issues
+- **investigator**: Read-only diagnosis: finds the root cause with file-and-line evidence and never changes anything
+- **deep-research**: Multi-source research with confidence calibration
+- **strategic-reviewer**: Devil's advocate for plans, proposals, decisions
+- **task-decomposition-expert**: Break complex goals into ordered steps
+- **communication-excellence-coach**: Email refinement, difficult conversations
+- **skill-diagnostics**: Debug skill triggering issues
 
 ### 13 wired hooks + 1 shared helper (most run silently)
 
@@ -200,20 +243,20 @@ Specialists Claude can spawn for complex tasks:
 
 ---
 
-## What's NOT in here — and what the kit touches
+## What's NOT in here, and what the kit touches
 
 This kit deliberately doesn't include:
 
-- **Specific MCP integrations** (Notion, Slack, etc.) — Anthropic ships those as separate plugins. Install what you need.
-- **Enforced project conventions** — The kit *suggests* conventions for project file structure (README/PLANNING/CONTEXT-SUMMARY) and naming (see [`docs/project-conventions.md`](docs/project-conventions.md)) and ships templates for them, but nothing is enforced. Use what fits, ignore what doesn't.
+- **Specific MCP integrations** (Notion, Slack, etc.): Anthropic ships those as separate plugins. Install what you need.
+- **Enforced project conventions**: The kit *suggests* conventions for project file structure (README/PLANNING/CONTEXT-SUMMARY) and naming (see [`docs/project-conventions.md`](docs/project-conventions.md)) and ships templates for them, but nothing is enforced. Use what fits, ignore what doesn't.
 
-**And so you know exactly what you're installing:** the hooks run locally on every prompt and tool call. They write only to your Claude home folder (`~/.claude/notes/`, `debt.md`, `decision-log.md`) and to timestamped `_backups/` folders next to files Claude edits. Nothing phones home — the only network call anywhere in the kit is the optional Pushover phone notification, and only if you add your own credentials. Everything you bring is yours.
+**And so you know exactly what you're installing:** the hooks run locally on every prompt and tool call. They write only to your Claude home folder (`~/.claude/notes/`, `debt.md`, `decision-log.md`) and to timestamped `_backups/` folders next to files Claude edits. Nothing phones home. The only network call anywhere in the kit is the optional Pushover phone notification, and only if you add your own credentials. Everything you bring is yours.
 
 ---
 
 ## Installation
 
-**Prerequisites:** Claude Code on a paid Claude plan (Pro, Max, Team or Enterprise) or a Console (API) account, plus `jq` and Python 3 on your `$PATH` (`jq --version` / `python3 --version` to check — most systems have both).
+**Prerequisites:** Claude Code on a paid Claude plan (Pro, Max, Team or Enterprise) or a Console (API) account, plus `jq` and Python 3 on your `$PATH` (`jq --version` / `python3 --version` to check; most systems have both).
 
 > **The friendly version:** Open a terminal, type `claude`, then at Claude Code's prompt run these two commands:
 > ```
@@ -222,7 +265,7 @@ This kit deliberately doesn't include:
 > ```
 > Pick an install scope when asked, then read the last line of the install summary. If it says `Run /reload-plugins to apply`, Claude Code runs that for you when the panel closes. Then run `/kit:getting-started` for the guided walkthrough.
 >
-> **Heads-up on command names:** the kit's own commands are namespaced under the plugin name, so you type `/kit:getting-started`, `/kit:session-end`, `/kit:note`, etc. — not the bare names. (That's standard for any installed plugin; the `/kit:` prefix is just this plugin's namespace.)
+> **Heads-up on command names:** the kit's own commands are namespaced under the plugin name, so you type `/kit:getting-started`, `/kit:session-end`, `/kit:note`, etc., not the bare names. (That's standard for any installed plugin; the `/kit:` prefix is just this plugin's namespace.)
 >
 > **Why two commands?** The first registers this repo as a *marketplace* on your machine (one-time trust step). The second installs the plugin from it (`kit` is the plugin name; `claude-code-starter-kit` is the marketplace name). Using the HTTPS URL avoids SSH host-key prompts that some setups hit on a first clone of GitHub.
 
@@ -245,15 +288,15 @@ The kit is a starting point, not a religion. After a week of use, you'll know wh
 
 ## Pro tips (native Claude Code features worth knowing)
 
-These aren't part of the kit — they ship with Claude Code itself — but they're easy to miss and they change how the tool feels day-to-day.
+These aren't part of the kit (they ship with Claude Code itself), but they're easy to miss and they change how the tool feels day-to-day.
 
-**1. Name your sessions.** Claude Code auto-names each session based on your first prompt, but you can override it. Launch with `claude -n "session-name"`, or use `/branch <name>` and `/rename <name>` mid-session. Names show in the terminal tab, the prompt box, and the `/resume` picker — useful when you have multiple sessions running at once.
+**1. Name your sessions.** Claude Code auto-names each session based on your first prompt, but you can override it. Launch with `claude -n "session-name"`, or use `/branch <name>` and `/rename <name>` mid-session. Names show in the terminal tab, the prompt box, and the `/resume` picker, which helps when you have multiple sessions running at once.
 
 **2. Plan mode (Shift+Tab cycles modes).** Hit `Shift+Tab` to move through the modes. From auto mode, where sessions start, the order is manual (asks before most actions), then accept edits, then plan, then back to auto. Plan mode has Claude look around and write out its approach before it changes any files. It's invaluable for risky changes (refactors, deletions, multi-file edits) where you want to review the plan before approving execution.
 
 **Auto mode is the default now.** Since Claude Code 2.1.284, a session with no permission mode set starts in **auto mode**: a built-in safety check reviews Claude's actions and stops risky ones, instead of asking you about every step. The status line under the prompt shows the current mode, and `Shift+Tab` switches it. To choose your own default, set `permissions.defaultMode` in `~/.claude/settings.json` (for example `"default"` to be asked before most actions). Anything on your `allow` list skips that safety check, so keep the list short; the kit's [settings template](settings.json.template) shows how. The kit's safety hooks run in every mode, so commands like `rm -rf` on important paths or a force-push to `main` are still blocked. Since 0.2.3 they also block the action if the safety check itself fails to run. That last part needs Claude Code 2.1.295 or later; on older versions a hook that crashes lets the command through, so keep Claude Code updated (`claude --version` shows yours).
 
-**3. `@<filename>` to reference files.** Inside a prompt, type `@` and start typing a filename — Claude Code autocompletes from your project. Beats copy-pasting code into the prompt, and Claude reads the file directly so you don't burn context on quoted blocks.
+**3. `@<filename>` to reference files.** Inside a prompt, type `@` and start typing a filename, and Claude Code autocompletes from your project. Beats copy-pasting code into the prompt, and Claude reads the file directly so you don't burn context on quoted blocks.
 
 **4. `Esc` to interrupt.** When Claude is heading down the wrong path, hit `Esc` to interrupt the current tool call. You can then redirect with a corrective prompt instead of waiting for a multi-step task to finish before pivoting.
 
@@ -261,7 +304,7 @@ These aren't part of the kit — they ship with Claude Code itself — but they'
 
 **6. `/recap` to re-orient.** Returning to a session you started yesterday? `/recap` gives you a one-line summary of the session so far. It's a quick reminder of where you were, not a full list of decisions, and it's cheaper than re-reading the whole transcript.
 
-Other power features worth exploring once these feel natural: `/color blue` (persistent prompt-bar accent per session — pairs with named tabs for telling parallel sessions apart), `/usage` (context, cost, rate limits at a glance), `/effort` (raise reasoning depth for hard tasks), `Ctrl+R` (search past prompts across sessions), `--worktree` (parallel work on the same repo with no merge headaches).
+Other power features worth exploring once these feel natural: `/color blue` (a persistent prompt-bar accent per session, which pairs with named tabs for telling parallel sessions apart), `/usage` (context, cost, rate limits at a glance), `/effort` (raise reasoning depth for hard tasks), `Ctrl+R` (search past prompts across sessions), `--worktree` (parallel work on the same repo with no merge headaches).
 
 ---
 
@@ -272,32 +315,32 @@ The kit is intentionally lean. Once you have it installed, here's what most user
 > **Before you add anything, read [Choosing plugins, connectors and skills](docs/choosing-plugins-and-connectors-primer.md):** a five-goal test for what earns a place, red flags to check before installing, and how to stop claude.ai plugins syncing into your terminal.
 
 **Foundational** (most people benefit):
-- `superpowers@claude-plugins-official` — brainstorming, systematic debugging, plan-writing skills. This kit's discipline-first philosophy is influenced by it; install for the full skill set.
-- `context7@claude-plugins-official` — fetches current library/framework docs on demand.
-- `github@claude-plugins-official` — manage repos, PRs, issues conversationally. **Setup note:** needs `GITHUB_PERSONAL_ACCESS_TOKEN` in your `~/.claude/settings.json` env block. The `gh` CLI's token works — run `gh auth token` to get the value.
+- `superpowers@claude-plugins-official`: brainstorming, systematic debugging, plan-writing skills. This kit's discipline-first philosophy is influenced by it; install for the full skill set.
+- `context7@claude-plugins-official`: fetches current library/framework docs on demand.
+- `github@claude-plugins-official`: manage repos, PRs, issues conversationally. **Setup note:** needs `GITHUB_PERSONAL_ACCESS_TOKEN` in your `~/.claude/settings.json` env block. The `gh` CLI's token works: run `gh auth token` to get the value.
 
 **Knowledge workers** (pick by role). These come from Anthropic's `knowledge-work-plugins` marketplace, which Claude Code doesn't add for you. Add it once first, or the installs fail with "not found": `/plugin marketplace add anthropics/knowledge-work-plugins`
-- `productivity@knowledge-work-plugins` — Notion / Asana / Linear / Monday / ClickUp connectors for tasks, calendars, personal context. Its memory and task skills create their own files (`TASKS.md`, a memory folder) in the folder you're working in, so skip it if you already keep tasks elsewhere.
-- `data@knowledge-work-plugins` — SQL queries, dashboards, statistical analysis.
-- `marketing@knowledge-work-plugins` — Figma / Notion / Ahrefs / SimilarWeb integrations for marketers.
-- `cowork-plugin-management@knowledge-work-plugins` — for customizing or building your own plugins (like this one).
+- `productivity@knowledge-work-plugins`: Notion / Asana / Linear / Monday / ClickUp connectors for tasks, calendars, personal context. Its memory and task skills create their own files (`TASKS.md`, a memory folder) in the folder you're working in, so skip it if you already keep tasks elsewhere.
+- `data@knowledge-work-plugins`: SQL queries, dashboards, statistical analysis.
+- `marketing@knowledge-work-plugins`: Figma / Notion / Ahrefs / SimilarWeb integrations for marketers.
+- `cowork-plugin-management@knowledge-work-plugins`: for customizing or building your own plugins (like this one).
 
-**Skill bundle:** (add the marketplace once — `claude plugin marketplace add anthropics/skills` — then install either plugin)
-- `example-skills@anthropic-agent-skills` — Anthropic's example skills: `theme-factory` (design themes), `brand-guidelines`, `algorithmic-art`, `canvas-design`, and more.
-- `document-skills@anthropic-agent-skills` — document creation/editing skills: `docx`, `pdf`, `pptx`, `xlsx`.
+**Skill bundle:** (add the marketplace once with `claude plugin marketplace add anthropics/skills`, then install either plugin)
+- `example-skills@anthropic-agent-skills`: Anthropic's example skills: `theme-factory` (design themes), `brand-guidelines`, `algorithmic-art`, `canvas-design`, and more.
+- `document-skills@anthropic-agent-skills`: document creation/editing skills: `docx`, `pdf`, `pptx`, `xlsx`.
 
 **Communication channels** (pick whichever you prefer for chatting with Claude outside the terminal):
 - `slack@claude-plugins-official`, `telegram@claude-plugins-official`, or `imessage@claude-plugins-official`.
 
 **Specialists** (install only if relevant to your work):
-- `figma@claude-plugins-official` — design work
-- `playwright@claude-plugins-official` — browser automation and web testing
-- `hookify@claude-plugins-official` — building custom hooks
-- `Notion@notion-plugin-marketplace` — deeper Notion integration than the productivity plugin alone
+- `figma@claude-plugins-official`: design work
+- `playwright@claude-plugins-official`: browser automation and web testing
+- `hookify@claude-plugins-official`: building custom hooks
+- `Notion@notion-plugin-marketplace`: deeper Notion integration than the productivity plugin alone
 
-**Honest caveats — skip these unless your stack matches:**
-- `enterprise-search@knowledge-work-plugins` — designed for Microsoft 365. Skip on Google Workspace; the Gmail / Calendar connector slots ship empty.
-- `legal@knowledge-work-plugins` and `finance@knowledge-work-plugins` — same MS365 dependency.
+**Honest caveats** (skip these unless your stack matches):
+- `enterprise-search@knowledge-work-plugins`: designed for Microsoft 365. Skip on Google Workspace; the Gmail / Calendar connector slots ship empty.
+- `legal@knowledge-work-plugins` and `finance@knowledge-work-plugins`: same MS365 dependency.
 
 **Install commands:**
 ```bash
@@ -322,29 +365,29 @@ claude plugin marketplace list
 Want to understand how Claude Code actually works under the hood? The official docs are well-written and worth a read:
 
 **Claude Code documentation:**
-- [Overview](https://code.claude.com/docs/en/overview) — start here
-- [Hooks guide](https://code.claude.com/docs/en/hooks-guide) — what they are, how to write them
-- [Slash commands](https://code.claude.com/docs/en/commands) — full reference
-- [Skills](https://code.claude.com/docs/en/skills) — auto-activating knowledge
-- [Sub-agents](https://code.claude.com/docs/en/sub-agents) — specialists Claude can spawn
-- [Plugins](https://code.claude.com/docs/en/plugins) — how this kit packages itself
-- [Memory & CLAUDE.md](https://code.claude.com/docs/en/memory) — the file at the heart of customization
-- [Output styles](https://code.claude.com/docs/en/output-styles) — Default, Proactive, Concise, Explanatory, Learning + custom styles
-- [Permission modes](https://code.claude.com/docs/en/permission-modes) — auto mode, plan mode, and the others
-- [MCP servers](https://code.claude.com/docs/en/mcp) — connecting external tools
+- [Overview](https://code.claude.com/docs/en/overview): start here
+- [Hooks guide](https://code.claude.com/docs/en/hooks-guide): what they are, how to write them
+- [Slash commands](https://code.claude.com/docs/en/commands): full reference
+- [Skills](https://code.claude.com/docs/en/skills): auto-activating knowledge
+- [Sub-agents](https://code.claude.com/docs/en/sub-agents): specialists Claude can spawn
+- [Plugins](https://code.claude.com/docs/en/plugins): how this kit packages itself
+- [Memory & CLAUDE.md](https://code.claude.com/docs/en/memory): the file at the heart of customization
+- [Output styles](https://code.claude.com/docs/en/output-styles): Default, Proactive, Concise, Explanatory, Learning + custom styles
+- [Permission modes](https://code.claude.com/docs/en/permission-modes): auto mode, plan mode, and the others
+- [MCP servers](https://code.claude.com/docs/en/mcp): connecting external tools
 
 **Broader Claude ecosystem:**
-- [Anthropic platform docs](https://platform.claude.com/docs/en/home) — for the underlying Claude API and general capabilities
+- [Anthropic platform docs](https://platform.claude.com/docs/en/home): for the underlying Claude API and general capabilities
 
 **Local primers in this kit:**
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — the philosophy + three-space memory model
-- [`docs/project-conventions.md`](docs/project-conventions.md) — README/PLANNING/CONTEXT-SUMMARY pattern
-- [`docs/output-styles-primer.md`](docs/output-styles-primer.md) — when to use each style
-- [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md) — when to plan vs just go
-- [`docs/worktrees-primer.md`](docs/worktrees-primer.md) — parallel work on the same repo
-- [`docs/claude-md-layering-and-context-primer.md`](docs/claude-md-layering-and-context-primer.md) — layered CLAUDE.md files and focused sessions
-- [`docs/context-budget-primer.md`](docs/context-budget-primer.md) — what loads when, `/context` habits, the hook test, skill loading
-- [`docs/claude-md-section-library.md`](docs/claude-md-section-library.md) — optional CLAUDE.md sections and which layer each belongs in
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): the philosophy + three-space memory model
+- [`docs/project-conventions.md`](docs/project-conventions.md): README/PLANNING/CONTEXT-SUMMARY pattern
+- [`docs/output-styles-primer.md`](docs/output-styles-primer.md): when to use each style
+- [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md): when to plan vs just go
+- [`docs/worktrees-primer.md`](docs/worktrees-primer.md): parallel work on the same repo
+- [`docs/claude-md-layering-and-context-primer.md`](docs/claude-md-layering-and-context-primer.md): layered CLAUDE.md files and focused sessions
+- [`docs/context-budget-primer.md`](docs/context-budget-primer.md): what loads when, `/context` habits, the hook test, skill loading
+- [`docs/claude-md-section-library.md`](docs/claude-md-section-library.md): optional CLAUDE.md sections and which layer each belongs in
 - The full reading list, including the integration primers, is under [Reading order](#reading-order)
 
 ---
@@ -380,6 +423,7 @@ claude-code-starter-kit/
 │   └── sample-project/           # Worked example: filled-in project files
 └── docs/
     ├── ARCHITECTURE.md           # The philosophy
+    ├── assets/                   # Images used in this README
     ├── context-budget-primer.md  # What loads when, /context habits, hooks test, skill loading
     ├── claude-md-section-library.md  # Optional CLAUDE.md sections + which layer each belongs in
     ├── project-conventions.md    # README/PLANNING/CONTEXT-SUMMARY templates + workflow
@@ -400,7 +444,7 @@ claude-code-starter-kit/
 
 ## Credits
 
-Built by **[Mariana Small](https://github.com/marianasmall)** — the original setup, the depersonalization, the voice, and the structural decisions are hers. This kit is what her daily-driver Claude Code looks like, made shareable.
+Built by **[Mariana Small](https://github.com/marianasmall)**: the original setup, the depersonalization, the voice, and the structural decisions are hers. This kit is what her daily-driver Claude Code looks like, made shareable.
 
 Inspired by:
 
@@ -413,7 +457,7 @@ Co-built with Claude (Opus 4.7) over the course of one long, productive evening.
 
 ## License
 
-MIT — do what you want with it. If you build on it, attribution is nice but not required.
+MIT. Do what you want with it. If you build on it, attribution is nice but not required.
 
 ## Contributing
 
