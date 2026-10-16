@@ -20,8 +20,10 @@ Create a concise session summary. Be rigorous — don't skip fields:
 
 - **What we worked on** (list the main tasks/topics)
 - **What changed** (files created, modified, or deleted)
-- **Key Decisions** (choices made — include the reasoning and alternatives, not just outcomes)
+- **Key Decisions** (choices made — include the reasoning and alternatives, not just outcomes; cite the project's D-number if one was logged)
+- **Open Loops** (anything owed, by whom, by when — including what's waiting on the user)
 - **Next Steps** (pending items or follow-ups)
+- **Where State Lives** (project folder, branch, and the files that hold the current truth)
 - **Questions & Concerns** (unresolved questions, blockers, things needing review)
 - **Insights & Recommendations** (patterns noticed, suggested next steps, cross-project connections)
 
@@ -41,7 +43,13 @@ Write the summary to `~/.claude/session-summaries.md` as a new entry at the top:
 **Key Decisions:**
 - ...
 
+**Open Loops:**
+- ...
+
 **Next Steps:**
+- ...
+
+**Where State Lives:**
 - ...
 
 **Questions & Concerns:**
@@ -66,9 +74,11 @@ Write `~/.claude/active-context.md` with:
 
 This is the warm-start file that gets injected at the beginning of the next session by `user-prompt-context.sh`. Keep it short (under 30 lines) — only what's needed to resume.
 
-## Step 3.5: Generate Handoff Prompt
+## Step 3.5: Add a Handoff Top Block
 
-Write a copy-paste-ready handoff message to `<project>/handoff.md` — the project folder where the work lives. **REPLACES contents** every session — only the latest matters. (Historical handoffs live in your session summaries; this file is just the copy-paste shortcut.)
+Add a new block to the **top** of `<project>/handoff.md` — the project folder where the work lives. Newest first: the previous top block moves down under an `## Earlier sessions` heading, shortened to a one-line recap. Keep the last ~5 recaps and prune older ones (full history lives in git and your session summaries). Only the top block carries a paste-ready prompt. Format and a worked example: `docs/never-lose-a-project.md`, "handoff.md: where you left off".
+
+**If the existing file uses the older replace-every-session format** (a single `# Handoff — date` block with a `---` paste line), convert it: its contents become the first `Earlier sessions` recap.
 
 **Detect "primary project":**
 - If cwd is in a project repo (has `CLAUDE.md`, `handoff.md`, or `~/Projects/<name>/` pattern) → write to `<project>/handoff.md`
@@ -78,29 +88,37 @@ Write a copy-paste-ready handoff message to `<project>/handoff.md` — the proje
 **Template:**
 
 ```markdown
-# Handoff — YYYY-MM-DD HH:MM
+# Handoff: [project-name]
 
-> Copy-paste prompt for a new Claude Code thread. Paste everything below the line.
+> **▶ YYYY-MM-DD HH:MM. READ THIS FIRST.**
+> - **Done:** [what finished, with branch and commit]
+> - **Mid-flight:** [what's half done]
+> - **Waiting on you:** [what only the user can do, and when it's on the calendar]
+> - **Next:** [the single first action]
+> - **Don't touch:** [anything off-limits]
+
+--- PASTE BELOW ---
+
+Continuing [project] in [folder], branch [branch].
+Read first: AGENTS.md, this handoff, [other project files most relevant to pickup], `~/.claude/active-context.md`.
+State: [one or two sentences].
+Last session log: [path or URL — depends on where Step 2 saved it]
+First action: [the one thing to do first].
 
 ---
 
-Continuing [topic / project] from prior session.
+## Earlier sessions
 
-**Status:** [latest deliverable + state]
-
-**Read first:**
-1. `~/.claude/active-context.md` — cross-session rolling state
-2. [project-specific file paths most relevant to pickup]
-3. [secondary file if needed]
-
-**Last session log:** [path or URL — depends on where Step 2 saved it]
-
-**Next action when you pick up:** [the one thing to do first]
+> **YYYY-MM-DD HH:MM.** [one-line recap of the previous top block]
 ```
 
-**The user's ritual:** at session close after this command runs, open `<project>/handoff.md`, copy contents below the `---` line, paste into a new Claude Code thread to continue.
+**The user's ritual:** in a new Claude Code thread opened in the project folder, say "pick up the handoff" — or copy everything under `--- PASTE BELOW ---` in the top block and paste it.
 
 **On-demand version:** the `/kit:handoff` command runs ONLY this step (no session summary, no commits) — useful for mid-session context switches.
+
+## Step 3.6: Decisions check
+
+If decisions were made this session in a project that has a `decisions.md`, confirm each one has a numbered row (`D-N`) with its reason and the option rejected. Add any that are missing now. Skip if the project has no `decisions.md`.
 
 ## Step 4: Update CLAUDE.md (only if substantial)
 
@@ -115,6 +133,10 @@ If the user works in version-controlled directories and changed files this sessi
 2. Offer to commit + push with a descriptive message
 3. Skip if user declines
 
+## Step 5.5: Calendar sweep (only if a calendar is connected)
+
+Look back over the session's Open Loops for anything only the user can do (a login-gated edit, a send, an approval, a decision) that doesn't have a calendar event yet. If a calendar tool is connected, propose events for them following `docs/calendar-handoff-primer.md`: every location in the description, a paste block for resume-work items, no invitations to anyone. Check existing events first so nothing lands twice. If no calendar tool is connected, list those items in the report instead and say they aren't scheduled.
+
 ## Step 6: Report
 
 Present the session summary and a status table:
@@ -126,13 +148,17 @@ Step 0 (Transcript recovery):  ✅/⏭️ skipped/❌ failed
 Step 1 (Summary):              ✅
 Step 2 (Persist):              ✅
 Step 3 (Active context):       ✅
-Step 3.5 (Handoff prompt):     ✅  → <project>/handoff.md
+Step 3.5 (Handoff top block):  ✅  → <project>/handoff.md
+Step 3.6 (Decisions check):    ✅/⏭️
 Step 4 (CLAUDE.md):            ✅/⏭️
 Step 5 (Commits):              ✅/⏭️
+Step 5.5 (Calendar sweep):     ✅/⏭️ no calendar connected
 ━━━━━━━━━━━━━━━━━━━
 
-**Tell the user:** "Handoff prompt saved to `<project>/handoff.md` — open it, copy below the `---` line, paste into a new Claude Code thread."
+**Tell the user:** "Handoff saved to the top of `<project>/handoff.md`. In a new thread, say 'pick up the handoff' or paste the block under `--- PASTE BELOW ---`."
 ```
+
+**If the user wants to keep going in this same session instead** and context is getting low, state is now saved, so offer a paste-ready compact line naming what must survive, e.g. `/compact Keep: [active task + branch], [open decisions], [what's waiting on the user], [rules granted this session]. Drop: [tool output already saved to files].` Never suggest compacting before Steps 3.5 and 5 have run.
 
 Confirm with the user that everything looks right.
 

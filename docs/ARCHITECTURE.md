@@ -30,7 +30,7 @@ Borrowed loosely from cognitive architectures: memory works best when separated 
 
 - Skills (in plugins or `~/.claude/skills/`)
 - Reference files
-- Project-specific docs (PLANNING.md, CONTEXT-SUMMARY.md)
+- Project-specific docs (AGENTS.md, PLANNING.md, decisions.md, handoff.md; see [never-lose-a-project.md](never-lose-a-project.md))
 
 ### Space 3: Operations
 **What's happening *now*.** Fluctuating.
@@ -108,7 +108,7 @@ There's no orchestration layer trying to chain agents together autonomously. Cla
 
 ### No proprietary conventions
 
-Things like specific filename patterns, project-state file naming (PLANNING.md vs CONTEXT-SUMMARY.md), or strict directory layouts are *suggested* in the templates but not *enforced*. The kit doesn't care if you don't use them.
+Things like specific filename patterns, project-state file naming (the AGENTS/PLANNING/decisions/handoff package), or strict directory layouts are *suggested* in the templates but not *enforced*. The kit doesn't care if you don't use them.
 
 ### No "feature flags"
 

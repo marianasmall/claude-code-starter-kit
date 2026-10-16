@@ -138,7 +138,7 @@ Add or remove rules to fit your work. A common fourth: "**Protect my information
 - Date-first (clusters by recency): `YYYY-MM-DD_[Topic]_[Description].ext`
 - kebab-case (URL-friendly): `topic-subtopic-description-YYYY-MM-DD.ext`
 
-Tradeoffs in [`project-conventions.md`](project-conventions.md).
+Tradeoffs in [`never-lose-a-project.md`](never-lose-a-project.md#part-4-naming).
 
 ## Memory architecture (what the kit provides)
 
