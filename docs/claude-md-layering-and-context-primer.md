@@ -40,7 +40,7 @@ Repeat for your 3-5 most-visited areas. Re-run afterwards to confirm the count d
 
 CLAUDE.md is followed **most** of the time, not every time. Claude is built on a language model, and the longer a conversation runs, the more likely early instructions drift. For rules that must never be broken, use a **hook** (section 5).
 
-> **Fits with this kit:** [`project-conventions.md`](project-conventions.md) covers the project-local CLAUDE.md alongside README, PLANNING, CONTEXT-SUMMARY and handoff. This primer adds the *layering* inside a project.
+> **Fits with this kit:** [`never-lose-a-project.md`](never-lose-a-project.md) covers the project package (README, AGENTS.md with a one-line CLAUDE.md, PLANNING, decisions, handoff). This primer adds the *layering* inside a project.
 
 ---
 

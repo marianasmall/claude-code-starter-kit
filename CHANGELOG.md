@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **New guide: [Never lose a project](docs/never-lose-a-project.md).** Replaces the older five-file project layout with the current standard: README, `AGENTS.md` plus a one-line `CLAUDE.md` that loads it, `PLANNING.md`, a numbered `decisions.md` that records the options you rejected, a newest-first `handoff.md`, and a gitignored `_private/` folder. Also covers the session-continuity loop (session summary, handoff, decisions check, commit, calendar sweep, then compact with a focus line), plan-then-subagents for big builds, and repo and file naming. Fictional worked examples and blank templates included. A companion template repo has the same package ready for GitHub's **Use this template**. `docs/project-conventions.md` is now a short pointer to the new guide.
+- **`/kit:session-end` and `/kit:handoff`:** the handoff is now a new block added to the top of `handoff.md` (newest first, last few kept) instead of replacing the file, so a session that ends badly no longer wipes the trail. Old-format files convert automatically. The session summary gains **Open Loops** and **Where State Lives** fields. `/kit:session-end` adds a decisions check and a calendar sweep (only when a calendar tool is connected), and both commands offer a paste-ready `/compact` line once state is saved.
+- **`/kit:scaffold-project`** now drops the new package and adds `_private/`, secrets files, and `_backups/` to `.gitignore`. It no longer creates `CONTEXT-SUMMARY.md`. The prompt-context hook still reads one if you have it, so existing projects keep working.
 - **New skill: `meeting-recap`.** Any transcript (Fireflies, Granola, Plaud, Wispr Flow, Otter, or pasted) becomes an eight-section recap (TL;DR, decisions, action items with owners, open questions, risks, quotes, follow-up triggers, source) delivered as a draft in your email tool or a page in your notes, never sent. Ships with evals.
 
 ## 0.2.4 — 2026-10-10

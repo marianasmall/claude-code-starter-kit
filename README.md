@@ -101,7 +101,7 @@ Installing this gets you a Claude Code that's:
 - **Safe**: Destructive commands get blocked before they run. Files get backed up before edits. Risky scripts require explicit dry-run gates. Critical claims get verified against primary sources before propagating across files.
 - **Proactive**: Claude retries validation errors before escalating to you. Warns when context is running low. Reminds you to persist findings before they evaporate.
 - **Memorable**: Remembers where you left off across sessions. Tracks decisions, notes, and operational debt. Surfaces past context when you ask *"didn't we decide X already?"*
-- **Continuable**: When a thread fills up, `/kit:session-end` auto-generates a `handoff.md` in your project folder. Copy it into a new thread to pick up exactly where you left off, with no re-explaining required. (See [project conventions](docs/project-conventions.md#the-handoff-ritual-how-to-continue-work-in-a-new-thread) for the full ritual.)
+- **Continuable**: When a thread fills up, `/kit:session-end` adds a fresh top block to `handoff.md` in your project folder. In a new thread, say "pick up the handoff" and you're back exactly where you left off, with no re-explaining required. (See [Never lose a project](docs/never-lose-a-project.md) for the full system: the project file package, the session-continuity loop, and saving state before you compact.)
 - **Polished**: Custom statusline at the bottom of your terminal showing context, cost, and time. `★ Insight ─` boxes when Claude is teaching. Notifications when you've stepped away.
 - **Invested in your success**: A CLAUDE.md framework captures who you are and how you work. After 15 minutes of customization, Claude works *with* your specific shape, not against it.
 
@@ -117,7 +117,7 @@ Out of the box, Claude Code is capable but generic. To get this same setup yours
 - Find and adopt skills scattered across various repos
 - Build hook scripts for safety, backups, context monitoring, retry coaching
 - Write a CLAUDE.md that actually captures how you work (this is the step most people underestimate: strong CLAUDE.md files are rare in the wild)
-- Figure out project-level conventions (PLANNING.md, CONTEXT-SUMMARY.md) that let Claude resume cold
+- Figure out project-level conventions (AGENTS.md, decisions.md, handoff.md) that let Claude resume cold
 
 That's months of "I wish I'd done this earlier" learning, scattered across blog posts and trial-and-error.
 
@@ -143,8 +143,8 @@ The repo's other files are alphabetical, which doesn't help you know where to st
 
 1. **[INSTALL.md](INSTALL.md)**: if you're about to install. Step-by-step setup.
 2. **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**: the philosophy + the "three-space memory" model (why CLAUDE.md, MEMORY.md, and project files all play different roles).
-3. **[docs/project-conventions.md](docs/project-conventions.md)**: the five-file project pattern (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md, handoff.md) + naming conventions.
-4. **[examples/sample-project/](examples/sample-project/)**: a worked example showing four of those files fully filled in for an imaginary project (handoff.md is generated at runtime). Read this if conventions feel abstract.
+3. **[docs/never-lose-a-project.md](docs/never-lose-a-project.md)**: the project package (README, AGENTS.md + one-line CLAUDE.md, PLANNING, numbered decisions, newest-first handoff, gitignored `_private/`), the session-continuity loop, plan-then-subagents for big builds, and naming conventions. Includes fictional filled-in examples and blank templates.
+4. **[examples/sample-project/](examples/sample-project/)**: a worked example of the older five-file layout (README, PLANNING, CONTEXT-SUMMARY, project-local CLAUDE.md). Still works; the doc above explains what changed.
 5. **The native CC primers** (read on demand when relevant):
    - [`docs/claude-md-layering-and-context-primer.md`](docs/claude-md-layering-and-context-primer.md): layered CLAUDE.md files, the step-count test, skills as folders, `/goal`, subagents vs hooks, keeping sessions focused (from JJ at Tenex's Oct 2026 workshop; start here if you read only one)
    - [`docs/context-budget-primer.md`](docs/context-budget-primer.md): what loads when and what it costs, `/context` and compaction habits, the hook test, skill loading levels and evals, the read-only investigator. Pairs with [`examples/layered-repo/`](examples/layered-repo/) and the [section library](docs/claude-md-section-library.md)
@@ -212,9 +212,9 @@ Type at Claude Code's prompt. (Installed plugin commands are namespaced under th
 | `/kit:maintain [full\|quick]` | Periodic system health check |
 | `/kit:permissions-audit` | Review and prune settings.json permissions |
 | `/kit:extract-skill <name>` | Scaffold a new skill from a pattern |
-| `/kit:scaffold-project [name]` | Drop project files (README, PLANNING, CONTEXT-SUMMARY) into the current directory |
+| `/kit:scaffold-project [name]` | Drop the project package (README, AGENTS.md, CLAUDE.md, PLANNING, decisions, handoff, `.gitignore` with `_private/`) into the current directory |
 | `/kit:consistency-check [path]` | Pre-ship audit for doc bundles: catches count drift, broken anchors, ambiguous pronouns, audience assumptions, jargon |
-| `/kit:handoff` | Refresh `<project>/handoff.md` without the full session-end ritual (mid-session context switch) |
+| `/kit:handoff` | Add a top block to `<project>/handoff.md` without the full session-end ritual (mid-session context switch, or right before compacting) |
 
 ### 6 Agents
 
@@ -248,7 +248,7 @@ Specialists Claude can spawn for complex tasks:
 This kit deliberately doesn't include:
 
 - **Specific MCP integrations** (Notion, Slack, etc.): Anthropic ships those as separate plugins. Install what you need.
-- **Enforced project conventions**: The kit *suggests* conventions for project file structure (README/PLANNING/CONTEXT-SUMMARY) and naming (see [`docs/project-conventions.md`](docs/project-conventions.md)) and ships templates for them, but nothing is enforced. Use what fits, ignore what doesn't.
+- **Enforced project conventions**: The kit *suggests* conventions for project file structure (README/AGENTS/PLANNING/decisions/handoff) and naming (see [`docs/never-lose-a-project.md`](docs/never-lose-a-project.md)) and ships templates for them, but nothing is enforced. Use what fits, ignore what doesn't.
 
 **And so you know exactly what you're installing:** the hooks run locally on every prompt and tool call. They write only to your Claude home folder (`~/.claude/notes/`, `debt.md`, `decision-log.md`) and to timestamped `_backups/` folders next to files Claude edits. Nothing phones home. The only network call anywhere in the kit is the optional Pushover phone notification, and only if you add your own credentials. Everything you bring is yours.
 
@@ -381,7 +381,7 @@ Want to understand how Claude Code actually works under the hood? The official d
 
 **Local primers in this kit:**
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): the philosophy + three-space memory model
-- [`docs/project-conventions.md`](docs/project-conventions.md): README/PLANNING/CONTEXT-SUMMARY pattern
+- [`docs/never-lose-a-project.md`](docs/never-lose-a-project.md): project file package, session-continuity loop, big-build planning, naming
 - [`docs/output-styles-primer.md`](docs/output-styles-primer.md): when to use each style
 - [`docs/plan-mode-primer.md`](docs/plan-mode-primer.md): when to plan vs just go
 - [`docs/worktrees-primer.md`](docs/worktrees-primer.md): parallel work on the same repo
@@ -420,13 +420,14 @@ claude-code-starter-kit/
 │   ├── debt-sync.sh.opt-in       # Optional Notion integration
 │   ├── pushover-setup.md         # Phone notification setup
 │   ├── layered-repo/             # Worked example: CLAUDE.md layers, a path-scoped rule, CLAUDE.local.md
-│   └── sample-project/           # Worked example: filled-in project files
+│   └── sample-project/           # Worked example: older five-file project layout
 └── docs/
     ├── ARCHITECTURE.md           # The philosophy
     ├── assets/                   # Images used in this README
     ├── context-budget-primer.md  # What loads when, /context habits, hooks test, skill loading
     ├── claude-md-section-library.md  # Optional CLAUDE.md sections + which layer each belongs in
-    ├── project-conventions.md    # README/PLANNING/CONTEXT-SUMMARY templates + workflow
+    ├── never-lose-a-project.md   # Project package, continuity loop, naming, templates
+    ├── project-conventions.md    # Pointer to never-lose-a-project.md
     ├── output-styles-primer.md   # Native CC feature: output styles
     ├── plan-mode-primer.md       # Native CC feature: plan mode
     ├── claude-md-layering-and-context-primer.md  # Layered CLAUDE.md files, focused sessions
