@@ -75,7 +75,10 @@ fi
 USER_ALERT_FILE="/tmp/claude-ctx-${SESSION_ID}-user-alerted"
 if [ "$REMAINING" -le "$USER_THRESHOLD" ] 2>/dev/null && [ ! -f "$USER_ALERT_FILE" ]; then
     touch "$USER_ALERT_FILE"
-    osascript -e 'display notification "Context at '"${REMAINING}"'% — STOP: run /session-end now, then push to GitHub" with title "⚠️ Save Session NOW" sound name "Hero"' 2>/dev/null
+    # Message passed as an argument, not spliced into the AppleScript source (same hardening as permission-ding.sh, 0.2.5)
+    osascript -e 'on run argv' \
+        -e 'display notification (item 1 of argv) with title "⚠️ Save Session NOW" sound name "Hero"' \
+        -e 'end run' -- "Context at ${REMAINING}% — STOP: run /session-end now, then push to GitHub" 2>/dev/null
     SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
     PUSHOVER_DEBOUNCE=0 source "$SCRIPT_DIR/pushover.sh" 2>/dev/null
     send_pushover "⚠️ Save Session NOW" "Context at ${REMAINING}% — STOP and run /session-end, then push to GitHub. Don't keep going." 1 2>/dev/null

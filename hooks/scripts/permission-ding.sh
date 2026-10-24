@@ -34,8 +34,13 @@ esac
 LOG_FILE="$HOME/.claude/permission-log.md"
 echo "- $(date '+%Y-%m-%d %H:%M') | $TOOL_DESC" >> "$LOG_FILE"
 
-# Mac notification with tool context
-osascript -e "display notification \"$TOOL_DESC\" with title \"Claude Code\" subtitle \"Waiting for approval\" sound name \"Submarine\"" 2>/dev/null
+# Mac notification with tool context.
+# The description is passed as an ARGUMENT (item 1 of argv), never spliced into
+# the AppleScript source. Splicing let a double quote inside a pending command
+# close the string and run its own `do shell script` before approval (fixed 0.2.5).
+osascript -e 'on run argv' \
+    -e 'display notification (item 1 of argv) with title "Claude Code" subtitle "Waiting for approval" sound name "Submarine"' \
+    -e 'end run' -- "$TOOL_DESC" 2>/dev/null
 
 # Optional Pushover (silently no-ops if not configured)
 if [ ! -f "$PERM_MARKER" ]; then

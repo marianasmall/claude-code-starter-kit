@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.2.5 — 2026-10-24
+
+**Security fix. Update now:** `claude plugin update kit@claude-code-starter-kit` in a terminal, restart Claude Code, then `/kit:verify`.
+
+- **Fixed: a command waiting for approval could run code before you approved it.** The permission-ding hook (`hooks/scripts/permission-ding.sh`, on for every install) built its Mac notification by pasting the pending command into the AppleScript text. A double quote inside that command closed the string, so a crafted or prompt-injected command like `echo hi" & (do shell script "…") & "` could run its own shell command the moment Claude asked for permission. The text is now handed to `osascript` as an argument (`on run argv`), which AppleScript treats as data, never as script. The same pattern in `context-monitor.sh` is hardened the same way (its value was a checked number, so low risk). Found by a review on 2026-10-23; confirmed with a stubbed `osascript` that recorded the script it was handed. Nothing was executed against the real one.
+- **New check in `scripts/verify-hooks.sh` (and so in `/kit:verify`):** fires a quote-bearing command at permission-ding through a recording `osascript` stub and fails if any of it lands in the script source. This stops the bug coming back.
+- Also in this release, everything listed under Unreleased since 0.2.4:
 
 - **New guide: [Never lose a project](docs/never-lose-a-project.md).** Replaces the older five-file project layout with the current standard: README, `AGENTS.md` plus a one-line `CLAUDE.md` that loads it, `PLANNING.md`, a numbered `decisions.md` that records the options you rejected, a newest-first `handoff.md`, and a gitignored `_private/` folder. Also covers the session-continuity loop (session summary, handoff, decisions check, commit, calendar sweep, then compact with a focus line), plan-then-subagents for big builds, and repo and file naming. Fictional worked examples and blank templates included. A companion template repo has the same package ready for GitHub's **Use this template**. `docs/project-conventions.md` is now a short pointer to the new guide.
 - **`/kit:session-end` and `/kit:handoff`:** the handoff is now a new block added to the top of `handoff.md` (newest first, last few kept) instead of replacing the file, so a session that ends badly no longer wipes the trail. Old-format files convert automatically. The session summary gains **Open Loops** and **Where State Lives** fields. `/kit:session-end` adds a decisions check and a calendar sweep (only when a calendar tool is connected), and both commands offer a paste-ready `/compact` line once state is saved.

@@ -164,6 +164,36 @@ else
     fail "self-guard — denied a write outside Claude infrastructure"
 fi
 
+# permission-ding must never splice the pending command into AppleScript source.
+# Regression test for the 0.2.5 fix: a double quote in a Bash command could close
+# the notification string and run its own `do shell script` before approval.
+# A recording osascript stub captures the exact arguments the hook passes.
+mkdir -p "$TMPD/rec"
+printf '#!/bin/sh\nfor a in "$@"; do printf "%%s\\n" "$a"; done >> "%s"\nexit 0\n' "$TMPD/osascript-args.txt" > "$TMPD/rec/osascript"
+chmod +x "$TMPD/rec/osascript"
+PAYLOAD='echo hi" & (do shell script "touch /tmp/verify-pwned") & "'
+printf '{"tool_name":"Bash","tool_input":{"command":%s}}' "$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1]))' "$PAYLOAD")" \
+    | HOME="$TMPD/home" PATH="$TMPD/rec:$TMPD/bin:$PATH" bash "$HOOKS/permission-ding.sh" >/dev/null 2>&1
+if [ -f "$TMPD/osascript-args.txt" ]; then
+    # Every -e argument is AppleScript SOURCE; the payload must not appear in any of them.
+    if python3 - "$TMPD/osascript-args.txt" "$PAYLOAD" <<'PY' 2>/dev/null
+import sys
+args = open(sys.argv[1]).read().split('\n')
+payload = sys.argv[2]
+src = [args[i+1] for i, a in enumerate(args[:-1]) if a == '-e']
+leaked = any('do shell script' in s for s in src)
+as_arg = any(payload in a for a in args if a not in src)
+sys.exit(0 if (not leaked and as_arg) else 1)
+PY
+    then
+        pass "permission-ding — quote-bearing command reaches osascript as data, not as script source"
+    else
+        fail "permission-ding — a quote-bearing command leaked into the AppleScript source (code injection)"
+    fi
+else
+    warn "permission-ding — osascript was not called for a Bash payload (hook skipped; cannot test injection)"
+fi
+
 # backup-before-edit must create a backup copy. The fixture lives in the real
 # ~/.claude subtree (see sandbox note above), inside the auto-removed TMPD.
 echo "original content" > "$TMPD/stage/sample.txt"
