@@ -116,7 +116,7 @@ Give the user:
 **Scene**
 13. No gibberish text on books, art, packaging, or signage
 14. Plants, flowers, and decor have real structure (no fused stems, no nonsense leaves)
-15. Objects aren't duplicated or cloned around the room
+15. Objects aren't duplicated or cloned around the room; nothing in the room slices through or covers the product (steps, floor edges, plant tips over cushions)
 16. The room shows some life: a throw slightly off, a book open, real clutter in proportion
 
 **Surface (the finishing pass handles these)**

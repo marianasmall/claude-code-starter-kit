@@ -104,6 +104,11 @@ Contents: A. Upholstered furniture · B. Wood, stone, metal, glass · C. Light a
 **Look for:** a view that doesn't match the light in the room, a skyline through a ground-floor window, a garden that turns into fog.
 **Fix:** Retouch the view, or soften it to a believable overexposed window.
 
+### D7. The room cutting into the product
+**Look for:** a step, floor edge, rug or wall line slicing through the base or arms; plant leaves or decor laid across cushions; a coffee table hiding a leg. AI often draws the occluder *through* the product instead of in front of or behind it.
+**Why:** the model blends the room and the product into one picture with no sense of what sits in front of what.
+**Fix:** Regenerate if the product is free to change. Under Product lock, the cut is frozen into the product's outline: the new room must keep an occluder at exactly that edge (product-lock.md §3), or recommend a real photo of the whole piece. On a product page, props never cover the product's defining details.
+
 ### D6. People and hands
 **Look for:** hands, fingers, a foot resting on nothing, a face too smooth, two people with the same face.
 **Fix:** Regenerate, or crop the person out. Hands are rarely worth retouching.

@@ -51,7 +51,11 @@ python3 scripts/product_lock.py verify ORIGINAL.png EDITED_locked_humanized.png 
 
 **Masters are PNG.** JPEG re-encoding moves every pixel slightly, product included. Keep the verified PNG as the master and export JPEGs for the web from it.
 
-**Objects in front of the product.** A plant, vase or throw that sits in front of the sofa hides part of it. If a room edit removes that object, the tool has to paint the hidden part of the sofa, and that paint is invented furniture. Either keep the object in every room edit (say so in the prompt and check the result), or add it to the mask so it is locked with the product.
+**Where the room cuts into the product.** Check the mask outline for edges that aren't the product's own: a plant's leaves across a back cushion, a step or floor edge slicing the base, a table hiding a leg. Each one is an occlusion, and the locked outline now has the room's shape cut into it. Two consequences:
+- **Keep every occluder in place.** If a room edit removes the plant or moves the step, the tool must invent the hidden part of the product (invented furniture), or the product ends abruptly in mid-air and looks chopped off. Say so in the room prompt, and check the result along every cut edge.
+- **Flag occlusion that hides a defining detail.** A step slicing the base hides exactly what designers spec (base, plinth, legs), and props over cushions blur the silhouette. Under Product lock this can't be fixed, so the audit flags it, and the fix is a real photo of the whole piece composited into a room that leaves the product clear.
+
+Watch for AI geometry errors at these edges: an AI often draws the occluder *into* the product (a step edge that slices through a sofa that should sit in front of it). That's a room blocker, and Product lock freezes it into the outline.
 
 **Shadows.** The mask covers the piece, not its shadow. Contact shadows belong to the room, so a room edit may (and often should) strengthen them: a sofa with no contact shadow floats (tells.md C2).
 
