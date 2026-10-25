@@ -186,7 +186,7 @@ A curated set of:
 Reusable frameworks Claude loads when relevant:
 
 - **humanizer**: Removes AI tells from your writing
-- **image-humanizer**: Finds what makes an AI image look fake (structure, light, surface), says how to fix each one, and runs a finishing pass that keeps AI disclosure intact. Built for product and interior shots.
+- **image-humanizer**: Finds what makes an AI image look fake (structure, light, surface), says how to fix each one, and runs a finishing pass that keeps AI disclosure intact. Built for product and interior shots. Product lock (for makers) changes only the room and proves the product's pixels didn't change.
 - **learning-capture**: Pin valuable insights mid-conversation
 - **idea-to-scope**: Turn vague ideas into structured scope docs
 - **kaizen**: Continuous improvement framework

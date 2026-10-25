@@ -14,8 +14,10 @@ import argparse
 import sys
 from pathlib import Path
 
+sys.dont_write_bytecode = True  # no .pyc files left in the skill folder
+
 import numpy as np
-from PIL import Image, ImageFilter, ImageOps
+from PIL import Image, ImageFilter, ImageOps, PngImagePlugin
 
 PRESETS = {
     "product":   dict(grain=0.8, desat=0.10, rolloff=0.15, vignette=0.06, soften=0.4, warmth=0.0, quality=90),
@@ -23,7 +25,7 @@ PRESETS = {
 }
 
 XMP_TEMPLATE = (
-    '<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>'
+    '<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>'  # ﻿: the byte-order mark XMP requires
     '<x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'
     '<rdf:Description rdf:about="" xmlns:Iptc4xmpExt="http://iptc.org/std/Iptc4xmpExt/2008-02-29/">'
     '<Iptc4xmpExt:DigitalSourceType>'
@@ -99,6 +101,24 @@ def soften_edges(img, amount, mask):
     return Image.composite(blurred, img, alpha)
 
 
+def protect_product(original, finished, args, settings, w, h):
+    # Put the input's product pixels back, exactly, with a hard edge. The mask
+    # is already grown a pixel or two past the product, which hides the seam;
+    # feathering here would paste a ring of unfinished room around the product.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from product_lock import load_mask
+    mask = load_mask(args.protect, (w, h))
+    orig = np.asarray(original, dtype=np.float32) / 255.0
+    if args.grain_on_product:
+        # Same seed, same shape: the identical grain field the room got.
+        orig = add_grain(orig, settings["grain"], np.random.default_rng(args.seed))
+    fin = np.asarray(finished, dtype=np.float32) / 255.0
+    out = np.where(mask[..., None], orig, fin)
+    print(f"Protected {mask.mean() * 100:.1f}% of the frame (product): "
+          + ("grain only." if args.grain_on_product else "pixels identical to the input."))
+    return Image.fromarray((np.clip(out, 0, 1) * 255 + 0.5).astype(np.uint8))
+
+
 def main():
     p = argparse.ArgumentParser(description="Finishing pass that makes AI images read like camera photos.")
     p.add_argument("input")
@@ -108,6 +128,12 @@ def main():
         p.add_argument(f"--{key}", type=float, help=f"override the preset's {key}")
     p.add_argument("--quality", type=int, help="JPEG quality")
     p.add_argument("--seed", type=int, default=7, help="grain seed, for repeatable output")
+    p.add_argument("--protect", metavar="MASK",
+                   help="product mask (white = product, from product_lock.py mask): those pixels stay "
+                        "identical to the input. Output defaults to PNG so they stay exact.")
+    p.add_argument("--grain-on-product", action="store_true",
+                   help="with --protect: add the same camera grain to the product so it doesn't look "
+                        "pasted in. Colour, tone and shape stay untouched; pixels change by grain only.")
     args = p.parse_args()
 
     settings = dict(PRESETS[args.preset])
@@ -116,7 +142,10 @@ def main():
             settings[key] = getattr(args, key)
 
     src = Path(args.input)
-    out = Path(args.out) if args.out else src.with_name(f"{src.stem}_humanized.jpg")
+    if args.grain_on_product and not args.protect:
+        sys.exit("--grain-on-product only means something with --protect MASK.")
+    ext = "png" if args.protect else "jpg"
+    out = Path(args.out) if args.out else src.with_name(f"{src.stem}_humanized.{ext}")
     if out.resolve() == src.resolve():
         sys.exit("Refusing to overwrite the input. Pass a different --out.")
     if out.exists():
@@ -140,10 +169,24 @@ def main():
     rgb = add_grain(np.asarray(result, dtype=np.float32) / 255.0, settings["grain"], rng)
     result = Image.fromarray((np.clip(rgb, 0, 1) * 255 + 0.5).astype(np.uint8))
 
-    save = dict(quality=settings["quality"], subsampling=0, optimize=True, xmp=XMP_TEMPLATE.encode("utf-8"))
-    if len(exif):
-        save["exif"] = exif.tobytes()
-    result.save(out, "JPEG", **save)
+    if args.protect:
+        result = protect_product(img, result, args, settings, w, h)
+
+    if out.suffix.lower() == ".png":
+        info = PngImagePlugin.PngInfo()
+        info.add_itxt("XML:com.adobe.xmp", XMP_TEMPLATE)
+        save = dict(pnginfo=info)
+        if len(exif):
+            save["exif"] = exif.tobytes()
+        result.save(out, "PNG", **save)
+    else:
+        if args.protect:
+            print("Note: JPEG re-encoding shifts protected pixels slightly. Keep a PNG master; "
+                  "export the JPEG from it for the web.")
+        save = dict(quality=settings["quality"], subsampling=0, optimize=True, xmp=XMP_TEMPLATE.encode("utf-8"))
+        if len(exif):
+            save["exif"] = exif.tobytes()
+        result.save(out, "JPEG", **save)
 
     print(f"Wrote {out}")
     print("Settings: " + ", ".join(f"{k}={v}" for k, v in settings.items()))

@@ -4,6 +4,10 @@ What to look for, why AI image models get it wrong, and the fix layer for each. 
 
 Fix layers: **Regenerate** (new prompt or new seed), **Retouch** (inpaint, clone, or mask one region), **Finish** (whole-image pass with `scripts/finish.py`).
 
+Contents: A. Upholstered furniture · B. Wood, stone, metal, glass · C. Light and physics · D. Scene and styling · E. Surface tells
+
+> **Under Product lock, sections A and B are diagnosis only.** Their fixes regenerate or retouch the product, which Product lock forbids. Record the tell, mark it "Locked: confirm with the maker", and don't retouch it. If the maker says the real piece doesn't look like that, the verdict is reshoot the product (`product-lock.md` §2). Sections C–E still apply, to the room only.
+
 ---
 
 ## A. Upholstered furniture
