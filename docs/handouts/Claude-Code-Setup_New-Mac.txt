@@ -14,7 +14,10 @@ Wait until the text stops scrolling and the blinking cursor comes back.
 If it asks for a password: it's this Mac's login password. Nothing shows
 on screen while you type it. That's normal. Type it and press Return.
 
-If the end of the output mentions "PATH": quit Terminal (Cmd+Q), reopen it.
+If the end of the output says "~/.local/bin is not in your PATH", paste
+this line and press Return (nothing visible happens; that's normal):
+
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 
 ------------------------------------------------------------
 STEP 2 — Start Claude and log in
