@@ -1,0 +1,58 @@
+CLAUDE CODE SETUP ON A NEW MAC
+Copy each command, paste into Terminal (Cmd+V), press Return.
+Don't retype commands: one wrong character (a ~ instead of a -) stops them.
+
+To open Terminal: Cmd+Space, type Terminal, press Return.
+
+------------------------------------------------------------
+STEP 1 — Install Claude Code
+------------------------------------------------------------
+
+curl -fsSL https://claude.ai/install.sh | bash
+
+Wait until the text stops scrolling and the blinking cursor comes back.
+If it asks for a password: it's this Mac's login password. Nothing shows
+on screen while you type it. That's normal. Type it and press Return.
+
+If the end of the output mentions "PATH": quit Terminal (Cmd+Q), reopen it.
+
+------------------------------------------------------------
+STEP 2 — Start Claude and log in
+------------------------------------------------------------
+
+claude
+
+Pick a text style, then choose to log in with your Claude account.
+A browser window opens. Sign in with the account that should pay for
+this work. Claude Code needs a paid plan (Pro, Max, Team or Enterprise).
+
+------------------------------------------------------------
+STEP 3 — Do the work (type in plain words)
+------------------------------------------------------------
+
+Example:
+Install Chrome and Zoom, then organize the Downloads and Desktop folders into sensible folders. Show me the plan before moving anything.
+
+macOS will ask "Allow Terminal to access..." -> click Allow.
+App installs ask for this Mac's login password.
+
+------------------------------------------------------------
+STEP 4 — Setting up for someone else? Clear your conversation log
+------------------------------------------------------------
+
+Tell Claude:
+Move the ~/.claude/projects folder to the Trash.
+
+------------------------------------------------------------
+STEP 5 — Log out
+------------------------------------------------------------
+
+/logout
+
+/exit
+
+------------------------------------------------------------
+STEP 6 — The Mac's owner logs in with their own account
+------------------------------------------------------------
+
+claude
